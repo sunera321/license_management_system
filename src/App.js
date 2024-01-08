@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <header>
-        license_management_system
+        license_management_system 0.1
       </header>
     </div>
   );
