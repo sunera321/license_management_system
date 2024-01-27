@@ -4,8 +4,8 @@ import Header from "./Header";
 import Slidebar from './Slidebar';
 
 
-
 const MainLayout = () => {
+
   return (
     <div>
       <Header />
