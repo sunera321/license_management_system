@@ -4,7 +4,7 @@ import React from 'react';
 const Slidebar = () => {
   return (
     <div className="relative justify-center h-auto">
-    <div className=" w-14 bg-custom-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-1/2 transform -translate-y-1/2  rounded">
+    <div className=" w-14 bg-custom-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-[55%] transform -translate-y-1/2  rounded">
       <div className="bg-custom-gray w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 
       transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
       {/* Sidebarlogo */}
@@ -15,7 +15,7 @@ const Slidebar = () => {
       </div> 
 
       <nav className="flex flex-col mt-2">
-        <div className="flex items-center hover:bg-slate-700 transition-colors py-2 px-6 ">
+        <div className="flex items-center hover:bg-slate-700 transition-colors py-2 px-6">
           <div className="icon"> <img src="/sidebarpic/dashboard.svg" alt="Dashboard Icon" className="h-8 w-8 mr-4" />
           </div>
           <span className="ml-2 hover:text-purple-600 flex-1 truncate group-hover:block "><a href="/components/page/Dashboard/Dashboard.jsx" >Dashboard </a>
