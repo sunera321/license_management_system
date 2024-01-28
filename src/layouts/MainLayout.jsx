@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div>
       <Header />
-      <Slidebar/>
+      <Slidebar/> 
       <Footer />
     </div>
   );
