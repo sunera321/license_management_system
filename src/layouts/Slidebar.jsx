@@ -3,8 +3,8 @@ import React from 'react';
 
 const Slidebar = () => {
   return (
-    <div className="relative">
-    <div className="h-screen w-14 bg-custom-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden">
+    <div className="relative justify-center h-auto">
+    <div className=" w-14 bg-custom-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-1/2 transform -translate-y-1/2  rounded">
       <div className="bg-custom-gray w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 
       transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
       {/* Sidebarlogo */}
