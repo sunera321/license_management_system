@@ -4,6 +4,7 @@ const Home = () => {
   return (
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
      <p className='pl-10 ml-10'>
 =======
@@ -65,6 +66,11 @@ const Home = () => {
 =======
 >>>>>>> Dev-Branch
 >>>>>>> cc2f0c7652818ad809deaaa4c025729e20c6e240
+=======
+     
+      Home
+     
+>>>>>>> parent of cc2f0c7 (Add autoprefixer and postcss dependencies)
     </div>
   )
 }
