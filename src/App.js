@@ -16,6 +16,9 @@ function App() {
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
           <Route path="contact_us" Component={Contact_Us} />
+          
+
+>>>>>>> Dev-Branch
         </Route>
       </Routes>
     </BrowserRouter>
