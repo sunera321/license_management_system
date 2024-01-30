@@ -1,9 +1,7 @@
 import React from 'react'
 
-const LicenseIssue = () => {
+export const LicenseIssue = () => {
   return (
     <div>LicenseIssue</div>
   )
 }
-
-export default LicenseIssue
