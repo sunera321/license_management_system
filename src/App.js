@@ -6,12 +6,13 @@ import Home from './page/Home';
 //import About from './page/About';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
+import About from './page/About';
 //import KeyGenerate from './page/KeyGenerateForm';
 //import EditProfilePartner from './page/EditProfilePartner';
 //import EditProfileUser from './page/EditProfileUser';
-//import Status from './page/Status';
+import Status from './page/Status';
 //import PartnerManagerApproval from './page/PartnerManagerApproval';
-import FinacialManagerApproval from './page/FinacialManagerApproval ';
+//import FinacialManagerApproval from './page/FinacialManagerApproval ';
 
 
 function App() {
@@ -21,10 +22,8 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index Component={Home} />
           <Route path="controlpanel" Component={ControlPanel} />
-          <Route path="about" Component={FinacialManagerApproval} />
+          <Route path="about" Component={Status} />
           <Route path="contact_us" Component={Contact_Us} />
-          
-
         </Route>
       </Routes>
       
