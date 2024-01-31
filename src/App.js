@@ -6,7 +6,7 @@ import Home from './page/Home';
 //import About from './page/About';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
-import About from './page/About';
+
 //import KeyGenerate from './page/KeyGenerateForm';
 //import EditProfilePartner from './page/EditProfilePartner';
 //import EditProfileUser from './page/EditProfileUser';
