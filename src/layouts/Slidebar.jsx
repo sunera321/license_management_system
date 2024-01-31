@@ -13,7 +13,7 @@ import addClient from '../Images/sidebarpic/add-client.svg';
 
 const Slidebar = () => {
   return (
-    <div className="relative justify-center h-auto bg-slate-900">
+    <div className="relative justify-center h-screen bg-slate-900">
     <div className=" bg-slate-900 w-14 bg-custom-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-[55%] transform -translate-y-1/2  rounded">
       <div className="absolute inset-y-0 left-0 w-64 px-2 space-y-6 transition duration-200 ease-in-out transform -translate-x-full bg-slate-900 bg-black-300 bg-custom-gray py-7 md:relative md:translate-x-0">
    
