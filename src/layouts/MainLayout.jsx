@@ -9,8 +9,8 @@ const MainLayout = () => {
   return (
     <div>
       <Header />
-      <Slidebar/> 
-      <div className="ml-12">
+      <Slidebar/>
+      <div className="ml-14">
       <Outlet/>
       </div> 
       <Footer />

@@ -17,6 +17,7 @@ import help from '../Images/sidebarpic/help.svg';
 
 const Slidebar = () => {
   return (
+
     <div className="">
       <div className=" bg-slate-900 w-10 bg-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-[55%] transform -translate-y-1/2  rounded">
         <div className="absolute inset-y-0 left-0 w-64 px-2 space-y-6 transition duration-200 ease-in-out transform -translate-x-full bg-slate-900 bg-black-300 bg-gray py-7 md:relative md:translate-x-0">
@@ -25,9 +26,10 @@ const Slidebar = () => {
             <span className="text-2xl font-extrabold"> <img src={menuIcon} alt="Menu" className="w-5 h-5" style={{  fill: 'white' }} />  </span>
           </a>
           <hr className="my-4 border-t border-gray-600" />
+
         </div>
 
-        <nav className="flex flex-col mt-2 text-slate-400">
+        <div className="flex flex-col mt-2 text-slate-400">
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={dash} alt="control Icon" className="w-6 h-6 mr-4" />
