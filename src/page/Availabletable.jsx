@@ -1,9 +1,9 @@
 import React from "react";
 
-const ExpiredTable = () => {
+const AvailableTable = () => {
   return (
     <div className="overflow-x-auto ">
-      <div className='md:ml-26 '>
+      <div className='md:ml-26'>
         <table className="mx-auto text-center  content-center  md:w-auto w-full mb-11 border-spacing-2 border-slate-500 caption-top">
           <thead className="bg-gray-200">
             <tr>
@@ -52,4 +52,4 @@ const ExpiredTable = () => {
     );
 };
 
-export default ExpiredTable; 
+export default AvailableTable; 
