@@ -10,7 +10,9 @@ const MainLayout = () => {
     <div>
       <Header />
       <Slidebar/> 
+      <div className="ml-12">
       <Outlet/>
+      </div> 
       <Footer />
     </div>
   );
