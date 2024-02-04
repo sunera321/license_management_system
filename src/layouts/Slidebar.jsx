@@ -29,7 +29,7 @@ const Slidebar = () => {
 
         </div>
 
-        <div className="flex flex-col mt-2 text-slate-400">
+        <nav className="flex flex-col mt-2 text-slate-400">
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={dash} alt="control Icon" className="w-6 h-6 mr-4" />
