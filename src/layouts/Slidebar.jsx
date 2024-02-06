@@ -17,8 +17,7 @@ import help from '../Images/sidebarpic/help.svg';
 
 const Slidebar = () => {
   return (
-
-    <div className="">
+       <div>
       <div className=" bg-slate-900 w-10 bg-gray fixed group hover:w-64 transition-all duration-300 ease-in-out overflow-hidden  top-[55%] transform -translate-y-1/2  rounded">
         <div className="absolute inset-y-0 left-0 w-64 px-2 space-y-6 transition duration-200 ease-in-out transform -translate-x-full bg-slate-900 bg-black-300 bg-gray py-7 md:relative md:translate-x-0">
 
@@ -57,7 +56,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={statusIcon} alt="status Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/" >Status</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/status" >Status</a></span>
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
@@ -74,7 +73,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addClient} alt="Add client Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/addClient/addClient.jsx" > Add Client</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/addclient" > Add Client</a></span>
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
