@@ -28,8 +28,14 @@ const Navbar = () => {
           <div className="flex justify-center text-black align-middle items pl-14">
             <UserCircleIcon className="w-10"/>
             <div className="m-1.5 ml-1 align-middle">user name</div>
-            <button> <FontAwesomeIcon icon={faChevronDown} className="pl-5 mt-2.0" /></button>
-           
+            <button> <FontAwesomeIcon icon={faChevronDown} className="pl-5 mt-2.0" /><div>
+              <ul>
+                <li>
+                  kk
+                </li>
+              </ul>
+            </div></button>
+            
           </div>
         </div>
        
