@@ -18,7 +18,7 @@ const Status = () => {
 
                             <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-green-600 rounded-full hover:bg-green-200 '> ......</button></td></tr>
                         <tr><td className='px-20 py-3 text-xl mx-45' >001</td>
-                            <td className='px-20 py-3 text-xl mx-45'>Himasha</td>
+                            <td className='px-20 py-3 text-xl mx-45'>Himashaaaaaaaaaaaaa</td>
                             <td className='px-10 mx-4'><div className='items-center visible py-3 text-xl font-bold text-center text-green-600 bg-green-300 rounded-xl'>Accept</div></td>
                             <td className='px-10 mx-4'><div className='items-center visible py-3 text-xl font-bold text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
                             <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-gray-600 rounded-full hover:bg-gray-400 '> ......</button></td></tr>
