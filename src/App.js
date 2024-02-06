@@ -6,23 +6,25 @@ import Home from './page/Home';
 //import About from './page/About';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
-//import KeyGenerate from './page/KeyGenerateForm';
+import KeyGenerate from './page/KeyGenerateForm';
 //import EditProfilePartner from './page/EditProfilePartner';
-//import EditProfileUser from './page/EditProfileUser';
+import EditProfileUser from './page/EditProfileUser';
 import Status from './page/Status';
 //import PartnerManagerApproval from './page/PartnerManagerApproval';
 //import FinacialManagerApproval from './page/FinacialManagerApproval ';
-
+//import EditProfileUser from './page/EditProfileUser';
+import test from './page/Test';
+//import PartnerManagerApproval from './page/FinacialManagerApproval ';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index Component={Home} />
-          <Route path="controlpanel" Component={ControlPanel} />
-          <Route path="about" Component={Status} />
-          <Route path="contact_us" Component={Contact_Us} />
+          <Route index Component={KeyGenerate} />
+          <Route path="controlpanel" Component={EditProfileUser} />
+          <Route path="about" Component={test} />
+          <Route path="contact_us" Component={Status} />
         </Route>
       </Routes>
       
