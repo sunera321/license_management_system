@@ -7,22 +7,6 @@ import About from './page/About';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
 import KeyGenerate from './page/KeyGenerateForm';
-import EditProfilePartner from './page/EditProfilePartner';
-import EditProfileUser from './page/EditProfileUser';
-import Status from './page/Status';
-import PartnerManagerApproval from './page/PartnerManagerApproval';
-import FinacialManagerApproval from './page/FinacialManagerApproval ';
-import Notification from './page/Notification';
-import AddClient from './page/AddClient';
-import ClientDetials from './page/ClientDetials';
-import Dashboard from './page/Dashboard';
-import Help from './page/Help';
-import KeyGenerateForm from './page/KeyGenerateForm';
-import Loging from './page/Loging';
-import Models from './page/Models';
-import PrivacyPolicy from './page/PrivacyPolicy';
-import Profile from './page/Profile';
-import TermsConditions from './page/TermsConditions';
 
 
 function App() {
@@ -30,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
+
           <Route index Component={Home} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />

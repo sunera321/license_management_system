@@ -4,10 +4,10 @@ const KeyGenerateForm = () => {
     return (
         <div >
             <h1 className='my-8 mt-10 font-serif text-5xl font-bold text-center text-black fill-gray-400'>LICENSE KEY GENERATE</h1>
-            <div className='px-40 md:mx-72'>
+            <div className='px-40 md:mx-60'>
                 <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg'>
                     <div className="mb-6 ">
-                        <label className='block mb-1 text-lg font-bold text-gray-700 '>Client ID</label><br />
+                        <label className='block mb-1 text-base font-bold text-gray-700 '>Client ID</label><br />
                         <input type="text" required name="clientID" className='w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' /> <br />
                     </div>
                     <div className='mb-6'>
