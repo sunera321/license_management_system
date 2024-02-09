@@ -10,7 +10,7 @@ const Footer = () => {
               <div class="mb-6 md:mb-0">
                   <div className="text-[20px] font-bold -mt-2">Company</div>
                   <a href="https://hsenidbiz.com/" class="flex items-center mt-4">
-                      <img src={Company} class="h-[50px] w-[240px] me-3" alt="cpmpany Logo" />
+                      <img src={Company} class="h-[40px] w-[240px] me-3" alt="cpmpany Logo" />
                   </a>
               </div>
               <div class=" flex justify-between w-screen">
