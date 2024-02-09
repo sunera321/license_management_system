@@ -23,6 +23,8 @@ import Models from './page/Models';
 import PrivacyPolicy from './page/PrivacyPolicy';
 import Profile from './page/Profile';
 import TermsConditions from './page/TermsConditions';
+import Expiredlicense from './page/Expiredlicense';
+import Expiredtable from './page/Expiredtable';
 
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index Component={Home} />
+          <Route path="expiredlicense" Component={Expiredlicense} />
           <Route path="controlpanel" Component={ControlPanel} />
+          <Route path="expiredtable" Component={Expiredtable} />
           <Route path="about" Component={About} />
           <Route path="contact_us" Component={Contact_Us} />
           <Route path="keygenerate" Component={KeyGenerate} />
