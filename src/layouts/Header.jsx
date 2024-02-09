@@ -22,7 +22,7 @@ const Navbar = () => {
               <a href="/about" >About</a>
             </li>
             <li>
-              <a href="/contact_us" >Contact_Us</a>
+              <a href="/Notification" >Contact_Us</a>
             </li>
           </ul>
           <div className="flex justify-center text-black align-middle items pl-14">
