@@ -10,12 +10,6 @@ import SignOut from '../Images/NavBarPic/s.png'
 
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <nav className="p-4 border-b-2 border-black-300">
       <div className="container mx-auto ">
