@@ -1,15 +1,19 @@
 import React from "react";
 import PageHeader from "../components/CommonModal/pageHeader";
-import ExpiredTable from "./Expiredtable";
-import SearchBar from '../components/page/ControlPanel/searchBar' ; 
+import PageFooter from "../components/CommonModal/pageFooter";
+import Page  from "../src/page/Expiredtable.jsx";
+import Slidebar from "../layouts/slidebar.jsx";
 
-const Expiredlicense = () => {
+const StatusOfKey = () => {
     return (
       <div>
+         
          <PageHeader title="Expired License Key"/>
-         <SearchBar/>
-         <ExpiredTable/>
+         <Slidebar/>
+         <Page/>
+         <PageFooter/>
+        
       </div>
     )
   }
-export default Expiredlicense;
+export default Expiredlicense; 

@@ -1,11 +1,10 @@
 import React from 'react';
-import PageHeader from '../components/CommonModal/pageHeader';
 
 const Status = () => {
     return (
-        <div><PageHeader title="STATUS OF LICENSE KEY" />
-            <div className=''>
-                <table className="content-center mx-auto border border-separate md:w-auto mb-11 border-spacing-2 border-slate-500 caption-top">
+        <div><h1 className='my-20 font-serif text-5xl font-bold text-center text-black fill-gray-400'>STATUS OF LICENSE KEY</h1>
+            <div className=' md:ml-56'>
+                <table className="content-center border border-separate md:w-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' ><th className='py-5 mx-4 text-xl px-18'>Clinet ID</th>
                         <th className='py-5 mx-4 text-xl px-18 '>Clinet name</th>
                         <th className='px-20 py-5 mx-4 text-xl'>Partner Manager</th>
