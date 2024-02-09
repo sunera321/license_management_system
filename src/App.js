@@ -12,7 +12,7 @@ import ControlPanel from './page/ControlPanel';
 import Status from './page/Status';
 
 //import Availablelicense from './page/Availablelicense';
-//import Expiredlicense from './page/Expiredlicense';
+import Expiredlicense from './page/Expiredlicense';
 
 //import PartnerManagerApproval from './page/PartnerManagerApproval';
 //import FinacialManagerApproval from './page/FinacialManagerApproval ';
@@ -28,6 +28,7 @@ function App() {
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={Status} />
           <Route path="contact_us" Component={Contact_Us} />
+          <Route path="expired" Component={Expiredlicense} />
         
         </Route>
       </Routes>
