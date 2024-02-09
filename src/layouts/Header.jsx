@@ -3,7 +3,7 @@ import Logo from '../Images/nav_logo.png';
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Notification from '../Images/NavBarPic/N.png'
+import Notification from '../Images/NavBarPic/No.png'
 import Profile from '../Images/NavBarPic/Pr.webp';
 import SignOut from '../Images/NavBarPic/s.png'
 
