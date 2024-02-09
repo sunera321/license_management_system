@@ -34,6 +34,9 @@ const Navbar = () => {
             <li>
               <a href="/contact_us" >Contact Us</a>
             </li>
+            <li>
+              <a href="/expired" >Expired</a>
+            </li>
           </ul>
           <div className="flex justify-center text-black align-middle items pl-14">
             <UserCircleIcon className="w-10" />
