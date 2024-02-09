@@ -18,6 +18,7 @@ import help from '../Images/sidebarpic/help.svg';
 
 
 
+
 const Slidebar = () => {
   return (
        <div>
@@ -41,7 +42,9 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={control} alt="control Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="ControlPanel" > Control Panel</a></span>
+
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/controlpanel" > Control Panel</a></span>
+
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
@@ -71,7 +74,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={generate} alt="Generate Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="KeyGenerate" >Generate Key</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/" >Generate Key</a></span>
           </div>
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addClient} alt="Add client Icon" className="w-6 h-6 mr-4" />
