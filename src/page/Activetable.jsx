@@ -37,10 +37,10 @@ const clients = [
     issueDate: "2018-12-03", 
     expireDate: "2021-12-03"
   }
-   
+
 ];
 
-const AvailableTable = () => {
+const ActiveTable = () => {
   return (
     <div className="overflow-x-auto">
       <div className="md:ml-26">
@@ -71,4 +71,4 @@ const AvailableTable = () => {
   );
 };
 
-export default  AvailableTable;
+export default  ActiveTable;
