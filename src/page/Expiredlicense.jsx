@@ -4,7 +4,7 @@ import PageFooter from "../components/CommonModal/pageFooter";
 import Page  from "../src/page/Expiredtable.jsx";
 import Slidebar from "../layouts/slidebar.jsx";
 
-const StatusOfKey = () => {
+const Expiredlicense = () => {
     return (
       <div>
          
