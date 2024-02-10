@@ -12,9 +12,6 @@ import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
 
-import KeyGenerate from '../page/KeyGenerateForm';
-import Status from '../page/Status';
-import ControlPanel from '../page/ControlPanel';
 
 
 
