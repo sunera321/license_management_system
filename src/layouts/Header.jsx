@@ -4,8 +4,8 @@ import { UserCircleIcon } from '@heroicons/react/solid';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Notification from '../Images/NavBarPic/N.png'
-import Profile from '../Images/NavBarPic/Pr.webp';
-import SignOut from '../Images/NavBarPic/s.png'
+import Profile from '../Images/NavBarPic/L.jpg';
+import SignOut from '../Images/NavBarPic/P.jpg'
 
 
 
@@ -34,9 +34,7 @@ const Navbar = () => {
             <li>
               <a href="/contact_us" >Contact Us</a>
             </li>
-            <li>
-              <a href="/expired" >Expired</a>
-            </li>
+           
           </ul>
           <div className="flex justify-center text-black align-middle items pl-14">
             <UserCircleIcon className="w-10" />
@@ -50,13 +48,13 @@ const Navbar = () => {
 
                   <div className="py-1" role="none">
                     <ul className="absolute hidden w-56 pt-1 mt-0 bg-white rounded-md -right-5 text-black-700 group-hover:block">
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a  href="#">User ID  : </a></span></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a  href="/home">User ID  : </a></span></div></li>
 
-                      <li ><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="#">Notification </a></span><div className="icon"> <img src={Notification} alt="Generate Icon" className="w-5 h-6 mr-4" />
+                      <li ><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/home">Notification </a></span><div className="icon"> <img src={Notification} alt="Generate Icon" className="w-5 h-6 mr-4" />
                       </div></div></li>
 
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="#">Profile</a></span><div><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></div></div></li>
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="#">Sign Out</a></span><div><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></div></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/home">Profile</a></span><div><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></div></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/home">Sign Out</a></span><div><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></div></div></li>
 
                     </ul>
                   </div>
