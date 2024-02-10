@@ -11,9 +11,7 @@ import addClient from '../Images/sidebarpic/add-client.svg';
 import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
-//import KeyGenerate from '../page/KeyGenerateForm';
-//import Status from '../page/Status';
-//import ControlPanel from '../page/ControlPanel';
+
 
 
 
@@ -62,7 +60,9 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={statusIcon} alt="status Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href='Status' >Status</a></span>
+
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/statusofkey" >Status</a></span>
+
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
