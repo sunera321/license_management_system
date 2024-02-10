@@ -1,15 +1,16 @@
 import React from "react";
 import PageHeader from "../components/CommonModal/pageHeader";
-import ExpiredTable from "./Expiredtable";
 import SearchBar from '../components/page/ControlPanel/searchBar' ; 
+import AvailableTable from "./Availabletable";
 
-const Expiredlicense = () => {
+const Availablelicense = () => {
     return (
       <div>
-         <PageHeader title="Expired License Key"/>
+         <PageHeader title="Available License Key"/>
          <SearchBar/>
-         <ExpiredTable/>
+         <AvailableTable/>
+        
       </div>
     )
   }
-export default Expiredlicense;
+export default Availablelicense;
