@@ -4,12 +4,15 @@ import Header from "./Header";
 import Slidebar from './Slidebar';
 
 
-
 const MainLayout = () => {
+
   return (
     <div>
       <Header />
       <Slidebar/>
+      <div className="ml-14">
+      <Outlet/>
+      </div> 
       <Footer />
     </div>
   );
