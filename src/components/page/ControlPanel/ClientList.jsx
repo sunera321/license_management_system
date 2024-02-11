@@ -1,4 +1,5 @@
 import React from 'react'
+import BlueButton from '../../CommonModal/BlueButton';
 const Clients = [
   {
     key: 1,
@@ -110,7 +111,9 @@ const ControlPanel = () => {
                       <div key={index}>{module}</div>
                     ))}
                   </div>
-                  <button className="mt-3 p-1 text-white bg-[#111158] rounded-md font-medium text-[15px] w-[100px] hover:bg-slate-100 hover:text-black">Edit</button>
+                  <div>
+                    <BlueButton value="Edit" />
+                  </div>
                 </div>
               </div>
           ))}
