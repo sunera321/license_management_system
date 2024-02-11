@@ -4,8 +4,8 @@ import { UserCircleIcon } from '@heroicons/react/solid';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Notification from '../Images/NavBarPic/N.png'
-import Profile from '../Images/NavBarPic/P.jpg';
-import SignOut from '../Images/NavBarPic/L.jpg'
+import Profile from '../Images/NavBarPic/p.png';
+import SignOut from '../Images/NavBarPic/l.png'
 
 
 
