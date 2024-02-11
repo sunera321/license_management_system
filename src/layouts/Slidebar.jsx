@@ -11,7 +11,7 @@ import addClient from '../Images/sidebarpic/add-client.svg';
 import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
-import Status from '../page/Status';
+
 
 
 
