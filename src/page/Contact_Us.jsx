@@ -28,7 +28,6 @@ Battaramulla,<br/>
                         </div>
                     </div>
 
-                    {/* Right Section */}
                     <div className="lg:w-1/2 md:w-2/3 mx-auto p-8 bg-slate-200 rounded-r-lg">
                         <div className="flex flex-wrap -m-2">
                             <div className="p-2 w-1/2">
@@ -89,6 +88,7 @@ Battaramulla,<br/>
                             </div>
                             <div className="p-2 w-full">
                                 <div className="relative">
+                                 -+
                                     <label htmlFor="message" className="leading-7 text-sm text-gray-600">
                                         Message
                                     </label>
