@@ -5,7 +5,7 @@ const EditProfilePartner = () => {
 
     return (
         <div>
-            <h1 className='my-8 mt-10 mb-8 font-serif text-5xl font-bold text-center text-black fill-gray-400'>EDIT PROFILE</h1>
+            <pageHeader title='Edit Profile' />
             <div className='max-w-full ml-48 '>
                 <form className='max-w-screen-md px-8 pt-0 pb-4 mt-5 mb-4 bg-white rounded shadow-md ml-96 '>
                     <div className="mb-6 ">

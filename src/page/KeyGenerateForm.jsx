@@ -3,7 +3,7 @@ import React from 'react';
 const KeyGenerateForm = () => {
     return (
         <div >
-            <h1 className='my-8 mt-10 font-serif text-5xl font-bold text-center text-black fill-gray-400'>LICENSE KEY GENERATE</h1>
+            <pageHeader title='Key Generate' />
             <div className='px-40 md:mx-60'>
                 <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg'>
                     <div className="mb-6 ">
