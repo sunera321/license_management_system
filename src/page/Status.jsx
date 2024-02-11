@@ -1,8 +1,10 @@
 import React from 'react';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 const Status = () => {
     return (
-        <div><pageHeader title='Status' />
+        <div><PageHeader title='Approval Status' />
+      
             <div className=''>
                 <table className="content-center mx-auto border border-separate md:w-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' ><th className='py-5 mx-4 text-xl px-18'>Clinet ID</th>
