@@ -5,6 +5,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
 import MainHome from './page/Home';
 import About from './page/About';
+import AddModule from './page/AddModule';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
 import KeyGenerate from './page/KeyGenerateForm';
@@ -19,13 +20,15 @@ import ClientDetials from './page/ClientDetials';
 import Dashboard from './page/Dashboard';
 import Help from './page/Help';
 import KeyGenerateForm from './page/KeyGenerateForm';
-import Models from './page/Models';
+import Module from './page/Module';
 import PrivacyPolicy from './page/PrivacyPolicy';
 import Profile from './page/Profile';
 import TermsConditions from './page/TermsConditions';
 import StatusOfKey from './page/StatusOfKey';
 import Login from './page/Login';
 import Register from './page/Register'; 
+import ClientRegistration from './page/ClientRegistration';
+import ClientMore from './page/ClientMore'; 
 
 function App() {
   return (
@@ -38,7 +41,10 @@ function App() {
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
+          <Route path="addmodule" Component={AddModule} />
+          <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
+          <Route path="clientregistration" Component={ClientRegistration} />
           <Route path="keygenerate" Component={KeyGenerate} />
           <Route path="editprofilepartner" Component={EditProfilePartner} />
           <Route path="editprofileuser" Component={EditProfileUser} />
@@ -52,7 +58,7 @@ function App() {
           <Route path="dashboard" Component={Dashboard} />
           <Route path="help" Component={Help} />
           <Route path="keygenerateform" Component={KeyGenerateForm} />
-          <Route path="models" Component={Models} />
+          <Route path="module" Component={Module} />
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
