@@ -1,17 +1,18 @@
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
+
 function Contact_Us() {
     return (
         <div>
-            <section className="text-gray-700 body-font relative p-16 mt-">
-                <h1 className="text-3xl font-bold text-center mb-8 text-black">Contact Us</h1>
-                <p className="text-lg text-center mb-8">Any question or remarks? Just write us a message!</p>
-                <div className="container px-5 py-24 mx-auto flex">
+            <section className="relative p-16 text-gray-700 body-font mt-">
+                <h1 className="mb-8 text-3xl font-bold text-center text-black">Contact Us</h1>
+                <p className="mb-8 text-lg text-center">Any question or remarks? Just write us a message!</p>
+                <div className="container flex px-5 py-24 mx-auto">
                     {/* Left Section */}
-                    <div className="w-1/2 max-w-3/4 bg-black text-slate-700 p-8 rounded-l-lg">
-                        <h2 className="text-2xl font-semibold mb-4 text-white ">Contact Information</h2>
-                        <p className='text-lg mb-12 '>Say something to start a live chat!</p>
+                    <div className="w-1/2 p-8 bg-black rounded-l-lg max-w-3/4 text-slate-700">
+                        <h2 className="mb-4 text-2xl font-semibold text-white ">Contact Information</h2>
+                        <p className='mb-12 text-lg '>Say something to start a live chat!</p>
                         <div className="flex items-center mb-8 text-white">
                             <FaPhone className="mr-2" />
                             <span>+94112824814</span>
@@ -29,11 +30,11 @@ Battaramulla,<br/>
                     </div>
 
                     {/* Right Section */}
-                    <div className="lg:w-1/2 md:w-2/3 mx-auto p-8 bg-slate-200 rounded-r-lg">
+                    <div className="p-8 mx-auto rounded-r-lg lg:w-1/2 md:w-2/3 bg-slate-200">
                         <div className="flex flex-wrap -m-2">
-                            <div className="p-2 w-1/2">
+                            <div className="w-1/2 p-2">
                                 <div className="relative">
-                                    <label htmlFor="firstName" className="leading-7 text-sm text-gray-600">
+                                    <label htmlFor="firstName" className="text-sm leading-7 text-gray-600">
                                         First Name
                                     </label>
                                     <input
@@ -41,13 +42,13 @@ Battaramulla,<br/>
                                         id="firstName"
                                         name="firstName"
                                         placeholder="Your first name"
-                                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     />
                                 </div>
                             </div>
-                            <div className="p-2 w-1/2">
+                            <div className="w-1/2 p-2">
                                 <div className="relative">
-                                    <label htmlFor="lastName" className="leading-7 text-sm text-gray-600">
+                                    <label htmlFor="lastName" className="text-sm leading-7 text-gray-600">
                                         Last Name
                                     </label>
                                     <input
@@ -55,13 +56,13 @@ Battaramulla,<br/>
                                         id="lastName"
                                         name="lastName"
                                         placeholder="Your last name"
-                                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     />
                                 </div>
                             </div>
-                            <div className="p-2 w-1/2">
+                            <div className="w-1/2 p-2">
                                 <div className="relative">
-                                    <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+                                    <label htmlFor="email" className="text-sm leading-7 text-gray-600">
                                         Email
                                     </label>
                                     <input
@@ -69,13 +70,13 @@ Battaramulla,<br/>
                                         id="email"
                                         name="email"
                                         placeholder="Your email address"
-                                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     />
                                 </div>
                             </div>
-                            <div className="p-2 w-1/2">
+                            <div className="w-1/2 p-2">
                                 <div className="relative">
-                                    <label htmlFor="phoneNumber" className="leading-7 text-sm text-gray-600">
+                                    <label htmlFor="phoneNumber" className="text-sm leading-7 text-gray-600">
                                         Phone Number
                                     </label>
                                     <input
@@ -83,25 +84,25 @@ Battaramulla,<br/>
                                         id="phoneNumber"
                                         name="phoneNumber"
                                         placeholder="Your phone number"
-                                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     />
                                 </div>
                             </div>
-                            <div className="p-2 w-full">
+                            <div className="w-full p-2">
                                 <div className="relative">
-                                    <label htmlFor="message" className="leading-7 text-sm text-gray-600">
+                                    <label htmlFor="message" className="text-sm leading-7 text-gray-600">
                                         Message
                                     </label>
                                     <textarea
                                         id="message"
                                         name="message"
                                         placeholder="Your message"
-                                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                                        className="w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none resize-none focus:border-indigo-500"
                                     ></textarea>
                                 </div>
                             </div>
-                            <div className="p-2 w-full flex justify-end">
-                                <button className="text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                            <div className="flex justify-end w-full p-2">
+                                <button className="px-8 py-2 text-lg text-white bg-black border-0 rounded focus:outline-none hover:bg-indigo-600">
                                     Send message
                                 </button>
                             </div>
