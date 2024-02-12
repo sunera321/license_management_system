@@ -29,12 +29,10 @@ Battaramulla,<br/>
                         </div>
                     </div>
 
-<<<<<<< HEAD
+
                     {/* Right Section */}
                     <div className="p-8 mx-auto rounded-r-lg lg:w-1/2 md:w-2/3 bg-slate-200">
-=======
-                    <div className="lg:w-1/2 md:w-2/3 mx-auto p-8 bg-slate-200 rounded-r-lg">
->>>>>>> da9c9a5a18c9d3a70ae16de84a6374622576bedf
+
                         <div className="flex flex-wrap -m-2">
                             <div className="w-1/2 p-2">
                                 <div className="relative">
@@ -94,12 +92,9 @@ Battaramulla,<br/>
                             </div>
                             <div className="w-full p-2">
                                 <div className="relative">
-<<<<<<< HEAD
+
                                     <label htmlFor="message" className="text-sm leading-7 text-gray-600">
-=======
-                                 -+
-                                    <label htmlFor="message" className="leading-7 text-sm text-gray-600">
->>>>>>> da9c9a5a18c9d3a70ae16de84a6374622576bedf
+
                                         Message
                                     </label>
                                     <textarea
