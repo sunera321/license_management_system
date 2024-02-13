@@ -29,6 +29,10 @@ import Login from './page/Login';
 import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
+import FogotPassword from './page/FogotPassword';
+import Verification from './page/Verification';
+import NewPassword from './page/NewPassword';
+
 
 function App() {
   return (
@@ -37,6 +41,9 @@ function App() {
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
+        <Route path="/fogotp" element={<FogotPassword/>} />
+        <Route path="/verification" element={<Verification/>} />
+        <Route path="/newpassword" element={<NewPassword/>} />
         <Route path="/" element={<MainLayout />}>
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
@@ -62,6 +69,7 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
+         
         </Route>
       </Routes>
     </BrowserRouter>
