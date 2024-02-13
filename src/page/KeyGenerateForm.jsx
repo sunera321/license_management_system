@@ -8,8 +8,8 @@ const KeyGenerateForm = () => {
             <div className='px-40 md:mx-60'>
                 <form className='px-5 pt-2 pb-20 mb-10 bg-gray-100 rounded shadow-lg'>
                     <div className="mb-6 ">
-                        <label className='block mb-1 text-lg font-bold text-gray-700 '>Client ID</label><br />
-                        <input type="text" required name="clientID" className='w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' /> <br />
+                        <label className='block mb-0 text-base font-semibold text-gray-700 '>Client ID</label><br />
+                        <input type="text" required name="clientID" className='w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none ' /> <br />
                     </div>
                     <div className='mb-6'>
                         <label className='block mb-1 text-lg font-bold text-gray-700 '>Host URL</label><br />
