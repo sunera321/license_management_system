@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavBar2 from '../components/page/loging/inc/NavBar2';
 import Footer2 from '../components/page/loging/inc/Footer2';
 import backgroundImg from '../Images/Loging_asserts/media/background1.jpg';
+import Back from '../Images/Loging_asserts/media/';
 
 
 const Login = () => {
