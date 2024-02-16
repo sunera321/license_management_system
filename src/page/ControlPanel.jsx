@@ -3,7 +3,7 @@ import ClientList from '../components/page/ControlPanel/ClientList'
 import SearchBar from '../components/page/ControlPanel/searchBar'
 const ControlPanel = () => {
   return (
-    <div>
+      <div>
       <SearchBar/>
       <ClientList/>
     </div>
