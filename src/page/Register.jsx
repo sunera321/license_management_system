@@ -6,7 +6,7 @@ import Details from '../components/steps/Details'
 import Final from '../components/steps/Final'
 import { StepperContext } from '../components/hooks/StepperContext';
 import Navbar2 from '../components/inc/NavBar2';
-import backgroundImg from '../components/asserts/Media/background1.jpg';
+import backgroundImg from '../Images/Back.jpg';
 import Footer2 from '../components/inc/Footer2';
 
 
@@ -46,11 +46,11 @@ function RegisterHsenid () {
   return (
     <>
     <Navbar2/>
-    <div className="flex justify-center items-center w-full h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImg})` }}>
-    <div className="w-2/5 h-300 bg-white p-5 rounded-lg relative">
-        <h1 className="text-3xl font-bold text-center mt-8">Create account</h1>
+    <div className="flex items-center justify-center w-full h-screen bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <div className="relative w-2/5 p-5 bg-white rounded-lg h-300">
+        <h1 className="mt-8 text-3xl font-bold text-center">Create account</h1>
 
-        <div className='container horizontal mt-5'>
+        <div className='container mt-5 horizontal'>
     <Stepper
     steps={steps}
     currentStep={currentStep}/>
@@ -77,7 +77,7 @@ function RegisterHsenid () {
     />
     
                     {currentStep === 1 && (
-                        <p className="text-center mt-4 text-sm">Already have an account? <a href="/login" className="text-black font-bold">Login</a></p>
+                        <p className="mt-4 text-sm text-center">Already have an account? <a href="/login" className="font-bold text-black">Login</a></p>
                     )}
     
     </div>
