@@ -33,7 +33,7 @@ const EditProfileUser = () => {
                     </div>
                     <div className='mb-6'>
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Phone Number</label><br />
-                        <input type="text" required name="PN" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none ' /> <br />
+                        <input type="text"  name="PN" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none ' /> <br />
                     </div>
                     <div className='mb-5 '>
                         <button id='submit' type='submit' className='max-w-xl px-4 py-2 text-white bg-blue-900 rounded float-end hover:bg-blue-700'>SUBMIT</button>
