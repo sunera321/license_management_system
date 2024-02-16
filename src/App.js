@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
-
+import About from './page/About';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
 import KeyGenerate from './page/KeyGenerateForm';
@@ -13,8 +13,6 @@ import Status from './page/Status';
 
 
 import Availablelicense from './page/Availablelicense';
-
-
 import PartnerManagerApproval from './page/PartnerManagerApproval';
 import FinacialManagerApproval from './page/FinacialManagerApproval ';
 import PartnerManagerApproval from './page/PartnerManagerApproval';
@@ -41,7 +39,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index Component={Home} />
           <Route path="controlpanel" Component={ControlPanel} />
-
+          <Route path="available" Component={Availablelicense} />
           <Route path="expired" Component={Expiredlicense} />
           <Route path="about" Component={About} />
           <Route path="contact_us" Component={Contact_Us} />
@@ -62,8 +60,7 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
-          
-
+        
         </Route>
       </Routes>
     </BrowserRouter>
