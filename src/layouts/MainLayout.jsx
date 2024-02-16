@@ -7,12 +7,13 @@ import Slidebar from './Slidebar';
 const MainLayout = () => {
 
   return (
-    <div>
+    
+       <div className="min-h-screen bg-gradient-to-t from-gray-700 via-transparent to-gray-500">
       <Header />
       <Slidebar/>
-      <div className="ml-14">
+     
       <Outlet/>
-      </div> 
+     
       <Footer />
     </div>
   );
