@@ -17,14 +17,32 @@ const Status = () => {
                             <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-green-600 bg-green-300 rounded-xl'>Accept</div></td>
                             <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
 
-                            <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-green-600 rounded-full hover:bg-green-200 '> ......</button></td></tr>
+                            <td className='align-middle border-b-2 border-slate-500'><button className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'> ISSUE</button></td></tr>
 
-                        <tr><td className='px-20 py-3 text-lg mx-45' >001</td>
-                            <td className='px-20 py-3 text-lg mx-45'>Himasha</td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-green-600 bg-green-300 rounded-xl'>Accept</div></td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
 
-                            <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-gray-600 rounded-full hover:bg-gray-400 '> ......</button></td></tr>
+                            <tr ><td className='py-2 text-base text-center border-b-2 border-slate-500' >001</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>Himasha</td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-3 py-2 text-base text-center text-green-800 bg-green-300 rounded-xl'>Accept</div></td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-4 py-2 text-base text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
+
+                            <td className='align-middle border-b-2 border-slate-500'><button className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'> ISSUE</button></td></tr>
+                            
+                            
+                            <tr ><td className='py-2 text-base text-center border-b-2 border-slate-500' >001</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>Himasha</td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-3 py-2 text-base text-center text-green-800 bg-green-300 rounded-xl'>Accept</div></td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-4 py-2 text-base text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
+
+                            <td className='align-middle border-b-2 border-slate-500'><button className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'> ISSUE</button></td></tr>
+
+                            
+                            <tr ><td className='py-2 text-base text-center border-b-2 border-slate-500' >001</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>Himasha</td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-3 py-2 text-base text-center text-green-800 bg-green-300 rounded-xl'>Accept</div></td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className='items-center visible px-4 py-2 text-base text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
+
+                            <td className='align-middle border-b-2 border-slate-500'><button className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'> ISSUE</button></td></tr>
+                       
                     </tbody>
                 </table>
             </div>
