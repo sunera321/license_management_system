@@ -11,8 +11,10 @@ const MainLayout = () => {
        <div className="min-h-screen bg-gradient-to-t from-gray-700 via-transparent to-gray-500">
       <Header />
       <Slidebar/>
-     
+      <div className="ml-12">
       <Outlet/>
+      </div>
+      
      
       <Footer />
     </div>

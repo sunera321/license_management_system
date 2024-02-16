@@ -29,6 +29,7 @@ import Login from './page/Login';
 import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
+import ValidateKey from './page/validatekey';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
           <Route path="statusofkey" Component={StatusOfKey} />
+          <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
           <Route path="finacialmanagerapproval" Component={FinacialManagerApproval} />
           <Route path="notification" Component={Notification} />
