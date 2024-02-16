@@ -8,6 +8,7 @@ import Footer2 from '../components/page/loging/inc/Footer2';
 import backgroundImg from '../Images/Loging_asserts/media/background1.jpg';
 
 
+
 const Login = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -82,7 +83,7 @@ const Login = () => {
                                 </button>
                             </div>
                             <p className="mt-5">
-                                Don't have an account? <a href="/choose" className="text-blue-500 underline hover:text-blue-700 hover:underline">Sign up</a>
+                                Don't have an account? <a href="/Register" className="text-blue-500 underline hover:text-blue-700 hover:underline">Sign up</a>
                             </p>
                         </form>
                     </div>
