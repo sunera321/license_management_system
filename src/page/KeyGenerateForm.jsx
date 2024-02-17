@@ -52,10 +52,10 @@ const KeyGenerateForm = () => {
 
             <PageHeader title='Key Generate' />
             <div className=''>
-                <form  onSubmit={handleSubmit}    className='w-3/5 px-10 pt-10 pb-20 mx-auto mb-10 bg-gray-100 rounded shadow-lg '>
+                <form  onSubmit={handleSubmit}    className='w-4/6 pt-10 mx-auto mb-5 bg-gray-200 rounded shadow-lg '>
                     <img className='w-12 pb-3 mx-auto' src={generate} />
                     <p className='pb-5 text-green-500'>Please provide follwing details for Generate a key</p>
-                    <div className="mb-6 ">
+                    <div className="mb-6">
                         <label  className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Client ID</label><br />
                         <select className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none '  value={ClientID} onChange={(e) =>setClinetID(e.target.value)}>
                             <option>Select Client ID</option>

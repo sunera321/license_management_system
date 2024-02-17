@@ -1,8 +1,11 @@
 import React from 'react'
+import ViewNotification from '../components/page/Notification/ViewNotification'
 
 const Notification = () => {
   return (
-    <div>Notification</div>
+    <div>
+      <ViewNotification />
+    </div>
   )
 }
 
