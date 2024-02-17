@@ -59,7 +59,7 @@ const Navbar = () => {
 
                       </div></div></li>
 
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href='EditProfilePartner'>Profile</a></span><div><a href='EditProfileUser'><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href='/EditProfileUser'>Profile</a></span><div><a href='EditProfileUser'><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
                       <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/login">Sign Out</a></span><div><a href="/login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
 
                     </ul>
