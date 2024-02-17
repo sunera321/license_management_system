@@ -23,7 +23,7 @@ const EditProfileUser = () => {
     }
 
     return (
-        <div>
+        <div className="h-screen bg-gradient-to-r from-indigo-900 via-blue-500 to-cyan-400 ">
          <PageHeader title={'Edit Account'} />
             <div className=''>
                 <form onSubmit={handleSubmit}  className='w-2/5 px-10 pt-10 pb-20 mx-auto mb-10 bg-gray-100 rounded shadow-lg'>
