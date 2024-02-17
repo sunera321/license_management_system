@@ -7,10 +7,6 @@ import Notification from '../Images/NavBarPic/N.png'
 import Profile from '../Images/NavBarPic/p.png';
 import SignOut from '../Images/NavBarPic/l.png'
 
-
-
-
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +21,7 @@ const Navbar = () => {
           <div className="font-bold text-white ml-14 "><img src={Logo} alt="Logo" className="w-40" /></div>
           <ul className="flex space-x-4 ml-[100px] gap-8  text-black bg-white-200 font-serif text-[18px]" >
             <li>
-              <a href="/" >Home</a>
+              <a href="/mainhome" >Home</a>
             </li>
             <li>
 
