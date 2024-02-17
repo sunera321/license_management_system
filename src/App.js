@@ -29,15 +29,18 @@ import Login from './page/Login';
 import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
+import ValidateKey from './page/validatekey';
 
 function App() {
   return (
+   
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
+      
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
@@ -50,6 +53,7 @@ function App() {
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
           <Route path="statusofkey" Component={StatusOfKey} />
+          <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
           <Route path="finacialmanagerapproval" Component={FinacialManagerApproval} />
           <Route path="notification" Component={Notification} />
@@ -62,9 +66,11 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
+  
   );
 }
 

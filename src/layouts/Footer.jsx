@@ -4,7 +4,7 @@ import Company from '../Images/nav_logo.png'
 
 const Footer = () => {
   return (
-    <footer class="bg-[#EEEBEB]">
+    <footer class="bg-gradient-to-t to-gray-300 from-[#EEEBEB] bg-gradient-to-l">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex gap-28  ml-14 mr-14">
               <div class="mb-6 md:mb-0">
