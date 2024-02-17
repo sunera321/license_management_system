@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 
 import "react-toastify/dist/ReactToastify.css";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import BlueButton from '../components/CommonModal/BlueButton'
+import BlueButton from '../components/CommonModal/BlueButton';
 
 
 
