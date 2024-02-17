@@ -6,7 +6,7 @@ const Status = () => {
         <div><PageHeader title='Approval Status' />
       
             <div className='mt-10'>
-                <table className="content-center w-2/4 mx-auto border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top ">
+                <table className= "content-center w-2/4 mx-auto bg-white border border-separate table-auto  mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' ><th className='px-0 py-3 mx-0 text-lg font-semibold'>Clinet ID</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Clinet name</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>

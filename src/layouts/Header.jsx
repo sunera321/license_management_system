@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 border-b-2 border-black-300">
+    <nav className="p-4 border-b-2 border-black-300 bg-slate-100">
       <div className="container mx-auto ">
         <div className="flex items-center justify-between -ml-16">
           <div className="font-bold text-white ml-14 "><img src={Logo} alt="Logo" className="w-40" /></div>
@@ -60,7 +60,7 @@ const Navbar = () => {
                       </div></div></li>
 
                       <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href='/EditProfileUser'>Profile</a></span><div><a href='EditProfileUser'><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/login">Sign Out</a></span><div><a href="/login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/Login">Sign Out</a></span><div><a href="/Login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
 
                     </ul>
                   </div>

@@ -107,7 +107,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/components/page/" >Logout</a></span>
+            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/Login" >Logout</a></span>
           </div>
         </nav>
       </div>

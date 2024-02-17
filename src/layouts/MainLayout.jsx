@@ -8,7 +8,7 @@ const MainLayout = () => {
 
   return (
     
-       <div className="min-h-screen bg-gradient-to-t from-gray-700 via-transparent to-gray-500">
+       <div className="h-full bg-gradient-to-b from-cyan-400 via-blue-500 to-indigo-900 ">
       <Header />
       <Slidebar/>
       <div className="ml-12">
