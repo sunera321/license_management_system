@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 
 import "react-toastify/dist/ReactToastify.css";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import BlueButton from '../components/CommonModal/BlueButton'
+import BlueButton from '../components/CommonModal/BlueButton';
 
 
 
@@ -18,20 +18,7 @@ const KeyGenerateForm = () => {
     const [VD, setVD] = useState('');
     const [BFI, setBFI] = useState(0);
 
-    const onSub = () => {
-
-        Swal.fire({
-            preventDefault: false,
-            position: "top-center",
-            icon: "success",
-            title: "Generate Key Succesfully",
-            showConfirmButton: false,
-            timer: 1500
-       
-          })
-        
-    }
-
+  
     const handleSubmit= (e) => {
         e.preventDefault();
         

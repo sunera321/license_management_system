@@ -8,7 +8,9 @@ const MainLayout = () => {
 
   return (
     
-       <div className="min-h-screen bg-transparent">
+
+       <div >
+
       <Header />
       <Slidebar/>
       <div className="ml-12">
