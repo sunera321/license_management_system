@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+
 import Home from './page/Home';
 import MainHome from './page/MainHome';
 import About from './page/About';
