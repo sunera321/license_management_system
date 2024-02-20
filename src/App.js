@@ -30,6 +30,7 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
+import Availablelicense from './page/Availablelicense';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
+          <Route path='availablelicense' element={Availablelicense} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />

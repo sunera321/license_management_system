@@ -10,13 +10,13 @@ const Dashboard = () => {
     <div className="mt-10 ml-6 mr-6 ">
       <div className ="flex justify-between">
         <div className="w-3/12 rounded-lg h-[150px] bg-sky-100 p-5">
-           AVAILABLE LICENSE KEY
+          <a href='./Availablelicense.jsx'> AVAILABLE LICENSE KEY </a>
         </div>
         <div className="w-3/12 rounded-lg h-[150px] bg-slate-200 p-5 ">
-          EXPIRED LICENSE KEY
+        <a href='#'> EXPIRED LICENSE KEY </a>
         </div>
         <div className="w-3/12 rounded-lg h-[150px] bg-sky-100 p-5">
-          ACTIVE LICENSE KEY
+        <a href='#'>ACTIVE LICENSE KEY </a>
         </div>
       </div>
       <div className="w-[1120px] bg-slate-100 rounded-lg h-[350px] mt-10 mb-10 ml-10 mr-10 p-6">
