@@ -4,7 +4,9 @@ import PageHeader from '../components/CommonModal/pageHeader';
 import "react-toastify/dist/ReactToastify.css";
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
+import axios from 'axios';
 
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -81,12 +83,42 @@ const KeyGenerateForm = () => {
                 break;
         }
     };
+
+    const handleSave = () => {
+        const url = `http://localhost:5295/api/License`;
+        const data ={
+            
+            "hostURL": URL,
+         "serverMacAddress": SMA,
+            "validDateUntil": VD,
+           "modules": BFI,
+             "hsenidUser": isChecked1,
+            "hsenidPartner": isChecked2
+        }
+
+        axios.post(url, data)
+        .then((result)=>{
+            console.log("DD")
+            Swal.fire({
+
+                position: "top-center",
+                icon: "success",
+                title: "Generate Key Succesfully",
+                showConfirmButton: false,
+                timer: 1500
+    
+            })
+        }).catch((error)=>{
+            toast.error(error);
+            console.log(error);
+        })
+    }
     return (
         <div  >
 
             <PageHeader title='Key Generate' />
             <div className=''>
-                <form onSubmit={handleSubmit} className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-100 rounded shadow-lg '>
+                <form onSubmit={handleSave} className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-100 rounded shadow-lg '>
                     <img className='w-12 pb-3 mx-auto' src={generate} />
                     <p className='pb-5 text-green-500'>Please provide follwing details for Generate a key</p>
                     <div className="mb-6 ">
@@ -144,7 +176,7 @@ const KeyGenerateForm = () => {
                     </div>
                     <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
 
-                        <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
+                        <input onClick={handleSave} type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
 
 
                     </div>

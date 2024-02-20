@@ -4,6 +4,7 @@ import Accept from '../components/CommonModal/Accept'
 import Reject from '../components/CommonModal/Reject';
 import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
+import Disable from '../components/CommonModal/Disable';
 
 const Status = () => {
     const empdata = [
@@ -11,14 +12,14 @@ const Status = () => {
             ClientID: 1,
             ClientName: 'Manoj',
             Pmanger: <Accept value='Accept'/>,
-            HManger:<Reject value='Reject'/>,
+            HManger:<Accept value='Accept'/>,
             Issue:<Issue value='Issue'/>
             
         },
         {
             ClientID: 2,
             ClientName: 'Manoj',
-            Pmanger: <Reject value='Reject'/>,
+            Pmanger: <Accept value='Accept'/>,
             HManger:<Accept value='Accept'/>,
             Issue:<Provide value='Provide'/>
             
@@ -29,7 +30,7 @@ const Status = () => {
             ClientName: 'Manoj',
             Pmanger: <Reject value='Reject'/>,
             HManger:<Accept value='Accept'/>,
-            Issue:<Provide value='Provide'/>
+            Issue:<Disable value='Disable'/>
             
         }
     ]

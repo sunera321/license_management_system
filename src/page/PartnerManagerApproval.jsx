@@ -124,14 +124,14 @@ function PartnerManagerApproval() {
                                         <td className='pl-5'>{client.Country}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-1'>Partner time Period</td>
+                                        <td className='py-1'>Client time Period</td>
                                         <td>:</td>
-                                        <td className='pl-5'>{client.Partner_Requested}</td>
+                                        <td className='pl-5'>{client.Requested_Time_Period}</td>
                                     </tr>
                                     <tr>
                                         <td className='py-1'>Partner Requested</td>
                                         <td>:</td>
-                                        <td className='pl-5'>{client.Requested_Time_Period}</td>
+                                        <td className='pl-5'>{client.Partner_Requested}</td>
                                     </tr>
                                     <tr>
                                         <td className='py-1'>Requested Module</td>
