@@ -46,7 +46,7 @@ function App() {
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
       
-          <Route path="mainhome" Component={MainHome} />
+          <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
           <Route path='activelicense' element={<Activelicense/>} />
