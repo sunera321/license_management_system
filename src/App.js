@@ -31,7 +31,7 @@ import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
 import Expiredlicense from './page/Expiredlicense';
-import Availablelicense from './page/Availablelicense';
+import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 
 
@@ -49,7 +49,6 @@ function App() {
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
-          <Route path='availablelicense' element={<Availablelicense/>} />
           <Route path='activelicense' element={<Activelicense/>} />
           <Route path='expiredlicense' element={<Expiredlicense/>} />
           <Route path="addmodule" Component={AddModule} />
