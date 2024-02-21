@@ -124,14 +124,14 @@ function PartnerManagerApproval() {
                                         <td className='pl-5'>{client.Country}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-1'>Partner time Period</td>
+                                        <td className='py-1'>Client time Period</td>
                                         <td>:</td>
-                                        <td className='pl-5'>{client.Partner_Requested}</td>
+                                        <td className='pl-5'>{client.Requested_Time_Period}</td>
                                     </tr>
                                     <tr>
                                         <td className='py-1'>Partner Requested</td>
                                         <td>:</td>
-                                        <td className='pl-5'>{client.Requested_Time_Period}</td>
+                                        <td className='pl-5'>{client.Partner_Requested}</td>
                                     </tr>
                                     <tr>
                                         <td className='py-1'>Requested Module</td>
@@ -140,11 +140,11 @@ function PartnerManagerApproval() {
                                     <div key={index}>{module}</div>
                                 ))}</td>
                                     </tr>
-                                    <div className='ml-0'>Partner manager Approval</div>
+                                    <div className='ml-0 '>Partner manager Approval</div>
                                     <tr>
-                                        <td className='py-1'> <button className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">Accept</button></td>
+                                        <td className='items-center py-1 pl-5 mx-auto'> <button className="w-2/3 p-2 px-5 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300">Accept </button></td>
                                         <td></td>
-                                        <td className='pl-5'><button className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
+                                        <td className='items-center justify-center px-5 '><button className="w-2/3 py-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
                                     </tr>
                                     
                                 </tbody>

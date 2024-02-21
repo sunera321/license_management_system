@@ -1,83 +1,104 @@
 import React from 'react'
 import PageHeader from '../components/CommonModal/pageHeader'
+import { Button } from '@material-tailwind/react'
 
-const validatekey = () => {
+const Data = [
+  {
+    key: 1,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 2,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 3,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 4,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 5,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 6,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 7,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+  {
+    key: 8,
+    ClientName: 'DSI',
+    ClientEmail: 'exampel@gamil.com',
+    PartnerName: 'partner name',
+    PartnerId: 'PID1223'
+  },
+];
+
+const ValidateKey = () => {
   return (
-    <div>
-       <div>
+    <div className="min-h-screen">
       <div>
         <PageHeader title="Validate License Key" />
       </div>
-      
-      <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-6  p-5  notification-box rounded-xl">
-        <div class=" text-2xl font-semibold pb-2" >
-        <span class="float-right">
-            <path
-              class="heroicon-ui"
-              d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-            />
-        </span>
+      {Data.map((Data) => (
+        <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-6  pr-2 pl-2 notification-box rounded-xl">
+          <div class="pl-5 pr-5 p-2" key={Data.key}>
+            <div className="flex justify-between ">
+              <div>
+                <div class="font-bold">
+                  {Data.ClientName}
+                </div>
+                <div>
+                  {Data.ClientEmail}
+                </div>
+              </div>
+              <div>
+                <div class="font-bold">
+                  {Data.PartnerName}
+                </div>
+                <div>
+                  Partner -{Data.PartnerId}
+                </div>
+              </div>
+              <Button className="h-10 mt-1 bg-red-500">
+                Warning!
+              </Button>
+              <Button className="h-10 mt-1 font-bold border-2 border-sky-500 text-violet-950 ">
+                Action
+              </Button>
+            </div>
+          </div>
         </div>
-        <div class=" text-lg text-gray-600  tracking-tight ">
-       
-        </div>
-      </div>
-      <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-1  p-5  notification-box rounded-xl">
-        <div class=" text-2xl font-semibold pb-2" >
-        <span class="float-right">
-            <path
-              class="heroicon-ui"
-              d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-            />
-        </span>
-        </div>
-        <div class=" text-lg text-gray-600  tracking-tight ">
-       
-        </div>
-      </div>
-      <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-1  p-5  notification-box rounded-xl">
-        <div class=" text-2xl font-semibold pb-2" >
-        <span class="float-right">
-            <path
-              class="heroicon-ui"
-              d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-            />
-        </span>
-        </div>
-        <div class=" text-lg text-gray-600  tracking-tight ">
-       
-        </div>
-      </div>
-      <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-1  p-5  notification-box rounded-xl">
-        <div class=" text-2xl font-semibold pb-2" >
-        <span class="float-right">
-            <path
-              class="heroicon-ui"
-              d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-            />
-        </span>
-        </div>
-        <div class=" text-lg text-gray-600  tracking-tight ">
-       
-        </div>
-      </div>
-      <div class="bg-gray-300 w-4/5 mx-auto m-8 mt-1  p-5  notification-box rounded-xl">
-        <div class=" text-2xl font-semibold pb-2" >
-        <span class="float-right">
-            <path
-              class="heroicon-ui"
-              d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-            />
-        </span>
-        </div>
-        <div class=" text-lg text-gray-600  tracking-tight ">
-       
-        </div>
-      </div>
-    
+      ))}
     </div>
-    </div>
-  )
+  );
 }
 
-export default validatekey
+export default ValidateKey;

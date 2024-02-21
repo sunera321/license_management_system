@@ -5,7 +5,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 function Contact_Us() {
     return (
         <div>
-            <section className="relative p-16 text-gray-700 body-font mt-">
+            <section className="relative p-16 text-gray-700  body-font mt-">
                 <h1 className="mb-8 text-3xl font-bold text-center text-black">Contact Us</h1>
                 <p className="mb-8 text-lg text-center">Any question or remarks? Just write us a message!</p>
                 <div className="container flex px-5 py-24 mx-auto">
