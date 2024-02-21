@@ -40,7 +40,7 @@ const clients = [
    
 ];
 
-const ExpiredTable = () => {
+const AvailableTable = () => {
   return (
     <div className="overflow-x-auto">
       <div className="md:ml-26">
@@ -71,4 +71,4 @@ const ExpiredTable = () => {
   );
 };
 
-export default ExpiredTable;
+export default  AvailableTable;
