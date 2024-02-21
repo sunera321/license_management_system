@@ -1,5 +1,5 @@
 import React from 'react'
-import PageHeader from '../components/CommonModal/pageHeader';
+import PageHeader from '../../CommonModal/pageHeader';
 
 const NotifiList = [
   {

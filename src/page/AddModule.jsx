@@ -1,12 +1,12 @@
 import React from 'react';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 const AddModule = () => {
     return (
         <div>
-            <h1 className='my-8 mt-10 mb-8 font-serif text-3xl font-bold text-center text-black md:text-4xl lg:text-4xl fill-gray-400'>Add Module Details</h1>
-
+            <PageHeader title={"Add Module Details"}/>
             <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
-                <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg '>
+                <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg '>
                     <div className="relative mb-6">
                         <label className='mb-2 text-lg font-bold text-gray-700'>Add Module Profile</label><br />
                         <div className="flex items-center">
