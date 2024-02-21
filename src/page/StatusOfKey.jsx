@@ -91,7 +91,7 @@ const StatusOfKey = () => {
     <PageHeader title="Status Of License Key"/>
     <div className="overflow-x-auto pt-7">
       <div className='md:ml-26 '>
-        <table className="content-center w-4/6 mx-auto text-center md: mb-11 border-spacing-2 border-slate-500 caption-top">
+        <table className="content-center w-4/6 mx-auto text-center bg-white  md: mb-11 border-spacing-2 border-slate-500 caption-top">
           <thead className="bg-gray-200 " >
             <tr className="p-3">
               <th className='px-2 py-1 '>Client ID</th>
