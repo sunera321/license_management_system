@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="container mx-auto ">
         <div className="flex items-center justify-between -ml-16">
           <div className="font-bold text-white ml-14 "><img src={Logo} alt="Logo" className="w-40" /></div>
-          <ul className="flex space-x-4 ml-[100px] gap-8  text-black bg-white-200 font-serif text-[18px]" >
+          <ul className="hidden md:flex space-x-4 ml-[100px] gap-8  text-black bg-white-200 font-serif text-[18px]" >
             <li>
               <a href="/mainhome" >Home</a>
             </li>

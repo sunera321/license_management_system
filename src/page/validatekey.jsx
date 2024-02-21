@@ -63,7 +63,7 @@ const Data = [
 
 const ValidateKey = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-10">
       <div>
         <PageHeader title="Validate License Key" />
       </div>
@@ -87,11 +87,12 @@ const ValidateKey = () => {
                   Partner -{Data.PartnerId}
                 </div>
               </div>
-              <Button className="h-10 mt-1 bg-red-500">
+              <Button className="hidden mt-1 bg-red-500 md:inline ">
                 Warning!
               </Button>
               <Button className="h-10 mt-1 font-bold border-2 border-sky-500 text-violet-950 ">
-                Action
+                <a href="/compeardata">Action</a>
+               
               </Button>
             </div>
           </div>
