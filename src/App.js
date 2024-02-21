@@ -30,9 +30,9 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
-import Availablelicense from './components/page/Dashboard/Availablelicense';
 import Activelicense from './page/Activelicense';
 import Expiredlicense from './page/Expiredlicense';
+import Availablelicense from './page/Availablelicense';
 
 function App() {
   return (
