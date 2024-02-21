@@ -15,11 +15,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 border-b-2 border-black-300">
+    <nav className="p-4 pt-3 pb-3 border-b-2 border-black-300 bg-slate-200">
       <div className="container mx-auto ">
         <div className="flex items-center justify-between -ml-16">
           <div className="font-bold text-white ml-14 "><img src={Logo} alt="Logo" className="w-40" /></div>
-          <ul className="flex space-x-4 ml-[100px] gap-8  text-black bg-white-200 font-serif text-[18px]" >
+          <ul className="hidden md:flex space-x-4 ml-[100px] gap-8  text-black bg-white-200 font-serif text-[18px]" >
             <li>
               <a href="/mainhome" >Home</a>
             </li>
@@ -56,7 +56,7 @@ const Navbar = () => {
                       </div></div></li>
 
                       <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href='/EditProfileUser'>Profile</a></span><div><a href='EditProfileUser'><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/login">Sign Out</a></span><div><a href="/login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
+                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/Login">Sign Out</a></span><div><a href="/Login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
 
                     </ul>
                   </div>

@@ -30,14 +30,9 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
-import Expiredlicense from './page/Expiredlicense';
-import Activelicense from './page/Activelicense';
-import CompearData from './page/CompearData';
-
 
 function App() {
   return (
-
    
     <BrowserRouter>
       <Routes>
@@ -49,8 +44,6 @@ function App() {
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
-          <Route path='activelicense' element={<Activelicense/>} />
-          <Route path='expiredlicense' element={<Expiredlicense/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
@@ -59,7 +52,6 @@ function App() {
           <Route path="editprofilepartner" Component={EditProfilePartner} />
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
-          <Route path="compeardata" Component={CompearData} />
           <Route path="statusofkey" Component={StatusOfKey} />
           <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
@@ -79,7 +71,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   
-
   );
 }
 
