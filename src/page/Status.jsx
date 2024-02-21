@@ -1,29 +1,74 @@
-import React from 'react';
+import React,{useState , useEffect} from 'react';
+import PageHeader from '../components/CommonModal/pageHeader';
+import Accept from '../components/CommonModal/Accept'
+import Reject from '../components/CommonModal/Reject';
+import Provide from '../components/CommonModal/Provide';
+import Issue from '../components/CommonModal/Issue';
+import Disable from '../components/CommonModal/Disable';
 
 const Status = () => {
+    const empdata = [
+        {
+            ClientID: 1,
+            ClientName: 'Manoj',
+            Pmanger: <Accept value='Accept'/>,
+            HManger:<Accept value='Accept'/>,
+            Issue:<Issue value='Issue'/>
+            
+        },
+        {
+            ClientID: 2,
+            ClientName: 'Manoj',
+            Pmanger: <Accept value='Accept'/>,
+            HManger:<Accept value='Accept'/>,
+            Issue:<Provide value='Provide'/>
+            
+        }
+        ,
+        {
+            ClientID: 3,
+            ClientName: 'Manoj',
+            Pmanger: <Reject value='Reject'/>,
+            HManger:<Accept value='Accept'/>,
+            Issue:<Disable value='Disable'/>
+            
+        }
+    ]
+    const [data, setData] = useState([]);
+    
+     useEffect(() => {
+         setData(empdata);
+     }, [])
     return (
-        <div><h1 className='my-20 font-serif text-5xl font-bold text-center text-black fill-gray-400'>STATUS OF LICENSE KEY</h1>
-            <div className=' md:ml-56'>
-                <table className="content-center border border-separate md:w-auto mb-11 border-spacing-2 border-slate-500 caption-top">
-                    <thead className='bg-indigo-100 ' ><th className='py-5 mx-4 text-xl px-18'>Clinet ID</th>
-                        <th className='py-5 mx-4 text-xl px-18 '>Clinet name</th>
-                        <th className='px-20 py-5 mx-4 text-xl'>Partner Manager</th>
-                        <th className='px-20 py-5 mx-4 text-xl '>Finance manager</th>
-                        <th className='py-5 mx-4 text-xl px-18 '>Issue</th></thead>
-                    <tbody >
-                        <tr><td className='px-20 py-3 text-lg mx-45' >001</td>
-                            <td className='px-20 py-3 text-lg mx-45'>Himasha</td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-green-600 bg-green-300 rounded-xl'>Accept</div></td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
+        <div><PageHeader title='Approval Status' />
+      
+            <div className='mt-10'>
+                <table className= "content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
+                    <thead className='bg-indigo-100 ' ><th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client name</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Finance manager</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Issue</th></thead>
+                    <tbody  >
+                    {
+                        data && data.length > 0 ?
+                            data.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                    <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.ClientID}</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.ClientName}</td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className=''>{item.Pmanger}</div></td>
+                            <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div >{item.HManger}</div></td>
 
-                            <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-green-600 rounded-full hover:bg-green-200 '> ......</button></td></tr>
-
-                        <tr><td className='px-20 py-3 text-lg mx-45' >001</td>
-                            <td className='px-20 py-3 text-lg mx-45'>Himasha</td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-green-600 bg-green-300 rounded-xl'>Accept</div></td>
-                            <td className='px-20 mx-4'><div className='items-center visible py-3 text-lg font-bold text-center text-red-600 bg-red-300 rounded-xl'>Reject</div></td>
-
-                            <td className='items-center '><button className='px-12 py-4 mx-10 text-transparent bg-gray-600 rounded-full hover:bg-gray-400 '> ......</button></td></tr>
+                            <td className='align-middle border-b-2 border-slate-500'>{item.Issue}</td>
+                                    </tr>
+                                )
+                            })
+                            :
+                            'Loading...'
+                    }
+                       
+                       
                     </tbody>
                 </table>
             </div>

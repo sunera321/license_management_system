@@ -93,7 +93,7 @@ function PartnerManagerApproval() {
                     {row.map((client) => (
                         <div
                             key={client.key}
-                            className="h-auto w-[450px]  bg-[#CCC7C7] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3 ">
+                            className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3 ">
                             <div className="flex gap-6 pt-2 justify-evenly">
                                 <div className="text-[26px] font-normal">{client.name}</div>
 
@@ -109,40 +109,40 @@ function PartnerManagerApproval() {
                                 </thead>
                                 <tbody className='content-center justify-center ml-10'>
                                     <tr >
-                                        <td className='py-3'>Client Name</td>
+                                        <td className='py-1'>Client Name</td>
                                         <td>:</td>
                                         <td className='pl-5'>{client.name}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-3'>Client ID</td>
+                                        <td className='py-1'>Client ID</td>
                                         <td>:</td>
                                         <td className='pl-5'>{client.clientID}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-3'>Country</td>
+                                        <td className='py-1'>Country</td>
                                         <td>:</td>
                                         <td className='pl-5'>{client.Country}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-3'>Partner time Period</td>
-                                        <td>:</td>
-                                        <td className='pl-5'>{client.Partner_Requested}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='py-3'>Partner Requested</td>
+                                        <td className='py-1'>Client time Period</td>
                                         <td>:</td>
                                         <td className='pl-5'>{client.Requested_Time_Period}</td>
                                     </tr>
                                     <tr>
-                                        <td className='py-3'>Requested Module</td>
+                                        <td className='py-1'>Partner Requested</td>
+                                        <td>:</td>
+                                        <td className='pl-5'>{client.Partner_Requested}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='py-1'>Requested Module</td>
                                         <td>:</td>
                                         <td className='pl-5'>{client.modules.map((module, index) => (
                                     <div key={index}>{module}</div>
                                 ))}</td>
                                     </tr>
-                                    <div className='ml-3'>Financial manager Approval</div>
+                                    <div className='ml-0'>Financial manager Approval</div>
                                     <tr>
-                                        <td className='py-3'> <button className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">Accept</button></td>
+                                        <td className='py-1'> <button className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">Accept</button></td>
                                         <td></td>
                                         <td className='pl-5'><button className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
                                     </tr>

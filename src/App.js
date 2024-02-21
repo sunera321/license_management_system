@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
-import MainHome from './page/Home';
+import MainHome from './page/MainHome';
 import About from './page/About';
 import AddModule from './page/AddModule';
 import Contact_Us from './page/Contact_Us';
@@ -29,18 +29,29 @@ import Login from './page/Login';
 import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
+import ValidateKey from './page/validatekey';
+import Expiredlicense from './page/Expiredlicense';
+import Availablelicense from './page/Availablelicense';
+import CompearData from './page/CompearData';
+
 
 function App() {
   return (
+
+   
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
+      
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
+          <Route path='availablelicense' element={<Availablelicense/>} />
+          <Route path='activelicense' element={<Activelicense/>} />
+          <Route path='expiredlicense' element={<Expiredlicense/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
@@ -49,7 +60,9 @@ function App() {
           <Route path="editprofilepartner" Component={EditProfilePartner} />
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
+          <Route path="compeardata" Component={CompearData} />
           <Route path="statusofkey" Component={StatusOfKey} />
+          <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
           <Route path="finacialmanagerapproval" Component={FinacialManagerApproval} />
           <Route path="notification" Component={Notification} />
@@ -62,9 +75,12 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
+  
+
   );
 }
 

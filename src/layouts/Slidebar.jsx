@@ -12,11 +12,6 @@ import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
 
-
-
-
-
-
 const Slidebar = () => {
   return (
        <div>
@@ -37,7 +32,7 @@ const Slidebar = () => {
             <div className="icon"> <img src={dash} alt="control Icon" className="w-6 h-6 mr-4" />
             </div>
 
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/ControlPanel/ControlPanel.jsx" > Dashboard</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/dashboard" > Dashboard</a></span>
 
           </div>
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
@@ -57,27 +52,35 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={approval} alt="approval Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/approvalStatus/approvalStatus.jsx" > Approvals </a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href='/partnermanagerapproval' > Approvals </a></span>
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={statusIcon} alt="status Icon" className="w-6 h-6 mr-4" />
             </div>
 
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/statusofkey" >Status</a></span>
+
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/status" >Status</a></span>
+
 
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon "> <img src={license} alt="License Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/LicenseIssue/LicenseIssue.jsx" > License Key</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/statusofkey" > Key Activation</a></span>
+          </div>
+          
+          <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
+            <div className="icon"> <img src={setting} alt="Setting Icon" className="w-6 h-6 mr-4" />
+            </div>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/validatekey" > Validate Key</a></span>
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={generate} alt="Generate Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/" >Generate Key</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href='/KeyGenerateForm' >Generate Key</a></span>
           </div>
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addClient} alt="Add client Icon" className="w-6 h-6 mr-4" />
@@ -90,22 +93,21 @@ const Slidebar = () => {
             <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/ClientRegistration" > Client Registration</a></span>
           </div>
 
-          <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
-            <div className="icon"> <img src={setting} alt="Setting Icon" className="w-6 h-6 mr-4" />
-            </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="#/components/page/" > Settings</a></span>
-          </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={help} alt="help Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components/page/" > Help</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components" > Help</a></span>
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/components/page/" >Logout</a></span>
+
+            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/" >Logout</a></span>
+
+           
+
           </div>
         </nav>
       </div>
