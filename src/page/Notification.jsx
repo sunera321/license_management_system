@@ -1,14 +1,12 @@
-import { NewsMainCon } from "../styles/pages/news";
-import NewsTop from "../components/page/News/NewsTop";
-import NewsContaner from "../components/page/News/NewsContaner";
-const News = () => {
+import React from 'react'
+import ViewNotification from '../components/page/Notification/ViewNotification'
+
+const Notification = () => {
   return (
-    <NewsMainCon>
+    <div>
+      <ViewNotification />
+    </div>
+  )
+}
 
-      <NewsTop />
-      <NewsContaner />
-    </NewsMainCon>
-  );
-};
-
-export default News;
+export default Notification
