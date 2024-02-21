@@ -30,9 +30,10 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
-import Activelicense from './page/Activelicense';
 import Expiredlicense from './page/Expiredlicense';
 import Availablelicense from './page/Availablelicense';
+import CompearData from './page/CompearData';
+
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="editprofilepartner" Component={EditProfilePartner} />
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
+          <Route path="compeardata" Component={CompearData} />
           <Route path="statusofkey" Component={StatusOfKey} />
           <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
