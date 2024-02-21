@@ -30,7 +30,9 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
-import Availablelicense from './page/Availablelicense';
+import Availablelicense from './components/page/Dashboard/Availablelicense';
+import Activelicense from './page/Activelicense';
+import Expiredlicense from './page/Expiredlicense';
 
 function App() {
   return (
@@ -46,7 +48,9 @@ function App() {
           <Route path="mainhome" Component={MainHome} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
-          <Route path='availablelicense' element={Availablelicense} />
+          <Route path='availablelicense' element={<Availablelicense/>} />
+          <Route path='activelicense' element={<Activelicense/>} />
+          <Route path='expiredlicense' element={<Expiredlicense/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
