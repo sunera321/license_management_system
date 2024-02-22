@@ -87,9 +87,9 @@ const ValidateKey = () => {
                   Partner -{Data.PartnerId}
                 </div>
               </div>
-              <Button className="hidden mt-1 bg-red-500 md:inline ">
+              <div className="hidden p-2 mt-1 bg-red-500 rounded-lg md:inline ">
                 Warning!
-              </Button>
+              </div>
               <Button className="h-10 mt-1 font-bold border-2 border-sky-500 text-violet-950 ">
                 <a href="/compeardata">Action</a>
                
