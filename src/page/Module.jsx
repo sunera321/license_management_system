@@ -24,18 +24,18 @@ const Module = () => {
       <div>
         <PageHeader title="Modules" />
       </div>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-3 gap-5">
         {images.map((imageItem, index) => (
           <div key={index} className="relative flex flex-col items-center">
             <Link to={`/moduledetails/${index + 1}`} key={index}> {/* Link to ModuleDescription page */}
               <img
                 src={imageItem}
                 alt={`Module ${index + 1}`}
-                className={`w-full h-full rounded-lg ${imageSize}`}
+                className={`w-full h-[300px] rounded-lg ${imageSize}`}
                 style={{ maxHeight: '320px' }}
               />
               <div
-                className={`absolute bottom-3 left-7 right-7 bg-gray-300 bg-opacity-80 text-black p-1 rounded-b-lg ${imageSize}`}
+                className={`absolute bottom-11 left-7 right-7 bg-gray-300 bg-opacity-80 text-black p-1 rounded-b-lg ${imageSize}`}
               style={{ marginTop: '-10px' }}
               >
                 {/* Adjusted padding and opacity */}
