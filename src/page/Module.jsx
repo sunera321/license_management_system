@@ -27,7 +27,7 @@ const Module = () => {
       <div className="grid grid-cols-3 gap-5">
         {images.map((imageItem, index) => (
           <div key={index} className="relative flex flex-col items-center">
-            <Link to={`/moduledetails/${index + 1}`} key={index}> {/* Link to ModuleDescription page */}
+            <Link to={'/moduledetails'} key={index}> {/* Link to ModuleDescription page */}
               <img
                 src={imageItem}
                 alt={`Module ${index + 1}`}
