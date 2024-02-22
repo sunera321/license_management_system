@@ -104,7 +104,7 @@ const Slidebar = () => {
             <div className="icon"> <img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
             </div>
 
-            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/Login" >Logout</a></span>
+            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/" >Logout</a></span>
 
            
 

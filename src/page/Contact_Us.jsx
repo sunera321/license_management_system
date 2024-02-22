@@ -5,11 +5,10 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 function Contact_Us() {
     return (
         <div>
-            <section className="relative p-16 text-gray-700  body-font mt-">
-                <h1 className="mb-8 text-3xl font-bold text-center text-black">Contact Us</h1>
-                <p className="mb-8 text-lg text-center">Any question or remarks? Just write us a message!</p>
-                <div className="container flex px-5 py-24 mx-auto">
-                    {/* Left Section */}
+            <section className="p-6 text-gray-700 body-font mt-">
+                <h1 className="mb-3 text-3xl font-bold text-center text-black">Contact Us</h1>
+                <p className="text-lg text-center ">Any question or remarks? Just write us a message!</p>
+                <div className="container flex px-5 py-10 mx-auto">
                     <div className="w-1/2 p-8 bg-black rounded-l-lg max-w-3/4 text-slate-700">
                         <h2 className="mb-4 text-2xl font-semibold text-white ">Contact Information</h2>
                         <p className='mb-12 text-lg '>Say something to start a live chat!</p>
