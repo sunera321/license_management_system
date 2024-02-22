@@ -87,7 +87,7 @@ const ValidateKey = () => {
                   Partner -{Data.PartnerId}
                 </div>
               </div>
-              <div className="hidden p-2 mt-1 bg-red-500 rounded-lg md:inline ">
+              <div className="hidden p-2 mt-1 text-white bg-red-500 rounded-lg md:inline ">
                 Warning!
               </div>
               <Button className="h-10 mt-1 font-bold border-2 border-sky-500 text-violet-950 ">
