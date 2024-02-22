@@ -86,32 +86,32 @@ const KeyGenerateForm = () => {
 
     const handleSave = () => {
         const url = `http://localhost:5295/api/License`;
-        const data ={
-            
+        const data = {
+
             "hostURL": URL,
-         "serverMacAddress": SMA,
+            "serverMacAddress": SMA,
             "validDateUntil": VD,
-           "modules": BFI,
-             "hsenidUser": isChecked1,
+            "modules": BFI,
+            "hsenidUser": isChecked1,
             "hsenidPartner": isChecked2
         }
 
         axios.post(url, data)
-        .then((result)=>{
-            console.log("DD")
-            Swal.fire({
+            .then((result) => {
+                console.log("DD")
+                Swal.fire({
 
-                position: "top-center",
-                icon: "success",
-                title: "Generate Key Succesfully",
-                showConfirmButton: false,
-                timer: 1500
-    
+                    position: "top-center",
+                    icon: "success",
+                    title: "Generate Key Succesfully",
+                    showConfirmButton: false,
+                    timer: 1500
+
+                })
+            }).catch((error) => {
+                toast.error(error);
+                console.log(error);
             })
-        }).catch((error)=>{
-            toast.error(error);
-            console.log(error);
-        })
     }
     return (
         <div  >
@@ -149,19 +149,53 @@ const KeyGenerateForm = () => {
 
                     </div>
                     <div className='ml-5 '>
-                        <label className='block mx-0 mb-0 text-base font-semibold text-gray-700 '>Select client required module</label><br />
-                        <div className='flex space-x-32 md:space-x-8'>
-                            <div className=''>
-                                <input class="mr-2 leading-tight" type="checkbox" onChange={() => handleChange("Banking, Finance & Insurance")} value={BFI} /><span class="text-base mr-2">Banking, Finance & Insurance</span></div>
-                            <div className=''><input class="mr-2 leading-tight" type="checkbox" onChange={() => handleChangeMR("Manufacturing and Retail")} value={MR} name='MR' /><span class="text-base mr-2">Manufacturing and Retail</span></div>
-                            <div><input class="mr-2 leading-tight" type="checkbox" onChange={() => handleChangeH("Hospitality")} value={H} name='MR' /><span class="text-base ">Hospitality</span><br /></div>
+                        
+                       
+                        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex  ">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module1-checkbox-list" onChange={() => handleChange("Banking, Finance & Insurance")} value={BFI} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600  focus:ring-2" />
+                                    <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module2-checkbox-list" type="checkbox" onChange={() => handleChangeMR("Manufacturing and Retail")} value={MR} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2  " />
+                                    <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module3-checkbox-list" type="checkbox" onChange={() => handleChangeH("Hospitality")} value={H} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <label for="module3-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black ">Hospitality</label>
+                                </div>
+                            </li>
 
-                        </div>
-                        <div className='flex mt-5 space-x-32 md:space-x-32'>
-                            <div><input class="mr-2 leading-tight" type="checkbox" name='MR' /><span class="text-base ">Hospitality</span><br /></div>
-                            <div className=''><input class="mr-2 leading-tight " type="checkbox" name='PS' /><span class="text-base ">Public Service</span></div>
-                            <div className=''><input class="mr-2 leading-tight " type="checkbox" name='PS' /><span class="text-base ">Public Service</span></div>
-                        </div>
+                        </ul>
+
+
+                        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700  dark:text-white">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module4-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <label for="module4-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black ">Module Name</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module5-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <label for="module5-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black ">Module Name</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                <div class="flex items-center ps-3 bg-white">
+                                    <input id="module6-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <label for="module6-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black ">Module Name</label>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <br />
 
                         <div>
                             <input class="mr-5 leading-tight mt-10 size-5" type="checkbox" checked={isChecked1}
@@ -169,13 +203,13 @@ const KeyGenerateForm = () => {
 
                         </div>
 
-                     
+
                         <div>
                             <input class="mr-2 leading-tight mt-10 size-5" type="checkbox" checked={isChecked2}
                                 onChange={(event) => handleCheckboxChange(event, 2)} name='PM' /><span class=" text-lg ">Take Permission Partner Manager</span>
 
                         </div>
-                        
+
                     </div>
                     <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
 
@@ -192,6 +226,7 @@ const KeyGenerateForm = () => {
 
     );
 };
+
 
 
 export default KeyGenerateForm;
