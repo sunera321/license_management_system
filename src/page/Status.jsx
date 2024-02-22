@@ -5,8 +5,19 @@ import Reject from '../components/CommonModal/Reject';
 import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
-
+import axios from 'axios';
 const Status = () => {
+    const [show, setShow] = useState(false);
+
+    const getData =() =>{
+        axios.get('http://localhost:5295/api/Client')
+        .then((result)=>{
+           setData(result.data);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
     const empdata = [
         {
             ClientID: 1,
@@ -37,7 +48,7 @@ const Status = () => {
     const [data, setData] = useState([]);
     
      useEffect(() => {
-         setData(empdata);
+         getData();
      }, [])
     return (
         <div><PageHeader title='Approval Status' />
@@ -55,8 +66,8 @@ const Status = () => {
                             data.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                    <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.ClientID}</td>
-                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.ClientName}</td>
+                                    <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.CID}</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.CName}</td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className=''>{item.Pmanger}</div></td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div >{item.HManger}</div></td>
 
