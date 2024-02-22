@@ -43,6 +43,14 @@ const Status = () => {
             HManger:<Accept value='Accept'/>,
             Issue:<Disable value='Disable'/>
             
+        } ,
+        {
+            ClientID:4 ,
+            ClientName: 'Manoj',
+            Pmanger: <Reject value='Reject'/>,
+            HManger:"InProgress",
+            Issue:'InProgress'
+            
         }
     ]
     const [data, setData] = useState([]);
