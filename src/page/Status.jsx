@@ -48,7 +48,7 @@ const Status = () => {
     const [data, setData] = useState([]);
     
      useEffect(() => {
-         getData();
+         setData(empdata);
      }, [])
     return (
         <div><PageHeader title='Approval Status' />
@@ -66,8 +66,8 @@ const Status = () => {
                             data.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                    <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.CID}</td>
-                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.CName}</td>
+                                    <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.ClientID}</td>
+                            <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.ClientName}</td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className=''>{item.Pmanger}</div></td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div >{item.HManger}</div></td>
 
