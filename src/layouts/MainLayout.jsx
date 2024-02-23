@@ -11,7 +11,7 @@ const MainLayout = () => {
     
 
 
-       <div className="h-full bg-gradient-to-b from-blue-100 via-blue-500 to-indigo-900 ">
+       <div className="">
 
 
 

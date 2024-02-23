@@ -65,6 +65,7 @@ const Status = () => {
                 <table className= "content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' ><th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client name</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client Data</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Finance manager</th>
                         <th className='px-0 py-0 mx-0 text-lg font-semibold '>Issue</th></thead>
@@ -75,7 +76,9 @@ const Status = () => {
                                 return (
                                     <tr key={index}>
                                     <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.ClientID}</td>
+                                    
                             <td className='px-20 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.ClientName}</td>
+                            <td><button>View</button></td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div className=''>{item.Pmanger}</div></td>
                             <td className='px-20 py-2 text-base border-b-2 mx-45 border-slate-500'><div >{item.HManger}</div></td>
 
