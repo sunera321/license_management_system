@@ -7,6 +7,7 @@ import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
 import Popup from '../components/CommonModal/Popup';
+
 const Status = () => {
     const [modal, setModal] = useState(false);
 
@@ -33,7 +34,7 @@ const Status = () => {
                 console.log(error);
             })
     }
-    const handle = (id) => {
+   {/* const handle = (id) => {
         
         handleShow(); 
         axios.get(`http://localhost:5295/api/Client/${id}`)
@@ -46,7 +47,7 @@ const Status = () => {
         .catch ((error)=>{
             toast.error(error);
         })
-    }   
+    }   */}
     const empdata = [
         {
             ClientID: 1,
