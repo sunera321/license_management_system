@@ -35,7 +35,7 @@ const Login = () => {
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
                         <h3 className="mb-5 text-2xl font-semibold text-center">Welcome back!</h3>
-                        <form>
+                        <form className=' from-transparent'>
                             <div className="mb-5">
                                 <label htmlFor="email">Email</label>
                                 <br />

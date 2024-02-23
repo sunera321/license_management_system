@@ -112,7 +112,7 @@ const ControlPanel = () => {
                     ))}
                   </div>
                   <div>
-                  <BlueButton value="Edit" href="/clientmore" />
+                  <BlueButton value="View More" href="" />
                   </div>
                 </div>
               </div>
