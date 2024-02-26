@@ -10,7 +10,7 @@ const MainLayout = () => {
   return (
     
 
-       <div className="h-full bg-gradient-to-b from-blue-100 via-blue-500 to-indigo-900 ">
+       <div className="h-full ">
       <Header />
       <Slidebar/>
       <div className="min-h-screen ml-12">
