@@ -5,8 +5,19 @@ import Reject from '../components/CommonModal/Reject';
 import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
-
+import axios from 'axios';
 const Status = () => {
+    const [show, setShow] = useState(false);
+
+    const getData =() =>{
+        axios.get('http://localhost:5295/api/Client')
+        .then((result)=>{
+           setData(result.data);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
     const empdata = [
         {
             ClientID: 1,
@@ -31,6 +42,14 @@ const Status = () => {
             Pmanger: <Reject value='Reject'/>,
             HManger:<Accept value='Accept'/>,
             Issue:<Disable value='Disable'/>
+            
+        } ,
+        {
+            ClientID:4 ,
+            ClientName: 'Manoj',
+            Pmanger: <Reject value='Reject'/>,
+            HManger:"InProgress",
+            Issue:'InProgress'
             
         }
     ]
