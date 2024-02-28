@@ -10,14 +10,12 @@ const MainLayout = () => {
   return (
     
 
-      <Header />
-      <Slidebar/>
+      <><Header /> 
+      <Slidebar />
       <div className="min-h-screen ml-12">
-      <Outlet/>
+      <Outlet />
       </div>
-      <Footer />
-
-    </div>
+      <Footer /></>
   );
 };
 
