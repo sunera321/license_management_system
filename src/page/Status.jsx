@@ -8,7 +8,9 @@ import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
 import Popup from '../components/CommonModal/Popup';
 import { useLocation } from 'react-router-dom';
-import Plus from '../Images/j.png'
+import Plus from '../Images/j.png';
+import BlueButton from '../components/CommonModal/BlueButton';
+
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -175,9 +177,9 @@ const Status = () => {
                 </table>
 
             </div>
-            <div className=''>
-            <div ><img src={Plus} className='h-10'/>Generate Key</div>
-            </div> 
+            
+            <div className='fixed bottom-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"}/> </div>
+            
         </div>
     );
 };
