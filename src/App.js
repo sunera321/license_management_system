@@ -34,7 +34,7 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
-
+import Test from './page/Test';
 
 
 

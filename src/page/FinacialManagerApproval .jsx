@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function FinancialManagerApproval() {
+function PartnerManagerApproval() {
   const [clients, setClients] = useState([]);
-
+  
+  const [isApproved, setIsApproved] = useState(false);
+  const [CID, setCID] = useState('');
   useEffect(() => {
     axios.get('http://localhost:5295/api/Client')
       .then(response => {
@@ -13,7 +16,33 @@ function FinancialManagerApproval() {
         console.error('Error fetching clients:', error);
       });
   }, []);
+  const navigate = useNavigate();
 
+  
+
+  const hanleUpdate = (CID) => {
+    const url = `http://localhost:5295/api/Activate/${CID}`;
+    const data = {
+      "lid": CID,
+      
+      "hsenidUser": 1,
+      "cid": CID,
+      "licenseKey": {
+        "cid":0 ,
+        
+      }
+        
+    }
+    axios.put(url, data)
+      .then((result) => {
+        console.log('Data Updated Successfully');
+        // After updating the database, you can optionally redirect to another page
+        navigate('/status', { state: { accepted: true } });
+      })
+      .catch((error) => {
+        console.log('Error updating data:', error);	
+      })
+  }
   return (
     <div >
         <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
@@ -57,9 +86,9 @@ function FinancialManagerApproval() {
           
                                 <div className='mt-5 ml-0'>Financial manager Approval</div>
                                     <tr>
-                                        <td className='py-1'> <button className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">Accept</button></td>
+                                        <td className='py-1'> <button onClick={() => hanleUpdate(client.CID)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
                                         <td></td>
-                                        <td className='pl-5'><button className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
+                                        <td className='pl-5'><button  className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
                                     </tr>
         </div>
       ))}
@@ -68,4 +97,4 @@ function FinancialManagerApproval() {
   );
 }
 
-export default FinancialManagerApproval;
+export default PartnerManagerApproval;
