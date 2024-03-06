@@ -9,7 +9,7 @@ const MainLayout = () => {
 
   return (
     
-
+      <div>
       <Header />
       <Slidebar/>
       <div className="min-h-screen ml-12">
