@@ -8,8 +8,11 @@ import Slidebar from './Slidebar';
 const MainLayout = () => {
 
   return (
-    
+
+       <div className="">
+
       <div>
+
       <Header />
       <Slidebar/>
       <div className="min-h-screen ml-12">
