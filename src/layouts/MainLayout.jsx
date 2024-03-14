@@ -8,16 +8,10 @@ import Slidebar from './Slidebar';
 const MainLayout = () => {
 
   return (
-    
-
 
        <div className="">
 
-
-
-    
-
-
+      <div>
 
       <Header />
       <Slidebar/>
