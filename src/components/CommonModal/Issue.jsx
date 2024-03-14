@@ -7,7 +7,7 @@ import Provide from './Provide';
 const Issue = () => {
 
     // Define state variable for button status
-    const [buttonClicked, setButtonClicked] = useState(false);
+    const [buttonClicked, setButtonClicked] = useState(true);
 
     // Function to handle button click
     const handleButtonClick = () => {

@@ -85,15 +85,15 @@ const KeyGenerateForm = () => {
     };
 
     const handleSave = () => {
-        const url = `http://localhost:5295/api/License`;
+        const url = 'http://localhost:5295/api/License';
         const data = {
+            "clientID": 2,
 
             "hostURL": URL,
             "serverMacAddress": SMA,
             "validDateUntil": VD,
             "modules": BFI,
-            "hsenidUser": isChecked1,
-            "hsenidPartner": isChecked2
+            
         }
 
         axios.post(url, data)
