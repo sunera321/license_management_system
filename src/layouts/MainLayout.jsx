@@ -9,7 +9,6 @@ const MainLayout = () => {
 
   return (
 
-       <div className="">
 
       <div>
 
