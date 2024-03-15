@@ -89,7 +89,7 @@ const Status = () => {
 
 
     useEffect(() => {
-        getDat();
+        
         getData();
         
 
@@ -247,7 +247,7 @@ const Status = () => {
                 )}
             </div>
 
-            <div className='fixed bottom-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
+            <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
 
         </div>
     );
