@@ -223,8 +223,8 @@ const AddClient = ({ client }) => {
                       </div>
                     </td>
                   </tr>
-                  
-                  
+
+
                   <tr className="border-b  dark:border-neutral-500 dark:bg-neutral-700">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">4</td>
                     <td className="whitespace-nowrap px-6 py-4">00015</td>
@@ -354,7 +354,7 @@ const AddClient = ({ client }) => {
                       </div>
                     </td>
                   </tr>
-                  
+
 
                   <tr className="border-b  dark:border-neutral-500 dark:bg-neutral-700">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">6</td>
@@ -420,9 +420,9 @@ const AddClient = ({ client }) => {
                     </td>
                   </tr>
 
-                 
 
-                    <tr>
+
+                  <tr>
                     <td colSpan="7" className="px-6 py-4">
                       <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100">
 
@@ -431,7 +431,7 @@ const AddClient = ({ client }) => {
                     </td>
                   </tr>
 
-                 
+
                 </tbody>
               </table>
             </div>
