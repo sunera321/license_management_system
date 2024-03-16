@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom for navigation
+import { Link } from 'react-router-dom'; 
 import PageHeader from '../components/CommonModal/pageHeader';
 import hsenidImage from '../Images/hsenid.png';
 
 const Module = () => {
   const images = [
-    hsenidImage, // Use the imported image variable
+    hsenidImage, 
     hsenidImage,
     hsenidImage,
     hsenidImage,
@@ -17,7 +17,7 @@ const Module = () => {
     hsenidImage,
   ];
 
-  const imageSize = 'max-w-md'; // Adjust the size of the image and description here
+  const imageSize = 'max-w-md'; 
 
   return (
 
@@ -28,7 +28,7 @@ const Module = () => {
       <div className="grid grid-cols-3 gap-5">
         {images.map((imageItem, index) => (
           <div key={index} className="relative flex flex-col items-center">
-            <Link to={'/moduledetails'} key={index}> {/* Link to ModuleDescription page */}
+            <Link to={'/moduledetails'} key={index}> 
               <img
                 src={imageItem}
                 alt={`Module ${index + 1}`}
@@ -39,7 +39,7 @@ const Module = () => {
                 className={`absolute bottom-11 left-7 right-7 bg-gray-300 bg-opacity-80 text-black p-1 rounded-b-lg ${imageSize}`}
               style={{ marginTop: '-10px' }}
               >
-                {/* Adjusted padding and opacity */}
+                
                 <div className="text-center">
                   Cloud based HR solution Hsenid
                 </div>
@@ -52,16 +52,16 @@ const Module = () => {
         <a href="#" className="text-white hover:underline">
           Previous Page
         </a>{' '}
-        {/* Added link for previous page */}
+        
         <a href="#" className="text-white hover:underline">
           Next Page
         </a>{' '}
-        {/* Added link for next page */}
+        
       </div>
       
-      {/* Content below the slider bar */}
+    
       <div className="py-20" style={{ paddingTop: '50px' }}>
-        {/* Add your content here */}
+      
       </div>
     </div>
   );
