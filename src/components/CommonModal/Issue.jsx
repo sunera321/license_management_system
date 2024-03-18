@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Provide from './Provide';
 
-const Issue = ({value}) => {
+
+
+
+const Issue = () => {
+
+    // Define state variable for button status
+    const [buttonClicked, setButtonClicked] = useState(true);
+
+    // Function to handle button click
+    const handleButtonClick = () => {
+      // Toggle the buttonClicked state when the button is clicked
+      setButtonClicked(!buttonClicked);
+    };
+    
   return (
     <div>
-      <button className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'>
+      
+        {buttonClicked ? (
+       <button onClick={handleButtonClick} className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'>
             
-            {value}
+       Issue
+       
+       
+   </button>
+      ) : (
+        <button  className='px-5 py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-gray-600 rounded-full '>
             
-            
-        </button>
+        Provide
+        
+        
+    </button>
+      )}
     </div>
   );
 };

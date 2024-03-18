@@ -85,15 +85,15 @@ const KeyGenerateForm = () => {
     };
 
     const handleSave = () => {
-        const url = `http://localhost:5295/api/License`;
+        const url = 'http://localhost:5295/api/License';
         const data = {
+            "clientID": 2,
 
             "hostURL": URL,
             "serverMacAddress": SMA,
             "validDateUntil": VD,
             "modules": BFI,
-            "hsenidUser": isChecked1,
-            "hsenidPartner": isChecked2
+            
         }
 
         axios.post(url, data)
@@ -145,7 +145,7 @@ const KeyGenerateForm = () => {
                     </div>
                     <div className='mb-8'>
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Valid date Until</label><br />
-                        <input onChange={(e) => setVD(e.target.value)} value={VD} type="date" required name="ValidDate" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /> <br />
+                        <input onChange={(e) => setVD(e.target.value)} value={VD} type="number" required name="ValidDate" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /> <br />
 
                     </div>
                     <div className='ml-5 '>
