@@ -89,7 +89,7 @@ const Status = () => {
 
 
     useEffect(() => {
-        getDat();
+        
         getData();
         
 
@@ -131,12 +131,14 @@ const Status = () => {
         <div><PageHeader title='Approval Status' />
 
             <div className='mt-10'>
+                <div className='max-w-sm mx-auto '>
                 <select onChange={handleTableChange} value={selectedTable} >
-                    <option value="">Select a table</option>
+                    <option value="" className="bg-gray-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Select a table   </option>
                     <option value="Client">Client</option>
                     <option value="Activate">Activate</option>
 
                 </select>
+                </div>
                 {selectedTable == "Client" && (
                     <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                         <thead className='bg-indigo-100 ' ><th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
@@ -247,7 +249,7 @@ const Status = () => {
                 )}
             </div>
 
-            <div className='fixed bottom-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
+            <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
 
         </div>
     );

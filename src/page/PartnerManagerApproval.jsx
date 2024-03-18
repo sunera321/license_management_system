@@ -37,7 +37,7 @@ function PartnerManagerApproval() {
       .then((result) => {
         console.log('Data Updated Successfully');
         // After updating the database, you can optionally redirect to another page
-        navigate('/status', { state: { accepted: true } });
+       
       })
       .catch((error) => {
         console.log('Error updating data:', error);	
