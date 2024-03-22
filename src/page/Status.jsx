@@ -18,6 +18,8 @@ const Status = () => {
     const [CID, setEditId] = useState('');
     const [CName, setEditName] = useState('');
     const [Email, setEditEmail] = useState('');
+    const[Partner,setPartner]=useState('');
+    const[Finance,setFinance]=useState('');
 
     const [status1, setStatus1] = useState(true);
     const [status2, setStatus2] = useState(true);
@@ -56,7 +58,7 @@ const Status = () => {
                 console.log(error);
             })
     }
-
+/*
     const getDat = () => {
         
         axios.get('http://localhost:5295/api/Employee')
@@ -68,7 +70,7 @@ const Status = () => {
                 console.log(error);
             })
     }
-
+*/
     const handle = (id) => {
 
         handleShow();
@@ -131,9 +133,9 @@ const Status = () => {
         <div><PageHeader title='Approval Status' />
 
             <div className='mt-10'>
-                <div className='max-w-sm mx-auto '>
-                <select onChange={handleTableChange} value={selectedTable} >
-                    <option value="" className="bg-gray-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Select a table   </option>
+                <div className='max-w-lg mx-auto mb-10 '>
+                <select onChange={handleTableChange} value={selectedTable} className='block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-gray-500 ' >
+                    <option value="" className="">Select a table   </option>
                     <option value="Client">Client</option>
                     <option value="Activate">Activate</option>
 
@@ -156,7 +158,7 @@ const Status = () => {
                                                 <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.CID}</td>
 
                                                 <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.CName}</td>
-                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'><button onClick={() => handle(item.CID)} className="block px-10 py-0 mx-auto text-lg mt-100">View
+                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'><button onClick={() => handle(item.CID)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && (
                                                         <div className="fixed inset-0 w-screen h-screen">
                                                             <div className="fixed inset-0 w-screen h-screen"></div>
@@ -205,8 +207,8 @@ const Status = () => {
                                                         </div>
                                                     )}</button></td>
 
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{statusMessage}</div></td>
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{statusMessage1}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.Partner  ? <Accept value='Accept'/> : 'In progress...'}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.Finance}</div></td>
 
                                                 <td className='align-middle border-b-2 border-slate-500'>{status1 && status2 ? (
                                                     <Issue />
