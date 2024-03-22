@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function PartnerManagerApproval() {
+function FinanceManagerApproval() {
   const [clients, setClients] = useState([]);
   
   const [isApproved, setIsApproved] = useState(false);
@@ -21,16 +21,13 @@ function PartnerManagerApproval() {
   
 
   const hanleUpdate = (CID) => {
-    const url = `http://localhost:5295/api/Activate/${CID}`;
+    const url = `http://localhost:5295/api/Client/${CID}`;
     const data = {
-      "lid": CID,
+      "CID": CID,
       
-      "hsenidUser": 1,
-      "cid": CID,
-      "licenseKey": {
-        "cid":0 ,
-        
-      }
+      
+      "Finance": true,
+      
         
     }
     axios.put(url, data)
@@ -84,7 +81,7 @@ function PartnerManagerApproval() {
                                     <td className='pl-5'>{client.Modules}</td>
                                 </tr>
           
-                                <div className='mt-5 ml-0'>Financial manager Approval</div>
+                                <div className='mt-5 ml-0'>Finance manager Approval</div>
                                     <tr>
                                         <td className='py-1'> <button onClick={() => hanleUpdate(client.CID)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
                                         <td></td>
@@ -97,4 +94,4 @@ function PartnerManagerApproval() {
   );
 }
 
-export default PartnerManagerApproval;
+export default FinanceManagerApproval;

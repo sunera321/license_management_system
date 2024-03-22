@@ -26,7 +26,7 @@ function PartnerManagerApproval() {
       "CID": CID,
       
       "Partner": true,
-      "Finance": true,
+      
       
         
     }

@@ -10,6 +10,7 @@ import Popup from '../components/CommonModal/Popup';
 import { useLocation } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
+import InProgress from '../components/CommonModal/InProgress';
 
 
 const Status = () => {
@@ -128,6 +129,25 @@ const Status = () => {
         }
     }, [selectedTable]);
 
+    const handleIssue = (clientId) => {
+        // Assuming you have another API endpoint to send data to the "Issues" table
+        const requestData = {
+            clientId: clientId,
+            CName : CName,
+            
+            // Add other relevant data fields here
+        };
+    
+        axios.post('http://localhost:5295/api/IssuedClient', requestData)
+            .then((response) => {
+                // Handle success response
+                console.log('Data sent to Issues table:', response.data);
+            })
+            .catch((error) => {
+                // Handle error
+                console.error('Error sending data to Issues table:', error);
+            });
+    };
 
     return (
         <div><PageHeader title='Approval Status' />
@@ -207,10 +227,10 @@ const Status = () => {
                                                         </div>
                                                     )}</button></td>
 
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.Partner  ? <Accept value='Accept'/> : 'In progress...'}</div></td>
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.Finance}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.Partner  ? <Accept value='Accept'/> : <InProgress value='InProgress'/>}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.Finance ? <Accept value='Accept'/> : <InProgress value='InProgress'/>}</div></td>
 
-                                                <td className='align-middle border-b-2 border-slate-500'>{status1 && status2 ? (
+                                                <td className='align-middle border-b-2 border-slate-500'><button className="btn btn-primary" onClick={() => handleIssue(item.CID)}>Issue</button>{status1 && status2 ? (
                                                     <Issue />
                                                 ) : (
                                                     <Provide />
