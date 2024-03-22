@@ -21,22 +21,23 @@ const Status = () => {
     const [Email, setEditEmail] = useState('');
     const[Partner,setPartner]=useState('');
     const[Finance,setFinance]=useState('');
-
+    const [selectedClient, setSelectedClient] = useState(null);
     const [status1, setStatus1] = useState(true);
     const [status2, setStatus2] = useState(true);
 
+    const addpopup = (client) => {
+        setModal(true);
+        setSelectedClient(client);  
+      }
+      const close = () => {
+        setModal(false);
+        setSelectedClient(null);  
+    };
     const [data, setData] = useState([]);
     const [clients, setClients] = useState([]);
 
-    //Navigate Page from Approval to Status
-    const location1 = useLocation();
-    const location = useLocation();
-    const accepted = location.state && location.state.accepted;
-    const ass = location1.state && location1.state.accepted;
-    const toggleModal = () => {
-        setModal(!modal);
-
-    };
+   
+  
 
     if (modal) {
         document.body.classList.add('active-modal')
@@ -98,14 +99,7 @@ const Status = () => {
 
     }, [])
 
-    //Show relevant buttons based on the status
-    const statusMessage = accepted === true ? <Accept value='Accept' /> :
-        accepted === false ? <Reject value='Reject' /> :
-            "In progress...";
-    const statusMessage1 = ass === true ? <Accept value='Accept' /> :
-        accepted === false ? <Reject value='Reject' /> :
-            "In progress...";
-
+   
 
     //Take Relavant Table
     const [tables, setTables] = useState([]);
@@ -178,8 +172,8 @@ const Status = () => {
                                                 <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.CID}</td>
 
                                                 <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.CName}</td>
-                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'><button onClick={() => handle(item.CID)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
-                                                    {modal && (
+                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'><button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
+                                                    {modal && selectedClient &&(
                                                         <div className="fixed inset-0 w-screen h-screen">
                                                             <div className="fixed inset-0 w-screen h-screen"></div>
                                                             <div className=" text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-relaxed hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
@@ -187,12 +181,12 @@ const Status = () => {
                                                                 <tr>
                                                                     <td className='py-1'>Client Name</td>
                                                                     <td>:</td>
-                                                                    <td className='pl-5'>{item.CName}</td>
+                                                                    <td className='pl-5'>{selectedClient.CName}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className='py-1'>Client ID</td>
                                                                     <td>:</td>
-                                                                    <td className='pl-5'>{item.CID}</td>
+                                                                    <td className='pl-5'>{selectedClient.CID}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className='py-1'>Email</td>
@@ -220,7 +214,7 @@ const Status = () => {
 
 
 
-                                                                <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={toggleModal}>
+                                                                <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={close}>
                                                                     X
                                                                 </button>
                                                             </div>
