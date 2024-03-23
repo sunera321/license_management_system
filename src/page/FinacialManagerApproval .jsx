@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function FinanceManagerApproval() {
   const [clients, setClients] = useState([]);
@@ -32,14 +33,35 @@ function FinanceManagerApproval() {
     }
     axios.put(url, data)
       .then((result) => {
-        console.log('Data Updated Successfully');
-        // After updating the database, you can optionally redirect to another page
+        console.log('Client Accepted');
        
+        Swal.fire({
+
+          position: "top-center",
+          icon: "success",
+          title: "Client Accepted",
+          showConfirmButton: false,
+          timer: 1500
+  
+      })
       })
       .catch((error) => {
         console.log('Error updating data:', error);	
       })
   }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Swal.fire({
+
+        position: "top-center",
+        icon: "success",
+        title: "Generate Key Succesfully",
+        showConfirmButton: false,
+        timer: 1500
+
+    })
+}
   return (
     <div >
         <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>

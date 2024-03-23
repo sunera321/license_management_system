@@ -29,15 +29,15 @@ const Status = () => {
         setModal(true);
         setSelectedClient(client);  
       }
-      const close = () => {
-        setModal(false);
-        setSelectedClient(null);  
-    };
     const [data, setData] = useState([]);
     const [clients, setClients] = useState([]);
 
-   
   
+    const toggleModal = () => {
+        setModal(false);
+        setSelectedClient(false); 
+
+    };
 
     if (modal) {
         document.body.classList.add('active-modal')
@@ -99,7 +99,8 @@ const Status = () => {
 
     }, [])
 
-   
+
+
 
     //Take Relavant Table
     const [tables, setTables] = useState([]);
@@ -214,7 +215,7 @@ const Status = () => {
 
 
 
-                                                                <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={close}>
+                                                                <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={toggleModal}>
                                                                     X
                                                                 </button>
                                                             </div>
