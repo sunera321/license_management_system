@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
+import Pending from '../components/CommonModal/Pending';
 
 
 const Status = () => {
@@ -26,7 +27,7 @@ const Status = () => {
     const [status2, setStatus2] = useState(true);
 
     const addpopup = (client) => {
-        setModal(true);
+        setModal(!modal);
         setSelectedClient(client);  
       }
     const [data, setData] = useState([]);
@@ -35,8 +36,7 @@ const Status = () => {
   
     const toggleModal = () => {
         setModal(false);
-        setSelectedClient(false); 
-
+        setSelectedClient(null); // Reset selected client
     };
 
     if (modal) {
@@ -60,19 +60,7 @@ const Status = () => {
                 console.log(error);
             })
     }
-/*
-    const getDat = () => {
-        
-        axios.get('http://localhost:5295/api/Employee')
-       
-            .then((result) => {
-                setData(result.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-*/
+
     const handle = (id) => {
 
         handleShow();
@@ -124,25 +112,7 @@ const Status = () => {
         }
     }, [selectedTable]);
 
-    const handleIssue = (clientId) => {
-        // Assuming you have another API endpoint to send data to the "Issues" table
-        const requestData = {
-            clientId: clientId,
-            CName : CName,
-            
-            // Add other relevant data fields here
-        };
-    
-        axios.post('http://localhost:5295/api/IssuedClient', requestData)
-            .then((response) => {
-                // Handle success response
-                console.log('Data sent to Issues table:', response.data);
-            })
-            .catch((error) => {
-                // Handle error
-                console.error('Error sending data to Issues table:', error);
-            });
-    };
+   
 
     return (
         <div><PageHeader title='Approval Status' />
@@ -225,11 +195,8 @@ const Status = () => {
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.Partner  ? <Accept value='Accept'/> : <InProgress value='InProgress'/>}</div></td>
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.Finance ? <Accept value='Accept'/> : <InProgress value='InProgress'/>}</div></td>
 
-                                                <td className='align-middle border-b-2 border-slate-500'><button className="btn btn-primary" onClick={() => handleIssue(item.CID)}>Issue</button>{status1 && status2 ? (
-                                                    <Issue />
-                                                ) : (
-                                                    <Provide />
-                                                )}</td>
+                                                <td className='align-middle border-b-2 border-slate-500'><div>
+                                                {item.Partner && item.Finance ? <Issue /> : <Pending value="Pending" />}</div></td>
                                             </tr>
                                         )
                                     })
