@@ -54,7 +54,7 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/ClientPanal');
+        const response = await axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClientPanal');
         setClients(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
