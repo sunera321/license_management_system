@@ -35,6 +35,7 @@ import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 
+
 function App() {
   return (
     
