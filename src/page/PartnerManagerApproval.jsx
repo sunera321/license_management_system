@@ -21,16 +21,13 @@ function PartnerManagerApproval() {
   
 
   const hanleUpdate = (CID) => {
-    const url = `http://localhost:5295/api/Activate/${CID}`;
+    const url = `http://localhost:5295/api/Client/${CID}`;
     const data = {
-      "lid": CID,
+      "CID": CID,
       
-      "hsenidPartner": 1,
-      "cid": CID,
-      "licenseKey": {
-        "cid":0 ,
-        
-      }
+      "Partner": true,
+      
+      
         
     }
     axios.put(url, data)
