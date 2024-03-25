@@ -7,8 +7,7 @@ import Slidebar from './Slidebar';
 const MainLayout = () => {
   return (
 
-
-      <div>
+  <div>
 
       <Header />
       <div className="flex flex-1">
