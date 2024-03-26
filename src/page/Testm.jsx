@@ -9,13 +9,14 @@ const Testm = () => {
     const handleClose = ()=> setShow(false);
     const handleShow = ()=> setShow(true);
 
+    const [ModuleId, setModuleId] = useState('');
     const [ModuleImage, setModuleImage] = useState('');
     const [ModuleName, setModuleName] = useState('');
     const [ModuleDescription, setModuleDescription] = useState('');
     const [ModuleFeatures, setModuleFeatures] = useState('');
     
-
-    const [editModuleImage, setEditId] = useState('');
+    const [editModuleId, setEditId] = useState('');
+    const [editModuleImage, setEditModuleImage] = useState('');
     const [editModuleName, setEditName] = useState('');
     const [editModuleDescription, setEditModuleDescription] = useState('');
     const [editModuleFeatures, setEditModuleFeatures] = useState('');
@@ -23,6 +24,7 @@ const Testm = () => {
 
     const module = [
         {
+            ModuleId:1,
             ModuleImage: 1 ,
             ModuleName: PeopleHR,
             ModuleDescription: khvuigvkvjhv,
@@ -30,6 +32,7 @@ const Testm = () => {
             
         },
         {
+            ModuleId:2,
             ModuleImage: 2 ,
             ModuleName: PeopleHR2,
             ModuleDescription: jfuyffffffv,
@@ -58,10 +61,11 @@ const Testm = () => {
         handleShow(); 
         axios.get(`http://localhost:5295/api/Employee/${ID}`)
         .then((result)=>{
+            setEditModuleId(result.data.ModuleId);
             setEditModuleImage(result.data.ModuleImage);
             setEditModuleName(result.data.ModuleName);
             setEditModuleDescription(result.data.ModuleDescription);
-            setEditModuleFeatures(id);
+            setEditModuleFeatures(result.data.ModuleFeatures);
             
         })
         .catch ((error)=>{
@@ -87,6 +91,7 @@ const Testm = () => {
     const hanleUpdate = () => {
         const url = `http://localhost:5295/api/Employee/${editId}`;
         const data = {
+            "ModuleId": ModuleId,
             "ModuleImage": ModuleImage,
             "ModuleName": ModuleName,
             "ModuleDescription": ModuleDescription,
@@ -106,6 +111,7 @@ const Testm = () => {
     const handleSave = () => {
         const url = `http://localhost:5295/api/Employee`;
         const data ={
+            "ModuleId": ModuleId,
             "ModuleImage": ModuleImage,
             "ModuleName": ModuleName,
             "ModuleDescription": ModuleDescription,
@@ -124,10 +130,12 @@ const Testm = () => {
     }
 
     const clear =()=>{
+           setModuleId('');
            setModuleImage('');
            setModuleName('');
            setModuleDescription('');
            setModuleFeatures('');
+           setEditModuleId('');
            setEditModuleImage('');
            setEditModuleName('');
            setEditModuleDescription('');
@@ -149,9 +157,10 @@ const Testm = () => {
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>ModuleId</th>
                         <th>ModuleImage</th>
                         <th>ModuleName</th>
-                        <th>ModuleDescripton</th>
+                        <th>ModuleDescription</th>
                         <th>ModuleFeatures</th>
                     
                     </tr>
@@ -163,9 +172,10 @@ const Testm = () => {
                                 return (
                                     <tr key={index}>
                                         <td>{index+1}</td>
+                                        <td>{item.ModuleId}</td>
                                         <td>{item.ModuleImage}</td>
                                         <td>{item.ModuleName}</td>
-                                        <td>{item.ModuleDescripton}</td>
+                                        <td>{item.ModuleDescription}</td>
                                         <td>{item.ModuleFeatures}</td>
                                         
                                         <td colSpan={2}>
@@ -184,6 +194,10 @@ const Testm = () => {
             <h1 className='my-8 mt-10 mb-8 font-serif text-5xl font-bold text-center text-black fill-gray-400'>ADD MODULES</h1>
             <div className='px-40 md:mx-96'>
                 <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg '>
+                <div className="mb-6 ">
+                        <label className='mb-2 text-lg font-bold text-gray-700 '>ModuleId</label><br />
+                        <input type="text" value={editModuleId} onChange={(e) => setEditId(e.target.value)}  name="ModuleId" className='w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' /> <br />
+                    </div>
                     <div className="mb-6 ">
                         <label className='mb-2 text-lg font-bold text-gray-700 '>ModuleImage</label><br />
                         <input type="text" value={editModuleImage} onChange={(e) => setEditId(e.target.value)}  name="ModuleImage" className='w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' /> <br />
