@@ -1,9 +1,10 @@
 import React from 'react';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 const ClientRegistration = () => {
     return (
         <div>
-            <h1 className='my-8 mt-10 mb-8 font-serif text-3xl font-bold text-center text-black md:text-4xl lg:text-4xl fill-gray-400'>Register Client</h1>
+            <PageHeader title={"Register Client"}/>
 
             <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
                 <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg '>
