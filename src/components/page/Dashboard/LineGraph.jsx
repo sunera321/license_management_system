@@ -48,7 +48,13 @@ const LineGraph = ({ chartData }) => {
     dataset.pointHoverRadius = 5; // Show point on hover, adjust as needed
   });
 
-  return <Line data={chartData} options={options} />;
+  return (
+    <div className="w-full px-4 md:px-0"> 
+    <div className="relative h-64 md:h-80 lg:h-96 "> 
+        <Line data={chartData} options={options} />
+      </div>
+    </div>
+  );
 };
 
 export default LineGraph;
