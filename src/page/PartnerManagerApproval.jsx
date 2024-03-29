@@ -22,33 +22,25 @@ function PartnerManagerApproval() {
   
 
   const hanleUpdate = (CID) => {
-    const url = `https://localhost:7295/api/ClientST/${CID}`;
-    const data = {
-      "cid": CID,
-      
-      "partner": true,
-      
-      
-        
-    }
-    axios.put(url, data)
+    const url = `https://localhost:7295/api/ClientST/${CID}/SetPartnerTrue`;
+ 
+    axios.patch(url)
+    
       .then((result) => {
         console.log('Data Updated Successfully');
         Swal.fire({
-
           position: "top-center",
           icon: "success",
           title: "Accepted Successfully",
           showConfirmButton: false,
           timer: 1500
-
       })
-       
       })
       .catch((error) => {
         console.log('Error updating data:', error);	
       })
-  }
+}
+
   return (
     <div >
         <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
