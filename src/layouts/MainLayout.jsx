@@ -8,7 +8,7 @@ const MainLayout = () => {
   return (
 
 
-       <div className="h-full  ">
+       <div className="h-full ">
 
       <Header />
       <div className="flex flex-1">

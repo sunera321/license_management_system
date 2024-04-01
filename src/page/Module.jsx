@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom fo
 import PageHeader from '../components/CommonModal/pageHeader';
 import hsenidImage from '../Images/hsenid.png';
 
-import React from 'react';
-import { Link } from 'react-router-dom'; 
-import PageHeader from '../components/CommonModal/pageHeader';
-import hsenidImage from '../Images/hsenid.png';
 
 const Module = () => {
   const images = [
 
     hsenidImage, 
+  ]
+  
 
 
 
-  const imageSize = 'max-w-md'; 
+const imageSize = 'max-w-md'; 
 
 
   return (

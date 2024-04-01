@@ -41,15 +41,15 @@ function App() {
     
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" Component={Home} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
           <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
-          <Route path='activelicense' element={<Activelicense/>} />
-          <Route path='expiredlicense' element={<Expiredlicense/>} />
+          <Route path='activelicense' element={Activelicense} />
+          <Route path='expiredlicense' Component={Expiredlicense} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
