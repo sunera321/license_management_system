@@ -52,7 +52,7 @@ const Status = () => {
     const getData = () => {
 
 
-        axios.get('http://localhost:5295/api/Client')
+        axios.get('https://localhost:7295/api/ClientST')
             .then((result) => {
                 setData(result.data);
             })
@@ -64,7 +64,7 @@ const Status = () => {
     const handle = (id) => {
 
         handleShow();
-        axios.get(`http://localhost:5295/api/Client/${id}`)
+        axios.get(`https://localhost:7295/api/ClientST/${id}`)
             .then((result) => {
                 setModal(!modal);
                 setEditName(CName);
@@ -102,7 +102,7 @@ const Status = () => {
 
     useEffect(() => {
         if (selectedTable) {
-            axios.get(`http://localhost:5295/api/${selectedTable}`)
+            axios.get(`https://localhost:7295/api/${selectedTable}`)
                 .then((result) => {
                     setTableData(result.data);
                 })
@@ -121,12 +121,12 @@ const Status = () => {
                 <div className='max-w-lg mx-auto mb-10 '>
                     <select onChange={handleTableChange} value={selectedTable} className='block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-gray-500 ' >
                         <option value="" className="">Select a table   </option>
-                        <option value="Client">Client</option>
+                        <option value="ClientSTs">Client</option>
                         <option value="Activate">Activate</option>
 
                     </select>
                 </div>
-                {selectedTable == "Client" && (
+                {selectedTable == "ClientSTs" && (
                     <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                         <thead className='bg-indigo-100 ' ><th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
                             <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client name</th>
@@ -140,9 +140,9 @@ const Status = () => {
                                     data.map((item, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.CID}</td>
+                                                <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.cid}</td>
 
-                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.CName}</td>
+                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.cName}</td>
                                                 <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'><button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
                                                         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
@@ -153,33 +153,33 @@ const Status = () => {
                                                                     <tr>
                                                                         <td className='py-1'>Client Name</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.CName}</td>
+                                                                        <td className='pl-5'>{selectedClient.cName}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className='py-1'>Client ID</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.CID}</td>
+                                                                        <td className='pl-5'>{selectedClient.cid}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className='py-1'>Email</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.Email}</td>
+                                                                        <td className='pl-5'>{selectedClient.email}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className='py-1'>Country</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.Country}</td>
+                                                                        <td className='pl-5'>{selectedClient.country}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className='py-1'>Client Time Period</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>u</td>
+                                                                        <td className='pl-5'>{selectedClient.tImePeriod}</td>
                                                                     </tr>
 
                                                                     <tr>
                                                                         <td className='py-1'>Requested Module</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>q</td>
+                                                                        <td className='pl-5'>{selectedClient.modules}</td>
                                                                     </tr>
 
 
@@ -194,11 +194,11 @@ const Status = () => {
                                                             </div>
                                                     )}</button></td>
 
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.Partner ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div></td>
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.Finance ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div className=''>{item.partner ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div></td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'><div >{item.finance ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div></td>
 
                                                 <td className='align-middle border-b-2 border-slate-500'><div>
-                                                    {item.Partner && item.Finance ? <Issue /> : <Pending value="Pending" />}</div></td>
+                                                    {item.partner && item.finance ? <Issue /> : <Pending value="Pending" />}</div></td>
                                             </tr>
                                         )
                                     })
