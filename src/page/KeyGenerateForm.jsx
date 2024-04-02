@@ -22,52 +22,32 @@ const KeyGenerateForm = () => {
 
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
+    const [modulesList, setModulesList] = useState([]);
 
 
 
 
 
-
-    const handleCheckboxChange = (event, checkboxNumber) => {
+    const handleCheckboxChange = (event, moduleName) => {
         const isChecked = event.target.checked;
-        switch (checkboxNumber) {
-            case 1:
-                setIsChecked1(isChecked);
-                break;
-            case 2:
-                setIsChecked2(isChecked);
-                break;
-            default:
-                break;
+        if (isChecked) {
+            setModulesList(prevModules => [...prevModules, moduleName]);
+        } else {
+            setModulesList(prevModules => prevModules.filter(module => module !== moduleName));
         }
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
+        e.preventDefault();
 
         const url = 'https://localhost:7295/api/LicenseKey';
-        /* const modules = []; // Array to store selected modules
-         if (isChecked1) {
-             modules.push("Banking, Finance & Insurance");
-         }
-         if (isChecked2) {
-             modules.push("Manufacturing and Retail");
-         }*/
+         
         const data = {
             "hos": URL,
             "clientID": ClientID,
             "serMac": SMA,
             "validDate": VD,
-            "bfi": true,
-            "mr": true,
-            "retail": true,
-        
-            
-            
-
-
-
-
-
+            "modulesList": modulesList
 
         }
 
@@ -94,7 +74,7 @@ const KeyGenerateForm = () => {
             <PageHeader title='Key Generate' />
             <div className=''>
 
-                <form onSubmit={handleSave} className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-100 rounded shadow-lg '>
+                <form onSubmit={handleSave}  className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-100 rounded shadow-lg '>
                     <img className='w-12 pb-3 mx-auto' src={generate} />
                     <p className='pb-5 text-green-500'>Please provide follwing details for Generate a key</p>
                     <div className="mb-6 ">
@@ -123,13 +103,13 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input id="module1-checkbox-list" onChange={(e) => handleCheckboxChange(e, 1)} checked={isChecked1} value={BFI} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600  focus:ring-2" />
+                                    <input id="module1-checkbox-list" onChange={(e) => handleCheckboxChange(e, "Banking, Finance & Insurance")} checked={isChecked1} value={BFI} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600  focus:ring-2" />
                                     <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input id="module2-checkbox-list" type="checkbox" value={MR} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input id="module2-checkbox-list" type="checkbox" onChange={(e) => handleCheckboxChange(e, "Manufacturing and Retail")} checked={isChecked2} value={MR} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
                                 </div>
                             </li>
@@ -167,14 +147,14 @@ const KeyGenerateForm = () => {
                         <br />
 
                         <div>
-                            <input className="mt-10 mr-5 leading-tight size-5" type="checkbox" checked={isChecked1}
+                            <input className="mt-10 mr-5 leading-tight size-5" type="checkbox" 
                                  name='TP' /><span className="text-lg ">Take Permission Hsenid Finanace</span>
 
                         </div>
 
 
                         <div>
-                            <input className="mt-10 mr-2 leading-tight size-5" type="checkbox" checked={isChecked2}
+                            <input className="mt-10 mr-2 leading-tight size-5" type="checkbox" 
                                  name='PM' /><span className="text-lg ">Take Permission Partner Manager</span>
 
                         </div>
