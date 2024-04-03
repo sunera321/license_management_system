@@ -13,7 +13,7 @@ const Dashboard = () => {
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4">
         <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-sky-100 p-5 shadow-md ">
-          <span className="text-lg font-bold text-gray-600">AVAILABLE LICENSE KEY </span>
+          <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4">
             <hr className="border-t border-blue-300" />
