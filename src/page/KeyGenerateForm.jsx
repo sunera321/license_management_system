@@ -14,11 +14,9 @@ import axios from 'axios';
 const KeyGenerateForm = () => {
     const [ClientID, setClinetID] = useState();
     const [URL, setURL] = useState();
-    const [SMA, setSMA] = useState();
-    const [VD, setVD] = useState();
-    const [BFI, setBFI] = useState(true);
-    const [MR, setMR] = useState(true);
-    const [H, setH] = useState(true);
+    const [MacAddress, setSMA] = useState();
+    const [ValidDate, setVD] = useState();
+ 
 
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
@@ -37,16 +35,41 @@ const KeyGenerateForm = () => {
         }
     };
 
+    const validateMacAddress = (macAddress) => {
+        // Regular expression for validating MAC address
+        const macAddressRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+        return macAddressRegex.test(macAddress);
+    };
+
+
     const handleSave = (e) => {
         e.preventDefault();
 
+        if (!validateMacAddress(MacAddress)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid MAC Address',
+                text: 'Please enter a valid MAC address.',
+            });
+            return; // Prevent further execution
+        }
+        const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+        if (!urlPattern.test(URL)) {
+            // URL is not in the correct format
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid URL',
+                text: 'Please enter a valid URL.',
+            });
+            return; // Prevent further execution
+        }
         const url = 'https://localhost:7295/api/LicenseKey';
          
         const data = {
             "hos": URL,
             "clientID": ClientID,
-            "serMac": SMA,
-            "validDate": VD,
+            "serMac": MacAddress,
+            "validDate": ValidDate,
             "modulesList": modulesList
 
         }
@@ -79,43 +102,49 @@ const KeyGenerateForm = () => {
                     <p className='pb-5 text-green-500'>Please provide follwing details for Generate a key</p>
                     <div className="mb-6 ">
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Client ID</label><br />
-                        <input type='text' value={ClientID} className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' onChange={(e) => setClinetID(e.target.value)} />
+                        <input required type='text' value={ClientID} className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' onChange={(e) => setClinetID(e.target.value)} />
 
                     </div>
 
                     <div className='mb-6'>
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Host URL</label><br />
-                        <input onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /><br />
+                        <input required onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /><br />
 
                     </div>
                     <div className='mb-8'>
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Server Mac Address</label><br />
-                        <input onChange={(e) => setSMA(e.target.value)} value={SMA} type="text" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /> <br />
+                        <input required onChange={(e) => setSMA(e.target.value)} value={MacAddress} type="text" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /> <br />
                     </div>
                     <div className='mb-8'>
                         <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Valid date Until</label><br />
-                        <input onChange={(e) => setVD(e.target.value)} value={VD} type="number" name="ValidDate" className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none' /> <br />
+                        <select required onChange={(e) => setVD(e.target.value)} value={ValidDate} className='w-full px-2 py-1 mx-2 leading-tight text-gray-700 border rounded shadow appearance-none'>
+                            <option value="">Select Duration</option>
+                            <option value="30">30 days</option>
+                            <option value="182">182 days</option>
+                            <option value="365">365 days</option>
+                        </select>
+                        
 
                     </div>
+                    <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Select Modules</label><br />
                     <div className='ml-5 '>
 
-
+                    
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input id="module1-checkbox-list" onChange={(e) => handleCheckboxChange(e, "Banking, Finance & Insurance")} checked={isChecked1} value={BFI} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600  focus:ring-2" />
-                                    <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
+                                <input id="module1-checkbox-list" onChange={(e) => handleCheckboxChange(e, "Banking, Finance & Insurance")} checked={modulesList.includes("Banking, Finance & Insurance")} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600  focus:ring-2" />                                    <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input id="module2-checkbox-list" type="checkbox" onChange={(e) => handleCheckboxChange(e, "Manufacturing and Retail")} checked={isChecked2} value={MR} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                <input id="module2-checkbox-list" type="checkbox" onChange={(e) => handleCheckboxChange(e, "Manufacturing and Retail")} checked={modulesList.includes("Manufacturing and Retail")} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input id="module3-checkbox-list" type="checkbox" value={H} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input id="module3-checkbox-list" type="checkbox"  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Hospitality</label>
                                 </div>
                             </li>
