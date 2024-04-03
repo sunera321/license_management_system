@@ -1,21 +1,26 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import Slidebar from './Slidebar';
 
-
-
 const MainLayout = () => {
-
   return (
-    
 
-      <><Header /> 
-      <Slidebar />
-      <div className="min-h-screen ml-12">
-      <Outlet />
+
+<div className="h-full ">
+
+
+    <Header />
+      <div className="flex flex-1">
+        <Slidebar />
+        <div className="flex-1">
+          <Outlet />
       </div>
-      <Footer /></>
+   </div>
+   <Footer />
+</div>
+
   );
 };
 
