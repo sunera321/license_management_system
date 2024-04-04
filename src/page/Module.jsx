@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,10 +9,12 @@ import hsenidImage2 from '../Images/hb.jpeg';
 import hsenidImage3 from '../Images/HR.jpeg';
 import hsenidImage5 from '../Images/New hr.jpg';
 
+
 const Module = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const images = [
+
 
     { src: hsenidImage, topic: 'Cloud-based HR Solution', description: 'This module provides a cloud-based solution for managing HR tasks efficiently.', link: '/moduledetails/1' },
     { src: hsenidImage2, topic: 'Employee Management System', description: 'Manage your employees effectively with this comprehensive management system.', link: '/moduledetails/2' },
@@ -25,11 +28,16 @@ const Module = () => {
   ];
 
 
+
   const imageSize = 'max-w-md';
 
+
+const imageSize = 'max-w-md'; 
+=======
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+
 
 
   return (
