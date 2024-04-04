@@ -28,6 +28,7 @@ const BarGraph = ({ chartData }) => {
     },
    
     maintainAspectRatio: false, 
+    responsive: true,
     layout: {
       padding: {
         top: 10,
@@ -38,7 +39,13 @@ const BarGraph = ({ chartData }) => {
     }
   };
 
-  return <Bar data={chartData} options={options} />;
+  return (
+    <div className="w-full px-4 md:px-0"> 
+    <div className="relative h-64 md:h-80 lg:h-96 "> 
+      <Bar data={chartData} options={options} />
+    </div>
+  </div>
+  );
 };
 
 export default BarGraph;

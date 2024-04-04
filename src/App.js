@@ -38,16 +38,14 @@ import ModuleDetails from './page/ModuleDetails';
 
 function App() {
   return (
-
-   
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
-      
-          <Route path="mainhome" Component={MainHome} />
+          <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
           <Route path='activelicense' element={<Activelicense/>} />
@@ -75,13 +73,13 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
+
           <Route path="moduledetails" Component ={ModuleDetails}/>
           
+
         </Route>
       </Routes>
     </BrowserRouter>
-  
-
   );
 }
 

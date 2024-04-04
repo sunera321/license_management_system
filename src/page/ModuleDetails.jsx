@@ -3,6 +3,7 @@ import peopleHR from '../Images/people HR.png';
 
 
 
+
 const ModuleDetails = () => {
     return (
      
@@ -22,6 +23,8 @@ const ModuleDetails = () => {
                 </div>
              
                 <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
+
+
                     Powered by Hsenid
                 </div>
             </div>
