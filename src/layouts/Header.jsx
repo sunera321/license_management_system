@@ -5,13 +5,25 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Notification from '../Images/NavBarPic/N.png'
 import Profile from '../Images/NavBarPic/p.png';
-import SignOut from '../Images/NavBarPic/l.png'
+import SignOutIcon from '../Images/NavBarPic/l.png'; // Make sure to import your SignOut icon here
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    const logoutRequest = {
+      // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
+      post_logout_redirect_uri: `${window.location.origin}`,
+    };
+
+    const logoutUrl = `https://login.microsoftonline.com/{77f15a54-9e6b-4132-901c-9ceba83a9269}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
+    // Redirect the user to Azure AD logout endpoint
+    window.location.href = logoutUrl;
   };
 
   return (
@@ -24,17 +36,14 @@ const Navbar = () => {
               <a href="/mainhome" >Home</a>
             </li>
             <li>
-
               <a href="/Module" >Modules</a>
             </li>
             <li>
-
               <a href="/about" >About</a>
             </li>
             <li>
               <a href="/contact_us" >Contact Us</a>
             </li>
-           
           </ul>
           <div className="flex justify-center text-black align-middle items pl-14">
             <UserCircleIcon className="w-10" />
@@ -42,32 +51,60 @@ const Navbar = () => {
             <div className="">
               <div className="flex items-center ml-4 md:ml-6">
                 <div className="relative ml-3 group">
-                  <button  > <FontAwesomeIcon icon={faChevronDown} className="pl-0 mt-3" />
+                  <button>
+                    <FontAwesomeIcon icon={faChevronDown} className="pl-0 mt-3" />
                   </button>
-
-
                   <div className="py-1 transition-all duration-75 scroll-smooth md:scroll-auto" role="none">
                     <ul className="absolute hidden w-56 pt-1 mt-0 duration-300 bg-white shadow-lg rounded-2xl border-3 -right-3 text-black-700 group-hover:block">
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block">User ID  : </span></div></li>
-
-
-                      <li ><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/notification">Notification </a></span><div className="icon"><a href="/notification"> <img src={Notification} alt="Generate Icon" className="w-5 h-6 mr-4" /></a>
-
-                      </div></div></li>
-
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href='/EditProfileUser'>Profile</a></span><div><a href='EditProfileUser'><img src={Profile} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
-                      <li><div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'><span className="flex-1 ml-2 truncate hover:text-white group-hover:block"><a href="/Login">Sign Out</a></span><div><a href="/Login"><img src={SignOut} alt="Generate Icon" className="w-6 h-6 mr-4" /></a></div></div></li>
-
+                      <li>
+                        <div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'>
+                          <span className="flex-1 ml-2 truncate hover:text-white group-hover:block">User ID  : </span>
+                        </div>
+                      </li>
+                      <li>
+                        <div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'>
+                          <span className="flex-1 ml-2 truncate hover:text-white group-hover:block">
+                            <a href="/notification">Notification </a>
+                          </span>
+                          <div className="icon">
+                            <a href="/notification">
+                              <img src={Notification} alt="Notification Icon" className="w-5 h-6 mr-4" />
+                            </a>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'>
+                          <span className="flex-1 ml-2 truncate hover:text-white group-hover:block">
+                            <a href='/EditProfileUser'>Profile</a>
+                          </span>
+                          <div>
+                            <a href='EditProfileUser'>
+                              <img src={Profile} alt="Profile Icon" className="w-6 h-6 mr-4" />
+                            </a>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className='flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700'>
+                          <span className="flex-1 ml-2 truncate hover:text-white group-hover:block">
+                            <a href="#" onClick={handleLogout}>Sign Out</a>
+                          </span>
+                          <div>
+                            <a href="#" onClick={handleLogout}>
+                              <img src={SignOutIcon} alt="Sign Out Icon" className="w-6 h-6 mr-4" />
+                            </a>
+                          </div>
+                        </div>
+                      </li>
                     </ul>
                   </div>
-
-                </div></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </nav>
   );
 };
