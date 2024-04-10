@@ -32,8 +32,6 @@ const Module = () => {
   const imageSize = 'max-w-md';
 
 
-const imageSize = 'max-w-md'; 
-=======
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
@@ -58,8 +56,8 @@ const imageSize = 'max-w-md';
                 style={{ maxHeight: '320px' }}
               />
 
-              <p className="text-left -mt-24 text-blue-500 hover:text-blue-700  underline hover:no-underline">{imageItem.topic}</p>
-              <p className="text-center text-gray-600 mt-1 ">{imageItem.description}</p>
+              <p className="-mt-24 text-left text-blue-500 underline hover:text-blue-700 hover:no-underline">{imageItem.topic}</p>
+              <p className="mt-1 text-center text-gray-600 ">{imageItem.description}</p>
 
             </Link>
           </div>

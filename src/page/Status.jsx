@@ -6,7 +6,7 @@ import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
-import Popup from '../components/CommonModal/Popup';
+
 import { useLocation } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
@@ -134,7 +134,7 @@ const Status = () => {
                                                 <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                             </td>
                                             <td className='align-middle border-b-2 border-slate-500'>
-                                                <div>{item.partner && item.finance ? <Issue /> : <Pending value="Pending" />}</div>
+                                                <div>{item.isPartnerApproval && item.isFinanceApproval ? <Issue /> : <Pending value="Pending" />}</div>
                                             </td>
                                         </tr>
                                     )
