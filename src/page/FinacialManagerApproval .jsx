@@ -9,7 +9,7 @@ function FinacialManagerApproval() {
   const [isApproved, setIsApproved] = useState(false);
   const [CID, setCID] = useState('');
   useEffect(() => {
-    axios.get('https://localhost:7295/api/ClientST')
+    axios.get('https://localhost:7295/api/RequestKey')
       .then(response => {
         setClients(response.data);
       })
@@ -47,34 +47,34 @@ function FinacialManagerApproval() {
       {clients.map((client, index) => (
         <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3">
             <div className="flex gap-6 pt-2 justify-evenly">
-                                <div className="text-[26px] font-normal">{client.cName}</div>
+                                <div className="text-[26px] font-normal">{client.endClient.name}</div>
 
                             </div>
                             <div className="mx-auto bg-gray-700 h-0.5 w-7/8 overflow-hidden"></div>
                             <tr>
                                 <td className='py-1'>Client Name</td>
                                 <td>:</td>
-                                <td className='pl-5'>{client.cName}</td>
+                                <td className='pl-5'>{client.endClient.name}</td>
                             </tr>
                             <tr>
                                 <td className='py-1'>Client ID</td>
                                 <td>:</td>
-                                <td className='pl-5'>{client.cid}</td>
+                                <td className='pl-5'>{client.endClient.id}</td>
                             </tr>
                             <tr>
                                 <td className='py-1'>Country</td>
                                 <td>:</td>
-                                <td  className='pl-5'>{client.country}</td>
+                                <td  className='pl-5'>{client.endClient.country}</td>
                             </tr>
                             <tr>
                                 <td className='py-1'>Client Time Period</td>
                                 <td>:</td>
-                                <td className='pl-5'>{client.tImePeriod}</td>
+                                <td className='pl-5'>{client.endClient.numberOfDays}</td>
                                 </tr>
                                 <tr>
                                 <td className='py-1'>Partner Requested</td>      
                                 <td>:</td>
-                                <td className='pl-5'>{client.partnerRequested}</td>
+                                <td className='pl-5'>{client.partnerId}</td>
                                 </tr>
                                 <tr>
                                     <td className='py-1'>Requested Module</td>   
