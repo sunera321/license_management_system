@@ -39,10 +39,66 @@ function FinacialManagerApproval() {
         console.log('Error updating data:', error);	
       })
 }
+const [isRejected, setIsRejected] = useState(false);
+const [rejectionReason, setRejectionReason] = useState('');
+const [selectedRequestId, setSelectedRequestId] = useState('');
 
+const handleReject = (request_id) => {
+  setSelectedRequestId(request_id);
+  setIsRejected(true);
+}
+
+const handleSubmitRejection = () => {
+  // Submit rejection reason
+
+
+   const url = `https://localhost:7295/api/RequestKey/${request_id}/Reject`;
+    axios.patch(url, rejectionReason)
+      .then((result) => {
+        console.log('Request Rejected Successfully');
+        setIsRejected(false);
+        setRejectionReason('');
+        setSelectedRequestId('');
+      })
+      .catch((error) => {
+        console.log('Error rejecting request:', error);	
+      })
+}
+const handleCloseRejectForm = () => {
+  setIsRejected(false);
+  setRejectionReason('');
+  setSelectedRequestId('');
+}
 
   return (
     <div >
+       {isRejected && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto bg-gray-500 bg-opacity-50">
+          <div className="w-2/3 p-8 bg-white rounded-lg ">
+            <h2 className="mb-4 text-xl font-semibold">Reject Reason</h2>
+            <textarea
+              className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
+              placeholder="Enter reason for rejection..."
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value)}
+            />
+            <div className="flex justify-end mr-5">
+              <button
+                className="px-4 py-2 mr-5 text-white bg-red-500 rounded-lg hover:bg-red-600"
+                onClick={handleSubmitRejection}
+              >
+                Submit
+              </button>
+              <button
+                className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
+                onClick={handleCloseRejectForm}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
         <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
       {clients.map((client, index) => (
         <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3">
@@ -86,7 +142,7 @@ function FinacialManagerApproval() {
                                     <tr>
                                         <td className='py-1'> <button onClick={() => hanleUpdate(client.requestID)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
                                         <td></td>
-                                        <td className='pl-5'><button  className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
+                                        <td className='pl-5'><button onClick={() => handleReject(client.requestID)}  className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
                                     </tr>
         </div>
       ))}
