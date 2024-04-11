@@ -21,7 +21,7 @@ function FinacialManagerApproval() {
 
   
   const hanleUpdate = (CID) => {
-    const url = `https://localhost:7295/api/ClientST/${CID}/SetFinanceTrue`;
+    const url = `https://localhost:7295/api/RequestKey/${CID}/SetFinanceTrue`;
  
     axios.patch(url)
     
@@ -69,7 +69,7 @@ function FinacialManagerApproval() {
                             <tr>
                                 <td className='py-1'>Client Time Period</td>
                                 <td>:</td>
-                                <td className='pl-5'>{client.endClient.numberOfDays}</td>
+                                <td className='pl-5'>{client.numberOfDays}</td>
                                 </tr>
                                 <tr>
                                 <td className='py-1'>Partner Requested</td>      
@@ -84,7 +84,7 @@ function FinacialManagerApproval() {
           
                                 <div className='mt-5 ml-0'>Finance manager Approval</div>
                                     <tr>
-                                        <td className='py-1'> <button onClick={() => hanleUpdate(client.cid)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
+                                        <td className='py-1'> <button onClick={() => hanleUpdate(client.request_id)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
                                         <td></td>
                                         <td className='pl-5'><button  className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
                                     </tr>
