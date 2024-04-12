@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Logo from '../Images/nav_logo.png';
 import SignOut from '../Images/NavBarPic/l.png'
 import Notification from '../Images/NavBarPic/N.png'
-
+import Path from '../components/CommonModal/Path';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,28 +26,37 @@ function Navbar() {
         </div>
         <ul className={`lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 ${isOpen ? 'block' : 'hidden'}`}>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/mainhome">Home</a></li>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+            <Path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+          </svg>
           <li><a className="text-[16px]  text-gray-600 hover:text-gray-500 " href="/Module">Modules</a></li>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+            <Path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+          </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="#">Client</a></li>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+            <Path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+          </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/contact_us">Contact</a></li>
         </ul>
 
-      
+
         <div className={`lg:flex  ${isOpen ? 'block' : 'hidden'}`}>
           <div className='flex '>
             <a href='/notification'><img src={Notification} alt="Notificatione Icon" className="w-5 h-6 mt-1.5 mr-4"></img></a>
             <a href="/Login" className=' flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl '>
               <span className="flex-1 truncate hover:text-black group-hover:block">
                 <div>Sign Out</div></span>
-                <div>
+              <div>
                 <div>
                   <img src={SignOut} alt="Generate Icon" className="w-6 h-6 " />
                 </div>
-                </div>
+              </div>
             </a>
-          
+
           </div>
         </div>
-  
+
 
       </div>
     </nav>
