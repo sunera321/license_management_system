@@ -23,8 +23,9 @@ const Status = () => {
     const [selectedClient, setSelectedClient] = useState(null);
     const [status1, setStatus1] = useState(true);
     const [status2, setStatus2] = useState(true);
-    const [data, setData] = useState([]);
-    const [clients, setClients] = useState([]);
+    const [dataWithCommentFinanceMgt, setDataWithCommentFinanceMgt] = useState([]);
+    const [dataWithoutCommentFinanceMgt, setDataWithoutCommentFinanceMgt] = useState([]);
+    const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
 
     const addpopup = (client) => {
         setModal(!modal);
@@ -49,7 +50,11 @@ const Status = () => {
     const getData = () => {
         axios.get('https://localhost:7295/api/RequestKey')
             .then((result) => {
-                setData(result.data);
+                // Filter data where CommentFinaceMgt is NULL
+                const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null);
+                const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null);
+                setDataWithCommentFinanceMgt(dataWithComment);
+                setDataWithoutCommentFinanceMgt(dataWithoutComment);
             })
             .catch((error) => {
                 console.log(error);
@@ -60,10 +65,18 @@ const Status = () => {
         getData();
     }, []);
 
+    const handleSelectChange = (event) => {
+        setSelectedDataType(event.target.value);
+    };
+
     return (
         <div>
             <PageHeader title='Approval Status' />
             <div className='mt-10'>
+                <select className="my-3 mx-4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
+                    <option value="withCommentFinanceMgt">Records with CommentFinaceMgt</option>
+                    <option value="withoutCommentFinanceMgt">Records without CommentFinaceMgt</option>
+                </select>
                 <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' >
                         <th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
@@ -75,8 +88,75 @@ const Status = () => {
                     </thead>
                     <tbody>
                         {
-                            data && data.length > 0 ?
-                                data.map((item, index) => {
+                            selectedDataType === 'withCommentFinanceMgt' ?
+                                dataWithCommentFinanceMgt && dataWithCommentFinanceMgt.length > 0 ?
+                                    dataWithCommentFinanceMgt.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.endClientId}</td>
+                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.endClient.name}</td>
+                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>
+                                                    <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
+                                                        {modal && selectedClient && (
+                                                            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
+                                                                <div className="fixed inset-0 w-screen h-screen ">
+                                                                    <div className=" text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-relaxed bg-white dark:border-gray-700  py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
+                                                                        <tr>
+                                                                            <td className='py-1'>Client Name</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.name}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Client ID</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.id}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Email</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.email}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Country</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.country}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Client Time Period</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Requested Module</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.modules}</td>
+                                                                        </tr>
+                                                                        <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={toggleModal}>
+                                                                            X
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </button>
+                                                </td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                                {item.commentPartnerMgt}
+                                                </td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                                    {item.commentFinaceMgt}
+                                                </td>
+                                                <td className='align-middle border-b-2 border-slate-500 px-5'>
+                                                    <Reject value="Rejected"/>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                :
+                                'No records found.'
+                            :
+                            dataWithoutCommentFinanceMgt && dataWithoutCommentFinanceMgt.length > 0 ?
+                                dataWithoutCommentFinanceMgt.map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.endClientId}</td>
@@ -138,8 +218,8 @@ const Status = () => {
                                         </tr>
                                     )
                                 })
-                                :
-                                'Loading...'
+                            :
+                            'No records found.'
                         }
                     </tbody>
                 </table>
