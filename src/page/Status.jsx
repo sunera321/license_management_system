@@ -128,7 +128,7 @@ const Status = () => {
                                                 </button>
                                             </td>
                                             <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
+                                                <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' /> }</div>
                                             </td>
                                             <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
                                                 <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
