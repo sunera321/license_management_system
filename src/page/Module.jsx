@@ -29,8 +29,10 @@ const Module = () => {
 
 
 
-  const imageSize = 'max-w-md';
+ 
 
+
+const imageSize = 'max-w-md'; 
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
