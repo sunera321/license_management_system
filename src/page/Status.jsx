@@ -23,8 +23,8 @@ const Status = () => {
     const [selectedClient, setSelectedClient] = useState(null);
     const [status1, setStatus1] = useState(true);
     const [status2, setStatus2] = useState(true);
-    const [dataWithCommentFinanceMgt, setDataWithCommentFinanceMgt] = useState([]);
-    const [dataWithoutCommentFinanceMgt, setDataWithoutCommentFinanceMgt] = useState([]);
+    const [RejectRequests, setRejectRequests] = useState([]);
+    const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
 
     const addpopup = (client) => {
@@ -53,8 +53,8 @@ const Status = () => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null);
                 const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null);
-                setDataWithCommentFinanceMgt(dataWithComment);
-                setDataWithoutCommentFinanceMgt(dataWithoutComment);
+                setRejectRequests(dataWithComment);
+                setPendingResults(dataWithoutComment);
             })
             .catch((error) => {
                 console.log(error);
@@ -72,30 +72,34 @@ const Status = () => {
     return (
         <div>
             <PageHeader title='Approval Status' />
-            <div className='mt-10'>
-                <select className="my-3 mx-4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
-                    <option value="withCommentFinanceMgt">Records with CommentFinaceMgt</option>
-                    <option value="withoutCommentFinanceMgt">Records without CommentFinaceMgt</option>
-                </select>
+            <div className='mt-10 '>
+            <div className="mb-10 text-center">
+                    <select className="w-1/4 p-2 border border-gray-300 rounded-md " onChange={handleSelectChange} value={selectedDataType}>
+                        <option value="">Select Your Preference</option>
+                        <option value="RejectRequests">Rejected Requests</option>
+                        <option value="PendingRequests">Pending Requests</option>
+                    </select>
+                </div>
                 <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
                     <thead className='bg-indigo-100 ' >
-                        <th className='px-0 py-3 mx-0 text-lg font-semibold'>Client ID</th>
-                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client name</th>
-                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Client Data</th>
-                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>
-                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Finance manager</th>
-                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Issue</th>
+                        <th className='px-5 py-3 mx-0 text-lg font-semibold'>Request ID</th>
+                        <th className='px-20 py-0 mx-0 text-lg font-semibold '>Client name</th>
+                        <th className='px-10 py-0 mx-0 text-lg font-semibold '>Client Data</th>
+                        <th className='px-20 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>
+                        <th className='px-20 py-0 mx-0 text-lg font-semibold '>Finance manager</th>
+                        <th className='px-2 py-0 mx-0 text-lg font-semibold '>Issue</th>
                     </thead>
                     <tbody>
                         {
-                            selectedDataType === 'withCommentFinanceMgt' ?
-                                dataWithCommentFinanceMgt && dataWithCommentFinanceMgt.length > 0 ?
-                                    dataWithCommentFinanceMgt.map((item, index) => {
+
+                            selectedDataType === 'RejectRequests' ?
+                            RejectRequests && RejectRequests.length > 0 ?
+                            RejectRequests.map((item, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.endClientId}</td>
-                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.endClient.name}</td>
-                                                <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>
+                                                <td className='px-0 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
+                                                <td className='w-1/3 py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
+                                                <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                     <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                         {modal && selectedClient && (
                                                             <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
@@ -143,10 +147,10 @@ const Status = () => {
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
                                                 {item.commentPartnerMgt}
                                                 </td>
-                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                                <td className='px-1 py-2 text-base border-b-2 mx-45 border-slate-500'>
                                                     {item.commentFinaceMgt}
                                                 </td>
-                                                <td className='align-middle border-b-2 border-slate-500 px-5'>
+                                                <td className='px-0 align-middle border-b-2 border-slate-500'>
                                                     <Reject value="Rejected"/>
                                                 </td>
                                             </tr>
@@ -155,13 +159,13 @@ const Status = () => {
                                 :
                                 'No records found.'
                             :
-                            dataWithoutCommentFinanceMgt && dataWithoutCommentFinanceMgt.length > 0 ?
-                                dataWithoutCommentFinanceMgt.map((item, index) => {
+                            PendingResults && PendingResults.length > 0 ?
+                            PendingResults.map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td className='px-20 py-2 text-base text-center border-b-2 border-slate-500' >{item.endClientId}</td>
-                                            <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>{item.endClient.name}</td>
-                                            <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>
+                                            <td className='px-2 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
+                                            <td className='px-0 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.endClient.name}</td>
+                                            <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                 <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
                                                         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
