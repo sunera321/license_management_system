@@ -37,7 +37,7 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClient');
+        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClients');
         setClients(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
