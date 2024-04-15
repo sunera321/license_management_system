@@ -34,6 +34,7 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import Availablelicense from './page/Availablelicense';
 
 
 function App() {
@@ -41,13 +42,15 @@ function App() {
     
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" Component={Home} /> 
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
           <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
+
+          <Route path="availablelicense" element={<Availablelicense/>} />    
           <Route path='activelicense' element={<Activelicense/>} />
           <Route path='expiredlicense' element={<Expiredlicense/>} />
           <Route path="addmodule" Component={AddModule} />
@@ -73,10 +76,15 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
-          <Route path="moduledetails" Component={ModuleDetails} />
+
+          <Route path="moduledetails" Component ={ModuleDetails}/>
+          
+
         </Route>
       </Routes>
+    
     </BrowserRouter>
+
   );
 }
 
