@@ -26,7 +26,6 @@ import Profile from './page/Profile';
 import TermsConditions from './page/TermsConditions';
 import StatusOfKey from './page/StatusOfKey';
 import Login from './page/Login';
-import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
@@ -34,7 +33,11 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from './Config';
+const msalInstance = new PublicClientApplication(msalConfig);
 import Availablelicense from './page/Availablelicense';
+
 
 
 function App() {
@@ -42,10 +45,11 @@ function App() {
     
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={Home} /> 
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/register" element={<Register />} /> 
-        <Route path="/" element={<MainLayout />}>
+
+        <Route path="/" element={<Home />} /> 
+        <Route path="/login" element={<Login msalInstance={msalInstance} />} />
+        <Route path="/" element={<MainLayout  />}>
+
           <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
