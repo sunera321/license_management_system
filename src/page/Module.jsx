@@ -1,8 +1,5 @@
-
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import PageHeader from '../components/CommonModal/pageHeader';
 import hsenidImage from '../Images/hsenid.png';
 import hsenidImage2 from '../Images/hb.jpeg';
@@ -11,6 +8,7 @@ import hsenidImage5 from '../Images/New hr.jpg';
 
 
 const Module = () => {
+
   const [isVisible, setIsVisible] = useState(true);
 
   const images = [
@@ -47,20 +45,16 @@ const imageSize = 'max-w-md';
       </div>
       <div className="grid grid-cols-3 gap-5">
         {images.map((imageItem, index) => (
-
           <div key={index} className="flex flex-col items-center">
             <Link to={`/ModuleDetails/`} className="flex flex-col items-center">
-
               <img
                 src={imageItem.src}
                 alt={`Module ${index + 1}`}
                 className={`w-full h-[300px] rounded-lg border border-gray-300 border-1 ${imageSize} mb-4`}
                 style={{ maxHeight: '320px' }}
               />
-
               <p className="-mt-24 text-left text-blue-500 underline hover:text-blue-700 hover:no-underline">{imageItem.topic}</p>
               <p className="mt-1 text-center text-gray-600 ">{imageItem.description}</p>
-
             </Link>
           </div>
         ))}
@@ -69,8 +63,6 @@ const imageSize = 'max-w-md';
         <a href="#" className="text-white hover:underline" onClick={toggleVisibility}>
           Hide Page
         </a>{' '}
-
-
       </div>
       <div className="py-20" style={{ paddingTop: '50px' }}></div>
     </div>
