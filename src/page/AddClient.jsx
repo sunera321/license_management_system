@@ -1,5 +1,7 @@
 import React from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
+import { Link } from 'react-router-dom';
+
 
 const AddClient = ({ client }) => {
 
@@ -424,10 +426,9 @@ const AddClient = ({ client }) => {
 
                   <tr>
                     <td colSpan="7" className="px-6 py-4">
-                      <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100">
-
+                      <Link to="/clientregistration" className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100">
                         Add New Client
-                      </button>
+                      </Link>
                     </td>
                   </tr>
 
