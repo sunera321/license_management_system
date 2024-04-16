@@ -19,7 +19,7 @@ const Issue = () => {
                 </button>
             ) : (
                 <button onClick={handleButtonClick} className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:-translate-y-1 hover:scale-110 hover:bg-green-400'>
-                    Issue
+                    Available
                 </button>
             )}
         </div>
