@@ -41,14 +41,15 @@ const clients = [
 ];
 const handleViewMore = (id) => {
   //console.log(id);
-  Swal.fire("SweetAlert2 is working!");
+  Swal.fire("This module is Expired!");
 };
 
 const ExpiredTable = () => {
   return (
-    <div class="overflow-x-auto shadow-md sm:rounded-lg md:ml-26">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="overflow-x-auto shadow-md sm:rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">
               Client ID
@@ -96,8 +97,9 @@ const ExpiredTable = () => {
 
             </tr>
           ))}
-        </tbody>
-      </table>
+            </tbody>
+        </table>
+      </div>
     </div>
   );
 };
