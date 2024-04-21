@@ -12,18 +12,18 @@ function LicenseKeyInfo() {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState('');
-  const [filteredRows, setFilteredRows] = useState([])
+  const [activationDateFilter, setActivationDateFilter] = useState('');
+  const [expiryDateFilter, setExpiryDateFilter] = useState('');
+  const [filteredRows, setFilteredRows] = useState([]);
+  const [data, setData] = useState([]);
 
   // Logic to calculate the indexes for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem);
-  const [data, setData] = useState([]);
-
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
-  
+
   const nextPage = () => {
     if (currentPage < Math.ceil(filteredRows.length / itemsPerPage)) {
       setCurrentPage((prevPage) => prevPage + 1);
@@ -36,22 +36,6 @@ function LicenseKeyInfo() {
     }
   };
 
-  useEffect(() => {
-    if (statusFilter && statusFilter !== 'All') {
-
-      const filteredData = data.filter((item) => item.key_Status === statusFilter);
-      setFilteredRows(filteredData);
-    } else {
-      
-      setFilteredRows(data);
-    }
-    setCurrentPage(1); 
-  }, [data, statusFilter]);
-  
-  const handleStatusFilterChange = (event) => {
-    setStatusFilter(event.target.value)
-  }
-
   const fetchData = async () => {
     try {
       const response = await axios.get('https://localhost:7295/api/LicenseKey');
@@ -60,15 +44,75 @@ function LicenseKeyInfo() {
       console.error('Error fetching data:', error);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
-  
+
+  const applyDateFilter = () => {
+    const filteredData = data.filter((item) => {
+      const activationDate = new Date(item.activationDate);
+      const expiryDate = new Date(item.deactivatedDate);
+
+      if (activationDateFilter && expiryDateFilter) {
+        return (
+          activationDate >= new Date(activationDateFilter) &&
+          expiryDate <= new Date(expiryDateFilter)
+        );
+      } else if (activationDateFilter) {
+        return activationDate >= new Date(activationDateFilter);
+      } else if (expiryDateFilter) {
+        return expiryDate <= new Date(expiryDateFilter);
+      } else {
+        return true;
+      }
+    });
+
+    setFilteredRows(filteredData);
+  };
+
+  useEffect(() => {
+    applyDateFilter();
+  }, [data, activationDateFilter, expiryDateFilter]);
+
+  const handleStatusFilterChange = (event) => {
+    setStatusFilter(event.target.value);
+  };
+
+  const handleActivationDateFilterChange = (event) => {
+    setActivationDateFilter(event.target.value);
+  };
+
+  const handleExpiryDateFilterChange = (event) => {
+    setExpiryDateFilter(event.target.value);
+  };
 
   return (
     <div className="mt-6 mb-8">
-      <div className="inline-block w-[97%] px-8 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg ml-6">
+     <div className="inline-block w-[97%] px-8 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg ml-6">
+        <div className="flex items-center mb-4">
+          <label className="mr-2 text-gray-700">Activation Date:</label>
+          <input
+            type="date"
+            value={activationDateFilter}
+            onChange={handleActivationDateFilterChange}
+            className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          />
+          <label className="ml-4 mr-2 text-gray-700">Expiry Date:</label>
+          <input
+            type="date"
+            value={expiryDateFilter}
+            onChange={handleExpiryDateFilterChange}
+            className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          />
+          <button
+            onClick={applyDateFilter}
+            className="px-4 py-2 ml-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Apply Filter
+          </button>
+        </div>
+
         <table className="min-w-full border-b-2">
           <thead>
             <tr className="border-2 border-gray-300 text-blue-500 text-[15px] gap-5">
@@ -98,18 +142,18 @@ function LicenseKeyInfo() {
           <tbody className="bg-white">
             {filteredRows.map((data, index) => (
               <tr key={index} className="px-2 border-2 border-gray-300">
-                <td className="px-2 whitespace-no-wrap border-b border-gray-500 ">{data.key_name}</td>
+                <td className="px-2 whitespace-no-wrap border-b border-gray-500 "> {data.key_name.length > 20 ? data.key_name.substring(0, 20) + '...' : data.key_name}</td>
                 <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                   {data.clintId}
                 </td>
                 <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
-                  {new Date(data.activationDate).toLocaleDateString()}
+                  {new Date(data.activationDate).toLocaleDateString('en-GB')}
                 </td>
                 <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                   {data.requestId}
                 </td>
                 <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
-                  {new Date(data.deactivatedDate).toLocaleDateString()}
+                  {new Date(data.deactivatedDate).toLocaleDateString('en-GB')}
                 </td>
                 <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                   <span
