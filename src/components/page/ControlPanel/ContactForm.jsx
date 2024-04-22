@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ContactForm = ({ client, onCloseClick }) => {
   const handleSubmit = async (e) => {
@@ -13,11 +14,21 @@ const ContactForm = ({ client, onCloseClick }) => {
         subject: subject.value,
         description: description.value,
         contactInfo: contactInfo.value // Assuming you have this in your client object
+        
       });
 
       // Handle successful response
       console.log('Email sent:', response.data);
-      alert('Email sent successfully!');
+  
+      Swal.fire({
+
+        position: "top-center",
+        icon: "success",
+        title: "Form Submitted ",
+        showConfirmButton: false,
+        timer: 1500
+
+    })
 
       // Optionally, you can do something after the email is sent, like closing the form
       onCloseClick();
