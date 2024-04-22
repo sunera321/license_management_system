@@ -54,7 +54,7 @@ const Status = () => {
     };
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post('https://localhost:7295/api/license/generate', { endClientId, requestKeyId })
+        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Optionally, you can display the generated key to the user or perform any other action
@@ -228,10 +228,12 @@ const Status = () => {
                                             </td>
                                             <td className='align-middle border-b-2 border-slate-500'>
                                                 <div>
-                                                    {item.isPartnerApproval && item.isFinanceApproval ? 
+                                                {item.isPartnerApproval && item.isFinanceApproval ?
+                                                    <button onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>ddd</button> : <Pending value="Pending" />}
+                                                </div>
+                                                {item.isPartnerApproval && item.isFinanceApproval ? 
                                                         <Issue  onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)}/> 
                                                         : <Pending value="Pending" />}
-                                                </div>
                                             </td>
                                         </tr>
                                     )
