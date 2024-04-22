@@ -38,20 +38,6 @@ const Status = () => {
         setSelectedClient(null); // Reset selected client
     };
 
-    const generateLicenseKey = (endClientId, requestKeyId) => {
-        setLoading(true);
-        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
-  
-            .then(response => {
-                setGeneratedKey(response.data);
-            })
-            .catch(error => {
-                console.error('Error generating license key:', error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
 
     const getData = () => {
         axios.get('https://localhost:7295/api/RequestKey')
@@ -66,7 +52,24 @@ const Status = () => {
                 console.log(error);
             });
     };
+ 
+    const handleIssueButtonClick = (endClientId, requestKeyId) => {
+        axios.post('https://localhost:7295/api/license/generate', { endClientId, requestKeyId })
+        .then(response => {
+            setGeneratedKey(response.data);
+            // Optionally, you can display the generated key to the user or perform any other action
+            console.log('Generated license key:', response.data);
+        })
+        .catch(error => {
+            console.error('Error generating license key:', error);
+            // Handle error gracefully (e.g., display error message to user)
+        });
+    
+    };
 
+    const S =()=>{
+        console.log('hello'	);
+    }
     useEffect(() => {
         getData();
     }, []);
@@ -75,10 +78,6 @@ const Status = () => {
         setSelectedDataType(event.target.value);
     };
 
-    const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        generateLicenseKey(endClientId, requestKeyId);
-        // Here you can add any additional logic you want to perform when the "Issue" button is clicked
-    };
 
     return (
         <div>
@@ -230,7 +229,7 @@ const Status = () => {
                                             <td className='align-middle border-b-2 border-slate-500'>
                                                 <div>
                                                     {item.isPartnerApproval && item.isFinanceApproval ? 
-                                                        <Issue onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)} /> 
+                                                        <Issue  onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)}/> 
                                                         : <Pending value="Pending" />}
                                                 </div>
                                             </td>
