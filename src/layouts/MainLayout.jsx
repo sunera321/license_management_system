@@ -14,9 +14,9 @@ const MainLayout = () => {
     <Header />
       <div className="flex flex-1">
         <Slidebar />
-        <div className="flex-1">
+        <div className="flex-1 pl-5">
           <Outlet />
-      </div>
+        </div>
    </div>
    <Footer />
 </div>

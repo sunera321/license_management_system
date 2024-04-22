@@ -12,7 +12,6 @@ import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
 
-
 const Status = () => {
     const [modal, setModal] = useState(false);
     const [CID, setEditId] = useState('');
@@ -26,6 +25,8 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
+    const [loading, setLoading] = useState(false);
+    const [generatedKey, setGeneratedKey] = useState('');
 
     const addpopup = (client) => {
         setModal(!modal);
@@ -37,15 +38,6 @@ const Status = () => {
         setSelectedClient(null); // Reset selected client
     };
 
-    if (modal) {
-        document.body.classList.add('active-modal');
-    } else {
-        document.body.classList.remove('active-modal');
-    }
-
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const getData = () => {
         axios.get('https://localhost:7295/api/RequestKey')
@@ -60,7 +52,24 @@ const Status = () => {
                 console.log(error);
             });
     };
+ 
+    const handleIssueButtonClick = (endClientId, requestKeyId) => {
+        axios.post('https://localhost:7295/api/license/generate', { endClientId, requestKeyId })
+        .then(response => {
+            setGeneratedKey(response.data);
+            // Optionally, you can display the generated key to the user or perform any other action
+            console.log('Generated license key:', response.data);
+        })
+        .catch(error => {
+            console.error('Error generating license key:', error);
+            // Handle error gracefully (e.g., display error message to user)
+        });
+    
+    };
 
+    const S =()=>{
+        console.log('hello'	);
+    }
     useEffect(() => {
         getData();
     }, []);
@@ -69,11 +78,12 @@ const Status = () => {
         setSelectedDataType(event.target.value);
     };
 
+
     return (
         <div>
             <PageHeader title='Approval Status' />
             <div className='mt-10 '>
-            <div className="mb-10 text-center">
+                <div className="mb-10 text-center">
                     <select className="w-1/4 p-2 border border-gray-300 rounded-md " onChange={handleSelectChange} value={selectedDataType}>
                         <option value="">Select Your Preference</option>
                         <option value="RejectRequests">Rejected Requests</option>
@@ -87,7 +97,7 @@ const Status = () => {
                         <th className='px-10 py-0 mx-0 text-lg font-semibold '>Client Data</th>
                         <th className='px-20 py-0 mx-0 text-lg font-semibold '>Partner Manager</th>
                         <th className='px-20 py-0 mx-0 text-lg font-semibold '>Finance manager</th>
-                        <th className='px-2 py-0 mx-0 text-lg font-semibold '>Issue</th>
+                        <th className='px-0 py-0 mx-0 text-lg font-semibold '>Issue</th>
                     </thead>
                     <tbody>
                         {
@@ -194,7 +204,7 @@ const Status = () => {
                                                                     <tr>
                                                                         <td className='py-1'>Client Time Period</td>
                                                                         <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                        <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className='py-1'>Requested Module</td>
@@ -217,7 +227,11 @@ const Status = () => {
                                                 <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                             </td>
                                             <td className='align-middle border-b-2 border-slate-500'>
-                                                <div>{item.isPartnerApproval && item.isFinanceApproval ? <Issue /> : <Pending value="Pending" />}</div>
+                                                <div>
+                                                    {item.isPartnerApproval && item.isFinanceApproval ? 
+                                                        <Issue  onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)}/> 
+                                                        : <Pending value="Pending" />}
+                                                </div>
                                             </td>
                                         </tr>
                                     )
@@ -228,7 +242,9 @@ const Status = () => {
                     </tbody>
                 </table>
             </div>
+            
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
+        
         </div>
     );
 };

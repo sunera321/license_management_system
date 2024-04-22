@@ -3,12 +3,12 @@ import { MediaData } from '../data/MediaData';
 
 const Footer = () => {
   return (
-    <footer className="footer bg-gray-200 p-5 flex justify-between items-center">
+    <footer className="flex items-center justify-between p-5 bg-gray-200 footer">
       <p className="mr-auto">Copyright © 2022 hSenidBiz.com. All rights reserved.</p>
-      <div className="social-icons flex items-center">
+      <div className="flex items-center social-icons">
         {MediaData.map((item, index) => (
           <a href={item.href} key={index} target="_blank" rel="noopener noreferrer">
-            <img src={item.img} alt={item.title} className="social-icon mr-4 h-8 w-8" />
+            <img src={item.img} alt={item.title} className="w-8 h-8 mr-4 social-icon" />
           </a>
         ))}
       </div>
