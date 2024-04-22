@@ -161,6 +161,7 @@ function LicenseKeyInfo() {
                       data.key_Status === 'Available' ? ' text-[#ed944a]' :
                       data.key_Status === 'Activated' ? 'text-green-900' :
                       data.key_Status === 'Deactivated' ? 'text-red-900' :
+                      data.key_Status === 'Expired' ? 'text-red-700' :
                       ''
                     }`}
                   >
@@ -170,6 +171,7 @@ function LicenseKeyInfo() {
                         data.key_Status === 'Available' ? 'bg-[#f8d2c1]' : 
                         data.key_Status === 'Activated' ? 'bg-green-400' :
                         data.key_Status === 'Deactivated' ? 'bg-red-400' :
+                        data.key_Status === 'Expired' ? 'bg-red-500' :
                         ''
                       
                       } rounded-full opacity-50`}
