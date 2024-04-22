@@ -76,10 +76,15 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
-          <Route path="moduledetails" Component={ModuleDetails} />
+
+          <Route path="moduledetails" Component ={ModuleDetails}/>
+          
+
         </Route>
       </Routes>
+    
     </BrowserRouter>
+
   );
 }
 
