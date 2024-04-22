@@ -8,17 +8,19 @@ const MainLayout = () => {
   return (
 
 
-      <div>
+<div className="h-full ">
 
-      <Header />
+
+    <Header />
       <div className="flex flex-1">
         <Slidebar />
-        <div className="flex-1">
+        <div className="flex-1 pl-5">
           <Outlet />
         </div>
-      </div>
-      <Footer />
-    </div>
+   </div>
+   <Footer />
+</div>
+
   );
 };
 

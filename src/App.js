@@ -19,6 +19,7 @@ import AddClient from './page/AddClient';
 import ClientDetials from './page/ClientDetials';
 import Dashboard from './page/Dashboard';
 import Help from './page/Help';
+import LicenseKeyInfo from './page/LicenseKeyInfo';
 import KeyGenerateForm from './page/KeyGenerateForm';
 import Module from './page/Module';
 import PrivacyPolicy from './page/PrivacyPolicy';
@@ -26,7 +27,6 @@ import Profile from './page/Profile';
 import TermsConditions from './page/TermsConditions';
 import StatusOfKey from './page/StatusOfKey';
 import Login from './page/Login';
-import Register from './page/Register'; 
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
@@ -34,26 +34,31 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
-import Test from './page/Test';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from './Config';
+const msalInstance = new PublicClientApplication(msalConfig);
+// import Availablelicense from './page/Availablelicense';
 
 
 
 function App() {
   return (
-
-   
+    
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<Home />} /> 
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/register" element={<Register />} /> 
-        <Route path="/" element={<MainLayout />}>
-      
+        <Route path="/login" element={<Login msalInstance={msalInstance} />} />
+        <Route path="/" element={<MainLayout  />}>
+
           <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
+{/* 
+          <Route path="availablelicense" element={<Availablelicense/>} />     */}
           <Route path='activelicense' element={<Activelicense/>} />
           <Route path='expiredlicense' element={<Expiredlicense/>} />
+          <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
           <Route path="contact_us" Component={Contact_Us} />
@@ -77,12 +82,14 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
-          <Route path="moduledetails" Component={ModuleDetails} />
+
+          <Route path="moduledetails" Component ={ModuleDetails}/>
           
+
         </Route>
       </Routes>
+    
     </BrowserRouter>
-  
 
   );
 }

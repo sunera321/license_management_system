@@ -2,25 +2,29 @@ import React from 'react';
 import peopleHR from '../Images/people HR.png';
 
 
+
+
 const ModuleDetails = () => {
     return (
      
-        <div className="py-20" style={{ paddingTop: '50px' }}> {/* Add border to the container */}
-          <div className="bg-green-500 py-20 w-full relative mt-0"> {/* Adjust mt-0 for the green tape to be at the very top */}
-                {/* Blue circle with image */}
-                <div className="bg-blue-950 rounded-full w-60 h-60 absolute top-2/4 transform -translate-y-1/2 right-20 mr-5 flex justify-center items-center">
-                    <img src={peopleHR} alt="People HR" className="w-40 h-40" />
+        <div className="py-20" style={{ paddingTop: '50px' }}> 
+          <div className="bg-gray-400 py-20 w-full mt-0"> 
+             
+                <div className=" absolute top-12 right-20  mt-7 bg-white-800 rounded-full w-70 h-60  flex justify-center items-center">
+                    <img src={peopleHR} alt="People HR" className="w-60 h-50" />
                 </div>
-                {/* Module name */}
-                <div className="absolute top-1/3 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
+              
+                <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
                     Module Name
                 </div>
-                {/* Completed in 2021 */}
-                <div className="absolute top-1/3 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
+               
+                <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
                     Completed in 2021
                 </div>
-                {/* Powered by Hsenid */}
-                <div className="absolute top-1/3 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
+             
+                <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
+
+
                     Powered by Hsenid
                 </div>
             </div>
