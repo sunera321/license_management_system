@@ -1,6 +1,7 @@
 import React from "react";
 import Swal from 'sweetalert2';
 
+// Sample data of clients
 const clients = [
   {
     id: "01129A",
@@ -40,6 +41,7 @@ const clients = [
 
 ];
 
+// To handle the "View more" button click 
 const handleViewMore = (id) => {
   //console.log(id);
   Swal.fire("This module is Available!");
@@ -47,10 +49,10 @@ const handleViewMore = (id) => {
 
 const AvailableTable = () => {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+<div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left border border-gray-200">
+          <thead className="text-xs uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Client ID
@@ -58,7 +60,7 @@ const AvailableTable = () => {
               <th scope="col" className="px-6 py-3">
                 Client Name
               </th>
-              <th scope="col" className="px-6 py-3"></th>
+           
               <th scope="col" className="px-6 py-3">
                 Email Address
               </th>
@@ -69,37 +71,30 @@ const AvailableTable = () => {
                 Expire Date
               </th>
             </tr>
+            <th scope="col" className="px-6 py-3"></th>
+
           </thead>
-          <tbody>
+            {/* Mapping through client data to render table rows */}
+            <tbody>
             {clients.map((client, index) => (
-              <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {client.id}
-                </td>
-                <td className="px-6 py-4">
-                  {client.name}
-                </td>
-                <td className="px-6 py-4">
-                  <button className="bg-gray-600 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleViewMore(client.id)}>
+              <tr key={index} className="bg-white border-b border-gray-200 hover:bg-gray-50">
+                <td className="px-2 py-2">{client.id}</td>
+                <td className="px-2 py-2">{client.name}</td>
+                <td className="px-2 py-2">{client.email}</td>
+                <td className="px-2 py-2">{client.issueDate}</td>
+                <td className="px-2 py-2">{client.expireDate}</td>
+                <td className="px-2 py-2">
+                  <button className="bg-gray-300 hover:bg-gray-500 text-black  py-2 px-3 rounded" onClick={() => handleViewMore(client.id)}>
                     View more
                   </button>
-                </td>
-                <td className="px-6 py-4">
-                  {client.email}
-                </td>
-                <td className="px-6 py-4">
-                  {client.issueDate}
-                </td>
-                <td className="px-6 py-4">
-                  {client.expireDate}
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+      </table>
     </div>
-  );
+  </div>
+);
 };
 
 export default AvailableTable;
