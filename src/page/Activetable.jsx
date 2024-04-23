@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from 'react';
+import Search from '../components/page/ControlPanel/Search'; // Import the Search component
 import Swal from 'sweetalert2';
-
 
 // Sample data of clients
 const clients = [
@@ -34,7 +34,7 @@ const clients = [
   },
   { 
     id: "01129A", 
-    name: "Manchee", 
+    name: "Maliban", 
     email: "abh123@gmail.com", 
     issueDate: "2018-12-03", 
     expireDate: "2021-12-03"
@@ -49,7 +49,19 @@ const handleViewMore = (id) => {
 
 
 const ActiveTable = () => {
+  const [searchInput, setSearchInput] = useState("");
+
+  const filteredClients = clients.filter(client => {
+    return client.name.toLowerCase().includes(searchInput.toLowerCase());
+  });
+
+  console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
+
   return (
+    <div>
+     {/* Render the Search component */}
+     <Search searchInput={searchInput} setSearchInput={setSearchInput} />
+
     <div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left border border-gray-200">
@@ -74,10 +86,10 @@ const ActiveTable = () => {
               <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
-          {/* Mapping through client data to render table rows */}
+          {/* Mapping through filtered clients data to render table rows */}
           <tbody>
-            {clients.map((client, index) => (
-              <tr key={index} className="bg-white border-b border-gray-200 hover:bg-gray-50">
+              {filteredClients.map((client, index) => (
+                <tr key={index} className="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <td className="px-2 py-2">{client.id}</td>
                 <td className="px-2 py-2">{client.name}</td>
                 <td className="px-2 py-2">{client.email}</td>
@@ -93,6 +105,7 @@ const ActiveTable = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };
