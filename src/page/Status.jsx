@@ -11,6 +11,7 @@ import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
+import Swal from 'sweetalert2';
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -27,6 +28,7 @@ const Status = () => {
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [loading, setLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
+    
 
     const addpopup = (client) => {
         setModal(!modal);
@@ -59,6 +61,11 @@ const Status = () => {
             setGeneratedKey(response.data);
             // Optionally, you can display the generated key to the user or perform any other action
             console.log('Generated license key:', response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'License Key Generated!',
+                
+            });
         })
         .catch(error => {
             console.error('Error generating license key:', error);
@@ -229,11 +236,9 @@ const Status = () => {
                                             <td className='align-middle border-b-2 border-slate-500'>
                                                 <div>
                                                 {item.isPartnerApproval && item.isFinanceApproval ?
-                                                    <button onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>ddd</button> : <Pending value="Pending" />}
+                                                    <button  className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:bg-green-400' onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>Available</button> : <Pending value="Pending" />}
                                                 </div>
-                                                {item.isPartnerApproval && item.isFinanceApproval ? 
-                                                        <Issue  onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)}/> 
-                                                        : <Pending value="Pending" />}
+                                                
                                             </td>
                                         </tr>
                                     )
