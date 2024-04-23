@@ -59,24 +59,26 @@ const Status = () => {
         axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
+            // Remove the item from PendingResults
+            setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
             // Optionally, you can display the generated key to the user or perform any other action
             console.log('Generated license key:', response.data);
             Swal.fire({
                 icon: 'success',
                 title: 'License Key Generated!',
-                
             });
         })
         .catch(error => {
             console.error('Error generating license key:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'key is Already Available !',
+            });
             // Handle error gracefully (e.g., display error message to user)
         });
-    
     };
 
-    const S =()=>{
-        console.log('hello'	);
-    }
+    
     useEffect(() => {
         getData();
     }, []);
