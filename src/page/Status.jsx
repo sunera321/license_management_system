@@ -6,6 +6,7 @@ import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
+import Sendkey from '../page/SendKey';
 import { useLocation } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
@@ -26,7 +27,7 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
-
+    const [sendkey, setSendKey] = useState(false);
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
@@ -64,16 +65,21 @@ const Status = () => {
     useEffect(() => {
         getData();
     }, []);
-
+    
     const handleSelectChange = (event) => {
         setSelectedDataType(event.target.value);
     };
+
+    const email = (client) => {
+        setSendKey(true);
+        setSelectedClient(client);
+      };
 
     return (
         <div>
             <PageHeader title='Approval Status' />
             <div className='mt-10 '>
-            <div className="mb-10 text-center">
+                <div className="mb-10 text-center">
                     <select className="w-1/4 p-2 border border-gray-300 rounded-md " onChange={handleSelectChange} value={selectedDataType}>
                         <option value="">Select Your Preference</option>
                         <option value="RejectRequests">Rejected Requests</option>
@@ -93,8 +99,8 @@ const Status = () => {
                         {
 
                             selectedDataType === 'RejectRequests' ?
-                            RejectRequests && RejectRequests.length > 0 ?
-                            RejectRequests.map((item, index) => {
+                                RejectRequests && RejectRequests.length > 0 ?
+                                    RejectRequests.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='px-0 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
@@ -145,90 +151,104 @@ const Status = () => {
                                                     </button>
                                                 </td>
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                {item.commentPartnerMgt}
+                                                    {item.commentPartnerMgt}
                                                 </td>
                                                 <td className='px-1 py-2 text-base border-b-2 mx-45 border-slate-500'>
                                                     {item.commentFinaceMgt}
                                                 </td>
                                                 <td className='px-0 align-middle border-b-2 border-slate-500'>
-                                                    <Reject value="Rejected"/>
+                                                    <Reject value="Rejected" />
                                                 </td>
                                             </tr>
                                         )
                                     })
+                                    :
+                                    'No records found.'
                                 :
-                                'No records found.'
-                            :
-                            PendingResults && PendingResults.length > 0 ?
-                            PendingResults.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td className='px-2 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
-                                            <td className='px-0 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.endClient.name}</td>
-                                            <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
-                                                <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
-                                                    {modal && selectedClient && (
-                                                        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
-                                                            <div className="fixed inset-0 w-screen h-screen ">
-                                                                <div className=" text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-relaxed bg-white dark:border-gray-700  py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
-                                                                    <tr>
-                                                                        <td className='py-1'>Client Name</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.name}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td className='py-1'>Client ID</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.id}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td className='py-1'>Email</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.email}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td className='py-1'>Country</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.country}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td className='py-1'>Client Time Period</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td className='py-1'>Requested Module</td>
-                                                                        <td>:</td>
-                                                                        <td className='pl-5'>{selectedClient.modules}</td>
-                                                                    </tr>
-                                                                    <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={toggleModal}>
-                                                                        X
-                                                                    </button>
+                                PendingResults && PendingResults.length > 0 ?
+                                    PendingResults.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td className='px-2 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
+                                                <td className='px-0 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>{item.endClient.name}</td>
+                                                <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
+                                                    <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
+                                                        {modal && selectedClient && (
+                                                            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
+                                                                <div className="fixed inset-0 w-screen h-screen ">
+                                                                    <div className=" text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-relaxed bg-white dark:border-gray-700  py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
+                                                                        <tr>
+                                                                            <td className='py-1'>Client Name</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.name}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Client ID</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.id}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Email</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.email}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Country</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.country}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Client Time Period</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td className='py-1'>Requested Module</td>
+                                                                            <td>:</td>
+                                                                            <td className='pl-5'>{selectedClient.modules}</td>
+                                                                        </tr>
+                                                                        <button className="absolute top-0 right-0 p-0 px-2 m-4 text-gray-700 bg-red-600 rounded-full hover:bg-red-400 hover:text-gray-800" onClick={toggleModal}>
+                                                                            X
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    )}
+                                                        )}
+                                                    </button>
+                                                </td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                                    <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
+                                                </td>
+                                                <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                                    <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
+                                                </td>
+                                                <td className='align-middle border-b-2 border-slate-500'>
+                                                    <div>{item.isPartnerApproval && item.isFinanceApproval ? <Issue /> : <Pending value="Pending" />}</div>
+                                                </td>
+                                                <button
+                                                    value="View More"
+                                                    onClick={() => email(item)}
+                                                    className="mt-3 p-1 text-white bg-[#111158] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
+                                                    View More
                                                 </button>
-                                            </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' /> }</div>
-                                            </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
-                                            </td>
-                                            <td className='align-middle border-b-2 border-slate-500'>
-                                                <div>{item.isPartnerApproval && item.isFinanceApproval ? <Issue /> : <Pending value="Pending" />}</div>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            :
-                            'No records found.'
+
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    'No records found.'
                         }
                     </tbody>
                 </table>
             </div>
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
+            {sendkey && selectedClient && (
+                <Sendkey
+                    client={selectedClient}
+                    onContactClick={email}
+                />
+            )}
+
         </div>
     );
 };
