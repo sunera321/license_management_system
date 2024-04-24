@@ -1,9 +1,14 @@
 import React from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';;
+import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';import { useParams } from 'react-router-dom';
+;
 
-const SendKey = ({license_Key}) => {
+const SendKey = () => {
+
+  const { key } = useParams();
+  console.log("key", key);
+  const license_Key = key;
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,6 +100,7 @@ const SendKey = ({license_Key}) => {
           </div>
         </div>
       </section>
+     
     </div>
 
 
