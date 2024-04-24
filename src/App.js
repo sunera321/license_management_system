@@ -18,7 +18,7 @@ import Notification from './page/Notification';
 import AddClient from './page/AddClient';
 import ClientDetials from './page/ClientDetials';
 import Dashboard from './page/Dashboard';
-import Help from './page/Help';
+import SendKey from './page/SendKey';
 import LicenseKeyInfo from './page/LicenseKeyInfo';
 import KeyGenerateForm from './page/KeyGenerateForm';
 import Module from './page/Module';
@@ -77,7 +77,7 @@ function App() {
           <Route path="addclient" Component={AddClient} />
           <Route path="clientdetials" Component={ClientDetials} />
           <Route path="dashboard" Component={Dashboard} />
-          <Route path="help" Component={Help} />
+          <Route path="/sendkey/:key" Component={SendKey} />
           <Route path="keygenerateform" Component={KeyGenerateForm} />
           <Route path="module" Component={Module} />
           <Route path="privacypolicy" Component={PrivacyPolicy} />

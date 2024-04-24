@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
+  const generateKey = () => {
+    // Generate your key here
+    const key = "YOUR_GENERATED_KEY";
+    // Navigate to SendKey page with key as parameter
+    window.location.href = `/sendkey/${key}`;
+  };
+
   return (
-    <div>Profile</div>
-  )
+    <div>
+      <button onClick={generateKey}>Generate Key</button>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;
