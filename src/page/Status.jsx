@@ -28,8 +28,8 @@ const Status = () => {
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [loading, setLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
+    const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     
-
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
@@ -61,7 +61,7 @@ const Status = () => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
-            // Optionally, you can display the generated key to the user or perform any other action
+
             console.log('Generated license key:', response.data);
             Swal.fire({
                 icon: 'success',
@@ -74,7 +74,6 @@ const Status = () => {
                 icon: 'error',
                 title: 'key is Already Available !',
             });
-            // Handle error gracefully (e.g., display error message to user)
         });
     };
 
