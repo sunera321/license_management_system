@@ -44,7 +44,7 @@ function PartnerManagerApproval() {
   }
 
   const handleSubmitRejection = () => {
-    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectFiancePart`;
+    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectPartnerPart`;
 
     axios.patch(url, JSON.stringify(rejectionReason), {
       headers: {

@@ -11,6 +11,7 @@ import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
+import Swal from 'sweetalert2';
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -27,7 +28,8 @@ const Status = () => {
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [loading, setLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
-
+    const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+    
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
@@ -54,22 +56,28 @@ const Status = () => {
     };
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post('https://localhost:7295/api/license/generate', { endClientId, requestKeyId })
+        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
-            // Optionally, you can display the generated key to the user or perform any other action
+            // Remove the item from PendingResults
+            setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
+
             console.log('Generated license key:', response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'License Key Generated!',
+            });
         })
         .catch(error => {
             console.error('Error generating license key:', error);
-            // Handle error gracefully (e.g., display error message to user)
+            Swal.fire({
+                icon: 'error',
+                title: 'key is Already Available !',
+            });
         });
-    
     };
 
-    const S =()=>{
-        console.log('hello'	);
-    }
+    
     useEffect(() => {
         getData();
     }, []);
@@ -228,10 +236,10 @@ const Status = () => {
                                             </td>
                                             <td className='align-middle border-b-2 border-slate-500'>
                                                 <div>
-                                                    {item.isPartnerApproval && item.isFinanceApproval ? 
-                                                        <Issue  onClick={() => handleIssueButtonClick(item.endClient.id, item.requestID)}/> 
-                                                        : <Pending value="Pending" />}
+                                                {item.isPartnerApproval && item.isFinanceApproval ?
+                                                    <button  className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:bg-green-400' onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>Available</button> : <Pending value="Pending" />}
                                                 </div>
+                                                
                                             </td>
                                         </tr>
                                     )
