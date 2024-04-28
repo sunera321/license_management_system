@@ -4,12 +4,9 @@ import Swal from 'sweetalert2';
 import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';import { useParams } from 'react-router-dom';
 ;
 
-const SendKey = () => {
+const SendKey = ({key}) => {
 
-  const { key } = useParams();
-  console.log("key", key);
-  const license_Key = key;
-  
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, licenseKey } = e.target.elements;
@@ -44,15 +41,14 @@ const SendKey = () => {
   return (
 
 
-
-    <div >
+    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50">
       <section className="flex items-center justify-center h-screen overflow-hidden" >
         <div className="flex items-center justify-center w-2/6 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
           <img src={backgroundImage} className="w-100% h-[100%]" alt=" image" />
         </div>
         <div className="relative flex flex-col w-1/3 p-5 pt-3 rounded-r-lg shadow-2xl h-2/3 bg-green-50">
           <div className=" lg:text-left">
-            <h2 className="font-bold text-center text-gray-800 lg:text-2xl">Send License Key Form Clinet<br /></h2>
+            <h2 className="font-bold text-center text-gray-800 text-[20px]">Send License Key Form Clinet<br /></h2>
 
             <div>
               <form className='pt-5' onSubmit={handleSubmit} >
@@ -67,7 +63,7 @@ const SendKey = () => {
                   type='text'
                   name='licenseKey'
                   className=' border-2 rounded-lg border-zinc-300 bg-slate-100 w-[90%]'
-                  placeholder={license_Key}
+                  placeholder={key}
                 />
 
                 <label className='font-semibold text-[18px] '>License key Description</label><br />
