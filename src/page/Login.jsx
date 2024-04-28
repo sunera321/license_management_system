@@ -7,6 +7,7 @@ import Footer2 from '../components/page/loging/inc/Footer2';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
 import backgroundImage from '../components/asserts/Media/image1.jpg';
 
+
 const AuthenticatedContent = () => {
   const { instance } = useMsal();
 
@@ -49,6 +50,7 @@ const SignInButton = () => {
               <div className="logo-and-button flex items-center mt-10">
                 <img src={microsoftLogo} alt="Microsoft Logo" className="w-10 h-10 mr-4" />
                 <button className="btn py-2 px-4 rounded-lg bg-gray-100 text-black hover:bg-gray-300 hover:text-gray-800" onClick={handleSignIn}>Sign in with Microsoft</button>
+               
               </div>
             </div>
           </div>

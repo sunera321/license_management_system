@@ -37,6 +37,7 @@ import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 import Availablelicense from './page/Availablelicense';
+import IncomeDashboard from './page/IncomeDashboard';
 
 // Create instance of PublicClientApplication
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -68,6 +69,7 @@ function App() {
           <Route path="validatekey" element={<ValidateKey />} />
           <Route path="partnermanagerapproval" element={<PartnerManagerApproval />} />
           <Route path="finacialmanagerapproval" element={<FinacialManagerApproval />} />
+           <Route path="income" element={<IncomeDashboard />} />
           <Route path="notification" element={<Notification />} />
           <Route path="addclient" element={<AddClient />} />
           <Route path="clientdetials" element={<ClientDetials />} />
