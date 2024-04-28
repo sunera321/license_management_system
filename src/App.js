@@ -22,6 +22,7 @@ import AddClient from './page/AddClient';
 import ClientDetials from './page/ClientDetials';
 import Dashboard from './page/Dashboard';
 import Help from './page/Help';
+import LicenseKeyInfo from './page/LicenseKeyInfo';
 import KeyGenerateForm from './page/KeyGenerateForm';
 import Module from './page/Module';
 import PrivacyPolicy from './page/PrivacyPolicy';
@@ -36,8 +37,12 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from './Config';
+
 import Availablelicense from './page/Availablelicense';
-import IncomeDashboard from './page/IncomeDashboard';
+
 
 // Create instance of PublicClientApplication
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -48,8 +53,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login msalInstance={msalInstance} />} />
-        <Route path="/" element={<MainLayout />}>
-          
+
+        <Route path="/" element={<MainLayout  />}>
+
           <Route path="mainhome" element={<Dashboard />} />
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="about" element={<About />} />
