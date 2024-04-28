@@ -37,15 +37,13 @@ import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import IncomeDashboard from './page/IncomeDashboard';
 
-import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from './Config';
 
 import Availablelicense from './page/Availablelicense';
 
 
-// Create instance of PublicClientApplication
-const msalInstance = new PublicClientApplication(msalConfig);
+
 
 function App() {
   return (
@@ -63,6 +61,7 @@ function App() {
           <Route path="activelicense" element={<Activelicense />} />
           <Route path="expiredlicense" element={<Expiredlicense />} />
           <Route path="addmodule" element={<AddModule />} />
+          <Route path='incomedashboard' element={<IncomeDashboard />} />
           <Route path="clientmore" element={<ClientMore />} />
           <Route path="contact_us" element={<Contact_Us />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
