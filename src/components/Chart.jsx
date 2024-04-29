@@ -60,7 +60,7 @@ export const data = {
   datasets: [
     {
       label: 'Users',
-      data: [1000, 3000, 4000, 5000, 4000, 3000, 6000, 2000, 1500, 3000, 4000],
+      data: [20, 30, 42, 35, 38, 60, 45, 50, 50, 30, 45],
       backgroundColor: 'rgba(69, 96, 113, 0.5)',
       barPercentage: 0.8, // Adjust overall width of bars (default: 0.9)
       categoryPercentage: 0.9, // Adjust spacing between bars within the same category (default: 0.8)
