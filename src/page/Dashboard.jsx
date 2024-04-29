@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import LineGraph from './../components/page/Dashboard/LineGraph';
 import BarGraph from '../components/page/Dashboard/BarGraph';
 import { lineChartData, barChartData } from '../components/page/Dashboard/Data';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 
 const Dashboard = () => {
+  const location = useLocation();
+  const availableLicenseKeys = location.state ? location.state.availableLicenseKeys :0;
   const [data] = useState({ line: lineChartData, bar: barChartData });
-  const availableLicenseKeys = 32;
   const expiredLicenseKeys = 6;
   const activeLicenseKeys = 26;
   return (

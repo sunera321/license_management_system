@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Search from '../components/page/ControlPanel/Search'; // Import the Search component
 import Swal from 'sweetalert2';
 
+
 const AvailableTable = () => {
   const [searchInput, setSearchInput] = useState("");
 
@@ -46,8 +47,14 @@ const AvailableTable = () => {
   // Filter clients based on search input
   const filteredClients = clients.filter(client => {
     return client.name.toLowerCase().includes(searchInput.toLowerCase());
-  });
 
+    
+  });
+  
+  const availableLicenseKeys = filteredClients.length; // Count of rows
+  console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
+  
+  
   console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
 
   // To handle the "View more" button click 
@@ -55,8 +62,11 @@ const AvailableTable = () => {
     Swal.fire("This module is Available!");
   };
 
+  
+
   return (
     <div>
+      
       {/* Render the Search component */}
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
       <div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
@@ -102,6 +112,7 @@ const AvailableTable = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 
