@@ -55,7 +55,7 @@ const AvailableTable = () => {
   console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
   
   
-  console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
+  //console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
 
   // To handle the "View more" button click 
   const handleViewMore = (id) => {

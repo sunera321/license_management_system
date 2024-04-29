@@ -18,6 +18,7 @@ const options = {
     title: 'Total Users',
     minValue: 0,
   },
+  
   vAxis: {
     title: 'Product',
   },

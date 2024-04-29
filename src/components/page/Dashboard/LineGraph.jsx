@@ -13,6 +13,7 @@ ChartJS.register(
 
 const LineGraph = ({ chartData }) => {
   const options = {
+    chartArea: { width: '50%' }, // Adjust the chart area width
     responsive: true,
     interaction: {
       intersect: false,
@@ -27,6 +28,7 @@ const LineGraph = ({ chartData }) => {
       y: {
         grid: {
           display: false,
+          position: 'bottom'
         },
       },
     },
@@ -45,7 +47,7 @@ const LineGraph = ({ chartData }) => {
     dataset.borderColor = 'black'; // Set the color of the line
     dataset.backgroundColor = 'transparent'; // No fill beneath the line
     dataset.pointRadius = 0; // Hide the points
-    dataset.pointHoverRadius = 5; // Show point on hover, adjust as needed
+    dataset.pointHoverRadius = 5; // Show point on hover
   });
 
   return (

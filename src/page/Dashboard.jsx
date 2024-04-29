@@ -6,15 +6,15 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 const Dashboard = () => {
-  const location = useLocation();
-  const availableLicenseKeys = location.state ? location.state.availableLicenseKeys :0;
+ // const location = useLocation();
+  const availableLicenseKeys = 5 ; //location.state ? location.state.availableLicenseKeys :0;
   const [data] = useState({ line: lineChartData, bar: barChartData });
   const expiredLicenseKeys = 6;
   const activeLicenseKeys = 26;
   return (
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4 ">
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-sky-100 p-5 shadow-md ">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-sky-200 p-5 shadow-md ">
           <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4">
@@ -24,7 +24,7 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-slate-200 p-5 shadow-md">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-green-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">ACTIVE LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{activeLicenseKeys}</div>
           <div className="pt-4">
@@ -32,7 +32,7 @@ const Dashboard = () => {
             <Link to='/activelicense' className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center"> View More </Link>
           </div>
         </div>
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-sky-100 p-5 shadow-md">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-blue-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">EXPIRED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{expiredLicenseKeys}</div>
           <div className="pt-4">
