@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
 
-
 // Import local components
 import MainLayout from './layouts/MainLayout';
 import Home from './page/Home';
@@ -42,7 +41,8 @@ import IncomeDashboard from './page/IncomeDashboard';
 
 
 import Availablelicense from './page/Availablelicense';
-
+const msalInstance = new PublicClientApplication(msalConfig);
+// import Availablelicense from './page/Availablelicense';
 
 
 
@@ -75,7 +75,6 @@ function App() {
           <Route path="validatekey" element={<ValidateKey />} />
           <Route path="partnermanagerapproval" element={<PartnerManagerApproval />} />
           <Route path="finacialmanagerapproval" element={<FinacialManagerApproval />} />
-           <Route path="income" element={<IncomeDashboard />} />
           <Route path="notification" element={<Notification />} />
           <Route path="addclient" element={<AddClient />} />
           <Route path="clientdetials" element={<ClientDetials />} />
