@@ -26,11 +26,11 @@ export const options = {
     title: {
       display: true,
       text: 'Total Revenue',
-      position: 'bottom' // Title placed below the chart
+      position: 'bottom'
     },
     legend: {
       display: true,
-      position: 'bottom' // Legend placed below the chart
+      position: 'bottom'
     },
   },
   scales: {
@@ -38,13 +38,13 @@ export const options = {
       ticks: {
         beginAtZero: true,
         callback: function(value) {
-          return value.toLocaleString(); // Add commas to y-axis ticks
+          return value.toLocaleString(); 
         }
       }
     },
     x: {
       grid: {
-        display: false // Hide x-axis gridlines
+        display: false 
       }
     }
   }
@@ -57,15 +57,14 @@ export const data = {
   datasets: [
     {
       label: 'Users',
-      data: [1000, 3000, 4000, 5000, 4000, 3000, 6000, 2000, 1500, 3000, 4000], // Added data for labels 7, 8, 9, 10
-      backgroundColor: 'rgba(92, 21, 36, 0.5)',
-      barPercentage: 0.5 // Adjust the width of bars
+      data: [1000, 3000, 4000, 5000, 4000, 3000, 6000, 2000, 1500, 3000, 4000],
+      barPercentage: 0.5 
     },
     {
       label: 'Revenue',
-      data: [2000, 3000, 5000, 4000, 3000, 2000, 8000, 3500, 4500, 2500, 6000], // Added data for labels 7, 8, 9, 10
+      data: [2000, 3000, 5000, 4000, 3000, 2000, 8000, 3500, 4500, 2500, 6000], 
       backgroundColor: 'rgba(12, 80, 126, 0.5)',
-      barPercentage: 0.5 // Adjust the width of bars
+      barPercentage: 0.5
     },
   ],
 };

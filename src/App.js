@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
 
+
 // Import local components
 import MainLayout from './layouts/MainLayout';
 import Home from './page/Home';
