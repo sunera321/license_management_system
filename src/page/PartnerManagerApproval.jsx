@@ -55,8 +55,8 @@ function PartnerManagerApproval() {
       
         const updatedClients = clients.map(client => {
           if (client.requestID === selectedRequestId) {
-            client.isFinanceApproval = false;
-            client.CommentFinaceMgt = rejectionReason;
+            client.isPartnerApproval = false;
+            client.CommentPartnerMgt = rejectionReason;
           }
           return client;
         });
