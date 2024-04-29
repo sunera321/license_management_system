@@ -26,9 +26,9 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
-    const [sendkey, setSendKey] = useState(false);
-    const [show, setShow] = useState(true);
-    const [viewMoreClicked, setViewMoreClicked] = useState(false); // State variable to track if "View More" button is clicked
+    // const [sendkey, setSendKey] = useState(false);
+    // const [show, setShow] = useState(true);
+    // const [viewMoreClicked, setViewMoreClicked] = useState(false); // State variable to track if "View More" button is clicked
 
     const addpopup = (client) => {
         setModal(!modal);
@@ -40,10 +40,10 @@ const Status = () => {
         setSelectedClient(null); // Reset selected client
     };
 
-    const handleClose = () => {
-        setViewMoreClicked(false); // Reset state when closing the Sendkey component
-        setShow(false);
-    };
+    // const handleClose = () => {
+    //     setViewMoreClicked(false); // Reset state when closing the Sendkey component
+    //     setShow(false);
+    // };
 
     const getData = () => {
         axios.get('https://localhost:7295/api/RequestKey')
@@ -67,10 +67,10 @@ const Status = () => {
         setSelectedDataType(event.target.value);
     };
 
-    const email = (client) => {
-        setSendKey(true);
-        setSelectedClient(client);
-    };
+    // const email = (client) => {
+    //     setSendKey(true);
+    //     setSelectedClient(client);
+    // };
 
     return (
         <div>
@@ -222,7 +222,7 @@ const Status = () => {
                                                 <td className='align-middle border-b-2 border-slate-500'>
                                                     <div>{item.isPartnerApproval && item.isFinanceApproval ? <Issue /> : <Pending value="Pending" />}</div>
                                                 </td>
-                                                <button
+                                                {/* <button
                                                     value="View More"
                                                     onClick={() => {
                                                         email(item);
@@ -230,7 +230,7 @@ const Status = () => {
                                                     }}
                                                     className="mt-3 p-1 text-white bg-[#111158] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
                                                     View More
-                                                </button>
+                                                </button> */}
                                             </tr>
                                         )
                                     })
@@ -241,13 +241,13 @@ const Status = () => {
                 </table>
             </div>
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
-            {viewMoreClicked && sendkey && selectedClient && ( // Render Sendkey component when "View More" button is clicked
+            {/* {viewMoreClicked && sendkey && selectedClient && ( // Render Sendkey component when "View More" button is clicked
                 <Sendkey
                     key={selectedClient}
                     onContactClick={email}
                     handleClose={handleClose}
                 />
-            )}
+            )} */}
 
         </div>
     );
