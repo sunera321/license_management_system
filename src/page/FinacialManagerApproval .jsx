@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+
 function FinancialManagerApproval() {
   const [clients, setClients] = useState([]);
   const [rejectionReason, setRejectionReason] = useState('');
