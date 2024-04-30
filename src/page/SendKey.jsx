@@ -5,10 +5,10 @@ import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 1
 ;
 
 const SendKey = () => {
-
+// Take the parameter of URL
 const params = useParams();
   const key = params.key;
-  console.log("getkey"+key);
+  
  
   const handleSubmit = async (e) => {
     e.preventDefault();
