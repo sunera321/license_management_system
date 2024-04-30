@@ -4,8 +4,11 @@ import Swal from 'sweetalert2';
 import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';import { useParams } from 'react-router-dom';
 ;
 
-const SendKey = ({key}) => {
-
+const SendKey = () => {
+// Take the parameter of URL
+const params = useParams();
+  const key = params.key;
+  
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +67,7 @@ const SendKey = ({key}) => {
                   name='licenseKey'
                   className=' border-2 rounded-lg border-zinc-300 bg-slate-100 w-[90%]'
                   placeholder={key}
+                  disabled
                 />
 
                 <label className='font-semibold text-[18px] '>License key Description</label><br />
