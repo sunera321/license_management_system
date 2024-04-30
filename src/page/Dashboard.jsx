@@ -63,10 +63,10 @@ const filteredClients = clients.filter(client => {
   const availableLicenseKeys = filteredClients.length; // Count of rows
   console.log("Available License Keys:", availableLicenseKeys); 
 */
-  const availableLicenseKeys = 5;
+  const availableLicenseKeys = 7;
   const [data] = useState({ line: lineChartData, bar: barChartData });
   const expiredLicenseKeys = 2;
-  const activeLicenseKeys = 3;
+  const activeLicenseKeys = 5;
   return (
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4 ">
@@ -108,7 +108,7 @@ const filteredClients = clients.filter(client => {
           <BarGraph chartData={data.bar} />
         </div>
       </div>
-      
+
     </div>
   )
 }

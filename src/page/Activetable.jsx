@@ -25,7 +25,37 @@ const clients = [
     email: "abh123@gmail.com",
     issueDate: "2018-12-03",
     expireDate: "2021-12-03"
+  },
+  {
+    id: "01125A",
+    name: "Manchee",
+    email: "abh123@gmail.com",
+    issueDate: "2018-12-03",
+    expireDate: "2021-12-03"
+  },
+
+  {
+    id: "01126A",
+    name: "Manchee",
+    email: "abh123@gmail.com",
+    issueDate: "2018-12-03",
+    expireDate: "2021-12-03"
+  },
+
+  {
+    id: "01127A",
+    name: "Maliban", 
+    email: "abh123@gmail.com",
+    issueDate: "2018-12-03",
+    expireDate: "2024-12-03"
+  }, {
+    id: "01129A",
+    name: "Qatar Airways", 
+    email: "abh123@gmail.com",
+    issueDate: "2018-12-03",
+    expireDate: "2024-12-03"
   }
+
 
 ];
 // To handle the "View more" button click 

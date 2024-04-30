@@ -42,7 +42,21 @@ const AvailableTable = () => {
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
       expireDate: "2021-12-03"
+    },
+    {
+      id: "01127A",
+      name: "Maliban", 
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2024-12-03"
+    }, {
+      id: "01129A",
+      name: "Qatar Airways", 
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2024-12-03"
     }
+  
   ];
   // Filter clients based on search input
   const filteredClients = clients.filter(client => {
@@ -51,8 +65,8 @@ const AvailableTable = () => {
 
   });
 
-  const availableLicenseKeys = filteredClients.length; // Count of rows
-  console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
+  // const availableLicenseKeys = filteredClients.length; // Count of rows
+  // console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
 
 
   //console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated

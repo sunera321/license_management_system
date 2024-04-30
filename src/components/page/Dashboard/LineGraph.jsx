@@ -12,7 +12,7 @@ ChartJS.register(
 
 const LineGraph = ({ chartData }) => {
   const options = {
-    chartArea: { width: '50%' }, // Adjust the chart area width
+  
     responsive: true,
     interaction: {
       intersect: false,
@@ -22,6 +22,10 @@ const LineGraph = ({ chartData }) => {
       x: {
         grid: {
          display: false, 
+         title: {
+          display: true,
+          text: 'Months',
+         }
         },
       },
       y: {

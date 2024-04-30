@@ -8,10 +8,10 @@ const Availablelicense = () => {
 
 
   return (
-      <div>
-          <PageHeader title="Issued License Keys"/>
-          <AvailableTable />
-      </div>
+    <div>
+      <PageHeader title="Issued License Keys" />
+      <AvailableTable />
+    </div>
   );
 };
 
