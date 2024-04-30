@@ -2,15 +2,71 @@ import React, { useState } from 'react';
 import LineGraph from './../components/page/Dashboard/LineGraph';
 import BarGraph from '../components/page/Dashboard/BarGraph';
 import { lineChartData, barChartData } from '../components/page/Dashboard/Data';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Dashboard = () => {
- // const location = useLocation();
-  const availableLicenseKeys = 5 ; //location.state ? location.state.availableLicenseKeys :0;
+
+  /*const [searchInput, setSearchInput] = useState("");
+  const clients = [
+    {
+      id: "01129A",
+      name: "Manchee",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    },
+    {
+      id: "01129A",
+      name: "Manchee",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    },
+    {
+      id: "01129A",
+      name: "Manchee",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    },
+    {
+      id: "01129A",
+      name: "Manchee",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    },
+    {
+      id: "01129A",
+      name: "Maliban",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    },
+    {
+      id: "01129A",
+      name: "Maliban",
+      email: "abh123@gmail.com",
+      issueDate: "2018-12-03",
+      expireDate: "2021-12-03"
+    }
+  ];
+
+// Filter clients based on search input
+const filteredClients = clients.filter(client => {
+  return client.name.toLowerCase().includes(searchInput.toLowerCase());
+
+
+});
+
+  const availableLicenseKeys = filteredClients.length; // Count of rows
+  console.log("Available License Keys:", availableLicenseKeys); 
+*/
+  const availableLicenseKeys = 5;
   const [data] = useState({ line: lineChartData, bar: barChartData });
-  const expiredLicenseKeys = 6;
-  const activeLicenseKeys = 26;
+  const expiredLicenseKeys = 2;
+  const activeLicenseKeys = 3;
   return (
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4 ">
@@ -52,6 +108,7 @@ const Dashboard = () => {
           <BarGraph chartData={data.bar} />
         </div>
       </div>
+      
     </div>
   )
 }

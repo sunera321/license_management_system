@@ -68,7 +68,7 @@ const BarGraph = () => {
           padding: {
 
             bottom: 20,
-            
+
           }
         }
       },
@@ -90,7 +90,7 @@ const BarGraph = () => {
         const labels = Object.keys(moduleData).map(module => `${module} (${moduleData[module]})`);
         const userData = Object.values(moduleData);
         // Generate different shades of blue for backgroundColor
-        const colorShades = generateColorShades([54, 78, 103], labels.length); 
+        const colorShades = generateColorShades([54, 78, 103], labels.length);
 
         setChartData({
           labels: labels,

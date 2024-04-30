@@ -6,38 +6,38 @@ import Swal from 'sweetalert2';
 const AvailableTable = () => {
   const [searchInput, setSearchInput] = useState("");
 
-  // Sample data of clients
+
   const clients = [
     {
-      id: "01129A",
+      id: "01120A",
       name: "Manchee",
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
       expireDate: "2021-12-03"
     },
     {
-      id: "01129A",
+      id: "01121A",
       name: "Manchee",
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
+      expireDate: "2024-12-03"
     },
     {
-      id: "01129A",
+      id: "01122A",
       name: "Manchee",
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
+      expireDate: "2024-12-03"
     },
     {
-      id: "01129A",
+      id: "01123A",
       name: "Manchee",
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
+      expireDate: "2024-12-03"
     },
     {
-      id: "01129A",
+      id: "01125A",
       name: "Maliban",
       email: "abh123@gmail.com",
       issueDate: "2018-12-03",
@@ -48,13 +48,13 @@ const AvailableTable = () => {
   const filteredClients = clients.filter(client => {
     return client.name.toLowerCase().includes(searchInput.toLowerCase());
 
-    
+
   });
-  
+
   const availableLicenseKeys = filteredClients.length; // Count of rows
   console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
-  
-  
+
+
   //console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
 
   // To handle the "View more" button click 
@@ -62,11 +62,11 @@ const AvailableTable = () => {
     Swal.fire("This module is Available!");
   };
 
-  
+
 
   return (
     <div>
-      
+
       {/* Render the Search component */}
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
       <div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
@@ -112,7 +112,7 @@ const AvailableTable = () => {
         </div>
       </div>
     </div>
-    
+
   );
 };
 
