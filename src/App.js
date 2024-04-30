@@ -21,7 +21,7 @@ import Notification from './page/Notification';
 import AddClient from './page/AddClient';
 import ClientDetials from './page/ClientDetials';
 import Dashboard from './page/Dashboard';
-import Help from './page/Help';
+import SendKey from './page/SendKey';
 import LicenseKeyInfo from './page/LicenseKeyInfo';
 import KeyGenerateForm from './page/KeyGenerateForm';
 import Module from './page/Module';
@@ -52,9 +52,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login msalInstance={msalInstance} />} />
-
-        <Route path="/" element={<MainLayout  />}>
-
           <Route path="mainhome" element={<Dashboard />} />
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="about" element={<About />} />
