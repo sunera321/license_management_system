@@ -13,7 +13,6 @@ const Slidebar = () => {
       </a>
       <hr className="my-4 border-t border-gray-600" />
       </div> 
-
       <nav className="flex flex-col mt-2">
         <div className="flex items-center px-6 py-2 transition-colors hover:bg-slate-700">
           <div className="icon"> <img src="/sidebarpic/dashboard.svg" alt="Dashboard Icon" className="w-8 h-8 mr-4" />
