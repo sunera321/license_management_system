@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
-import Accept from '../components/CommonModal/Accept';
+import Accept from '../components/CommonModal/Accept'
 import Reject from '../components/CommonModal/Reject';
 import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
-import Sendkey from '../page/SendKey';
 import { useLocation } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
-
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -28,12 +26,10 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
-
     const [loading, setLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     
-
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
@@ -43,7 +39,6 @@ const Status = () => {
         setModal(false);
         setSelectedClient(null); // Reset selected client
     };
-
 
 
     const getData = () => {
@@ -116,8 +111,8 @@ const Status = () => {
                         {
 
                             selectedDataType === 'RejectRequests' ?
-                                RejectRequests && RejectRequests.length > 0 ?
-                                    RejectRequests.map((item, index) => {
+                            RejectRequests && RejectRequests.length > 0 ?
+                            RejectRequests.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='px-0 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
@@ -168,21 +163,18 @@ const Status = () => {
                                                     </button>
                                                 </td>
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                    {item.commentPartnerMgt}
+                                                {item.commentPartnerMgt}
                                                 </td>
                                                 <td className='px-1 py-2 text-base border-b-2 mx-45 border-slate-500'>
                                                     {item.commentFinaceMgt}
                                                 </td>
                                                 <td className='px-0 align-middle border-b-2 border-slate-500'>
-                                                    <Reject value="Rejected" />
+                                                    <Reject value="Rejected"/>
                                                 </td>
                                             </tr>
                                         )
                                     })
-                                    :
-                                    'No records found.'
                                 :
-
                                 'No records found.'
                             :
                             PendingResults && PendingResults.length > 0 ?
@@ -260,8 +252,7 @@ const Status = () => {
             </div>
             
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
-
-
+        
         </div>
     );
 };
