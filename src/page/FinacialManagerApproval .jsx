@@ -7,6 +7,7 @@ function FinancialManagerApproval() {
   const [clients, setClients] = useState([]);
   const [rejectionReason, setRejectionReason] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState('');
+  
 
   useEffect(() => {
     axios.get('https://localhost:7295/api/RequestKey')
