@@ -44,7 +44,7 @@ const params = useParams();
   return (
 
 
-    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50">
+    <div className="top-0 left-0 flex items-center justify-center w-full h-full ">
       <section className="flex items-center justify-center h-screen overflow-hidden" >
         <div className="flex items-center justify-center w-2/6 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
           <img src={backgroundImage} className="w-100% h-[100%]" alt=" image" />

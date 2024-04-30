@@ -78,7 +78,7 @@ function App() {
           <Route path="addclient" Component={AddClient} />
           <Route path="clientdetials" Component={ClientDetials} />
           <Route path="dashboard" Component={Dashboard} />
-          <Route path="/sendkey/:key" Component={SendKey} />
+          <Route path="sendkey" Component={SendKey} />
           <Route path="keygenerateform" Component={KeyGenerateForm} />
           <Route path="module" Component={Module} />
           <Route path="privacypolicy" Component={PrivacyPolicy} />

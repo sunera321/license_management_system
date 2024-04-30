@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PageLoader from '../components/CommonModal/PageLoader';
 
 function LicenseKeyInfo() {
   const itemsPerPage = 10;
@@ -9,6 +10,7 @@ function LicenseKeyInfo() {
   const [expiryDateFilter, setExpiryDateFilter] = useState('');
   const [filteredRows, setFilteredRows] = useState([]);
   const [data, setData] = useState([]);
+  const [isLoad, setIsLoad] = useState(true);
 
   // Logic to calculate the indexes for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -33,6 +35,7 @@ function LicenseKeyInfo() {
     try {
       const response = await axios.get('https://localhost:7295/api/LicenseKey');
       setData(response.data);
+      setIsLoad(false)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -115,7 +118,12 @@ function LicenseKeyInfo() {
             Apply Filter
           </button>
         </div>
-
+        {isLoad ? (
+        <>
+          <PageLoader />
+        </>
+      ) : (
+        <>
         <table className="min-w-full border-b-2">
           <thead>
             <tr className="border-2 border-gray-300 text-blue-500 text-[15px] gap-5">
@@ -141,6 +149,7 @@ function LicenseKeyInfo() {
               <th className="text-left">View More</th>
             </tr>
           </thead>
+          
           <tbody className="bg-white">
             {filteredRows.map((data, index) => (
               <tr key={index} className="px-2 border-2 border-gray-300">
@@ -176,6 +185,8 @@ function LicenseKeyInfo() {
             ))}
           </tbody>
         </table>
+        </>
+      )}
         <div className="mt-4 sm:flex-1 sm:flex sm:items-center sm:justify-between work-sans">
           <div>
             <span className="mr-2 text-gray-600">Page {currentPage} of {Math.ceil(data.length / itemsPerPage)}</span>
