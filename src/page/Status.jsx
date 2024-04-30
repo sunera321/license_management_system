@@ -6,12 +6,15 @@ import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
+
+
+
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -29,6 +32,8 @@ const Status = () => {
     const [loading, setLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+    const navigate = useNavigate();
+    
     
     const addpopup = (client) => {
         setModal(!modal);
@@ -63,10 +68,12 @@ const Status = () => {
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
 
             console.log('Generated license key:', response.data);
+            const key = response.data;
             Swal.fire({
                 icon: 'success',
                 title: 'License Key Generated!',
             });
+            navigate(`/sendkey/${key}`);
         })
         .catch(error => {
             console.error('Error generating license key:', error);
