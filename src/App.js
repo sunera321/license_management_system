@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
-import MainHome from './page/MainHome';
+import IncomeDashboard from './page/IncomeDashboard';
 import About from './page/About';
 import AddModule from './page/AddModule';
 import Contact_Us from './page/Contact_Us';
@@ -62,6 +62,7 @@ function App() {
           <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
+          <Route path="incomedashboard" Component={IncomeDashboard} />
           <Route path="contact_us" Component={Contact_Us} />
           <Route path="clientregistration" Component={ClientRegistration} />
           <Route path="keygenerate" Component={KeyGenerate} />
