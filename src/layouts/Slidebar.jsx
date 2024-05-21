@@ -11,12 +11,26 @@ import addClient from '../Images/sidebarpic/add-client.svg';
 import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
+import { msalConfig } from '../Config';
+
+const handleLogout = async () => {
+  const logoutRequest = {
+    // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
+    post_logout_redirect_uri: `${window.location.origin}`,
+  };
+
+  // Replace {tenantId} with the actual tenant ID
+  const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
+  // Redirect the user to Azure AD logout endpoint
+  window.location.href = logoutUrl;
+};
 
 const Slidebar = () => {
   return (
        <div>
 
-      <div className="fixed w-10 h-screen overflow-hidden transition-all duration-300 ease-in-out rounded bg-slate-900 bg-gray group hover:w-64">
+      <div className="fixed w-10 h-screen overflow-hidden transition-all duration-300 ease-in-out rounded bg-slate-900 bg-gray group hover:w-64 ">
 
         <div className="absolute inset-y-0 left-0 w-64 px-2 pt-2 pb-2 transition ease-in-out transform -translate-x-full bg-slate-900 bg-black-300 bg-gray md:relative md:translate-x-0">
 
@@ -112,10 +126,10 @@ const Slidebar = () => {
           </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
-            <div className="icon"> <img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
+            <div className="icon"><img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
             </div>
 
-            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="/" >Logout</a></span>
+            <span className="flex-1 ml-2 text-red-500 truncate group-hover:block"><a href="#" onClick={handleLogout}>Logout</a></span>
 
            
 

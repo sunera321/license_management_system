@@ -65,14 +65,14 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
                       <FaCalendarAlt className="mr-2" />
                       <strong>Activate</strong>
                     </td>
-                    <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{formatDate(client.activetDta)}</td>
+                    <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{formatDate(client.activetDate)}</td>
                   </tr>
                   <tr className='h-10'>
                     <td className="flex items-center text-lg text-gray-700">
                       <FaCalendarAlt className="mr-2" />
                       <strong>Due</strong>
                     </td>
-                    <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{formatDate(client.deactivatedDta)}</td>
+                    <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{formatDate(client.expireDate)}</td>
                   </tr>
                   <tr className='h-10'>
                     <td className="flex items-center text-lg text-gray-700">
