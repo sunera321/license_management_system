@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import PageLoader from '../components/CommonModal/PageLoader';
 
 function PartnerManagerApproval() {
   const [clients, setClients] = useState([]);
   const [rejectionReason, setRejectionReason] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true); 
     axios.get('https://localhost:7295/api/RequestKey')
       .then(response => {
         setClients(response.data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching clients:', error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -83,6 +88,9 @@ function PartnerManagerApproval() {
 
   return (
     <div>
+      {isLoading ? (
+                <PageLoader />
+            ) : (
       <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
         {clients.map((client, index) => (
           <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3">
@@ -130,6 +138,7 @@ function PartnerManagerApproval() {
           </div>
         ))}
       </div>
+      )}
       {selectedRequestId && (
         <div className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto bg-gray-500 bg-opacity-50">
           <div className="w-2/3 p-8 bg-white rounded-lg ">
@@ -155,9 +164,12 @@ function PartnerManagerApproval() {
               </button>
             </div>
           </div>
+      
         </div>
       )}
+      
     </div>
+
   );
 }
 
