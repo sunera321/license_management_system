@@ -39,7 +39,7 @@ const ControlPanel = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://localhost:7295/api/EndClient/getEndClienthasKey');
-      
+
         setClients(response.data);
         setIsLoad(false)
       } catch (error) {
@@ -56,7 +56,7 @@ const ControlPanel = () => {
 
   return (
     <div>
-     
+
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
       {isLoad ? (
         <>
@@ -64,17 +64,17 @@ const ControlPanel = () => {
         </>
       ) : (
         <>
-      <div className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
-        {filteredClients.map((client) => (
-          <ClientCard
-            key={client.id}
-            client={client}
-            onMoreInfoClick={addpopup}
-            onContactClick={conatctClinet}
-          />
-        ))}
-      </div>
-      </>
+          <div className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
+            {filteredClients.map((client) => (
+              <ClientCard
+                key={client.id}
+                client={client}
+                onMoreInfoClick={addpopup}
+                onContactClick={conatctClinet}
+              />
+            ))}
+          </div>
+        </>
       )}
       {popup && selectedClient && (
         <Popup
