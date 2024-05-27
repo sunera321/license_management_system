@@ -91,7 +91,7 @@ const ControlPanel = () => {
           onSubmit={(data) => {
             // Handle form submission here
             console.log('Form submitted:', data);
-          }}
+          }} 
         />
       )}
     </div>

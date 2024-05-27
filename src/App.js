@@ -69,7 +69,7 @@ function App() {
           <Route path="editprofilepartner" Component={EditProfilePartner} />
           <Route path="editprofileuser" Component={EditProfileUser} />
           <Route path="status" Component={Status} />
-          <Route path="compeardata" Component={CompearData} />
+          <Route path="/compeardata/:logkey" Component={CompearData} />
           <Route path="statusofkey" Component={StatusOfKey} />
           <Route path="validatekey" Component={ValidateKey}/>
           <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />

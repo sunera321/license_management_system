@@ -34,7 +34,7 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
           <button
             value="View More"
             onClick={() => onMoreInfoClick(client)}
-            className="mt-3 p-1 text-white bg-[#111158] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
+            className="mt-3 p-1 text-white bg-[#36ac4d] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
             View More
           </button>
           
