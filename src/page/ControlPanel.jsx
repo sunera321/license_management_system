@@ -4,7 +4,6 @@ import ClientList from '../components/page/ControlPanel/ClientList'
 const ControlPanel = () => {
   return (
       <div>
-       
       <ClientList/>
     </div>
   )

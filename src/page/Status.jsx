@@ -6,12 +6,16 @@ import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
+import PageLoader from '../components/CommonModal/PageLoader';
+
+
+
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -26,9 +30,11 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+    const navigate = useNavigate();
+    
     
     const addpopup = (client) => {
         setModal(!modal);
@@ -42,6 +48,7 @@ const Status = () => {
 
 
     const getData = () => {
+        setIsLoading(true);
         axios.get('https://localhost:7295/api/RequestKey')
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
@@ -49,9 +56,11 @@ const Status = () => {
                 const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null);
                 setRejectRequests(dataWithComment);
                 setPendingResults(dataWithoutComment);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setIsLoading(false);
             });
     };
  
@@ -63,10 +72,12 @@ const Status = () => {
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
 
             console.log('Generated license key:', response.data);
+            const key = response.data;
             Swal.fire({
                 icon: 'success',
                 title: 'License Key Generated!',
             });
+            navigate(`/sendkey/${key}`);
         })
         .catch(error => {
             console.error('Error generating license key:', error);
@@ -90,6 +101,9 @@ const Status = () => {
     return (
         <div>
             <PageHeader title='Approval Status' />
+            {isLoading ? (
+                <PageLoader />
+            ) : (
             <div className='mt-10 '>
                 <div className="mb-10 text-center">
                     <select className="w-1/4 p-2 border border-gray-300 rounded-md " onChange={handleSelectChange} value={selectedDataType}>
@@ -250,11 +264,12 @@ const Status = () => {
                     </tbody>
                 </table>
             </div>
-            
+            )}
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
         
         </div>
     );
+
 };
 
 export default Status;
