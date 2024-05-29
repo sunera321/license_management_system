@@ -75,6 +75,7 @@ const KeyGenerateForm = () => {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
+            moduleID : 1
         };
 
         // Prepare data for RequestKey API
@@ -142,7 +143,7 @@ const KeyGenerateForm = () => {
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                     </div>
 
