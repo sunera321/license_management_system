@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 
 function FinancialManagerApproval() {
@@ -90,6 +91,7 @@ function FinancialManagerApproval() {
 
   return (
     <div>
+       <PageHeader title='Finance Manager Approval' />
       {isLoading ? (
                 <PageLoader />
             ) : (
