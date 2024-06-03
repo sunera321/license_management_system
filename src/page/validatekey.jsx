@@ -89,12 +89,14 @@ const ValidateKey = () => {
                     data.statusCode=== 'Valid_Loging' ? 'text-green-900' :
                     data.statusCode === 'Invalid Mac Address' ? 'text-red-900' :
                     data.statusCode === 'Invalid Host URL' ? ' text-yellow-900' :
+                    data.statusCode === 'Expired Key' ? ' text-rose-900' :
                           ''
                   }`}>
                   <span aria-hidden className={`absolute inset-0 ${data.statusCode === 'Available' ? 'bg-[#f8d2c1]' :
                       data.statusCode === 'Valid_Loging' ? 'bg-green-400' :
                       data.statusCode === 'Invalid Mac Address' ? 'bg-red-500' :
                         data.statusCode === 'Invalid Host URL' ?  ' bg-yellow-400' :
+                        data.statusCode === 'Expired Key' ?  ' bg-rose-400' :
                             ''
                     } rounded-full opacity-50`}></span>
                   <span className="relative"> {data.statusCode === 'Invalid Mac Address' ? 'Invalid Mac' : data.statusCode === 'Invalid Host URL' ? 'Invalid Host' : data.statusCode}</span>
