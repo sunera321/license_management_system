@@ -60,9 +60,11 @@ const ContactForm = ({ client, onCloseClick }) => {
                   <input
                     className='w-[325px] h-[30px] border-1 border-black rounded-md pl-2'
                     placeholder={client.email}
+              
                     type="email"
                     id="email"
                     name="email"
+                   
                     
                     
                   />

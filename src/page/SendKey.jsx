@@ -1,23 +1,28 @@
 import React from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';import { useParams } from 'react-router-dom';
-;
+import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';
+import { useParams } from 'react-router-dom';
 
-const SendKey = ({key}) => {
-
+const SendKey = () => {
+// Take the parameter of URL
+const params = useParams();
+  const key = params.key;
+  
  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, licenseKey } = e.target.elements;
-
+    console.log(licenseKey.value);
     try {
       const response = await axios.post('https://localhost:7295/api/KeyEmail', {
         to: email.value,
-        licenseKey: licenseKey.value,
+        licenseKey: key,
+        
 
       });
-
+      
+      console.log(licenseKey.value);
       // Handle successful response
       console.log('Email sent:', response.data);
 
@@ -25,7 +30,7 @@ const SendKey = ({key}) => {
 
         position: "top-center",
         icon: "success",
-        title: "Form Submitted ",
+        title: "Send Mail "+email.value+" Successfully",
         showConfirmButton: false,
         timer: 1500
 
@@ -41,7 +46,7 @@ const SendKey = ({key}) => {
   return (
 
 
-    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50">
+    <div className="top-0 left-0 flex items-center justify-center w-full h-full ">
       <section className="flex items-center justify-center h-screen overflow-hidden" >
         <div className="flex items-center justify-center w-2/6 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
           <img src={backgroundImage} className="w-100% h-[100%]" alt=" image" />
@@ -64,6 +69,8 @@ const SendKey = ({key}) => {
                   name='licenseKey'
                   className=' border-2 rounded-lg border-zinc-300 bg-slate-100 w-[90%]'
                   placeholder={key}
+                  disabled
+                  
                 />
 
                 <label className='font-semibold text-[18px] '>License key Description</label><br />
