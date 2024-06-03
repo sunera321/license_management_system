@@ -1,22 +1,28 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import Slidebar from './Slidebar';
-import backgroundImg from '../Images/MicrosoftTeams-image.png';
-
 
 const MainLayout = () => {
-
   return (
-    
 
-       <div className="h-full  ">
-      <Header />
-      <Slidebar/>
-      <div className="min-h-screen ml-12">
-      <Outlet/>
+
+<div className="h-full ">
+
+
+    <Header />
+    <div className="flex flex-1">
+      <div className="mr-6">
+        <Slidebar />  
       </div>
-    </div>
+        <div className="flex-1 pl-5">
+          <Outlet />
+        </div>
+   </div>
+   <Footer />
+</div>
+
   );
 };
 

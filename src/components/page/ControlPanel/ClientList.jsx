@@ -1,124 +1,99 @@
-import React from 'react'
-import BlueButton from '../../CommonModal/BlueButton';
-const Clients = [
-  {
-    key: 1,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 2,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 3,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 4,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 5,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 6,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 7,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  {
-    key: 8,
-    name: 'Sri Lanka Air Line',
-    client_id: '0213',
-    Activate: '2020-12-05',
-    Due: '2020-12-05',
-    modules: ['Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid', 'Cloud-based HR solution Hsenid'],
-  },
-  
-  
-];
 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ClientCard from './ClientCard';
+import Popup from './Popup';
+import ContactForm from './ContactForm';
+import Search from './Search';
+import PageLoader from '../../CommonModal/PageLoader';
 
 const ControlPanel = () => {
-  const line = Clients.reduce((resultArray, item, index) => {
-    const rowIndex = Math.floor(index / 2);
-    if (!resultArray[rowIndex]) {
-      resultArray[rowIndex] = [];
-    }
-    resultArray[rowIndex].push(item);
-    return resultArray;
+  const [popup, setPopup] = useState(false);
+  const [clients, setClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [ClinetContact, setClinetContact] = useState(false);
+  const [Clintmail, setClintmail] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
+  const [isLoad, setIsLoad] = useState(true);
+  const addpopup = (client) => {
+    setPopup(true);
+    setSelectedClient(client);
+  };
+
+  const closepopup = () => {
+    setPopup(false);
+    setSelectedClient(null);
+  };
+
+  const conatctClinet = (client) => {
+    setClinetContact(true);
+    setClintmail(client);
+  };
+
+  const conatctClinetclose = () => {
+    setClinetContact(false);
+    setClintmail(null);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClienthasKey');
+
+        setClients(response.data);
+        setIsLoad(false)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const filteredClients = clients.filter((client) =>
+    client.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   return (
     <div>
-      {line.map((row, rowIndex) => (
-        
-            <div key={rowIndex} className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
-          {row.map((client) => (
-            <div
-              key={client.key}
-              className="h-auto w-[450px]  bg-[#CCC7C7] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3 ">
-                <div className="flex gap-6 pt-2 justify-evenly">
-                  <div className="text-[26px] font-normal">{client.name}</div>
-                  <div className="pt-3 text-[16px]">ID-{client.client_id}</div>
-                </div>
-                <div className="mx-auto bg-white h-0.5 w-7/8 mt-"></div>
-                <div className="flex justify-evenly pt-3   gap-2.5">
-                    <div className="text-[16px] gap-1.5 flex">
-                      <div className="w-4 h-4 mt-1.5 bg-[#19F000] border border-black rounded-full"></div>
-                      <div className="text-[16px]">Activate:{client.Activate}</div>
-                    </div>
-                    <div className="text-[16px] gap-1.5 flex">
-                      <div className="w-4 h-4 mt-1.5 bg-[#F10000] border border-black rounded-full"></div>
-                      <div className="text-[16px]"> Due:{client.Due}</div>
-                    </div>
-                </div>
-                <div className="text-[22px] text-center mt-2 ">Registered Modules </div>
-                <div className="flex flex-col items-center justify-center -mt-0.5">
-                  <div className='p-3 mt-0.5 w-5/6 h-auto bg-[#EBECEC] mx-auto  text-[16px] rounded-lg text-center'>  
-                    {client.modules.map((module, index) => (                    
-                      <div key={index}>{module}</div>
-                    ))}
-                  </div>
-                  <div>
-                  <BlueButton value="Edit" href="/clientmore" />
-                  </div>
-                </div>
-              </div>
-          ))}
-        </div>
-      ))}
+
+      <Search searchInput={searchInput} setSearchInput={setSearchInput} />
+      {isLoad ? (
+        <>
+          <PageLoader />
+        </>
+      ) : (
+        <>
+          <div className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
+            {filteredClients.map((client) => (
+              <ClientCard
+                key={client.id}
+                client={client}
+                onMoreInfoClick={addpopup}
+                onContactClick={conatctClinet}
+              />
+            ))}
+          </div>
+        </>
+      )}
+      {popup && selectedClient && (
+        <Popup
+          client={selectedClient}
+          onCloseClick={closepopup}
+          onContactClick={conatctClinet}
+        />
+      )}
+
+      {ClinetContact && Clintmail && (
+        <ContactForm
+          client={Clintmail}
+          onCloseClick={conatctClinetclose}
+          onSubmit={(data) => {
+            // Handle form submission here
+            console.log('Form submitted:', data);
+          }} 
+        />
+      )}
     </div>
   );
 };
