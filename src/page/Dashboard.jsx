@@ -7,62 +7,6 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
 
-  /*const [searchInput, setSearchInput] = useState("");
-  const clients = [
-    {
-      id: "01129A",
-      name: "Manchee",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    },
-    {
-      id: "01129A",
-      name: "Manchee",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    },
-    {
-      id: "01129A",
-      name: "Manchee",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    },
-    {
-      id: "01129A",
-      name: "Manchee",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    },
-    {
-      id: "01129A",
-      name: "Maliban",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    },
-    {
-      id: "01129A",
-      name: "Maliban",
-      email: "abh123@gmail.com",
-      issueDate: "2018-12-03",
-      expireDate: "2021-12-03"
-    }
-  ];
-
-// Filter clients based on search input
-const filteredClients = clients.filter(client => {
-  return client.name.toLowerCase().includes(searchInput.toLowerCase());
-
-
-});
-
-  const availableLicenseKeys = filteredClients.length; // Count of rows
-  console.log("Available License Keys:", availableLicenseKeys); 
-*/
   const availableLicenseKeys = 7;
   const [data] = useState({ line: lineChartData, bar: barChartData });
   const expiredLicenseKeys = 2;
@@ -70,7 +14,7 @@ const filteredClients = clients.filter(client => {
   return (
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4 ">
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-sky-200 p-5 shadow-md ">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-blue-700 p-5 shadow-md ">
           <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4">
