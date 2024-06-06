@@ -3,7 +3,21 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import axios from 'axios';
 
+
 ChartJS.register(CategoryScale, LinearScale, BarElement);
+
+const generateColorShades = (color, count) => {
+  const colors = [];
+  const minShade = 0.3; // Minimum opacity for the darkest shade
+  const maxShade = 0.9; // Maximum opacity for the lightest shade
+  const shadeStep = (maxShade - minShade) / (count - 1);
+
+  for (let i = 0; i < count; i++) {
+    const shade = minShade + i * shadeStep;
+    colors.push(`rgba(${color[0]}, ${color[1]}, ${color[2]}, ${shade})`);
+  }
+  return colors;
+};
 
 const BarGraph = () => {
   const [chartData, setChartData] = useState({
@@ -12,63 +26,54 @@ const BarGraph = () => {
       {
         label: 'User Count',
         data: [],
-        backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(199, 199, 199, 0.2)'
-        ],
-        borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(199, 199, 199, 1)'
-        ],
+        backgroundColor: [],
+        borderColor: [],
         borderWidth: 1
       }
     ]
   });
 
   const options = {
+    indexAxis: 'y', // To display bars horizontally
+    elements: {
+      bar: {
+        borderWidth: 1, // To increase the border width of bars
+      }
+    },
+    layout: {
+      padding: {
+        left: 50,
+        right: 50
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+      }
+    },
+
+    responsive: true,
     scales: {
       x: {
-        grid: {
-          display: false, 
-        },
+        ticks: {
+          beginAtZero: true,
+          precision: 0
+        }
       },
       y: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          color: function(context) {
-            if (context.tick.value === 0) {
-              return 'transparent'; 
-            }
-            return 'rgba(0, 0, 0, 0.1)'; 
-          },
-        },
-        ticks: {
-          precision: 0, 
-          beginAtZero: true 
+        title: {
+          display: true,
+          text: 'Product', // Title for the left side (y-axis) of the bar graph
+          padding: {
+
+            bottom: 20,
+
+          }
         }
       },
     },
-    maintainAspectRatio: false, 
-    responsive: true,
-    layout: {
-      padding: {
-        top: 10,
-        right: 50,
-        bottom: 10,
-        left: 50
-      }
-    }
   };
-
   useEffect(() => {
     axios.get('https://localhost:7284/api/client')
       .then(response => {
@@ -84,26 +89,30 @@ const BarGraph = () => {
 
         const labels = Object.keys(moduleData).map(module => `${module} (${moduleData[module]})`);
         const userData = Object.values(moduleData);
+        // Generate different shades of blue for backgroundColor
+        const colorShades = generateColorShades([54, 78, 103], labels.length);
 
         setChartData({
           labels: labels,
           datasets: [{
             label: 'User Count',
             data: userData,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: colorShades,
+            borderColor: colorShades,
             borderWidth: 1
           }]
         });
       })
+      // Catch any errors that occur during the data fetching process and log them to the console
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
   return (
-    <div className="w-full px-4 md:px-0"> 
-      <div className="relative h-64 md:h-80 lg:h-96 "> 
+
+    <div className="w-full">
+      <div className='mb-4 relative md:h-80 lg:h-96'>
         <Bar data={chartData} options={options} />
       </div>
     </div>
