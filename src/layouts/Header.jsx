@@ -3,11 +3,25 @@ import Logo from '../Images/nav_logo.png';
 import SignOut from '../Images/NavBarPic/l.png'
 import Notification from '../Images/NavBarPic/N.png'
 import Path from '../components/CommonModal/Path';
+import { msalConfig } from '../Config';
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+  const handleLogout = async () => {
+    const logoutRequest = {
+      // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
+      post_logout_redirect_uri: `${window.location.origin}`,
+    };
+
+    // Replace {tenantId} with the actual tenant ID
+    const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
+    // Redirect the user to Azure AD logout endpoint
+    window.location.href = logoutUrl;
   };
 
   return (
@@ -46,10 +60,10 @@ function Navbar() {
             <a href='/notification'><img src={Notification} alt="Notificatione Icon" className="w-5 h-6 mt-1.5 mr-4"></img></a>
             <a href="/Login" className=' flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl '>
               <span className="flex-1 truncate hover:text-black group-hover:block">
-                <div>Sign Out</div></span>
+              <a href="#" onClick={handleLogout}><div className='onclick{handlelogout}'>Sign Out</div></a></span>
               <div>
                 <div>
-                  <img src={SignOut} alt="Generate Icon" className="w-6 h-6 " />
+                <a href="#" onClick={handleLogout}><img src={SignOut} alt="Generate Icon" className="w-6 h-6 " /></a>
                 </div>
               </div>
             </a>

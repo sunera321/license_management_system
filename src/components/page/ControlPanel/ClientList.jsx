@@ -5,6 +5,7 @@ import ClientCard from './ClientCard';
 import Popup from './Popup';
 import ContactForm from './ContactForm';
 import Search from './Search';
+import PageLoader from '../../CommonModal/PageLoader';
 
 const ControlPanel = () => {
   const [popup, setPopup] = useState(false);
@@ -13,7 +14,7 @@ const ControlPanel = () => {
   const [ClinetContact, setClinetContact] = useState(false);
   const [Clintmail, setClintmail] = useState(null);
   const [searchInput, setSearchInput] = useState('');
-
+  const [isLoad, setIsLoad] = useState(true);
   const addpopup = (client) => {
     setPopup(true);
     setSelectedClient(client);
@@ -37,8 +38,10 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClient');
+        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClienthasKey');
+
         setClients(response.data);
+        setIsLoad(false)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -53,20 +56,26 @@ const ControlPanel = () => {
 
   return (
     <div>
-     
+
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
-
-      <div className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
-        {filteredClients.map((client) => (
-          <ClientCard
-            key={client.id}
-            client={client}
-            onMoreInfoClick={addpopup}
-            onContactClick={conatctClinet}
-          />
-        ))}
-      </div>
-
+      {isLoad ? (
+        <>
+          <PageLoader />
+        </>
+      ) : (
+        <>
+          <div className="flex flex-wrap justify-center gap-10 mt-5 mb-8 ml-18 mr-18 ">
+            {filteredClients.map((client) => (
+              <ClientCard
+                key={client.id}
+                client={client}
+                onMoreInfoClick={addpopup}
+                onContactClick={conatctClinet}
+              />
+            ))}
+          </div>
+        </>
+      )}
       {popup && selectedClient && (
         <Popup
           client={selectedClient}
@@ -82,7 +91,7 @@ const ControlPanel = () => {
           onSubmit={(data) => {
             // Handle form submission here
             console.log('Form submitted:', data);
-          }}
+          }} 
         />
       )}
     </div>
