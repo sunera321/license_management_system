@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const AddClient = ({ client }) => {
+  
 
   const toggleText = (id) => {
     const element = document.getElementById(id);
@@ -21,8 +22,8 @@ const AddClient = ({ client }) => {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-x-auto">
             <div className="border dark:border-neutral-500">
-              <table className="min-w-full text-left text-sm font-light">
-                <thead className="border-b font-medium dark:border-neutral-500">
+              <table className="min-w-full text-sm font-light text-left">
+                <thead className="font-medium border-b dark:border-neutral-500">
                   <tr>
                     <th scope="col" className="px-6 py-4">#</th>
                     <th scope="col" className="px-6 py-4">Client ID</th>
@@ -35,16 +36,16 @@ const AddClient = ({ client }) => {
                 </thead>
                 <tbody>
                   <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                    <td className="whitespace-nowrap px-6 py-4">00012</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">1</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00012</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails1')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
                       >
                         View More
                       </button>
@@ -55,7 +56,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails1">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails1">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -98,17 +99,17 @@ const AddClient = ({ client }) => {
                     </td>
                   </tr>
 
-                  <tr className="border-b  dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">2</td>
-                    <td className="whitespace-nowrap px-6 py-4">00013</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                  <tr className="border-b dark:border-neutral-500 dark:bg-neutral-700">
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">2</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00013</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails2')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-50"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none bg-gray-50"
                       >
                         View More
                       </button>
@@ -119,7 +120,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails2">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails2">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -163,16 +164,16 @@ const AddClient = ({ client }) => {
                   </tr>
 
                   <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">3</td>
-                    <td className="whitespace-nowrap px-6 py-4">00014</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">3</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00014</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails3')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
                       >
                         View More
                       </button>
@@ -183,7 +184,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails3">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails3">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -227,17 +228,17 @@ const AddClient = ({ client }) => {
                   </tr>
 
 
-                  <tr className="border-b  dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">4</td>
-                    <td className="whitespace-nowrap px-6 py-4">00015</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                  <tr className="border-b dark:border-neutral-500 dark:bg-neutral-700">
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">4</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00015</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails4')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-50"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none bg-gray-50"
                       >
                         View More
                       </button>
@@ -248,7 +249,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails4">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails4">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -294,16 +295,16 @@ const AddClient = ({ client }) => {
 
 
                   <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">5</td>
-                    <td className="whitespace-nowrap px-6 py-4">00016</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">5</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00016</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails5')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
                       >
                         View More
                       </button>
@@ -314,7 +315,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails5">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails5">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -358,17 +359,17 @@ const AddClient = ({ client }) => {
                   </tr>
 
 
-                  <tr className="border-b  dark:border-neutral-500 dark:bg-neutral-700">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">6</td>
-                    <td className="whitespace-nowrap px-6 py-4">00017</td>
-                    <td className="whitespace-nowrap px-6 py-4">Sri Lankan Airlines</td>
-                    <td className="whitespace-nowrap px-6 py-4">reservations@srilankan.com</td>
-                    <td className="whitespace-nowrap px-6 py-4">+94117 77 1979</td>
-                    <td className="whitespace-nowrap px-6 py-4">Katunayake</td>
+                  <tr className="border-b dark:border-neutral-500 dark:bg-neutral-700">
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">6</td>
+                    <td className="px-6 py-4 whitespace-nowrap">00017</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Sri Lankan Airlines</td>
+                    <td className="px-6 py-4 whitespace-nowrap">reservations@srilankan.com</td>
+                    <td className="px-6 py-4 whitespace-nowrap">+94117 77 1979</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Katunayake</td>
                     <td>
                       <button
                         onClick={() => toggleText('moreDetails6')}
-                        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-50"
+                        className="px-2 py-1 text-blue-500 transition-colors duration-200 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none bg-gray-50"
                       >
                         View More
                       </button>
@@ -379,7 +380,7 @@ const AddClient = ({ client }) => {
                         Generate license key
                       </button> </td>
                   </tr>
-                  <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700 hidden" id="moreDetails6">
+                  <tr className="hidden border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" id="moreDetails6">
                     <td colSpan="7">
                       <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
                         <table className="w-full">
@@ -426,7 +427,7 @@ const AddClient = ({ client }) => {
 
                   <tr>
                     <td colSpan="7" className="px-6 py-4">
-                      <Link to="/clientregistration" className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none border border-blue-500 rounded-md px-2 py-1 bg-gray-100">
+                      <Link to="/clientregistration" className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
                         Add New Client
                       </Link>
                     </td>

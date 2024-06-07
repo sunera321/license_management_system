@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ClientRegistration = () => {
+
     const [formData, setFormData] = useState({
-        partnerid: '',
-        ClientName: '',
-        Email: '',
-        Phone_number: '',
-        Address: '',
-        City: '',
-        Region: '',
-        Postal_Code: '',
-        Country: '',
-        Web_site: '',
-        Industry: '',
-        Selected_Modules: '',
-        Additional_information: ''
+        partnerId: '',
+        name: '',
+        email: '',
+        phoneNumber: '',
+        city: '',
+        region: '',
+        postalCode: '',
+        country: '',
+        website: '',
+        industry: '',
+        additionalInfo: ''
     });
 
     const handleInputChange = (e) => {
@@ -26,26 +27,43 @@ const ClientRegistration = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Perform form submission/validation logic here
         // For example, you can check if required fields are filled and validate email format
         if (
-            formData.ClientName.trim() === '' ||
-            formData.Email.trim() === '' ||
-            formData.Phone_number.trim() === ''
+            formData.ClientName === '' ||
+            formData.Email === '' ||
+            formData.Phone_number === ''
         ) {
             alert('Client Name, Email, and Phone Number are required!');
             return;
         }
 
-        if (!validateEmail(formData.Email)) {
-            alert('Please enter a valid email address!');
-            return;
-        }
+        try{
+            const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            console.log('Data submitted successfully:', response.data);
+            Swal.fire({
+    
+                position: "top-center",
+                icon: "success",
+                title: "New Client Add Successfully",
+                showConfirmButton: false,
+                timer: 1500
+        
+              })
+          } catch (error) {
+            console.error('Error submitting data:', error);
+          }
+   
 
-        // If validation passes, continue with form submission logic
-        console.log('Form submitted:', formData);
+      
+
+     
     };
 
     // Email validation function
@@ -61,39 +79,39 @@ const ClientRegistration = () => {
 
             <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
                 <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg' onSubmit={handleSubmit}>
-                    <div className="mb-1 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-1">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Partner ID</label><br />
                             <input
                                 type="text"
-                                name="partnerid"
+                                name="partnerId"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.partnerid}
+                                value={formData.partnerId}
                             /><br />
                         </div>
                         <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Client Name</label><br />
                             <input
                                 type="text"
-                                name="ClientName"
+                                name="name"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.ClientName}
+                                value={formData.name}
                                 required
                             /><br />
                         </div>
                     </div>
 
-                    <div className="mb-2 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-2">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Email</label><br />
                             <input
                                 type="email"
-                                name="Email"
+                                name="email"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Email}
+                                value={formData.email}
                                 required
                             /><br />
                         </div>
@@ -101,113 +119,91 @@ const ClientRegistration = () => {
                             <label className='mb-2 text-lg text-gray-700'>Phone Number</label><br />
                             <input
                                 type="text"
-                                name="Phone_number"
+                                name="phoneNumber"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Phone_number}
+                                value={formData.phoneNumber}
                                 required
                             /><br />
                         </div>
                     </div>
 
-                    <div className="mb-5">
-                        <label className='mb-2 text-lg text-gray-700'>Address</label><br />
-                        <input
-                            type="text"
-                            name="Address"
-                            className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                            onChange={handleInputChange}
-                            value={formData.Address}
-                        /> <br />
-                    </div>
-
-                    <div className="mb-3 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-3">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>City</label><br />
                             <input
                                 type="text"
-                                name="City"
+                                name="city"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.City}
+                                value={formData.city}
                             /><br />
                         </div>
                         <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Region</label><br />
                             <input
                                 type="text"
-                                name="Region"
+                                name="region"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Region}
+                                value={formData.region}
                             /><br />
                         </div>
                     </div>
 
-                    <div className="mb-4 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-4">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Postal Code</label><br />
                             <input
                                 type="text"
-                                name="Postal_Code"
+                                name="postalCode"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Postal_Code}
+                                value={formData.postalCode}
                             /><br />
                         </div>
                         <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Country</label><br />
                             <input
                                 type="text"
-                                name="Country"
+                                name="country"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Country}
+                                value={formData.country}
                             /><br />
                         </div>
                     </div>
 
-                    <div className="mb-4 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-4">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Web site</label><br />
                             <input
                                 type="text"
-                                name="Web_site"
+                                name="website"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Web_site}
+                                value={formData.website}
                             /><br />
                         </div>
                         <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Industry</label><br />
                             <input
                                 type="text"
-                                name="Industry"
+                                name="industry"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.Industry}
+                                value={formData.industry}
                             /><br />
                         </div>
-                    </div>
-
-                    <div className="mb-12">
-                        <label className='mb-2 text-lg text-gray-700'>Selected Modules</label><br />
-                        <input
-                            type="text"
-                            name="Selected_Modules"
-                            className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                            onChange={handleInputChange}
-                            value={formData.Selected_Modules}
-                        /> <br />
                     </div>
 
                     <div className="mb-13">
                         <label className='mb-2 text-lg text-gray-700'>Additional Info:</label><br />
                         <textarea
-                            name="Additional_information"
+                            name="additionalInfo"
                             className='w-full h-32 px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none resize-y focus:outline-none focus:shadow-outline'
                             onChange={handleInputChange}
-                            value={formData.Additional_information}
+                            value={formData.additionalInfo}
                         ></textarea> <br />
                     </div>
 
