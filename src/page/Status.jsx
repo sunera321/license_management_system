@@ -52,8 +52,8 @@ const Status = () => {
         axios.get('https://localhost:7295/api/RequestKey')
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
-                const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null);
-                const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null);
+                const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
+                const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null && item.commentPartnerMgt === null);
                 setRejectRequests(dataWithComment);
                 setPendingResults(dataWithoutComment);
                 setIsLoading(false);
