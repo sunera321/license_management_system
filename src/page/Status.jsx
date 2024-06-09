@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
-import Accept from '../components/CommonModal/Accept';
+import Accept from '../components/CommonModal/Accept'
 import Reject from '../components/CommonModal/Reject';
 import Provide from '../components/CommonModal/Provide';
 import Issue from '../components/CommonModal/Issue';
 import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
-import Sendkey from '../page/SendKey';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Plus from '../Images/j.png';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
 import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
+import PageLoader from '../components/CommonModal/pageHeader'
+
+
 
 
 const Status = () => {
@@ -28,12 +30,12 @@ const Status = () => {
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
-
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+    const navigate = useNavigate();
     
-
+    
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
@@ -45,8 +47,8 @@ const Status = () => {
     };
 
 
-
     const getData = () => {
+        setIsLoading(true);
         axios.get('https://localhost:7295/api/RequestKey')
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
@@ -54,9 +56,11 @@ const Status = () => {
                 const dataWithoutComment = result.data.filter(item => item.commentFinaceMgt === null);
                 setRejectRequests(dataWithComment);
                 setPendingResults(dataWithoutComment);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setIsLoading(false);
             });
     };
  
@@ -68,10 +72,12 @@ const Status = () => {
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
 
             console.log('Generated license key:', response.data);
+            const key = response.data;
             Swal.fire({
                 icon: 'success',
                 title: 'License Key Generated!',
             });
+            navigate(`/sendkey/${key}`);
         })
         .catch(error => {
             console.error('Error generating license key:', error);
@@ -95,6 +101,9 @@ const Status = () => {
     return (
         <div>
             <PageHeader title='Approval Status' />
+            {isLoading ? (
+                <PageLoader />
+            ) : (
             <div className='mt-10 '>
                 <div className="mb-10 text-center">
                     <select className="w-1/4 p-2 border border-gray-300 rounded-md " onChange={handleSelectChange} value={selectedDataType}>
@@ -116,8 +125,8 @@ const Status = () => {
                         {
 
                             selectedDataType === 'RejectRequests' ?
-                                RejectRequests && RejectRequests.length > 0 ?
-                                    RejectRequests.map((item, index) => {
+                            RejectRequests && RejectRequests.length > 0 ?
+                            RejectRequests.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='px-0 py-2 text-base text-center border-b-2 border-slate-500' >{item.requestID}</td>
@@ -168,21 +177,18 @@ const Status = () => {
                                                     </button>
                                                 </td>
                                                 <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
-                                                    {item.commentPartnerMgt}
+                                                {item.commentPartnerMgt}
                                                 </td>
                                                 <td className='px-1 py-2 text-base border-b-2 mx-45 border-slate-500'>
                                                     {item.commentFinaceMgt}
                                                 </td>
                                                 <td className='px-0 align-middle border-b-2 border-slate-500'>
-                                                    <Reject value="Rejected" />
+                                                    <Reject value="Rejected"/>
                                                 </td>
                                             </tr>
                                         )
                                     })
-                                    :
-                                    'No records found.'
                                 :
-
                                 'No records found.'
                             :
                             PendingResults && PendingResults.length > 0 ?
@@ -258,12 +264,12 @@ const Status = () => {
                     </tbody>
                 </table>
             </div>
-            
+            )}
             <div className='fixed top-20 right-10 '><BlueButton className="" value={"Generate Key"} href={"/keygenerate"} /> </div>
-
-
+        
         </div>
     );
+
 };
 
 export default Status;

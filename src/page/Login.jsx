@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider, AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import { msalConfig } from '../Config';
@@ -6,22 +6,24 @@ import NavBar2 from '../components/page/loging/inc/NavBar2';
 import Footer2 from '../components/page/loging/inc/Footer2';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
 import backgroundImage from '../components/asserts/Media/image1.jpg';
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const AuthenticatedContent = () => {
-  const { instance } = useMsal();
+  const { accounts } = useMsal();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    instance.logout();
-    window.location.href = '/';
-  };
+  // Retrieve the access token from the MSAL account object
+  const accessToken = accounts[0]?.accessToken;
 
-  return (
-    <div>
-      <h2>Welcome, you are authenticated!</h2>
-      <button className="px-4 py-2 text-black bg-gray-100 rounded-lg btn hover:bg-gray-300 hover:text-gray-800" onClick={handleLogout}>Sign out</button>
-    </div>
-  );
+  // Save the access token to session storage
+  sessionStorage.setItem('accessToken', accessToken);
+
+  useEffect(() => {
+    // Redirect to the Dashboard component after successful authentication
+    navigate('/dashboard');
+  }, [navigate]);
+
+  return null; // No content to render
 };
 
 const SignInButton = () => {
@@ -29,7 +31,7 @@ const SignInButton = () => {
 
   const handleSignIn = async () => {
     try {
-      await instance.loginRedirect(msalConfig.auth);
+      await instance.loginPopup(msalConfig.auth); // Use loginPopup instead of loginRedirect
     } catch (error) {
       console.error('Authentication error:', error);
     }
@@ -49,10 +51,7 @@ const SignInButton = () => {
               <p className="mt-32 mb-4 text-lg text-gray-600">Get started by signing in with Microsoft</p>
               <div className="flex items-center mt-10 logo-and-button">
                 <img src={microsoftLogo} alt="Microsoft Logo" className="w-10 h-10 mr-4" />
-
                 <button className="btn py-2 px-4 rounded-lg bg-gray-100 text-black hover:bg-gray-300 hover:text-gray-800" onClick={handleSignIn}>Sign in with Microsoft</button>
-               
-
               </div>
             </div>
           </div>
@@ -81,5 +80,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

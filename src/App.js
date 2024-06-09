@@ -1,12 +1,10 @@
-import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from './Config';
-
-// Import local components
-import MainLayout from './layouts/MainLayout';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MsalProvider } from '@azure/msal-react';
+import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
+import IncomeDashboard from './page/IncomeDashboard';
 import About from './page/About';
 import AddModule from './page/AddModule';
 import Contact_Us from './page/Contact_Us';
@@ -31,15 +29,14 @@ import TermsConditions from './page/TermsConditions';
 import StatusOfKey from './page/StatusOfKey';
 import Login from './page/Login';
 import ClientRegistration from './page/ClientRegistration';
-import ClientMore from './page/ClientMore';
+import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
 import Expiredlicense from './page/Expiredlicense';
 import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
-import IncomeDashboard from './page/IncomeDashboard';
-
-
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from './Config';
 import Availablelicense from './page/Availablelicense';
 const msalInstance = new PublicClientApplication(msalConfig);
 // import Availablelicense from './page/Availablelicense';
@@ -48,44 +45,55 @@ const msalInstance = new PublicClientApplication(msalConfig);
 
 function App() {
   return (
+    <MsalProvider instance={msalInstance}>
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login msalInstance={msalInstance} />} />
-          <Route path="mainhome" element={<Dashboard />} />
-          <Route path="controlpanel" element={<ControlPanel />} />
-          <Route path="about" element={<About />} />
-          <Route path="availablelicense" element={<Availablelicense />} />    
-          <Route path="activelicense" element={<Activelicense />} />
-          <Route path="expiredlicense" element={<Expiredlicense />} />
-          <Route path="addmodule" element={<AddModule />} />
-          <Route path='incomedashboard' element={<IncomeDashboard />} />
-          <Route path="clientmore" element={<ClientMore />} />
-          <Route path="contact_us" element={<Contact_Us />} />
-          <Route path="clientregistration" element={<ClientRegistration />} />
-          <Route path="keygenerate" element={<KeyGenerate />} />
-          <Route path="editprofilepartner" element={<EditProfilePartner />} />
-          <Route path="editprofileuser" element={<EditProfileUser />} />
-          <Route path="status" element={<Status />} />
-          <Route path="compeardata" element={<CompearData />} />
-          <Route path="statusofkey" element={<StatusOfKey />} />
-          <Route path="validatekey" element={<ValidateKey />} />
-          <Route path="partnermanagerapproval" element={<PartnerManagerApproval />} />
-          <Route path="finacialmanagerapproval" element={<FinacialManagerApproval />} />
-          <Route path="notification" element={<Notification />} />
-          <Route path="addclient" element={<AddClient />} />
-          <Route path="clientdetials" element={<ClientDetials />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="help" element={<Help />} />
-          <Route path="keygenerateform" element={<KeyGenerateForm />} />
-          <Route path="module" element={<Module />} />
-          <Route path="privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="termsconditions" element={<TermsConditions />} />
-          <Route path="moduledetails" element={<ModuleDetails />} />
+        <Route path="/" element={<MainLayout  />}>
+
+          <Route path="mainhome" Component={Dashboard} />
+          <Route path="controlpanel" Component={ControlPanel} />
+          <Route path="about" Component={About} />
+
+          <Route path="availablelicense" element={<Availablelicense/>} />    
+          <Route path='activelicense' element={<Activelicense/>} />
+          <Route path='expiredlicense' element={<Expiredlicense/>} />
+          <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
+          <Route path="addmodule" Component={AddModule} />
+          <Route path="clientmore" Component={ClientMore} />
+          <Route path="incomedashboard" Component={IncomeDashboard} />
+          <Route path="contact_us" Component={Contact_Us} />
+          <Route path="clientregistration" Component={ClientRegistration} />
+          <Route path="keygenerate" Component={KeyGenerate} />
+          <Route path="editprofilepartner" Component={EditProfilePartner} />
+          <Route path="editprofileuser" Component={EditProfileUser} />
+          <Route path="status" Component={Status} />
+          <Route path="/compeardata/:logkey" Component={CompearData} />
+          <Route path="statusofkey" Component={StatusOfKey} />
+          <Route path="validatekey" Component={ValidateKey}/>
+          <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
+          <Route path="finacialmanagerapproval" Component={FinacialManagerApproval} />
+          <Route path="notification" Component={Notification} />
+          <Route path="addclient" Component={AddClient} />
+          <Route path="clientdetials" Component={ClientDetials} />
+          <Route path="dashboard" Component={Dashboard} />
+          <Route path="/sendkey/:key" Component={SendKey} />
+          <Route path="keygenerateform" Component={KeyGenerateForm} />
+          <Route path="module" Component={Module} />
+          <Route path="privacypolicy" Component={PrivacyPolicy} />
+          <Route path="profile" Component={Profile} />
+          <Route path="termsconditions" Component={TermsConditions} />
+
+          <Route path="moduledetails" Component ={ModuleDetails}/>
+          
+
         </Route>
       </Routes>
+    
     </BrowserRouter>
+ </MsalProvider>
   );
 }
 
