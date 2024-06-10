@@ -22,7 +22,7 @@ export const msalConfig = {
     // Storage location for tokens (sessionStorage or localStorage)
     cacheLocation: 'sessionStorage',
     // Option to store authentication state in cookies
-    storeAuthStateInCookie: true,
+    storeAuthStateInCookie:true,
   },
   // System configuration for logging
   system: {
