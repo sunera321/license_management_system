@@ -89,10 +89,10 @@ const LineGraph = () => {
     datasets: []
   });
 
-  useEffect(() => {
+useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7284/api/client');
+        const response = await fetch('https://localhost:7295/api/LicenseKey');
         const data = await response.json();
 
        /* Group data by month and count total users per month */

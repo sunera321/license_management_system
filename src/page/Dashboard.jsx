@@ -14,29 +14,29 @@ const Dashboard = () => {
   return (
     <div className="mt-10 mx-6">
       <div className="flex flex-wrap justify-between gap-4 ">
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-blue-700 p-5 shadow-md ">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-blue-200 p-5 shadow-md ">
           <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-blue-300" />
+            <hr className="border-t border-blue-400" />
             <Link to="/availablelicense" className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
               View More
             </Link>
           </div>
         </div>
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-green-200 p-5 shadow-md">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-emerald-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">ACTIVE LICENSE KEY </span>
           <div className="text-4xl font-bold text-gray-600">{activeLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-slate-300" />
+            <hr className="border-t border-emerald-400" />
             <Link to='/activelicense' className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center"> View More </Link>
           </div>
         </div>
-        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-blue-200 p-5 shadow-md">
+        <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] bg-violet-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">EXPIRED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{expiredLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-blue-300" />
+            <hr className="border-t border-violet-400" />
             <Link to='/expiredlicense' className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center"> View More </Link>
           </div>
         </div>
@@ -58,3 +58,14 @@ const Dashboard = () => {
 }
 
 export default Dashboard;
+/*/* <Link to="/availablelicense">
+      <div className="flex-auto min-w-[250px] max-w-full md:w-1/4 rounded-lg h-[145px] shadow-md m-2 overflow-hidden">
+        <div className="bg-blue-300 p-5 flex items-center justify-center h-1/3">
+          <div className="text-lg font-bold text-black">ISSUED LICENSE KEY</div>
+        </div>
+        <div className="bg-sky-200 p-5 flex items-center justify-center h-2/3">
+          <div className="text-5xl font-bold text-gray-600">{availableLicenseKeys}</div>
+        </div>
+      </div>
+    </Link>
+*/
