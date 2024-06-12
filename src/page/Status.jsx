@@ -96,8 +96,10 @@ const Status = () => {
 
     return (
         <div>
-            <div className=' place-content-end'>
-                <BlueButton value="Generate Key"/>
+            <div className='fixed top-20 right-2'>
+                <a href='/KeyGenerateForm'>
+                <BlueButton value="Generate Key" />
+                </a>
             </div>
             <PageHeader title='Approval Status' />
             {isLoading ? (
