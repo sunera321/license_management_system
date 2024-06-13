@@ -68,7 +68,7 @@ const KeyGenerateForm = () => {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
-            moduleID :Modules
+            
         };
 
         // Prepare data for RequestKey API
@@ -80,7 +80,7 @@ const KeyGenerateForm = () => {
             numberOfDays: ValidDate,
             endClientId: ClientID,
             partnerId: PartnerID,
-            moduleId: 1
+           
 
         };
 
@@ -90,7 +90,7 @@ const KeyGenerateForm = () => {
                 // Client API call successful, now call RequestKey API
                 axios.post(requestKeyUrl, requestKeyData)
                     .then((requestKeyResult) => {
-                        // Both API calls successful
+                        
                         Swal.fire({
                             position: "top-center",
                             icon: "success",
@@ -174,19 +174,19 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module1-checkbox-list" onChange={(e) => setModules(e.target.value)} value={"001"} type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
+                                    <input name="Modules" id="module1-checkbox-list" onChange={(e) => setModules(e.target.value)} value={1} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
                                      <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module2-checkbox-list" onChange={(e) => setModules(e.target.value)} value={"002"} type="radio"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input name="Modules" id="module2-checkbox-list" onChange={(e) => setModules(e.target.value)} value={2} type="checkbox"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  name="Modules" onChange={(e) => setModules(e.target.value)} value={"003"} id="module3-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input  name="Modules" onChange={(e) => setModules(e.target.value)} value={3} id="module3-checkbox-list" type="Checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Hospitality</label>
                                 </div>
                             </li>
@@ -197,13 +197,13 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:text-white">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={"004"}  id="module4-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={4}  id="module4-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                     <label for="module4-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Cloud-based HR solution</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={"005"} id="module5-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={5} id="module5-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                     <label for="module5-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Employee Management </label>
                                 </div>
                             </li>
