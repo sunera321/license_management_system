@@ -18,7 +18,7 @@ const KeyGenerateForm = () => {
     const [ValidDate, setVD] = useState();
     const [Website, setWeb] = useState();
     const [PartnerID, setPartnerID] = useState();
-    const [Modules, setModules] = useState();
+    const [selectedModules, setSelectedModules] = useState([]);
 
 
     const [isChecked1, setIsChecked1] = useState(false);
@@ -34,6 +34,16 @@ const KeyGenerateForm = () => {
         // Regular expression for validating MAC address
         const macAddressRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
         return macAddressRegex.test(macAddress);
+    };
+
+    const handleModuleChange = (moduleId) => {
+        setSelectedModules(prevSelectedModules => {
+            if (prevSelectedModules.includes(moduleId)) {
+                return prevSelectedModules.filter(id => id !== moduleId);
+            } else {
+                return [...prevSelectedModules, moduleId];
+            }
+        });
     };
 
     const handleSave = (e) => {
@@ -61,8 +71,8 @@ const KeyGenerateForm = () => {
         // Define the URLs for both endpoints
         const clientUrl = `https://localhost:7295/api/RequestKey/${ClientID}`;
         const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
-
-        // Prepare data for Client API
+        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
+        //  Client API
         const clientData = {
 
             hostUrl: URL,
@@ -71,7 +81,7 @@ const KeyGenerateForm = () => {
             
         };
 
-        // Prepare data for RequestKey API
+        //  RequestKey API
         const requestKeyData = {
             isFinanceApproval: false,
             isPartnerApproval: false,
@@ -83,39 +93,58 @@ const KeyGenerateForm = () => {
            
 
         };
+         //  UpdateModule API
+         const updateModuleData = {
+            endClientId:91,
+            moduleIds: [
+                3
+            ]
+        };
 
         // Send requests to both endpoints
         axios.patch(clientUrl, clientData)
-            .then((clientResult) => {
-                // Client API call successful, now call RequestKey API
-                axios.post(requestKeyUrl, requestKeyData)
-                    .then((requestKeyResult) => {
-                        
-                        Swal.fire({
-                            position: "top-center",
-                            icon: "success",
-                            title: "Form Submitted ",
-                            showConfirmButton: false,
-                            timer: 1500
+        .then((clientResult) => {
+            // Client API call successful, now call RequestKey API
+            axios.post(requestKeyUrl, requestKeyData)
+                .then((requestKeyResult) => {
+                    // RequestKey API call successful, now call UpdateModule API
+                    axios.post(updateModuleUrl, updateModuleData)
+                        .then((updateModuleResult) => {
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "success",
+                                title: "Form Submitted",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        })
+                        .catch((updateModuleError) => {
+                            console.log(updateModuleError);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to update the module.',
+                            });
                         });
-                    })
-                    .catch((requestKeyError) => {
-                        console.log(requestKeyError);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Failed to submit Request form.',
-                        });
+                })
+                .catch((requestKeyError) => {
+                    console.log(requestKeyError);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to submit RequestKey form.',
                     });
-            })
-            .catch((clientError) => {
-                console.log(clientError);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Failed to submit Client form.',
                 });
+        })
+        .catch((clientError) => {
+            console.log(clientError);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to submit Client form.',
             });
+        });
+    
     };
 
 
@@ -174,19 +203,19 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module1-checkbox-list" onChange={(e) => setModules(e.target.value)} value={1} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
+                                    <input name="Modules" id="module1-checkbox-list" onChange={() => handleModuleChange(1)} checked={selectedModules.includes(1)} value={1} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
                                      <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module2-checkbox-list" onChange={(e) => setModules(e.target.value)} value={2} type="checkbox"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input name="Modules" id="module2-checkbox-list" onChange={() => handleModuleChange(2)} checked={selectedModules.includes(2)} type="checkbox"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  name="Modules" onChange={(e) => setModules(e.target.value)} value={3} id="module3-checkbox-list" type="Checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <input  name="Modules" onChange={() => handleModuleChange(3)} checked={selectedModules.includes(3)} id="module3-checkbox-list" type="Checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
                                     <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Hospitality</label>
                                 </div>
                             </li>
@@ -197,13 +226,13 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:text-white">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={4}  id="module4-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <input name="Modules" onChange={() => handleModuleChange(4)} checked={selectedModules.includes(4)} value={4}  id="module4-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                     <label for="module4-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Cloud-based HR solution</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={5} id="module5-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <input name="Modules" onChange={() => handleModuleChange(5)} checked={selectedModules.includes(5)} value={5} id="module5-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                     <label for="module5-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Employee Management </label>
                                 </div>
                             </li>
