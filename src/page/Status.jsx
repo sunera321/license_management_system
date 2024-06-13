@@ -13,6 +13,7 @@ import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 
+
 const Status = () => {
     const [modal, setModal] = useState(false);
     const [CID, setEditId] = useState('');
@@ -95,6 +96,11 @@ const Status = () => {
 
     return (
         <div>
+            <div className='fixed top-20 right-2'>
+                <a href='/KeyGenerateForm'>
+                <BlueButton value="Generate Key" />
+                </a>
+            </div>
             <PageHeader title='Approval Status' />
             {isLoading ? (
                 <PageLoader />
@@ -103,9 +109,11 @@ const Status = () => {
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
                             <option value="">Select Your Preference</option>
-                            <option value="RejectRequests">Rejected Requests</option>
-                            <option value="PendingRequests">Pending Requests</option>
                             <option value="AvailableLicense">Available Requests</option>
+                            <option value="PendingRequests">Pending Requests</option>
+                            <option value="RejectRequests">Rejected Requests</option>
+                            
+                           
                         </select>
                     </div>
                     <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
@@ -120,7 +128,8 @@ const Status = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {selectedDataType === 'RejectRequests' && (
+                            {
+                            selectedDataType === 'RejectRequests' && (
                                 RejectRequests && RejectRequests.length > 0 ? (
                                     RejectRequests.map((item, index) => (
                                         <tr key={index}>
