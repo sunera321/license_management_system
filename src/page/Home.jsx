@@ -25,7 +25,7 @@ const Home = () => {
       <div className='flex items-center justify-center gap-7'>
         
       <Link to="/login" className="login-link"><button className='bg-green-500 text-black px-4 lg:px-8 py-3 rounded-md text-[18px] hover:bg-black hover:text-white cursor-pointer'>Login</button></Link>
-      <Link to="/register" className="login-link"><button className='bg-green-500 text-black px-4 lg:px-8 py-3 rounded-md text-[18px] hover:bg-black hover:text-white cursor-pointer'>Register</button></Link>
+     
 
       </div>
     </div>

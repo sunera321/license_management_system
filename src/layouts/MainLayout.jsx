@@ -12,11 +12,13 @@ const MainLayout = () => {
 
 
     <Header />
-      <div className="flex flex-1">
-        <Slidebar />
-        <div className="flex-1">
-          <Outlet />
+    <div className="flex flex-1">
+      <div className="mr-6">
+        <Slidebar />  
       </div>
+        <div className="flex-1 pl-5">
+          <Outlet />
+        </div>
    </div>
    <Footer />
 </div>
