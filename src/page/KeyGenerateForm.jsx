@@ -95,10 +95,8 @@ const KeyGenerateForm = () => {
         };
          //  UpdateModule API
          const updateModuleData = {
-            endClientId:91,
-            moduleIds: [
-                3
-            ]
+            endClientId:ClientID,
+            moduleIds: [3,4]
         };
 
         // Send requests to both endpoints
