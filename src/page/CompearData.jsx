@@ -85,7 +85,7 @@ const CompearData = () => {
                             <th class="pl-3 text-lg bg-gray-200 dark: text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-200 w-1/5">
                                 Crrent Data
                             </th>
-                            <th class="pl-3 text-lg bg-gray-200 dark: text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-200 w-1/5">
+                            <th class="pl-3 text-lg bg-gray-200     dark: text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-200 w-1/5">
                                 Actual Data
                             </th>
                         </tr>
