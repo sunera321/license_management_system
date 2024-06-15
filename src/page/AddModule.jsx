@@ -22,10 +22,7 @@ const AddModule = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.moduleName.trim() === '' || formData.yearCompleted.trim() === '') {
-            alert('Module Name and Year of completed are required!');
-            return;
-        }
+      
         try {
             const response = await axios.post('https://localhost:7295/api/Module', formData, {
               headers: {
