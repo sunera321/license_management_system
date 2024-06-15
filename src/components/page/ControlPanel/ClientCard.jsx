@@ -21,7 +21,7 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
         <div className='pb-2 pl-4 font-semibold'>Partner ID : {client.partnerId}</div>
         <div className="text-[16px]  flex">
           <div className="w-4 h-4 mt-1 bg-[#19F000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Activet Data : {formatDate(client.activetDate)}</div>
+          <div className="text-[16px]"> Activet Data : {formatDate(client.activeDate)}</div>
         </div>
         <div className="text-[16px] mt-3 flex">
           <div className="w-4 h-4 mt-1 bg-[#F10000] border border-black rounded-full"></div>
