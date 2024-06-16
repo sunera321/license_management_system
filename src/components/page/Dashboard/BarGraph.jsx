@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from 'chart.js';
+import { Chart } from 'react-google-charts';
 import axios from 'axios';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement);
 
 const BarGraph = () => {
   const [chartData, setChartData] = useState({
@@ -12,89 +9,40 @@ const BarGraph = () => {
       {
         label: 'User Count',
         data: [],
-        backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(199, 199, 199, 0.2)'
-        ],
-        borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(199, 199, 199, 1)'
-        ],
+        backgroundColor: [],
+        borderColor: [],
         borderWidth: 1
       }
     ]
   });
 
-  const options = {
-    scales: {
-      x: {
-        grid: {
-          display: false, 
-        },
-      },
-      y: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          color: function(context) {
-            if (context.tick.value === 0) {
-              return 'transparent'; 
-            }
-            return 'rgba(0, 0, 0, 0.1)'; 
-          },
-        },
-        ticks: {
-          precision: 0, 
-          beginAtZero: true 
-        }
-      },
-    },
-    maintainAspectRatio: false, 
-    responsive: true,
-    layout: {
-      padding: {
-        top: 10,
-        right: 50,
-        bottom: 10,
-        left: 50
-      }
-    }
-  };
-
   useEffect(() => {
-    axios.get('https://localhost:7284/api/client')
+    axios.get('https://localhost:7295/api/LicenseKey')
       .then(response => {
         const data = response.data;
-        const moduleData = {};
+        const statusData = {};
 
+        // Count occurrences of each key_Status
         data.forEach(item => {
-          if (!moduleData[item.module]) {
-            moduleData[item.module] = 0;
+          if (!statusData[item.key_Status]) {
+            statusData[item.key_Status] = 0;
           }
-          moduleData[item.module]++;
+          statusData[item.key_Status]++;
         });
 
-        const labels = Object.keys(moduleData).map(module => `${module} (${moduleData[module]})`);
-        const userData = Object.values(moduleData);
+        const labels = Object.keys(statusData);
+        const counts = Object.values(statusData);
 
-        setChartData({
-          labels: labels,
-          datasets: [{
-            label: 'User Count',
-            data: userData,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          }]
+
+      
+        // Prepare data for react-google-charts with a uniform color
+        const chartArray = [['Status', 'Count', { role: 'style', type: 'string' }]];
+        const uniformColor = 'color: rgb(96, 130, 182)'; // Uniform color for all bars
+        labels.forEach((label, index) => {
+          chartArray.push([label, counts[index], uniformColor]);
         });
+
+        setChartData(chartArray);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -102,9 +50,29 @@ const BarGraph = () => {
   }, []);
 
   return (
-    <div className="w-full px-4 md:px-0"> 
-      <div className="relative h-64 md:h-80 lg:h-96 "> 
-        <Bar data={chartData} options={options} />
+    <div className="w-full">
+      <div className='mb-4 relative md:h-80 lg:h-96'>
+        <Chart
+          width={'100%'}
+          height={'400px'}
+          chartType="BarChart"
+          data={chartData}
+          options={{
+            title: 'User Count by Status',
+            chartArea: { width: '50%' },
+            hAxis: {
+              title: 'User Count',
+              minValue: 0,
+            },
+            vAxis: {
+              title: 'Status',
+            },
+            legend: { 
+              fill:'#6082B6',
+              position: 'bottom' },
+    
+          }}
+        />
       </div>
     </div>
   );
