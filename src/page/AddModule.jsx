@@ -1,31 +1,48 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const AddModule = () => {
-    const [formData, setFormData] = useState({
-        moduleImage: '',
-        moduleName: '',
-        yearCompleted: '',
-        moduleDescription: '',
-        moduleFeatures: ''
+   const [formData, setFormData] = useState({
+    modulename: '',
+    createdData: '',
+    features: '',
+    moduleDescription: '',
+    imagePath: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
     });
+  };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.moduleName.trim() === '' || formData.yearCompleted.trim() === '') {
-            alert('Module Name and Year of completed are required!');
-            return;
-        }
       
-        console.log('Form submitted:', formData);
+        try {
+            const response = await axios.post('https://localhost:7295/api/Module', formData, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            console.log('Data submitted successfully:', response.data);
+            Swal.fire({
+
+                position: "top-center",
+                icon: "success",
+                title: "New Module Add Successfully",
+                showConfirmButton: false,
+                timer: 1500
+        
+              })
+          } catch (error) {
+            console.error('Error submitting data:', error);
+          }
+        
     };
 
     return (
@@ -42,21 +59,21 @@ const AddModule = () => {
                                 name="moduleImage"
                                 placeholder="Please add 260*75 image"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
+                       
                                 value={formData.moduleImage}
                             />
                             <label htmlFor="module_image" className="absolute top-7.5 right-0 px-2 py-1 bg-gray-300 text-gray-700 border rounded cursor-pointer hover:bg-gray-400">Browse image</label>
                         </div>
                     </div>
 
-                    <div className="mb-3 flex">
-                        <div className="mr-5 w-1/2">
+                    <div className="flex mb-3">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Module Name</label><br />
                             <input
                                 type="text"
                                 name="moduleName"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
+                                onChange={handleChange}
                                 value={formData.moduleName}
                                 required
                             /><br />
@@ -64,11 +81,11 @@ const AddModule = () => {
                         <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Year of completed</label><br />
                             <input
-                                type="text"
-                                name="yearCompleted"
+                                type="date"
+                                name="createdData"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.yearCompleted}
+                                onChange={handleChange}
+                                value={formData.createdData}
                                 required
                             /><br />
                         </div>
@@ -80,7 +97,7 @@ const AddModule = () => {
                         <textarea
                             name="moduleDescription"
                             className='w-full h-32 px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none resize-y focus:outline-none focus:shadow-outline'
-                            onChange={handleInputChange}
+                            onChange={handleChange}
                             value={formData.moduleDescription}
                         ></textarea> <br />
                     </div>
@@ -88,11 +105,12 @@ const AddModule = () => {
                     <div className="mb-5">
                         <label className='mb-2 text-lg text-gray-700'>Module Features</label><br />
                         <textarea
-                            name="moduleFeatures"
+                            name="features"
                             className='w-full h-32 px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none resize-y focus:outline-none focus:shadow-outline'
-                            onChange={handleInputChange}
-                            value={formData.moduleFeatures}
+                            onChange={handleChange}
+                            value={formData.features}
                         ></textarea> <br />
+                           
                     </div>
 
                     <br />

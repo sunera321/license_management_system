@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 
 function FinancialManagerApproval() {
@@ -90,11 +91,12 @@ function FinancialManagerApproval() {
 
   return (
     <div>
+       <PageHeader title='Finance Manager Approval' />
       {isLoading ? (
                 <PageLoader />
             ) : (
       <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
-        {clients.map((client, index) => (
+        {clients.filter(client => !client.isFinanceApproval).map((client, index) => (
           <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3">
             <div className="flex gap-6 pt-2 justify-evenly">
               <div className="text-[26px] font-normal">{client.endClient.name}</div>

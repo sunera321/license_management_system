@@ -82,19 +82,21 @@ const ValidateKey = () => {
               </div>
               <div className="w-3/12">
                 <div className="font-medium">{data.partnerName}</div>
-                <div>ID - {data.partnerId}</div>
+                <div>{data.partnerEmail}</div>
               </div>
               <div className="w-2/12 mt-3 ml-3 md:inline">
                 <span className={`relative inline-block px-5 py-2 font-semibold leading-tight ${data.statusCode === 'Available' ? 'text-[#ed944a]' :
                     data.statusCode=== 'Valid_Loging' ? 'text-green-900' :
                     data.statusCode === 'Invalid Mac Address' ? 'text-red-900' :
                     data.statusCode === 'Invalid Host URL' ? ' text-yellow-900' :
+                    data.statusCode === 'Expired Key' ? ' text-rose-900' :
                           ''
                   }`}>
                   <span aria-hidden className={`absolute inset-0 ${data.statusCode === 'Available' ? 'bg-[#f8d2c1]' :
                       data.statusCode === 'Valid_Loging' ? 'bg-green-400' :
                       data.statusCode === 'Invalid Mac Address' ? 'bg-red-500' :
                         data.statusCode === 'Invalid Host URL' ?  ' bg-yellow-400' :
+                        data.statusCode === 'Expired Key' ?  ' bg-rose-400' :
                             ''
                     } rounded-full opacity-50`}></span>
                   <span className="relative"> {data.statusCode === 'Invalid Mac Address' ? 'Invalid Mac' : data.statusCode === 'Invalid Host URL' ? 'Invalid Host' : data.statusCode}</span>
