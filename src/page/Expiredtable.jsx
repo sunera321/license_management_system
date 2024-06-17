@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Search from '../components/page/ControlPanel/Search'; // Import the Search component
-import Swal from 'sweetalert2';
+
 // Sample data of clients
 const clients = [
   {
@@ -20,11 +20,6 @@ const clients = [
   }
 
 ];
-// To handle the "View more" button click 
-const handleViewMore = (id) => {
-  //console.log(id);
-  Swal.fire("This module is Expired!");
-};
 
 const ExpiredTable = () => {
   const [searchInput, setSearchInput] = useState("");
