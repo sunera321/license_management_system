@@ -11,7 +11,6 @@ export const lineChartData = {
     ]
   };
   
-  
   export const barChartData = {
     labels: ['HRM', 'ESN', 'PeoplesHR', 'HRO', 'Trackingsystems', 'HRO'],
     datasets: [

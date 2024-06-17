@@ -82,7 +82,7 @@ const ValidateKey = () => {
               </div>
               <div className="w-3/12">
                 <div className="font-medium">{data.partnerName}</div>
-                <div>{data.partnerEmail}</div>
+                <div>ID - {data.partnerId}</div>
               </div>
               <div className="w-2/12 mt-3 ml-3 md:inline">
                 <span className={`relative inline-block px-5 py-2 font-semibold leading-tight ${data.statusCode === 'Available' ? 'text-[#ed944a]' :
