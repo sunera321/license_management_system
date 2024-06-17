@@ -1,24 +1,48 @@
 import React, { useState } from 'react';
 import LineGraph from './../components/page/Dashboard/LineGraph';
 import BarGraph from '../components/page/Dashboard/BarGraph';
-import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import PageHeader from "../components/CommonModal/pageHeader";
+import AvailableTable from "./Availabletable";
+import ActiveTable from './Activetable';
+import ExpiredTable from './Expiredtable';
 
+const customStyles = {
+  content: {
+    top: '10%',
+    bottom: '10%',
+    left: '50%',
+    right: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, 0)',
+    width: '80%',
+    maxWidth: '95vw',
+    maxHeight: '80vh',
+    overflow: 'auto',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backdropFilter: 'blur(3px)' // Blur effect
+  }
+};
 
 const Dashboard = () => {
   const availableLicenseKeys = 7;
   const expiredLicenseKeys = 2;
   const activeLicenseKeys = 5;
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isAvailableModalOpen, setIsAvailableModalOpen] = useState(false);
+  const [isActiveModalOpen, setIsActiveModalOpen] = useState(false);
+  const [isExpiredModalOpen, setIsExpiredModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
+  const openAvailableModal = () => setIsAvailableModalOpen(true);
+  const closeAvailableModal = () => setIsAvailableModalOpen(false);
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  const openActiveModal = () => setIsActiveModalOpen(true);
+  const closeActiveModal = () => setIsActiveModalOpen(false);
 
+  const openExpiredModal = () => setIsExpiredModalOpen(true);
+  const closeExpiredModal = () => setIsExpiredModalOpen(false);
 
   return (
     <div className="mt-10 mx-6">
@@ -28,26 +52,70 @@ const Dashboard = () => {
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4">
             <hr className="border-t border-blue-400" />
-
-            <Link to="/availablelicense" className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            <button onClick={openAvailableModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
               View More
-            </Link>           
+            </button>
+
+            {/* Available License Keys Modal */}
+            <Modal isOpen={isAvailableModalOpen} onRequestClose={closeAvailableModal} style={customStyles} ariaHideApp={false}>
+              <button onClick={closeAvailableModal} style={{ background: 'none', cursor: 'pointer', color: 'red' }}>
+                Close
+              </button>
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <PageHeader title="Issued License Keys" />
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <AvailableTable />
+              </div>
+            </Modal>
           </div>
         </div>
+
         <div className="rounded-lg h-[145px] bg-emerald-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">ACTIVE LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{activeLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-emerald-400" />
-            <Link to='/activelicense' className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center"> View More </Link>
+            <hr className="border-t border-blue-400" />
+            <button onClick={openActiveModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+              View More
+            </button>
+
+            {/* Active License Keys Modal */}
+            <Modal isOpen={isActiveModalOpen} onRequestClose={closeActiveModal} style={customStyles} ariaHideApp={false}>
+              <button onClick={closeActiveModal}  style={{ background: 'none', cursor: 'pointer', color: 'red' }}>
+                Close
+              </button>
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <PageHeader title="Active License Keys" />
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <ActiveTable />
+              </div>
+            </Modal>
           </div>
         </div>
+
         <div className="rounded-lg h-[145px] bg-violet-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">EXPIRED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{expiredLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-violet-400" />
-            <Link to='/expiredlicense' className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center"> View More </Link>
+            <hr className="border-t border-blue-400" />
+            <button onClick={openExpiredModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+              View More
+            </button>
+
+            {/* Expired License Keys Modal */}
+            <Modal isOpen={isExpiredModalOpen} onRequestClose={closeExpiredModal} style={customStyles} ariaHideApp={false}>
+              <button onClick={closeExpiredModal} style={{ background: 'none', cursor: 'pointer', color: 'red' }}>
+                Close
+              </button>
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <PageHeader title="Expired License Keys" />
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <ExpiredTable />
+              </div>
+            </Modal>
           </div>
         </div>
       </div>

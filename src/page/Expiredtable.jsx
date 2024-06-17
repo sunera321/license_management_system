@@ -73,11 +73,6 @@ const ExpiredTable = () => {
                   <td className="px-2 py-2">{client.email}</td>
                   <td className="px-2 py-2">{client.issueDate}</td>
                   <td className="px-2 py-2">{client.expireDate}</td>
-                  <td className="px-2 py-2">
-                    <button className="bg-gray-300 hover:bg-gray-500 text-black  py-2 px-3 rounded" onClick={() => handleViewMore(client.id)}>
-                      View more
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Search from '../components/page/ControlPanel/Search'; // Import the Search component
-import Swal from 'sweetalert2';
+
 
 
 const AvailableTable = () => {
@@ -65,16 +65,7 @@ const AvailableTable = () => {
 
   });
 
-  // const availableLicenseKeys = filteredClients.length; // Count of rows
-  // console.log("Available License Keys:", availableLicenseKeys); // Add this line to check if availableLicenseKeys is updated
-
-
   //console.log("Search Input:", searchInput); // Add this line to check if searchInput is updated
-
-  // To handle the "View more" button click 
-  const handleViewMore = (id) => {
-    Swal.fire("This module is Available!");
-  };
 
 
 
@@ -114,11 +105,6 @@ const AvailableTable = () => {
                   <td className="px-2 py-2">{client.email}</td>
                   <td className="px-2 py-2">{client.issueDate}</td>
                   <td className="px-2 py-2">{client.expireDate}</td>
-                  <td className="px-2 py-2">
-                    <button className="bg-gray-300 hover:bg-gray-500 text-black  py-2 px-3 rounded" onClick={() => handleViewMore(client.id)}>
-                      View more
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>

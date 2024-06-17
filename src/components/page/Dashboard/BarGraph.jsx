@@ -17,26 +17,21 @@ const BarGraph = () => {
   });
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/LicenseKey')
+    axios.get('https://localhost:7295/api/Module/statistics')
       .then(response => {
-        const data = response.data;
-        const statusData = {};
+        const modules = response.data;
+        const moduleData = {};
 
-        // Count occurrences of each key_Status
-        data.forEach(item => {
-          if (!statusData[item.key_Status]) {
-            statusData[item.key_Status] = 0;
-          }
-          statusData[item.key_Status]++;
+        // Count occurrences of each module
+        modules.forEach(item => {
+          moduleData[item.name] = item.total;
         });
 
-        const labels = Object.keys(statusData);
-        const counts = Object.values(statusData);
+        const labels = Object.keys(moduleData);
+        const counts = Object.values(moduleData);
 
-
-      
         // Prepare data for react-google-charts with a uniform color
-        const chartArray = [['Status', 'Count', { role: 'style', type: 'string' }]];
+        const chartArray = [['Module', 'User Count', { role: 'style', type: 'string' }]];
         const uniformColor = 'color: rgb(96, 130, 182)'; // Uniform color for all bars
         labels.forEach((label, index) => {
           chartArray.push([label, counts[index], uniformColor]);
@@ -49,6 +44,7 @@ const BarGraph = () => {
       });
   }, []);
 
+
   return (
     <div className="w-full">
       <div className='mb-4 relative md:h-80 lg:h-96'>
@@ -58,14 +54,14 @@ const BarGraph = () => {
           chartType="BarChart"
           data={chartData}
           options={{
-            title: 'User Count by Status',
+            title: 'User Count by Product',
             chartArea: { width: '50%' },
             hAxis: {
               title: 'User Count',
               minValue: 0,
             },
             vAxis: {
-              title: 'Status',
+              title: 'Product',
             },
             legend: { 
               fill:'#6082B6',
