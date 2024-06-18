@@ -49,7 +49,7 @@ const ClientRegistration = () => {
             console.log('Data submitted successfully:', response.data);
             Swal.fire({
     
-                position: "top-center",
+                position: "center",
                 icon: "success",
                 title: "New Client Add Successfully",
                 showConfirmButton: false,
