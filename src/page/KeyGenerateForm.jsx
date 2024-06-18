@@ -206,20 +206,20 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  id="module1-checkbox-list" onChange={() => handleModuleChange(3)} checked={selectedModules.includes(3)} value={3} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
-                                     <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
+                                    <input  id="module1-checkbox-list" onChange={() => handleModuleChange(108)} checked={selectedModules.includes(108)} value={108} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
+                                     <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">People HR</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  id="module2-checkbox-list" onChange={() => handleModuleChange(4)} checked={selectedModules.includes(4)} type="checkbox"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
-                                    <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
+                                    <input  id="module2-checkbox-list" onChange={() => handleModuleChange(109)} checked={selectedModules.includes(109)} type="checkbox"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">HR Enterpise</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input   onChange={() => handleModuleChange(6)} checked={selectedModules.includes(6)} id="module3-checkbox-list" type="Checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
-                                    <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Hospitality</label>
+                                    <input   onChange={() => handleModuleChange(110)} checked={selectedModules.includes(110)} id="module3-checkbox-list" type="Checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
+                                    <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">juraa</label>
                                 </div>
                             </li>
 
@@ -229,14 +229,14 @@ const KeyGenerateForm = () => {
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:text-white">
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  onChange={() => handleModuleChange(7)} checked={selectedModules.includes(7)} value={7}  id="module4-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                    <label for="module4-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Cloud-based HR solution</label>
+                                    <input  onChange={() => handleModuleChange(111)} checked={selectedModules.includes(111)} value={111}  id="module4-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <label for="module4-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">HRO</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div className="flex items-center bg-white ps-3">
-                                    <input  onChange={() => handleModuleChange(8)} checked={selectedModules.includes(8)} value={8} id="module5-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                    <label for="module5-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Employee Management </label>
+                                    <input  onChange={() => handleModuleChange(112)} checked={selectedModules.includes(112)} value={112} id="module5-checkbox-list" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                    <label for="module5-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Tracking System</label>
                                 </div>
                             </li>
                             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">

@@ -46,6 +46,7 @@ const Status = () => {
     const getData = () => {
         setIsLoading(true);
         axios.get('https://localhost:7295/api/RequestKey')
+        
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
@@ -166,7 +167,7 @@ const Status = () => {
                                                                             <tr>
                                                                                 <td className='py-1'>Client Time Period</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
@@ -237,9 +238,9 @@ const Status = () => {
                                                                                 <td className='pl-5'>{selectedClient.endClient.country}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td className='py-1'>Client Time Period</td>
+                                                                                <td className='py-1'>Client No od Days</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
