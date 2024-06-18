@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';import { useParams } from 'react-router-dom';
-;
+import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';
+import { useParams } from 'react-router-dom';
 
 const SendKey = () => {
 // Take the parameter of URL
@@ -13,14 +13,16 @@ const params = useParams();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, licenseKey } = e.target.elements;
-
+    console.log(licenseKey.value);
     try {
       const response = await axios.post('https://localhost:7295/api/KeyEmail', {
         to: email.value,
-        licenseKey: licenseKey.value,
+        licenseKey: key,
+        
 
       });
-
+      
+      console.log(licenseKey.value);
       // Handle successful response
       console.log('Email sent:', response.data);
 
@@ -28,7 +30,7 @@ const params = useParams();
 
         position: "top-center",
         icon: "success",
-        title: "Form Submitted ",
+        title: "Send Mail "+email.value+" Successfully",
         showConfirmButton: false,
         timer: 1500
 
@@ -68,6 +70,7 @@ const params = useParams();
                   className=' border-2 rounded-lg border-zinc-300 bg-slate-100 w-[90%]'
                   placeholder={key}
                   disabled
+                  
                 />
 
                 <label className='font-semibold text-[18px] '>License key Description</label><br />
