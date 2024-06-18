@@ -318,7 +318,7 @@ const Status = () => {
                                                                             <tr>
                                                                                 <td className='py-1'>Client Time Period</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
