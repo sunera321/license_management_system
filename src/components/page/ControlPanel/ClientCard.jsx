@@ -21,7 +21,7 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
         <div className='pb-2 pl-4 font-semibold'>Partner ID : {client.partnerId}</div>
         <div className="text-[16px]  flex">
           <div className="w-4 h-4 mt-1 bg-[#19F000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Activet Data : {formatDate(client.activetDate)}</div>
+          <div className="text-[16px]"> Activet Data : {formatDate(client.activeDate)}</div>
         </div>
         <div className="text-[16px] mt-3 flex">
           <div className="w-4 h-4 mt-1 bg-[#F10000] border border-black rounded-full"></div>
@@ -34,7 +34,7 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
           <button
             value="View More"
             onClick={() => onMoreInfoClick(client)}
-            className="mt-3 p-1 text-white bg-[#111158] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
+            className="mt-3 p-1 text-white bg-[#36ac4d] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
             View More
           </button>
           
