@@ -147,7 +147,7 @@ function PartnerManagerApproval() {
               <td className='py-1'>Requested Module</td>
               <td>:</td>
               <td className='pl-5'>
-                      {requestedModules[client.endClient.id] ? requestedModules[client.endClient.id].join(', ') : 'Loading...'}
+                      {requestedModules[client.endClient.id] ? requestedModules[client.endClient.id].join(', ') : 'Click here...'}
                     </td>
             </tr>
             <div className='mt-5 ml-0'>Partner manager Approval</div>

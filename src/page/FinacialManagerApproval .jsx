@@ -11,7 +11,7 @@ function FinancialManagerApproval() {
   const [rejectionReason, setRejectionReason] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [requestedModules, setRequestedModules] = useState({});
 
   useEffect(() => {
     setIsLoading(true); 
@@ -27,7 +27,20 @@ function FinancialManagerApproval() {
   }, []);
 
   const navigate = useNavigate();
+ 
+  const fetchModules = async (clientId) => {
+    try {
+      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      setRequestedModules(prevModules => ({
+        ...prevModules,
+        [clientId]: response.data
+      }));
+    } catch (error) {
+      console.error('Error fetching modules:', error);
+    }
+  };
 
+ 
   const handleUpdate = (request_id) => {
     const url = `https://localhost:7295/api/RequestKey/${request_id}/SetFinanceTrue`;
 
@@ -89,6 +102,12 @@ function FinancialManagerApproval() {
     setSelectedRequestId('');
   }
 
+  const handleClientClick = (clientId) => {
+    if (!requestedModules[clientId]) {
+      fetchModules(clientId);
+    }
+  };
+
   return (
     <div>
        <PageHeader title='Finance Manager Approval' />
@@ -97,7 +116,8 @@ function FinancialManagerApproval() {
             ) : (
       <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
         {clients.filter(client => !client.isFinanceApproval).map((client, index) => (
-          <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3">
+          <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3"
+          onClick={() => handleClientClick(client.endClient.id)}>
             <div className="flex gap-6 pt-2 justify-evenly">
               <div className="text-[26px] font-normal">{client.endClient.name}</div>
               <div>RequestID : {client.requestID}</div>
@@ -131,7 +151,7 @@ function FinancialManagerApproval() {
             <tr className='mx-auto text-center '>
               <td className='py-1'>Requested Module</td>
               <td>:</td>
-              <td className='pl-5'>{client.module}</td>
+              <td className='pl-5'>  {requestedModules[client.endClient.id] ? requestedModules[client.endClient.id].join(', ') : 'Click here...'}</td>
             </tr>
             <div className='mt-5 ml-0'>Finance manager Approval</div>
             <tr className='mx-auto text-center '>
