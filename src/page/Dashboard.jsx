@@ -6,6 +6,8 @@ import PageHeader from "../components/CommonModal/pageHeader";
 import AvailableTable from "./Availabletable";
 import ActiveTable from './Activetable';
 import ExpiredTable from './Expiredtable';
+import StatusBarGraph from '../components/page/Dashboard/statusBarGraph';
+
 
 const customStyles = {
   content: {
@@ -27,6 +29,9 @@ const customStyles = {
 };
 
 const Dashboard = () => {
+
+  const [activeTab, setActiveTab] = useState('totalUsers');
+
   const availableLicenseKeys = 7;
   const expiredLicenseKeys = 2;
   const activeLicenseKeys = 5;
@@ -50,9 +55,9 @@ const Dashboard = () => {
         <div className="rounded-lg h-[145px] bg-blue-200 p-5 shadow-md">
           <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
-          <div className="pt-4">
+          <div className="pt-4 ">
             <hr className="border-t border-blue-400" />
-            <button onClick={openAvailableModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            <button onClick={openAvailableModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex ">
               View More
             </button>
 
@@ -75,8 +80,8 @@ const Dashboard = () => {
           <span className="text-lg font-bold text-gray-600">ACTIVE LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{activeLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-blue-400" />
-            <button onClick={openActiveModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            <hr className="border-t border-emerald-400" />
+            <button onClick={openActiveModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex ">
               View More
             </button>
 
@@ -99,8 +104,8 @@ const Dashboard = () => {
           <span className="text-lg font-bold text-gray-600">EXPIRED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{expiredLicenseKeys}</div>
           <div className="pt-4">
-            <hr className="border-t border-blue-400" />
-            <button onClick={openExpiredModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            <hr className="border-t border-violet-400" />
+            <button onClick={openExpiredModal} className="mt-2 text-m font-bold text-gray-500 hover:text-gray-700 flex ">
               View More
             </button>
 
@@ -120,17 +125,46 @@ const Dashboard = () => {
         </div>
       </div>
 
+   
       <div className="bg-slate-100 rounded-lg mt-10 mb-10 p-2 sm:p-6 flex flex-col">
+      <div className="flex justify-around border-b-2 border-gray-300">
+        <button 
+          className={`py-2 px-4 ${activeTab === 'totalUsers' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'}`}
+          onClick={() => setActiveTab('totalUsers')}
+        >
+          Total Users
+        </button>
+        <button 
+          className={`py-2 px-4 ${activeTab === 'operatingStatus' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'}`}
+          onClick={() => setActiveTab('operatingStatus')}
+        >
+          Operating Status
+        </button>
+      </div>
+      <div className="bg-slate-100 rounded-lg mt-10 mb-10 p-2 sm:p-6 flex flex-col">
+        {activeTab === 'totalUsers' && (
+          <div className="flex-grow">
+            <BarGraph />
+          </div>
+        )}
+        {activeTab === 'operatingStatus' && (
+          <div className="flex-grow">
+            <StatusBarGraph/>
+          </div>
+        )}
+      </div>
+    </div>
+    
+    <div className="bg-slate-100 rounded-lg mt-10 mb-10 p-2 sm:p-6 flex flex-col">
         <h1 className='font-bold'>Total users</h1>
         <div className="flex-grow">
           <LineGraph />
         </div>
       </div>
-      <div className="bg-slate-100 rounded-lg mt-10 mb-10 p-2 sm:p-6 flex flex-col">
-        <div className="flex-grow">
-          <BarGraph />
-        </div>
-      </div>
+
+
+
+
     </div>
   )
 }

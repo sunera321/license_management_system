@@ -77,7 +77,7 @@ const AvailableTable = () => {
       <div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
         <div className="overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left border border-gray-200">
-            <thead className="text-xs uppercase bg-gray-50">
+            <thead className="text-xs uppercase bg-blue-200">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Client ID
@@ -99,7 +99,7 @@ const AvailableTable = () => {
             {/* Mapping through filtered clients data to render table rows */}
             <tbody>
               {filteredClients.map((client, index) => (
-                <tr key={index} className="bg-white border-b border-gray-200 hover:bg-gray-50">
+                <tr key={index} className="bg-white border-b border-gray-200 hover:bg-gray-100">
                   <td className="px-2 py-2">{client.id}</td>
                   <td className="px-2 py-2">{client.name}</td>
                   <td className="px-2 py-2">{client.email}</td>
