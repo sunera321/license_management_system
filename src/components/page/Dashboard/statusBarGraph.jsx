@@ -2,36 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import axios from 'axios';
 
-const BarGraph = () => {
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'User Count',
-        data: [],
-        backgroundColor: [],
-        borderColor: [],
-        borderWidth: 1
-      }
-    ]
-  });
+const  StatusBarGraph = () => {
+  const [chartData, setChartData] = useState([
+    ['Status', 'Count', { role: 'style', type: 'string' }]
+  ]);
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/Module/statistics')
+    axios.get('https://localhost:7295/api/LicenseKey')
       .then(response => {
-        const modules = response.data;
-        const moduleData = {};
+        const keys = response.data;
+        const statusCounts = {};
 
-        // Count occurrences of each module
-        modules.forEach(item => {
-          moduleData[item.name] = item.total;
+        // Count occurrences of each status
+        keys.forEach(key => {
+          if (statusCounts[key.key_Status]) {
+            statusCounts[key.key_Status]++;
+          } else {
+            statusCounts[key.key_Status] = 1;
+          }
         });
 
-        const labels = Object.keys(moduleData);
-        const counts = Object.values(moduleData);
+        const labels = Object.keys(statusCounts);
+        const counts = Object.values(statusCounts);
 
         // Prepare data for react-google-charts with a uniform color
-        const chartArray = [['Module', 'User Count', { role: 'style', type: 'string' }]];
+        const chartArray = [['Status', 'Count', { role: 'style', type: 'string' }]];
         const uniformColor = 'color: rgb(96, 130, 182)'; // Uniform color for all bars
         labels.forEach((label, index) => {
           chartArray.push([label, counts[index], uniformColor]);
@@ -44,7 +39,6 @@ const BarGraph = () => {
       });
   }, []);
 
-
   return (
     <div className="w-full">
       <div className='mb-4 relative md:h-80 lg:h-96'>
@@ -54,19 +48,16 @@ const BarGraph = () => {
           chartType="BarChart"
           data={chartData}
           options={{
-            title: 'User Count by Product',
+            title: 'Key Status Count',
             chartArea: { width: '50%' },
             hAxis: {
-              title: 'User Count',
+              title: 'Count',
               minValue: 0,
             },
             vAxis: {
-              title: 'Product',
+              title: 'Status',
             },
-            legend: { 
-              fill:'#6082B6',
-              position: 'bottom' },
-    
+            legend: { position: 'bottom' },
           }}
         />
       </div>
@@ -74,4 +65,4 @@ const BarGraph = () => {
   );
 };
 
-export default BarGraph;
+export default StatusBarGraph;
