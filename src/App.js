@@ -1,5 +1,7 @@
 import './App.css';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
@@ -34,6 +36,7 @@ import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
+
 const msalInstance = new PublicClientApplication(msalConfig);
 
 
@@ -80,9 +83,12 @@ function App() {
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
 
-          <Route path="moduledetails" Component ={ModuleDetails}/>
           
-
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
+          
+       
+          
+           
         </Route>
       </Routes>
     

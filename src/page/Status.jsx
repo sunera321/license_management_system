@@ -32,20 +32,33 @@ const Status = () => {
     const [generatedKey, setGeneratedKey] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
+    const [requestedModules, setRequestedModules] = useState([]);
     
     const addpopup = (client) => {
         setModal(!modal);
         setSelectedClient(client);
+        fetchModules(client.endClient.id);
     };
 
     const toggleModal = () => {
         setModal(false);
         setSelectedClient(null); // Reset selected client
+        setRequestedModules([]); // Reset requested modules
+    };
+    const fetchModules = (clientId) => {
+        axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
+            .then((response) => {
+                setRequestedModules(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching modules:', error);
+            });
     };
 
     const getData = () => {
         setIsLoading(true);
         axios.get('https://localhost:7295/api/RequestKey')
+        
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
@@ -166,12 +179,12 @@ const Status = () => {
                                                                             <tr>
                                                                                 <td className='py-1'>Client Time Period</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.modules}</td>
+                                                                                <td className='pl-5'>{requestedModules.join(', ')}</td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -237,14 +250,14 @@ const Status = () => {
                                                                                 <td className='pl-5'>{selectedClient.endClient.country}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td className='py-1'>Client Time Period</td>
+                                                                                <td className='py-1'>Client No od Days</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.modules}</td>
+                                                                                <td className='pl-5'>{requestedModules.join(', ')}</td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -317,12 +330,12 @@ const Status = () => {
                                                                             <tr>
                                                                                 <td className='py-1'>Client Time Period</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.endClient.numberOfDays}</td>
+                                                                                <td className='pl-5'>{selectedClient.numberOfDays}</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td className='py-1'>Requested Module</td>
                                                                                 <td>:</td>
-                                                                                <td className='pl-5'>{selectedClient.modules}</td>
+                                                                                <td className='pl-5'>{requestedModules.join(', ')}</td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>

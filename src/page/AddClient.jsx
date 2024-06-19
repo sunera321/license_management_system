@@ -40,7 +40,7 @@ const AddClient = () => {
                     <th scope="col" className="px-6 py-4">Client Name</th>
                     <th scope="col" className="px-6 py-4">Email</th>
                     <th scope="col" className="px-6 py-4">Phone Number</th>
-                    <th scope="col" className="px-6 py-4">Address</th>
+                    <th scope="col" className="px-6 py-4">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,19 +58,21 @@ const AddClient = () => {
                           >
                             View More
                           </button>
-                        </td>
-                        <td>
-                          <button
-                            className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
+                          <Link
+                            to={{
+                              pathname: "/KeyGenerateForm",
+                              state: { clientId: client.id, partnerId: client.partnerId }
+                            }}
+                            className="px-2 py-1 ml-2 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
                           >
-                            Generate license key
-                          </button>
+                            Generate License Key
+                          </Link>
                         </td>
                       </tr>
                       {toggleState[`moreDetails${index + 1}`] && (
                         <tr className="border-b bg-neutral-100 dark:border-neutral-500">
-                          <td colSpan="7">
-                            <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
+                          <td colSpan="5">
+                            <div className="p-4 bg-white border-4 border-blue-100 rounded-md shadow-md">
                               <table className="w-full">
                                 <tbody>
                                   <tr>
@@ -110,7 +112,7 @@ const AddClient = () => {
                     </React.Fragment>
                   ))}
                   <tr>
-                    <td colSpan="7" className="px-6 py-4">
+                    <td colSpan="5" className="px-6 py-4">
                       <Link
                         to="/clientregistration"
                         className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
