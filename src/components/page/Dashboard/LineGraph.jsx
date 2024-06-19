@@ -18,7 +18,7 @@ const LineGraph = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:7295/api/LicenseKey');
+        const response = await fetch('https://localhost:7295/api/LicenseKey/statistics');
         const data = await response.json();
 
           // Filter data to include only 'Available' status
