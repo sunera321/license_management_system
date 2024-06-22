@@ -67,6 +67,7 @@ const AddClient = () => {
                           >
                             Generate License Key
                           </Link>
+
                         </td>
                       </tr>
                       {toggleState[`moreDetails${index + 1}`] && (
