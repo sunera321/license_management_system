@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import peopleHR from '../Images/people.png'; // Import your image
 import axios from 'axios';
+
 
 const ModuleDetails = () => {
   const { moduleId } = useParams();
@@ -66,6 +66,7 @@ const ModuleDetails = () => {
           ))}
         </ul>
       </div>
+   
     </div>
   );
 };
