@@ -66,7 +66,7 @@ const Status = () => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
                 const dataWithoutComment = result.data.filter(item => item.isFinanceApproval === false || item.isPartnerApproval === false);
-                const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true);
+                const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
                 const IssuedKeys =result.data.filter(item=>item.issued === true && item.isFinanceApproval === true && item.isPartnerApproval === true );
                 setRejectRequests(dataWithComment);
                 setPendingResults(dataWithoutComment);
@@ -232,7 +232,10 @@ const Status = () => {
                                                 {item.commentFinaceMgt}
                                             </td>
                                             <td className='px-0 align-middle border-b-2 border-slate-500'>
+                                            <div className='flex flex-row gap-5'>
                                                 <Reject value="Rejected" />
+                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))
@@ -462,7 +465,7 @@ const Status = () => {
                                             <div className='flex flex-row gap-5'>
                                               <IssuedKeys value="Issued" />
                                               
-                                              <img src={del} className='w-10 h-10 mr-10 rounded-3xl hover:bg-red-600'/>
+                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                               
                                             </div>
                                             
