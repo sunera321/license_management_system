@@ -13,6 +13,7 @@ import Pending from '../components/CommonModal/Pending';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import IssuedKeys from '../components/CommonModal/IssuedKey';
+import del from '../Images/del.png'
 
 
 const Status = () => {
@@ -65,7 +66,7 @@ const Status = () => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
                 const dataWithoutComment = result.data.filter(item => item.isFinanceApproval === false || item.isPartnerApproval === false);
-                const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true);
+                const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
                 const IssuedKeys =result.data.filter(item=>item.issued === true && item.isFinanceApproval === true && item.isPartnerApproval === true );
                 setRejectRequests(dataWithComment);
                 setPendingResults(dataWithoutComment);
@@ -78,6 +79,16 @@ const Status = () => {
                 setIsLoading(false);
             });
     };
+    const handledelete = (endClientId, requestKeyId) => {
+        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
+        .then (response => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+            });
+        }
+        )
+    }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
         axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
@@ -146,15 +157,15 @@ const Status = () => {
                            
                         </select>
                     </div>
-                    <table className="content-center w-2/4 mx-auto bg-white border border-separate table-auto mb-11 border-spacing-2 border-slate-500 caption-top">
-                        <thead className='bg-indigo-100'>
+                    <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
+                        <thead className='text-white bg-indigo-900'>
                             <tr>
-                                <th className='px-5 py-3 mx-0 text-lg font-semibold'>Request ID</th>
-                                <th className='px-20 py-0 mx-0 text-lg font-semibold'>Client name</th>
-                                <th className='px-10 py-0 mx-0 text-lg font-semibold'>Client Data</th>
-                                <th className='px-20 py-0 mx-0 text-lg font-semibold'>Partner Manager</th>
-                                <th className='px-20 py-0 mx-0 text-lg font-semibold'>Finance manager</th>
-                                <th className='px-2 py-0 mx-0 text-lg font-semibold'>Issue</th>
+                                <th className='px-5 py-2 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
+                                <th className='px-20 mx-0 text-lg font-semibold rounded-lg py-'>Client name</th>
+                                <th className='px-10 py-2 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+                                <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
+                                <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
+                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -221,7 +232,10 @@ const Status = () => {
                                                 {item.commentFinaceMgt}
                                             </td>
                                             <td className='px-0 align-middle border-b-2 border-slate-500'>
+                                            <div className='flex flex-row gap-5'>
                                                 <Reject value="Rejected" />
+                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))
@@ -447,9 +461,12 @@ const Status = () => {
                                         <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
                                             <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                         </td>
-                                        <td className='align-middle border-b-2 border-slate-500'>
-                                            <div>
+                                        <td className='border-b-2 border-slate-500'>
+                                            <div className='flex flex-row gap-5'>
                                               <IssuedKeys value="Issued" />
+                                              
+                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                              
                                             </div>
                                             
                                         </td>
