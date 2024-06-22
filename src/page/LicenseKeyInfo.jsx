@@ -52,7 +52,8 @@ function LicenseKeyInfo() {
   const fetchData = async () => {
     try {
       const response = await axios.get('https://localhost:7295/api/LicenseKey');
-      setData(response.data);
+      const sortedData = response.data.sort((a, b) => a.clintId - b.clintId);
+      setData(sortedData);
       setIsLoad(false);
      
     
