@@ -55,6 +55,13 @@ var ClintName=client.name;
                   <tr className='h-10'>
                     <td className="flex items-center text-lg text-gray-700">
                       <FaEnvelope className="mr-2" />
+                      <strong>Name</strong>
+                    </td>
+                    <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{client.name}</td>
+                  </tr>
+                  <tr className='h-10'>
+                    <td className="flex items-center text-lg text-gray-700">
+                      <FaEnvelope className="mr-2" />
                       <strong>Email</strong>
                     </td>
                     <td className="mb-5 text-lg text-gray-700"><strong className='pr-5'>:</strong>{client.email}</td>
