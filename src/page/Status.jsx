@@ -79,6 +79,16 @@ const Status = () => {
                 setIsLoading(false);
             });
     };
+    const handledelete = (endClientId, requestKeyId) => {
+        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
+        .then (response => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+            });
+        }
+        )
+    }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
         axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
@@ -147,7 +157,7 @@ const Status = () => {
                            
                         </select>
                     </div>
-                    <table className="content-center w-2/4 mx-auto bg-white border-separate table-auto mb-11 border-spacing-2 caption-top">
+                    <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
                         <thead className='text-white bg-indigo-900'>
                             <tr>
                                 <th className='px-5 py-2 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
