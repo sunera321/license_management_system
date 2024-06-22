@@ -41,15 +41,17 @@ function Navbar() {
         <ul className={`lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 ${isOpen ? 'block' : 'hidden'}`}>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/mainhome">Home</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-           
+
+            
           </svg>
           <li><a className="text-[16px]  text-gray-600 hover:text-gray-500 " href="/Module">Modules</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-            
+           
           </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="incomedashboard">Revenue</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-           
+          
+
           </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/contact_us">Contact</a></li>
         </ul>

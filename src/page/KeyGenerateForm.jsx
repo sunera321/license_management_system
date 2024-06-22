@@ -110,7 +110,7 @@ const KeyGenerateForm = () => {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
-                                    text: 'Failed to update the module.',
+                                    text: 'Module Already available.',
                                 });
                             });
                     })
@@ -128,7 +128,7 @@ const KeyGenerateForm = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Failed to submit Client form.',
+                    text: 'Please provide valid client ID.',
                 });
             });
     };
