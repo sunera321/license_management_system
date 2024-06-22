@@ -79,6 +79,7 @@ const KeyGenerateForm = () => {
             numberOfDays: ValidDate,
             endClientId: ClientID,
             partnerId: PartnerID,
+            issued:true
         };
 
         const updateModuleData = {
