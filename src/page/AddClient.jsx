@@ -76,6 +76,10 @@ const AddClient = () => {
                             <div className="p-4 bg-white border-4 border-blue-100 rounded-md shadow-md">
                               <table className="w-full">
                                 <tbody>
+                                <tr>
+                                    <td className="font-bold">Partner ID:</td>
+                                    <td>{client.partnerId}</td>
+                                  </tr>
                                   <tr>
                                     <td className="font-bold">City:</td>
                                     <td>{client.city}</td>
