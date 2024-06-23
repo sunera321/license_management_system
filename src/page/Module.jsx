@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-
 const Module = () => {
   const [modules, setModules] = useState([]);
 
@@ -67,7 +66,7 @@ const Module = () => {
           </Link>
         </div>
       </div>
-  
+   
     </div>
   );
 };

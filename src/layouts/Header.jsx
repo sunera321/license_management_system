@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Logo from '../Images/nav_logo.png';
 import SignOut from '../Images/NavBarPic/l.png'
 import Notification from '../Images/NavBarPic/N.png'
-import Path from '../components/CommonModal/Path';
 import { msalConfig } from '../Config';
 
 function Navbar() {
@@ -42,15 +41,15 @@ function Navbar() {
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/mainhome">Home</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
 
-            
+
           </svg>
           <li><a className="text-[16px]  text-gray-600 hover:text-gray-500 " href="/Module">Modules</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-           
+
           </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="incomedashboard">Revenue</a></li>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-          
+
 
           </svg>
           <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/contact_us">Contact</a></li>
@@ -60,13 +59,12 @@ function Navbar() {
         <div className={`lg:flex  ${isOpen ? 'block' : 'hidden'}`}>
           <div className='flex '>
             <a href='/notification'><img src={Notification} alt="Notificatione Icon" className="w-5 h-6 mt-1.5 mr-4"></img></a>
-            <a href="/Login" className=' flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl '>
-              <span className="flex-1 truncate hover:text-black group-hover:block">
-              <a href="#" onClick={handleLogout}><div className='onclick{handlelogout}'>Sign Out</div></a></span>
-              <div>
-                <div>
-                <a href="#" onClick={handleLogout}><img src={SignOut} alt="Generate Icon" className="w-6 h-6 " /></a>
-                </div>
+            <a href="/Login" className="flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl">
+              <div className="flex items-center space-x-2">
+                <button onClick={handleLogout} className="flex items-center space-x-2 focus:outline-none">
+                  <span className="truncate hover:text-black">Sign Out</span>
+                  <img src={SignOut} alt="Sign Out Icon" className="w-6 h-6" />
+                </button>
               </div>
             </a>
 

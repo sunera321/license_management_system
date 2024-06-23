@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -21,6 +22,11 @@ const ModuleDetails = () => {
     }
   }, [moduleId]);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   if (!module) {
     return <div>Loading...</div>; // Handle loading state or error gracefully
   }
@@ -29,13 +35,13 @@ const ModuleDetails = () => {
     <div className="py-20" style={{ paddingTop: '50px' }}>
       <div className="bg-gray-200 py-20 w-full mt-0">
         <div className="absolute top-12 right-20 mt-7 bg-white-800 rounded-full w-70 h-60 flex justify-center items-center">
-          <img src={module.imagePath} alt="People HR" className="w-60 h-50" />
+          <img src={module.imagePath} alt="Module" className="w-60 h-50" />
         </div>
         <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
           {module.modulename}
         </div>
         <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
-          Completed in {module.completedYear || module.createdData}
+          Completed in {module.completedYear || formatDate(module.createdData)}
         </div>
         <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
           Powered by {module.poweredBy || 'Hsenid'}

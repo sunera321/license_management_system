@@ -36,7 +36,7 @@ import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
-
+import RatingReview from  './components/page/ReviewRating/RatingReview';
 const msalInstance = new PublicClientApplication(msalConfig);
 
 
@@ -85,7 +85,7 @@ function App() {
 
           
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
-          
+          <Route path="/module/:moduleId/reviews" component={RatingReview} />
        
           
            
