@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMsal } from '@azure/msal-react';
+import Cookies from 'js-cookie';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
 import backgroundImage from '../components/asserts/Media/image1.jpg';
 import NavBar2 from '../components/page/loging/inc/NavBar2';
@@ -15,8 +16,9 @@ const SignInButton = ({ setUserRole }) => {
         scopes: ['openid', 'profile', 'User.Read'],
         prompt: 'select_account',
       });
+      console.log('Login successful');
     } catch (error) {
-      console.log(error);
+      console.log('Login error:', error);
     }
   };
 
@@ -32,6 +34,9 @@ const SignInButton = ({ setUserRole }) => {
           const data = await response.json();
           console.log('User Data from Graph API:', data);
           setUserData(data);
+          // Save user ID and email to cookies
+          Cookies.set('userId', data.id, { expires: 7 }); // expires in 7 days
+          Cookies.set('userEmail', data.mail || data.userPrincipalName, { expires: 7 }); // expires in 7 days
         } else {
           console.error('Failed to fetch user data from Graph API:', response.status, response.statusText);
         }
@@ -47,16 +52,12 @@ const SignInButton = ({ setUserRole }) => {
 
           const roles = rolesData.value;
 
-          // Extract appRoleId and save to session storage
           if (roles.length > 0) {
-            const roleIds = roles.map(role => role.appRoleId);
-            // Filter out any empty or null role IDs
-            const filteredRoleIds = roleIds.filter(id => id !== '00000000-0000-0000-0000-000000000000');
+            const roleIds = roles.map(role => role.appRoleId).filter(id => id !== '00000000-0000-0000-0000-000000000000');
 
-            if (filteredRoleIds.length > 0) {
-              sessionStorage.setItem('roleIds', filteredRoleIds.join(',')); // Join filtered roleIds into a comma-separated string
-              // Pass the first role ID back to the parent component
-              setUserRole(filteredRoleIds[0]);
+            if (roleIds.length > 0) {
+              sessionStorage.setItem('roleIds', roleIds.join(',')); 
+              setUserRole(roleIds[0]);
             } else {
               console.log('No valid roles found for the user');
             }
@@ -83,10 +84,11 @@ const SignInButton = ({ setUserRole }) => {
           fetchDataFromGraphAPI(response.accessToken);
 
         } catch (error) {
-          console.log(error);
+          console.log('Token acquisition error:', error);
         }
       }
     };
+
     checkAccount();
   }, [accounts, instance, setUserRole]);
 
