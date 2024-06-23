@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-
 const ModuleDetails = () => {
   const { moduleId } = useParams();
   const [module, setModule] = useState(null);
@@ -66,7 +65,6 @@ const ModuleDetails = () => {
           ))}
         </ul>
       </div>
-   
     </div>
   );
 };
