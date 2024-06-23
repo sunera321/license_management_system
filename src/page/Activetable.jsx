@@ -5,57 +5,14 @@ import Search from '../components/page/ControlPanel/Search'; // Import the Searc
 // Sample data of clients
 const clients = [
   {
-    id: "01120A",
-    name: "Manchee",
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2021-12-03"
-  },
-
-  {
-    id: "01121A",
-    name: "Sri Lanka Airline",
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2021-12-03"
-  },
-  {
-    id: "01122A",
-    name: "Maliban",
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2021-12-03"
-  },
-  {
-    id: "01125A",
-    name: "Manchee",
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2021-12-03"
-  },
-
-  {
-    id: "01126A",
-    name: "Manchee",
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2021-12-03"
-  },
-
-  {
-    id: "01127A",
-    name: "Maliban", 
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2024-12-03"
-  }, {
-    id: "01129A",
-    name: "Qatar Airways", 
-    email: "abh123@gmail.com",
-    issueDate: "2018-12-03",
-    expireDate: "2024-12-03"
+    id: "258",
+    name: "PERERA",
+    email: "Perera@gmail.com",
+    issueDate: "2024-06-20 ",
+    expireDate: "2025-06-20 "
   }
 
+  
 
 ];
 

@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   const availableLicenseKeys = 7;
   const expiredLicenseKeys = 2;
-  const activeLicenseKeys = 5;
+  const activeLicenseKeys = 1;
 
   const [isAvailableModalOpen, setIsAvailableModalOpen] = useState(false);
   const [isActiveModalOpen, setIsActiveModalOpen] = useState(false);
@@ -50,9 +50,9 @@ const Dashboard = () => {
   const closeExpiredModal = () => setIsExpiredModalOpen(false);
 
   return (
-    <div className="mt-10 mx-6">
+    <div className="mt-10 mx-2">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="rounded-lg h-[145px] bg-blue-200 p-5 shadow-md">
+        <div className="rounded-lg h-[145px] bg-blue-200 p-5 shadow-xl">
           <span className="text-lg font-bold text-gray-600">ISSUED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{availableLicenseKeys}</div>
           <div className="pt-4 ">
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="rounded-lg h-[145px] bg-emerald-200 p-5 shadow-md">
+        <div className="rounded-lg h-[145px] bg-emerald-200 p-5 shadow-xl">
           <span className="text-lg font-bold text-gray-600">ACTIVE LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{activeLicenseKeys}</div>
           <div className="pt-4">
@@ -100,7 +100,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="rounded-lg h-[145px] bg-violet-200 p-5 shadow-md">
+        <div className="rounded-lg h-[145px] bg-violet-200 p-5 shadow-xl">
           <span className="text-lg font-bold text-gray-600">EXPIRED LICENSE KEY</span>
           <div className="text-4xl font-bold text-gray-600">{expiredLicenseKeys}</div>
           <div className="pt-4">

@@ -22,7 +22,7 @@ const LineGraph = () => {
         const data = await response.json();
 
           // Filter data to include only 'Available' status
-          const activateData = data.filter(item => item.key_Status === 'Activated');
+          const activateData = data.filter(item => item.key_Status === 'Available');
           
         // Group available data by month and count total users per month
         const groupedData = activateData.reduce((acc, curr) => {
