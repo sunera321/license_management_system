@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { countries } from 'countries-list';
+import { ChevronDownIcon } from '@heroicons/react/solid'; // Import ChevronDownIcon from Heroicons
+
+const countryData = Object.values(countries);
 
 const ClientRegistration = () => {
-
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         partnerId: '',
         name: '',
         email: '',
@@ -17,7 +20,9 @@ const ClientRegistration = () => {
         website: '',
         industry: '',
         additionalInfo: ''
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -29,48 +34,34 @@ const ClientRegistration = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Perform form submission/validation logic here
-        // For example, you can check if required fields are filled and validate email format
+
         if (
-            formData.ClientName === '' ||
-            formData.Email === '' ||
-            formData.Phone_number === ''
+            formData.name === '' ||
+            formData.email === '' ||
+            formData.phoneNumber === ''
         ) {
             alert('Client Name, Email, and Phone Number are required!');
             return;
         }
 
-        try{
+        try {
             const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
-              headers: {
-                'Content-Type': 'application/json'
-              }
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             console.log('Data submitted successfully:', response.data);
             Swal.fire({
-    
                 position: "center",
                 icon: "success",
-                title: "New Client Add Successfully",
+                title: "New Client Added Successfully",
                 showConfirmButton: false,
                 timer: 1500
-        
-              })
-          } catch (error) {
+            });
+            setFormData(initialFormData); // Clear the form after submission
+        } catch (error) {
             console.error('Error submitting data:', error);
-          }
-   
-
-      
-
-     
-    };
-
-    // Email validation function
-    const validateEmail = (email) => {
-        // Basic email format validation
-        const re = /\S+@\S+\.\S+/;
-        return re.test(email);
+        }
     };
 
     return (
@@ -78,8 +69,8 @@ const ClientRegistration = () => {
             <PageHeader title={"Register Client"} />
 
             <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
-                <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg' onSubmit={handleSubmit}>
-                    <div className="flex mb-1">
+                <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg' onSubmit={handleSubmit}>
+                    <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Partner ID</label><br />
                             <input
@@ -103,7 +94,7 @@ const ClientRegistration = () => {
                         </div>
                     </div>
 
-                    <div className="flex mb-2">
+                    <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Email</label><br />
                             <input
@@ -115,7 +106,28 @@ const ClientRegistration = () => {
                                 required
                             /><br />
                         </div>
-                        <div className="w-1/2">
+                        <div className="relative w-1/2">
+                            <label className='mb-2 text-lg text-gray-700'>Country</label><br />
+                            <div className="flex items-center relative">
+                                <select
+                                    name="country"
+                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                    onChange={handleInputChange}
+                                    value={formData.country}
+                                    required
+                                >
+                                    <option value="">Select Country</option>
+                                    {countryData.map((country, index) => (
+                                        <option key={index} value={country.name}>{country.name}</option>
+                                    ))}
+                                </select>
+                                <ChevronDownIcon className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex mb-4">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Phone Number</label><br />
                             <input
                                 type="text"
@@ -126,10 +138,7 @@ const ClientRegistration = () => {
                                 required
                             /><br />
                         </div>
-                    </div>
-
-                    <div className="flex mb-3">
-                        <div className="w-1/2 mr-5">
+                        <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>City</label><br />
                             <input
                                 type="text"
@@ -139,7 +148,10 @@ const ClientRegistration = () => {
                                 value={formData.city}
                             /><br />
                         </div>
-                        <div className="w-1/2">
+                    </div>
+
+                    <div className="flex mb-4">
+                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Region</label><br />
                             <input
                                 type="text"
@@ -149,10 +161,7 @@ const ClientRegistration = () => {
                                 value={formData.region}
                             /><br />
                         </div>
-                    </div>
-
-                    <div className="flex mb-4">
-                        <div className="w-1/2 mr-5">
+                        <div className="w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Postal Code</label><br />
                             <input
                                 type="text"
@@ -162,21 +171,11 @@ const ClientRegistration = () => {
                                 value={formData.postalCode}
                             /><br />
                         </div>
-                        <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Country</label><br />
-                            <input
-                                type="text"
-                                name="country"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.country}
-                            /><br />
-                        </div>
                     </div>
 
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Web site</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Website</label><br />
                             <input
                                 type="text"
                                 name="website"
@@ -204,21 +203,17 @@ const ClientRegistration = () => {
                             className='w-full h-32 px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none resize-y focus:outline-none focus:shadow-outline'
                             onChange={handleInputChange}
                             value={formData.additionalInfo}
-                        ></textarea> <br />
+                        ></textarea><br />
                     </div>
 
-                    <br />
-                    <div className='mb-14'>
+                    <div className='text-right mb-4'>
                         <button
                             id='submit'
                             type='submit'
-                            className='max-w-xl px-8 py-2 text-white bg-blue-900 rounded-full float-end hover:bg-blue-1000'
+                            className='px-8 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-800 focus:outline-none focus:shadow-outline'
                         >SUBMIT</button>
                     </div>
                 </form>
-            </div>
-            <div className='mt-4'>
-
             </div>
         </div>
     );

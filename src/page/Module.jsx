@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PageHeader from '../components/CommonModal/pageHeader';
 
 const Module = () => {
   const [modules, setModules] = useState([]);
@@ -20,6 +21,7 @@ const Module = () => {
 
   return (
     <div className="px-10 py-10">
+       <PageHeader title={"Modules"} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {/* Existing Modules Cards */}
         {modules.map((module) => (
