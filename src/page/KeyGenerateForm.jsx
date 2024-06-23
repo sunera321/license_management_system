@@ -17,7 +17,8 @@ const KeyGenerateForm = () => {
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
     const [searchParams] = useSearchParams();
-    const key = searchParams.get('key');
+    const cli = searchParams.get('client');
+    const par = searchParams.get('partner');
 
     useEffect(() => {
         axios.get('https://localhost:7295/api/Module/getModuleswithId')
@@ -148,11 +149,11 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" placeholder={`(${key})`} value={key} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
+                            <input required type="text"  onChange={(e) => setClinetID(e.target.value)}  placeholder={`${cli}`} value={ClientID} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required onChange={(e) => setPartnerID(e.target.value)} placeholder={`${par}`}  value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                     </div>
 

@@ -9,8 +9,8 @@ const AddClient = () => {
   const [toggleState, setToggleState] = useState({});
   const navigate = useNavigate();
 
-  const goToGenerate = (id) => {
-    navigate(`/KeyGenerateForm?key=${id}`);
+  const goToGenerate = (cid,pid) => {
+    navigate(`/KeyGenerateForm?client=${cid}&partner=${pid}`);
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const AddClient = () => {
                           >
                             View More
                           </button>
-                          <button onClick={() => goToGenerate(client.id)} className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
+                          <button onClick={() => goToGenerate(client.id,client.partnerId)} className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
                             Generate License Key
                         </button>
 
