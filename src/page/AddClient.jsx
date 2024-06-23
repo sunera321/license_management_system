@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddClient = () => {
   const [clients, setClients] = useState([]);
   const [toggleState, setToggleState] = useState({});
+  const navigate = useNavigate();
+
+  const goToGenerate = (cid,pid) => {
+    navigate(`/KeyGenerateForm?client=${cid}&partner=${pid}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,15 +64,9 @@ const AddClient = () => {
                           >
                             View More
                           </button>
-                          <Link
-                            to={{
-                              pathname: "/KeyGenerateForm",
-                              state: { clientId: client.id, partnerId: client.partnerId }
-                            }}
-                            className="px-2 py-1 ml-2 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
-                          >
+                          <button onClick={() => goToGenerate(client.id,client.partnerId)} className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
                             Generate License Key
-                          </Link>
+                        </button>
 
                         </td>
                       </tr>
