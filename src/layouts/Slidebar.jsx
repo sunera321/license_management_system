@@ -13,14 +13,32 @@ import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
 import { msalConfig } from '../Config';
 
+const deleteCookie = (name) => {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+};
 const handleLogout = async () => {
   const logoutRequest = {
-    // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
     post_logout_redirect_uri: `${window.location.origin}`,
   };
 
   // Replace {tenantId} with the actual tenant ID
   const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
+  // Clear session storage
+  sessionStorage.clear();
+
+  // Clear local storage if needed
+  localStorage.clear();
+
+  // Delete the access token cookie
+  deleteCookie('userId');
+  deleteCookie('userEmail');
+  deleteCookie('userProfile');
+  
+  
+  
+
+
 
   // Redirect the user to Azure AD logout endpoint
   window.location.href = logoutUrl;
