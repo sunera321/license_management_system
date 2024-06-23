@@ -20,11 +20,9 @@
     "@testing-library/user-event": "^13.5.0",
     "assert": "^2.1.0",
     "autoprefixer": "^10.4.17",
-
     "axios": "^1.7.2",
     "chart.js": "^4.4.1",
     "firebase": "^10.12.2",
-
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -39,7 +37,7 @@
     "recharts": "^2.12.6",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "sweetalert2": "^11.10.5",
+    "sweetalert2": "^11.12.0",
     "url": "^0.11.3",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"

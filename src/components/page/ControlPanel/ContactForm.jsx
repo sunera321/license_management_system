@@ -2,12 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import backgroundImage from '../../asserts/Media/background1.jpg';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const ContactForm = ({ client, onCloseClick }) => {
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, subject, description,contactInfo } = e.target.elements;
-
+    setLoading(true);
     try {
       const response = await axios.post('https://localhost:7295/api/ContactMail', {
         to: email.value,
@@ -20,7 +22,7 @@ const ContactForm = ({ client, onCloseClick }) => {
 
       // Handle successful response
       console.log('Email sent:', response.data);
-  
+      setLoading(false);
       Swal.fire({
 
         position: "top-center",
@@ -103,6 +105,7 @@ const ContactForm = ({ client, onCloseClick }) => {
                     type="text"
                     id="contactInfo"
                     name="contactInfo"
+                    placeholder='optional'
                   />
                 </td>
               </tr>
@@ -110,12 +113,13 @@ const ContactForm = ({ client, onCloseClick }) => {
                 <td></td>
                 <td className=' pl-52'>
               
-                  <button type="submit" class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                  <button type="submit" disabled={loading} class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2">
                     <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                       <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
                       <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
                     </svg>
-                    Send Email
+                    {loading ? 'Sending...' : 'Send Email'}
+                   
                   </button>
                 </td>
               </tr>
