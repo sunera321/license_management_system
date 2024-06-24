@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/license_management_system/static/css/main.c6fb0d9a.css",
+    "main.js": "/license_management_system/static/js/main.4d0d5684.js",
+    "static/js/839.10d17366.chunk.js": "/license_management_system/static/js/839.10d17366.chunk.js",
+    "static/media/Screenshot 2024-04-23 112913.png": "/license_management_system/static/media/Screenshot 2024-04-23 112913.7f35cbb40302b00a62fc.png",
+    "static/media/del.png": "/license_management_system/static/media/del.abbf0f1c9a4090e97f57.png",
+    "static/media/background.jpg": "/license_management_system/static/media/background.efb7e2d75f8a3e7ccd9f.jpg",
+    "static/media/background1.jpg": "/license_management_system/static/media/background1.7275ca5e7776d7e5ce01.jpg",
+    "static/media/image1.jpg": "/license_management_system/static/media/image1.c8c940ccd78ad3e6e939.jpg",
+    "static/media/hsenid.png": "/license_management_system/static/media/hsenid.d629973268a6adc88164.png",
+    "static/media/nav_logo.png": "/license_management_system/static/media/nav_logo.52507487e126c3d78577.png",
+    "static/media/add-client.svg": "/license_management_system/static/media/add-client.c3a6cf23466ceaa1b78e29ec64c72603.svg",
+    "static/media/help.svg": "/license_management_system/static/media/help.2cbefb005ba7083db4bab49360f37762.svg",
+    "static/media/control.svg": "/license_management_system/static/media/control.554682bfcec6321455985c0a52433047.svg",
+    "static/media/license.svg": "/license_management_system/static/media/license.0fa04040fcf6d1487b63f3870f453fdb.svg",
+    "static/media/setting.svg": "/license_management_system/static/media/setting.a4706265538c0a091b6e1f70dd644f96.svg",
+    "static/media/approval.svg": "/license_management_system/static/media/approval.be11b6dd4e57cc0e12c859f5ed1d92d0.svg",
+    "static/media/logout.svg": "/license_management_system/static/media/logout.942f05c236078bd08a2f9545e7121b4a.svg",
+    "static/media/add-module.svg": "/license_management_system/static/media/add-module.b936cca85ee4b43866160c7f1629d621.svg",
+    "index.html": "/license_management_system/index.html",
+    "static/media/stat.svg": "/license_management_system/static/media/stat.e1842c48be1c068e040ef6d0ea705244.svg",
+    "static/media/generate.svg": "/license_management_system/static/media/generate.383b20378a66e0b1e65987419032340c.svg",
+    "static/media/menu-alt.svg": "/license_management_system/static/media/menu-alt.b578819a395f67bd353ea22b4d0647af.svg",
+    "static/media/dashboard.svg": "/license_management_system/static/media/dashboard.30c220d633b92c4c799810cc0bdbfdd2.svg",
+    "main.c6fb0d9a.css.map": "/license_management_system/static/css/main.c6fb0d9a.css.map",
+    "main.4d0d5684.js.map": "/license_management_system/static/js/main.4d0d5684.js.map",
+    "839.10d17366.chunk.js.map": "/license_management_system/static/js/839.10d17366.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6fb0d9a.css",
+    "static/js/main.4d0d5684.js"
+  ]
+}
