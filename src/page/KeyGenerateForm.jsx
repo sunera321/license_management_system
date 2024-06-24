@@ -86,8 +86,8 @@ const KeyGenerateForm = () => {
             commentFinaceMgt: "",
             commentPartnerMgt: "",
             numberOfDays: ValidDate,
-            endClientId: ClientID,
-            partnerId: PartnerID,
+            endClientId: cli,
+            partnerId: par,
             issued:false
         };
 
