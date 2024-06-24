@@ -68,7 +68,7 @@ function App() {
           <Route path="privacypolicy" element={<PrivacyPolicy />} />
           <Route path="profile" element={<Profile />} />
           <Route path="termsconditions" element={<TermsConditions />} />
-          <Route path="keygenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
         </Route>
       </Routes>
     </BrowserRouter>

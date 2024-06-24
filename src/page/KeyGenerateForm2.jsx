@@ -16,7 +16,7 @@ const KeyGenerateForm = () => {
     const [PartnerID, setPartnerID] = useState('');
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
-    const [searchParams] = useSearchParams();
+    
   
 
     useEffect(() => {

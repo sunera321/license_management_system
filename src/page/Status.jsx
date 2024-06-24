@@ -137,7 +137,7 @@ const Status = () => {
     return (
         <div>
             <div className='fixed top-20 right-2'>
-                <a href='/KeyGenerateForm'>
+                <a href='/KeyGenerateForm2'>
                 <BlueButton value="Generate Key" />
                 </a>
             </div>
