@@ -77,7 +77,7 @@ const KeyGenerateForm = () => {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
-            moduleID :Modules
+            
         };
 
         const requestKeyData = {

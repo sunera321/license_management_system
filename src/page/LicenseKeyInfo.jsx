@@ -24,16 +24,7 @@ function LicenseKeyInfo() {
 
 
   
-  const closepopup = () => {
-    setPopup(false);
-    setSelectedClient(null);
-  };
-
-  const conatctClinet = (client) => {
-    setClinetContact(true);
-    setClintmail(client);
-  };
-
+  
   const conatctClinetclose = () => {
     setClinetContact(false);
     setClintmail(null);
