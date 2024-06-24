@@ -15,7 +15,9 @@ const params = useParams();
    
     e.preventDefault();
     const { email, licenseKey } = e.target.elements;
+
     setLoading(true);
+
     console.log(licenseKey.value);
     try {
       const response = await axios.post('https://localhost:7295/api/KeyEmail', {
