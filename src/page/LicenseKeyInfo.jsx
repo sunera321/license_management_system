@@ -3,9 +3,10 @@ import axios from 'axios';
 import PageLoader from '../components/CommonModal/PageLoader';
 import Popup from '../components/page/ControlPanel/Popup';
 
+import ContactForm from '../components/page/ControlPanel/ContactForm';
+
 function LicenseKeyInfo() {
-  const itemsPerPage = 20;
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [statusFilter, setStatusFilter] = useState('');
   const [activationDateFilter, setActivationDateFilter] = useState('');
   const [expiryDateFilter, setExpiryDateFilter] = useState('');
@@ -17,23 +18,33 @@ function LicenseKeyInfo() {
   const [selectedClient, setSelectedClient] = useState(null);
   const [ClinetContact, setClinetContact] = useState(false);
   const [Clintmail, setClintmail] = useState(null);
+
+
+
+
+
   
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const nextPage = () => {
-    if (currentPage < Math.ceil(filteredRows.length / itemsPerPage)) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
+  const closepopup = () => {
+    setPopup(false);
+    setSelectedClient(null);
   };
 
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
+  const conatctClinet = (client) => {
+    setClinetContact(true);
+    setClintmail(client);
+  };
+
+  const conatctClinetclose = () => {
+    setClinetContact(false);
+    setClintmail(null);
+  };
+  const fetchClientData = async (clientId) => {
+    try {
+      const response = await axios.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
+      setClientData(response.data);
+    
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
   const closepopup = () => {
@@ -46,30 +57,31 @@ function LicenseKeyInfo() {
     setClintmail(client);
   };
 
+
+
   const fetchData = async () => {
     try {
       const response = await axios.get('https://localhost:7295/api/LicenseKey');
-      setData(response.data);
+
+      const sortedData = response.data.sort((a, b) => a.clintId - b.clintId);
+      setData(sortedData);
       setIsLoad(false);
+     
+    
+      
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  const fetchClientData = async (clientId) => {
-    try {
-      const response = await axios.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
-      setClientData(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
   useEffect(() => {
     fetchData();
   }, []);
   var clinetname=clientData.name;
   console.log(clinetname);
+
 
   const applyDateFilter = () => {
     const filteredData = data.filter((item) => {
@@ -122,6 +134,7 @@ function LicenseKeyInfo() {
   const handleExpiryDateFilterChange = (event) => {
     setExpiryDateFilter(event.target.value);
   };
+  
 
   return (
     <div className="mt-6 mb-8">
@@ -153,12 +166,14 @@ function LicenseKeyInfo() {
         ) : (
           <>
             <table className="min-w-full border-b-2">
-              <thead>
-                <tr className="border-2 border-gray-300 text-blue-500 text-[15px] gap-5">
-                  <th className="w-[280px] px-2 py-3 text-left">License key</th>
-                  <th className="text-left">Client ID</th>
+
+              <thead className=''>
+                <tr className="border-2 border-gray-300 text-blue-500 text-[15px] gap-3  ">
+                  <th className="px-5 text-left ">Client ID</th>
+                  <th className="text-left">Client Name</th>
                   <th className="text-left">Activation Date</th>
-                  <th className="text-left">Request Key</th>
+                  <th className="text-left">Request ID</th>
+
                   <th className="text-left">Expiry Date</th>
                   <th className="flex gap-1 px-2 py-3 text-left tea">
                     Status
@@ -179,12 +194,14 @@ function LicenseKeyInfo() {
               </thead>
               <tbody className="bg-white">
                 {filteredRows.map((data, index) => (
-                  <tr key={index} className="px-2 border-2 border-gray-300">
-                    <td className="px-2 whitespace-no-wrap border-b border-gray-500">
-                      {data.key_name.length > 20 ? data.key_name.substring(0, 20) + '...' : data.key_name}
+
+                  <tr key={index} className="border-2 border-gray-300 px-">
+                    <td className="px-5 whitespace-no-wrap border-b border-gray-500">
+                    {data.clintId}
                     </td>
                     <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
-                      clint name
+                    {data.clintName}
+
                     </td>
                     <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                       {new Date(data.activationDate).toLocaleDateString('en-GB')}
@@ -228,35 +245,17 @@ function LicenseKeyInfo() {
           </>
         )}
         <div className="mt-4 sm:flex-1 sm:flex sm:items-center sm:justify-between work-sans">
-          <div>
-            <span className="mr-2 text-gray-600">Page {currentPage} of {Math.ceil(data.length / itemsPerPage)}</span>
-          </div>
+        
           <div>
             <nav className="relative z-0 inline-flex shadow-sm">
-              <button
-                onClick={prevPage}
-                disabled={currentPage === 1}
-                className={`relative inline-flex items-center px-2 py-2 text-sm font-medium leading-5 ${currentPage === 1 ? 'text-gray-500' : 'text-blue-700'
-                  } transition duration-150 ease-in-out bg-white border border-gray-300 rounded-l-md hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 hover:bg-tertiary`}
-              >
+
+              <button >
                 Previous
               </button>
-              {Array.from({ length: Math.ceil(data.length / itemsPerPage) }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => paginate(i + 1)}
-                  className={`relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium leading-5 ${currentPage === i + 1 ? 'text-blue-700' : 'text-gray-500'
-                    } transition duration-150 ease-in-out bg-white border border-gray-300 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 hover:bg-tertiary`}
-                >
-                  {i + 1}
-                </button>
-              ))}
-              <button
-                onClick={() => moreData(data.clintId)}
-                disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
-                className={`relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium leading-5 ${currentPage === Math.ceil(data.length / itemsPerPage) ? 'text-gray-500' : 'text-blue-700'
-                  } transition duration-150 ease-in-out bg-white border border-gray-300 rounded-r-md hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 hover:bg-tertiary`}
-              >
+              
+            
+              <button>
+
                 Next
               </button>
             </nav>
@@ -271,6 +270,20 @@ function LicenseKeyInfo() {
           
         />
       )}
+
+
+      
+      {ClinetContact && Clintmail && (
+        <ContactForm
+          client={Clintmail}
+          onCloseClick={conatctClinetclose}
+          onSubmit={(data) => {
+            // Handle form submission here
+            console.log('Form submitted:', data);
+          }} 
+        />
+      )}
+
     </div>
   );
 }

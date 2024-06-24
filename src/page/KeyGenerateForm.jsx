@@ -1,39 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
 import axios from 'axios';
 
-
-
-
-
-
-
+import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const KeyGenerateForm = () => {
-    const [ClientID, setClinetID] = useState();
-    const [URL, setURL] = useState();
-    const [MacAddress, setSMA] = useState();
-    const [ValidDate, setVD] = useState();
-    const [Website, setWeb] = useState();
-    const [PartnerID, setPartnerID] = useState();
-    const [Modules, setModules] = useState();
 
+    const [ClientID, setClinetID] = useState('');
+    const [URL, setURL] = useState('');
+    const [MacAddress, setSMA] = useState('');
+    const [ValidDate, setVD] = useState('');
+    const [Website, setWeb] = useState('');
+    const [PartnerID, setPartnerID] = useState('');
+    const [selectedModules, setSelectedModules] = useState([]);
+    const [modules, setModules] = useState([]);
+    const [searchParams] = useSearchParams();
+    const cli = searchParams.get('client');
+    const par = searchParams.get('partner');
 
-    const [isChecked1, setIsChecked1] = useState(false);
-    const [isChecked2, setIsChecked2] = useState(false);
-    //const [modulesList, setModulesList] = useState([]);
-
-
-
-
+    useEffect(() => {
+        axios.get('https://localhost:7295/api/Module/getModuleswithId')
+            .then(response => {
+                setModules(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching modules:', error);
+            });
+    }, []);
 
 
     const validateMacAddress = (macAddress) => {
-        // Regular expression for validating MAC address
         const macAddressRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
         return macAddressRegex.test(macAddress);
+    };
+
+    const handleModuleChange = (moduleId) => {
+        setSelectedModules(prevSelectedModules => {
+            if (prevSelectedModules.includes(moduleId)) {
+                return prevSelectedModules.filter(id => id !== moduleId);
+            } else {
+                return [...prevSelectedModules, moduleId];
+            }
+        });
     };
 
     const handleSave = (e) => {
@@ -45,33 +56,30 @@ const KeyGenerateForm = () => {
                 title: 'Invalid MAC Address',
                 text: 'Please enter a valid MAC address.',
             });
-            return; // Prevent further execution
+            return;
         }
+
         const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
         if (!urlPattern.test(URL)) {
-            // URL is not in the correct format
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid URL',
                 text: 'Please enter a valid URL.',
             });
-            return; // Prevent further execution
+            return;
         }
 
-        // Define the URLs for both endpoints
-        const clientUrl = `https://localhost:7295/api/RequestKey/${ClientID}`;
+        const clientUrl = `https://localhost:7295/api/RequestKey/${cli}`;
         const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
+        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
 
-        // Prepare data for Client API
         const clientData = {
-
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
             moduleID :Modules
         };
 
-        // Prepare data for RequestKey API
         const requestKeyData = {
             isFinanceApproval: false,
             isPartnerApproval: false,
@@ -80,31 +88,47 @@ const KeyGenerateForm = () => {
             numberOfDays: ValidDate,
             endClientId: ClientID,
             partnerId: PartnerID,
-            moduleId: 1
-
+            issued:false
         };
 
-        // Send requests to both endpoints
+        const updateModuleData = {
+            endClientId: cli,
+            moduleIds: selectedModules
+        };
+
+        console.log('Client Data:', clientData);
+        console.log('Request Key Data:', requestKeyData);
+        console.log('Update Module Data:', updateModuleData);
+
         axios.patch(clientUrl, clientData)
             .then((clientResult) => {
-                // Client API call successful, now call RequestKey API
                 axios.post(requestKeyUrl, requestKeyData)
                     .then((requestKeyResult) => {
-                        // Both API calls successful
-                        Swal.fire({
-                            position: "top-center",
-                            icon: "success",
-                            title: "Form Submitted ",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+                        axios.post(updateModuleUrl, updateModuleData)
+                            .then((updateModuleResult) => {
+                                Swal.fire({
+                                    position: "top-center",
+                                    icon: "success",
+                                    title: "Form Submitted",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            })
+                            .catch((updateModuleError) => {
+                                console.log(updateModuleError);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Module Already available.',
+                                });
+                            });
                     })
                     .catch((requestKeyError) => {
                         console.log(requestKeyError);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Failed to submit Request form.',
+                            text: 'Failed to submit RequestKey form.',
                         });
                     });
             })
@@ -113,30 +137,28 @@ const KeyGenerateForm = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Failed to submit Client form.',
+                    text: 'Please provide valid client ID.',
                 });
             });
     };
 
-
-
     return (
-        <div  >
-
-            <PageHeader title='Key Generate' />
-            <div className=''>
-
-                <form onSubmit={handleSave} className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-200 rounded shadow-lg '>
-                    <img className='w-12 pb-3 mx-auto' src={generate} />
-                    <p className='pb-5 text-green-500'>Please provide follwing details for Generate a key</p>
+        <div>
+            <PageHeader title='Key Generate Form' />
+            <div>
+                <form onSubmit={handleSave} className='w-3/5 px-10 pt-10 pb-5 mx-auto mb-10 bg-gray-200 rounded shadow-lg'>
+                    <img className='w-12 pb-3 mx-auto' src={generate} alt="Generate" />
+                    <p className='pb-5 text-green-500'>Please provide following details to generate a key</p>
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" value={ClientID} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" onChange={(e) => setClinetID(e.target.value)} />
+                            <input required type="text" readOnly  setClinetID={ClientID}  placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+
+                            <input required  placeholder={`${par}`} readOnly  value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+
                         </div>
                     </div>
 
@@ -167,86 +189,28 @@ const KeyGenerateForm = () => {
                         </div>
                     </div>
 
-                    <label className='block mx-3 mb-0 text-base font-semibold text-gray-700 '>Select Modules</label><br />
-                    <div className='ml-5 '>
-
-
-                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex ">
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module1-checkbox-list" onChange={(e) => setModules(e.target.value)} value={"001"} type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2" />                                   
-                                     <label for="module1-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Banking, Finance & Insurance</label>
-                                </div>
-                            </li>
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module2-checkbox-list" onChange={(e) => setModules(e.target.value)} value={"002"} type="radio"   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
-                                    <label for="module2-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-black">Manufacturing and Retail</label>
-                                </div>
-                            </li>
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input  name="Modules" onChange={(e) => setModules(e.target.value)} value={"003"} id="module3-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 " />
-                                    <label for="module3-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Hospitality</label>
-                                </div>
-                            </li>
-
+                    <label className='block mx-3 mb-0 text-base font-semibold text-gray-700'>Select Modules</label><br />
+                    <div className='ml-5'>
+                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+                            {modules.map((module) => (
+                                <li key={module.modulesId} className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                                    <div className="flex items-center pl-3">
+                                        <input id={`checkbox-${module.modulesId}`} type="checkbox" value={module.modulesId} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" onChange={() => handleModuleChange(module.modulesId)} />
+                                        <label htmlFor={`checkbox-${module.modulesId}`} className="w-full py-3 ml-2 text-sm font-medium text-gray-900">{module.modulename}</label>
+                                    </div>
+                                </li>
+                            ))}
                         </ul>
 
-
-                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:text-white">
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={"004"}  id="module4-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                    <label for="module4-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Cloud-based HR solution</label>
-                                </div>
-                            </li>
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" onChange={(e) => setModules(e.target.value)} value={"005"} id="module5-checkbox-list" type="radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                    <label for="module5-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Employee Management </label>
-                                </div>
-                            </li>
-                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
-                                <div className="flex items-center bg-white ps-3">
-                                    <input name="Modules" id="module6-checkbox-list" type="radio" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                    <label for="module6-checkbox-list" className="w-full py-3 text-sm font-medium text-black ms-2 ">Module Name</label>
-                                </div>
-                            </li>
-
-                        </ul>
-                        <br />
-
-                        <div>
-                            <input className="mt-10 mr-5 leading-tight size-5" type="checkbox"
-                                name='TP' /><span className="text-lg ">Take Permission Hsenid Finanace</span>
-
-                        </div>
-
-
-                        <div>
-                            <input className="mt-10 mr-2 leading-tight size-5" type="checkbox"
-                                name='PM' /><span className="text-lg ">Take Permission Partner Manager</span>
-
-                        </div>
 
                     </div>
                     <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
-
                         <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
-
-
                     </div>
-
                 </form>
-
             </div>
-
         </div>
-
     );
 };
-
-
 
 export default KeyGenerateForm;

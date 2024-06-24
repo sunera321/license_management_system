@@ -1,5 +1,7 @@
 import './App.css';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
@@ -30,15 +32,13 @@ import Login from './page/Login';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
-import Expiredlicense from './page/Expiredlicense';
-import Activelicense from './page/Activelicense';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
-import Availablelicense from './page/Availablelicense';
+
 const msalInstance = new PublicClientApplication(msalConfig);
-// import Availablelicense from './page/Availablelicense';
+
 
 
 
@@ -56,9 +56,7 @@ function App() {
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
 
-          <Route path="availablelicense" element={<Availablelicense/>} />    
-          <Route path='activelicense' element={<Activelicense/>} />
-          <Route path='expiredlicense' element={<Expiredlicense/>} />
+      
           <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
@@ -85,9 +83,12 @@ function App() {
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
 
-          <Route path="moduledetails" Component ={ModuleDetails}/>
           
-
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
+          
+       
+          
+           
         </Route>
       </Routes>
     

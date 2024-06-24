@@ -38,8 +38,8 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClienthasKey');
-
+        const response = await axios.get('https://localhost:7295/api/EndClient/GetkeyHasEndClients');
+        
         setClients(response.data);
         setIsLoad(false)
       } catch (error) {

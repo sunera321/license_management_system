@@ -1,77 +1,3 @@
-// import React from 'react';
-// import { Line } from 'react-chartjs-2';
-// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement} from 'chart.js';
-
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
- 
-// );
-
-// const LineGraph = ({ chartData }) => {
-//   const options = {
-  
-//     responsive: true,
-//     interaction: {
-//       intersect: false,
-//       mode: 'index',
-//     },
-//     scales: {
-//       x: {
-//         grid: {
-//          display: false, 
-//          title: {
-//           display: true,
-//           text: 'Months',
-//          }
-//         },
-//       },
-//       y: {
-//         grid: {
-//           display: false,
-//           position: 'bottom'
-//         },
-//       },
-//     },
-//     maintainAspectRatio: false, 
-//     elements: {
-//       line: {
-//         tension: 0.3,
-//         borderWidth: 2,
-//       },
-//       point: {
-//         radius: 0,
-//       },
-//     },
-//   };
-//   chartData.datasets.forEach(dataset => {
-//     dataset.borderColor = 'black'; // Set the color of the line
-//     dataset.backgroundColor = 'transparent'; // No fill beneath the line
-//     dataset.pointRadius = 0; // Hide the points
-//     dataset.pointHoverRadius = 5; // Show point on hover
-//   });
-
-//   return (
-//     <div className="w-full px-4 md:px-0"> 
-//     <div className=" h-64 md:h-80 lg:h-96 "> 
-//         <Line data={chartData} options={options} />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LineGraph;
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
@@ -92,12 +18,16 @@ const LineGraph = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7284/api/client');
+        const response = await fetch('https://localhost:7295/api/LicenseKey/statistics');
         const data = await response.json();
 
-       /* Group data by month and count total users per month */
-        const groupedData = data.reduce((acc, curr) => {
-          const month = curr.date.split('-')[1];
+          // Filter data to include only 'Available' status
+          const activateData = data.filter(item => item.key_Status === 'Available');
+          
+        // Group available data by month and count total users per month
+        const groupedData = activateData.reduce((acc, curr) => {
+          // Extract the month from the activationDate field
+          const month = new Date(curr.activationDate).getMonth() + 1; // JavaScript months are 0-indexed
           if (!acc[month]) {
             acc[month] = 0;
           }
@@ -105,17 +35,20 @@ const LineGraph = () => {
           return acc;
         }, {});
 
-        /* Extract unique months */
-        const months = Object.keys(groupedData);
+        // Create labels for months
+        const months = Object.keys(groupedData).map(month => 
+          new Date(0, month - 1).toLocaleString('default', { month: 'long' })
+        );
 
-       /* Generate dataset for monthly users */
+        // Generate dataset for monthly users
         const dataset = {
-          label: 'Monthly Users',
+          label: 'Monthly Available Users',
           data: Object.values(groupedData),
-          borderColor: 'black',
-          backgroundColor: 'transparent',
-          pointRadius: 0,
-          pointHoverRadius: 5
+          borderColor: 'rgba(0, 123, 255, 0.8)',
+          backgroundColor: 'rgba(0, 123, 255, 0.5)',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: true
         };
 
         setChartData({
@@ -130,6 +63,7 @@ const LineGraph = () => {
     fetchData();
   }, []);
 
+ 
   const options = {
     responsive: true,
     interaction: {
