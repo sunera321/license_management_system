@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Accept from '../components/CommonModal/Accept'
 import Reject from '../components/CommonModal/Reject';
-import Provide from '../components/CommonModal/Provide';
-import Issue from '../components/CommonModal/Issue';
-import Disable from '../components/CommonModal/Disable';
+// import Provide from '../components/CommonModal/Provide';
+// import Issue from '../components/CommonModal/Issue';
+// import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../components/CommonModal/BlueButton';
@@ -18,21 +18,21 @@ import del from '../Images/del.png'
 
 const Status = () => {
     const [modal, setModal] = useState(false);
-    const [CID, setEditId] = useState('');
-    const [CName, setEditName] = useState('');
-    const [Email, setEditEmail] = useState('');
-    const [Partner, setPartner] = useState('');
-    const [Finance, setFinance] = useState('');
+    // const [CID, setEditId] = useState('');
+    // const [CName, setEditName] = useState('');
+    // const [Email, setEditEmail] = useState('');
+    // const [Partner, setPartner] = useState('');
+    // const [Finance, setFinance] = useState('');
     const [selectedClient, setSelectedClient] = useState(null);
-    const [status1, setStatus1] = useState(true);
-    const [status2, setStatus2] = useState(true);
+    // const [status1, setStatus1] = useState(true);
+    // const [status2, setStatus2] = useState(true);
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
-    const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+   // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
@@ -160,9 +160,11 @@ const Status = () => {
                     <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
                         <thead className='text-white bg-indigo-900'>
                             <tr>
+
                                 <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
                                 <th className='px-20 mx-0 text-lg font-semibold rounded-lg py-'>Client name</th>
                                 <th className='px-10 py-0 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
                                 <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>

@@ -8,6 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const KeyGenerateForm = () => {
+
     const [ClientID, setClinetID] = useState('');
     const [URL, setURL] = useState('');
     const [MacAddress, setSMA] = useState('');
@@ -29,6 +30,7 @@ const KeyGenerateForm = () => {
                 console.error('Error fetching modules:', error);
             });
     }, []);
+
 
     const validateMacAddress = (macAddress) => {
         const macAddressRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
@@ -75,6 +77,7 @@ const KeyGenerateForm = () => {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
+            
         };
 
         const requestKeyData = {
@@ -83,9 +86,8 @@ const KeyGenerateForm = () => {
             commentFinaceMgt: "",
             commentPartnerMgt: "",
             numberOfDays: ValidDate,
-            endClientId: cli,
-            partnerId: par,
-
+            endClientId: ClientID,
+            partnerId: PartnerID,
             issued:false
         };
 
@@ -154,7 +156,9 @@ const KeyGenerateForm = () => {
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
+
                             <input required  placeholder={`${par}`} readOnly  value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+
                         </div>
                     </div>
 
@@ -197,6 +201,7 @@ const KeyGenerateForm = () => {
                                 </li>
                             ))}
                         </ul>
+
 
                     </div>
                     <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
