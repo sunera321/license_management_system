@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageLoader from '../components/CommonModal/PageLoader';
 import Popup from '../components/page/ControlPanel/Popup';
+
 import ContactForm from '../components/page/ControlPanel/ContactForm';
 
 function LicenseKeyInfo() {
+
   const [statusFilter, setStatusFilter] = useState('');
   const [activationDateFilter, setActivationDateFilter] = useState('');
   const [expiryDateFilter, setExpiryDateFilter] = useState('');
@@ -17,7 +19,6 @@ function LicenseKeyInfo() {
   const [ClinetContact, setClinetContact] = useState(false);
   const [Clintmail, setClintmail] = useState(null);
 
-  
 
 
 
@@ -46,18 +47,29 @@ function LicenseKeyInfo() {
       console.error('Error fetching data:', error);
     }
   };
+  const closepopup = () => {
+    setPopup(false);
+    setSelectedClient(null);
+  };
+
+  const conatctClinet = (client) => {
+    setClinetContact(true);
+    setClintmail(client);
+  };
 
 
 
   const fetchData = async () => {
     try {
       const response = await axios.get('https://localhost:7295/api/LicenseKey');
+
       const sortedData = response.data.sort((a, b) => a.clintId - b.clintId);
       setData(sortedData);
       setIsLoad(false);
      
     
       
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -67,6 +79,8 @@ function LicenseKeyInfo() {
   useEffect(() => {
     fetchData();
   }, []);
+  var clinetname=clientData.name;
+  console.log(clinetname);
 
 
   const applyDateFilter = () => {
@@ -152,12 +166,14 @@ function LicenseKeyInfo() {
         ) : (
           <>
             <table className="min-w-full border-b-2">
+
               <thead className=''>
                 <tr className="border-2 border-gray-300 text-blue-500 text-[15px] gap-3  ">
                   <th className="px-5 text-left ">Client ID</th>
                   <th className="text-left">Client Name</th>
                   <th className="text-left">Activation Date</th>
                   <th className="text-left">Request ID</th>
+
                   <th className="text-left">Expiry Date</th>
                   <th className="flex gap-1 px-2 py-3 text-left tea">
                     Status
@@ -178,12 +194,14 @@ function LicenseKeyInfo() {
               </thead>
               <tbody className="bg-white">
                 {filteredRows.map((data, index) => (
+
                   <tr key={index} className="border-2 border-gray-300 px-">
                     <td className="px-5 whitespace-no-wrap border-b border-gray-500">
                     {data.clintId}
                     </td>
                     <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                     {data.clintName}
+
                     </td>
                     <td className="leading-5 text-blue-900 whitespace-no-wrap border-b border-gray-500">
                       {new Date(data.activationDate).toLocaleDateString('en-GB')}
@@ -230,12 +248,14 @@ function LicenseKeyInfo() {
         
           <div>
             <nav className="relative z-0 inline-flex shadow-sm">
+
               <button >
                 Previous
               </button>
               
             
               <button>
+
                 Next
               </button>
             </nav>
@@ -251,6 +271,7 @@ function LicenseKeyInfo() {
         />
       )}
 
+
       
       {ClinetContact && Clintmail && (
         <ContactForm
@@ -262,6 +283,7 @@ function LicenseKeyInfo() {
           }} 
         />
       )}
+
     </div>
   );
 }
