@@ -137,7 +137,7 @@ const Status = () => {
     return (
         <div>
             <div className='fixed top-20 right-2'>
-                <a href='/KeyGenerateForm'>
+                <a href='/KeyGenerateForm2'>
                 <BlueButton value="Generate Key" />
                 </a>
             </div>
@@ -160,9 +160,11 @@ const Status = () => {
                     <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
                         <thead className='text-white bg-indigo-900'>
                             <tr>
-                                <th className='px-5 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
+
+                                <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
                                 <th className='px-20 mx-0 text-lg font-semibold rounded-lg py-'>Client name</th>
-                                <th className='px-10 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+                                <th className='px-10 py-0 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
                                 <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
