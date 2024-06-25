@@ -32,7 +32,14 @@ function Navbar() {
     localStorage.clear();
 
     // Delete the access token cookie
-    deleteCookie('accessToken');
+    deleteCookie('userId');
+    deleteCookie('userEmail');
+    deleteCookie('userProfile');
+    
+    
+    
+
+
 
     // Redirect the user to Azure AD logout endpoint
     window.location.href = logoutUrl;

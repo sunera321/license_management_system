@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { MsalProvider } from '@azure/msal-react';
 import MainLayout from "./layouts/MainLayout";
 import MainLayout1 from "./layouts/MainLayout1";
-
 import Home from './page/Home';
 import IncomeDashboard from './page/IncomeDashboard';
 import About from './page/About';

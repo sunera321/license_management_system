@@ -31,11 +31,19 @@ function Navbar() {
     localStorage.clear();
 
     // Delete the access token cookie
-    deleteCookie('accessToken');
+    deleteCookie('userId');
+    deleteCookie('userEmail');
+    deleteCookie('userProfile');
+    
+    
+    
+
+
 
     // Redirect the user to Azure AD logout endpoint
     window.location.href = logoutUrl;
   };
+
   return (
     <nav className="bg-blue-500">
       <div className="flex items-center justify-between px-3 py-3 bg-slate-200">
