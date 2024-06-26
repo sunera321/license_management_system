@@ -36,6 +36,7 @@ const Status = () => {
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
+    const [All,setAll]=useState([]);
     
     const addpopup = (client) => {
         setModal(!modal);
@@ -148,7 +149,7 @@ const Status = () => {
                 <div className='mt-10 '>
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
-                            <option value="">Select Your Preference</option>
+                            <option value="All">Select Your Preference</option>
                             <option value="PendingRequests">Pending Requests</option>
                             <option value="RejectRequests">Rejected Requests</option>
                             <option value="AvailableLicense">Available Requests</option>
@@ -171,6 +172,7 @@ const Status = () => {
                             </tr>
                         </thead>
                         <tbody>
+                            
                             {
                             selectedDataType === 'RejectRequests' && (
                                 RejectRequests && RejectRequests.length > 0 ? (
