@@ -9,7 +9,6 @@ import ExpiredTable from './Expiredtable';
 import StatusBarGraph from '../components/page/Dashboard/statusBarGraph';
 import axios from 'axios';
 import StatusPieChart from '../components/page/Dashboard/piechart';
-import DownloadDropdown from '../components/page/Dashboard/DownloadDropdown';
 
 const customStyles = {
   content: {
@@ -184,13 +183,12 @@ const Dashboard = () => {
         {activeTab === 'totalUsers' && (
           <div className="flex-grow"> 
             <BarGraph />
-            <DownloadDropdown/>
           </div>
         )}
         {activeTab === 'operatingStatus' && (
           <div className="flex-grow">
             <StatusBarGraph/>
-            <DownloadDropdown/>
+
           </div>
         )}
       </div>

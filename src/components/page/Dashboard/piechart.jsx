@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer, Text } from 'recharts';
+import DownloadDropdown from './DownloadDropdown';
 
 const StatusPieChart = () => {
     const [data, setData] = useState([]);
@@ -17,11 +18,11 @@ const StatusPieChart = () => {
                 const processedData = Object.entries(statusCounts).map(([name, value]) => ({
                     name,
                     value,
-                    fill: name === 'Invalid Host URL' ? '#f94144' : 
-                         name === 'Invalid Mac Address' ? '#f3722c' : 
-                         '#43aa8b'  // Default fill for valid and other statuses
+                    fill: name === 'Invalid Host URL' ? '#f94144' :
+                        name === 'Invalid Mac Address' ? '#f3722c' :
+                            '#43aa8b'  // Default fill for valid and other statuses
                 }));
-                
+
                 setData(processedData);
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -83,6 +84,9 @@ const StatusPieChart = () => {
                     <Tooltip />
                 </PieChart>
             </ResponsiveContainer>
+            <div className="w-full flex justify-end mt-4">
+                <DownloadDropdown userData={data} />
+            </div>
         </div>
     );
 };
