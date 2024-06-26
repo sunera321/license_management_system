@@ -180,7 +180,7 @@ const Dashboard = () => {
           Operating Status
         </button>
       </div>
-      <div className="mt-5 p-2 sm:p-6 flex flex-col">
+      <div className="mt-5 mb-5 p-2 sm:p-6 flex flex-col">
         {activeTab === 'totalUsers' && (
           <div className="flex-grow"> 
             <BarGraph />

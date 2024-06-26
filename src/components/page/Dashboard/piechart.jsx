@@ -14,7 +14,6 @@ const StatusPieChart = () => {
                     return acc;
                 }, {});
 
-                const total = data.length;
                 const processedData = Object.entries(statusCounts).map(([name, value]) => ({
                     name,
                     value,

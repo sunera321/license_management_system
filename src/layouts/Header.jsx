@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../Images/nav_logo.png';
-import SignOut from '../Images/NavBarPic/l.png'
-import Notification from '../Images/NavBarPic/N.png'
+import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
 
 function Navbar() {
@@ -10,68 +9,57 @@ function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   const handleLogout = async () => {
     const logoutRequest = {
-      // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
       post_logout_redirect_uri: `${window.location.origin}`,
     };
 
-    // Replace {tenantId} with the actual tenant ID
     const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
-
-    // Redirect the user to Azure AD logout endpoint
     window.location.href = logoutUrl;
   };
 
   return (
-    <nav className="bg-blue-500">
-      <div className="flex items-center justify-between px-3 py-3 bg-slate-200">
-        <a className="text-3xl font-bold leading-none" href="#">
-          <div className="font-bold text-white ml-14 "><img src={Logo} alt="Logo" className="w-40" /></div>
-        </a>
-        <div className="lg:hidden">
-          <button className="flex items-center p-3 text-blue-600 navbar-burger" onClick={toggleMenu}>
-            <svg className="block w-4 h-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <title>Mobile menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+    <nav className="bg-white shadow-lg">
+      <div className="container mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="flex items-center">
+          <img src={Logo} alt="Logo" className="h-10" />
+        </div>
+        <div className="flex items-center lg:hidden">
+          <button onClick={toggleMenu} className="text-gray-500 focus:outline-none">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           </button>
         </div>
-        <ul className={`lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 ${isOpen ? 'block' : 'hidden'}`}>
-          <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/mainhome">Home</a></li>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-
-
-          </svg>
-          <li><a className="text-[16px]  text-gray-600 hover:text-gray-500 " href="/Module">Modules</a></li>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-
-          </svg>
-          <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="incomedashboard">Revenue</a></li>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-
-
-          </svg>
-          <li><a className="text-[16px] text-gray-600 hover:text-gray-500" href="/contact_us">Contact</a></li>
-        </ul>
-
-
-        <div className={`lg:flex  ${isOpen ? 'block' : 'hidden'}`}>
-          <div className='flex '>
-            <a href='/notification'><img src={Notification} alt="Notificatione Icon" className="w-5 h-6 mt-1.5 mr-4"></img></a>
-            <a href="/Login" className="flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl">
-              <div className="flex items-center space-x-2">
-                <button onClick={handleLogout} className="flex items-center space-x-2 focus:outline-none">
-                  <span className="truncate hover:text-black">Sign Out</span>
-                  <img src={SignOut} alt="Sign Out Icon" className="w-6 h-6" />
-                </button>
-              </div>
+        <div className={`lg:flex flex-grow justify-end items-center ${isOpen ? 'flex' : 'hidden'}`}>
+          <ul className="lg:flex lg:space-x-6">
+            <li className="relative group">
+              <a href="/mainhome" className="text-gray-700 px-4 py-2 rounded-md text-sm font-medium transition duration-300 group-hover:text-blue-500">Home</a>
+              <div className="absolute left-0 right-0 bottom-0 transform translate-y-2 h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </li>
+            <li className="relative group">
+              <a href="/Module" className="text-gray-700 px-4 py-2 rounded-md text-sm font-medium transition duration-300 group-hover:text-blue-500">Modules</a>
+              <div className="absolute left-0 right-0 bottom-0 transform translate-y-2 h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </li>
+            <li className="relative group">
+              <a href="/incomedashboard" className="text-gray-700 px-4 py-2 rounded-md text-sm font-medium transition duration-300 group-hover:text-blue-500">Revenue</a>
+              <div className="absolute left-0 right-0 bottom-0 transform translate-y-2 h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </li>
+            <li className="relative group">
+              <a href="/contact_us" className="text-gray-700 px-4 py-2 rounded-md text-sm font-medium transition duration-300 group-hover:text-blue-500">Contact</a>
+              <div className="absolute left-0 right-0 bottom-0 transform translate-y-2 h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </li>
+          </ul>
+          <div className="flex items-center ml-8"> 
+            <a href='/notification' className="text-gray-700 hover:text-blue-500 pr-4">
+              <img src={Notification} alt="Notification Icon" className="h-6 w-6" />
             </a>
-
+            <button onClick={handleLogout} className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-sm font-medium transition duration-300">
+              Logout
+            </button>
           </div>
         </div>
-
-
       </div>
     </nav>
   );
