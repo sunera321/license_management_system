@@ -36,7 +36,8 @@ const Status = () => {
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
-    const [All,setAll]=useState([]);
+   
+    
     
     const addpopup = (client) => {
         setModal(!modal);
@@ -149,7 +150,7 @@ const Status = () => {
                 <div className='mt-10 '>
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
-                            <option value="All">Select Your Preference</option>
+                            <option value=" ">Select Your Preference</option>
                             <option value="PendingRequests">Pending Requests</option>
                             <option value="RejectRequests">Rejected Requests</option>
                             <option value="AvailableLicense">Available Requests</option>
@@ -159,7 +160,7 @@ const Status = () => {
                         </select>
                     </div>
                     <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
-                        <thead className='text-white bg-indigo-900'>
+                        <thead  className={`${selectedDataType ? ' ' : 'hidden'} text-white bg-indigo-900`}>
                             <tr>
 
                                 <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
@@ -168,12 +169,13 @@ const Status = () => {
 
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
-                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
+                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                             {
+                                
                             selectedDataType === 'RejectRequests' && (
                                 RejectRequests && RejectRequests.length > 0 ? (
                                     RejectRequests.map((item, index) => (
