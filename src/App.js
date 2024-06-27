@@ -83,7 +83,6 @@ function App() {
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
 
-          
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
           <Route path="/module/:moduleId/reviews" component={RatingReview} />
        
