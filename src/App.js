@@ -32,8 +32,10 @@ import ClientMore from './page/ClientMore';
 import ValidateKey from './page/validatekey';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
+
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -80,7 +82,7 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
-
+          <Route path="addnotification" Component={AddNotification} />
           
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
           

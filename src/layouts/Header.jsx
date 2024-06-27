@@ -7,7 +7,7 @@ import { msalConfig } from '../Config';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasNewNotifications, setHasNewNotifications] = useState(false);
+  const [newNotificationCount, setNewNotificationCount] = useState(0); // State to track new notifications count
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -22,14 +22,16 @@ function Navbar() {
     window.location.href = logoutUrl;
   };
 
-  // Example function to simulate adding a new notification
+  // Function to simulate adding a new notification
   const addNotification = () => {
-    setHasNewNotifications(true);
+    // Increment the new notification count
+    setNewNotificationCount(prevCount => prevCount + 1);
   };
 
-  // Example function to simulate viewing notifications
+  // Function to simulate viewing notifications
   const viewNotifications = () => {
-    setHasNewNotifications(false); // Reset new notifications indicator after viewing
+    // Reset new notification count after viewing
+    setNewNotificationCount(0);
   };
 
   return (
@@ -67,8 +69,8 @@ function Navbar() {
           <div className='flex'>
             <a href='/notification' onClick={viewNotifications} className="relative">
               <img src={Notification} alt="Notification Icon" className="w-5 h-6 mt-1.5 mr-4" />
-              {hasNewNotifications && (
-                <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+              {newNotificationCount > 0 && (
+                <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">{newNotificationCount}</span>
               )}
             </a>
             <a href="/Login" className='flex items-center justify-center px-4 py-1.5 text-sm font-bold text-white transition duration-200 bg-blue-500 hover:bg-blue-600 rounded-xl'>

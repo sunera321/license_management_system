@@ -30,6 +30,7 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
+import AddNotification from './page/AddNotification';
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
           <Route path="privacypolicy" Component={PrivacyPolicy} />
           <Route path="profile" Component={Profile} />
           <Route path="termsconditions" Component={TermsConditions} />
+          <Route path="addnotification" component={AddNotification} />
           
         </Route>
       </Routes>

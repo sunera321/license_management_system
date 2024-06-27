@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { countries } from 'countries-list';
-import { ChevronDownIcon } from '@heroicons/react/solid'; // Import ChevronDownIcon from Heroicons
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 const countryData = Object.values(countries);
 
@@ -23,12 +26,30 @@ const ClientRegistration = () => {
     };
 
     const [formData, setFormData] = useState(initialFormData);
+    const [cityPlaceholder, setCityPlaceholder] = useState('City');
+    const [regionPlaceholder, setRegionPlaceholder] = useState('Region');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value
+        });
+    };
+
+    const handleCountryChange = (val) => {
+        setFormData({
+            ...formData,
+            country: val
+        });
+        setCityPlaceholder(`City in ${val}`);
+        setRegionPlaceholder(`Region in ${val}`);
+    };
+
+    const handleRegionChange = (val) => {
+        setFormData({
+            ...formData,
+            region: val
         });
     };
 
@@ -40,7 +61,7 @@ const ClientRegistration = () => {
             formData.email === '' ||
             formData.phoneNumber === ''
         ) {
-            alert('Client Name, Email, and Phone Number are required!');
+            alert('Partner ID,Client Name, Email, and Phone Number are required!');
             return;
         }
 
@@ -59,6 +80,7 @@ const ClientRegistration = () => {
                 timer: 1500
             });
             setFormData(initialFormData); // Clear the form after submission
+            window.location.href = 'http://localhost:3000/addclient';
         } catch (error) {
             console.error('Error submitting data:', error);
         }
@@ -72,17 +94,18 @@ const ClientRegistration = () => {
                 <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg' onSubmit={handleSubmit}>
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Partner ID</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Partner ID <span className="text-red-600">*</span></label><br />
                             <input
                                 type="text"
                                 name="partnerId"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.partnerId}
+                                required
                             /><br />
                         </div>
                         <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Client Name</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Client Name <span className="text-red-600">*</span></label><br />
                             <input
                                 type="text"
                                 name="name"
@@ -96,31 +119,26 @@ const ClientRegistration = () => {
 
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Email</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Email <span className="text-red-600">*</span></label><br />
                             <input
                                 type="email"
                                 name="email"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.email}
+                                placeholder=" example@example.com"
                                 required
                             /><br />
                         </div>
                         <div className="relative w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Country</label><br />
                             <div className="flex items-center relative">
-                                <select
-                                    name="country"
-                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                    onChange={handleInputChange}
+                                <CountryDropdown
                                     value={formData.country}
+                                    onChange={handleCountryChange}
+                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                     required
-                                >
-                                    <option value="">Select Country</option>
-                                    {countryData.map((country, index) => (
-                                        <option key={index} value={country.name}>{country.name}</option>
-                                    ))}
-                                </select>
+                                />
                                 <ChevronDownIcon className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                             </div>
                         </div>
@@ -128,37 +146,42 @@ const ClientRegistration = () => {
 
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Phone Number</label><br />
-                            <input
-                                type="text"
-                                name="phoneNumber"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
+                            <label className='mb-2 text-lg text-gray-700'>Phone Number <span className="text-red-600">*</span></label><br />
+                            <PhoneInput
+                                country={formData.country.toLowerCase()}
                                 value={formData.phoneNumber}
+                                onChange={phone => setFormData({ ...formData, phoneNumber: phone })}
+                                inputClass='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                specialLabel=''
                                 required
                             /><br />
                         </div>
-                        <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>City</label><br />
-                            <input
-                                type="text"
-                                name="city"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.city}
-                            /><br />
+                        <div className="relative w-1/2">
+                            <label className='mb-2 text-lg text-gray-700'>Region</label><br />
+                            <div className="flex items-center relative">
+                                <RegionDropdown
+                                    country={formData.country}
+                                    value={formData.region}
+                                    onChange={handleRegionChange}
+                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                    placeholder={regionPlaceholder}
+                                    required
+                                />
+                                <ChevronDownIcon className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+                            </div>
                         </div>
                     </div>
 
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Region</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>City</label><br />
                             <input
                                 type="text"
-                                name="region"
+                                name="city"
+                                placeholder={cityPlaceholder}
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
-                                value={formData.region}
+                                value={formData.city}
                             /><br />
                         </div>
                         <div className="w-1/2">
@@ -182,6 +205,7 @@ const ClientRegistration = () => {
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.website}
+                                placeholder="https://example.com"
                             /><br />
                         </div>
                         <div className="w-1/2">
