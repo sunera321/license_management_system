@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddClient = () => {
   const [clients, setClients] = useState([]);
   const [toggleState, setToggleState] = useState({});
+  const navigate = useNavigate();
+
+  const goToGenerate = (cid,pid) => {
+    navigate(`/KeyGenerateForm?client=${cid}&partner=${pid}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +46,7 @@ const AddClient = () => {
                     <th scope="col" className="px-6 py-4">Client Name</th>
                     <th scope="col" className="px-6 py-4">Email</th>
                     <th scope="col" className="px-6 py-4">Phone Number</th>
-                    <th scope="col" className="px-6 py-4">Address</th>
+                    <th scope="col" className="px-6 py-4">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,21 +64,22 @@ const AddClient = () => {
                           >
                             View More
                           </button>
-                        </td>
-                        <td>
-                          <button
-                            className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
-                          >
-                            Generate license key
-                          </button>
+                          <button onClick={() => goToGenerate(client.id,client.partnerId)} className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
+                            Generate License Key
+                        </button>
+
                         </td>
                       </tr>
                       {toggleState[`moreDetails${index + 1}`] && (
                         <tr className="border-b bg-neutral-100 dark:border-neutral-500">
-                          <td colSpan="7">
-                            <div className="p-4 bg-white border border-gray-300 rounded-md shadow-md">
+                          <td colSpan="5">
+                            <div className="p-4 bg-white border-4 border-blue-100 rounded-md shadow-md">
                               <table className="w-full">
                                 <tbody>
+                                <tr>
+                                    <td className="font-bold">Partner ID:</td>
+                                    <td>{client.partnerId}</td>
+                                  </tr>
                                   <tr>
                                     <td className="font-bold">City:</td>
                                     <td>{client.city}</td>
@@ -110,7 +117,7 @@ const AddClient = () => {
                     </React.Fragment>
                   ))}
                   <tr>
-                    <td colSpan="7" className="px-6 py-4">
+                    <td colSpan="5" className="px-6 py-4">
                       <Link
                         to="/clientregistration"
                         className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
