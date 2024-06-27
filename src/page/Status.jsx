@@ -36,6 +36,7 @@ const Status = () => {
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
+    const [All,setAll] = useState([RejectRequests,PendingResults,AvailableRequest,KeyIssued]);
    
     
     
@@ -150,7 +151,7 @@ const Status = () => {
                 <div className='mt-10 '>
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
-                            <option value=" ">Select Your Preference</option>
+                            <option value="All">Select Your Preference</option>
                             <option value="PendingRequests">Pending Requests</option>
                             <option value="RejectRequests">Rejected Requests</option>
                             <option value="AvailableLicense">Available Requests</option>
@@ -159,7 +160,7 @@ const Status = () => {
                            
                         </select>
                     </div>
-                    <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
+                    <table className={`${selectedDataType ? ' ' : 'hidden'}content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top`}>
                         <thead  className={`${selectedDataType ? ' ' : 'hidden'} text-white bg-indigo-900`}>
                             <tr>
 
