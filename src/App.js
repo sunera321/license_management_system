@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { MsalProvider } from '@azure/msal-react';
 import MainLayout from "./layouts/MainLayout";
 import MainLayout1 from "./layouts/MainLayout1";
-
+import Cookies from 'js-cookie';
 import Home from './page/Home';
 import IncomeDashboard from './page/IncomeDashboard';
 import About from './page/About';
@@ -64,8 +64,22 @@ const App = () => {
     return Promise.reject(error);
   });
 
+  const userId = Cookies.get('userId');
+  const email = Cookies.get('userEmail');
+  const name= Cookies.get('displayName');
   const renderRoutes = () => {
     if (userRole === 'b6fb7992-75fe-4d51-81e9-a62e2b8bd6ff') {
+      axios.post('https://localhost:7295/api/Partner/addPartner', {
+      userId,
+      email,
+      name,
+    })
+      .then(response => {
+        console.log('User data saved to database:', response.data);
+      })
+      .catch(error => {
+        console.error('Failed to save user data to database:', error);
+      });
       return (
         <Route path="/" element={<MainLayout1 />}>
           <Route path="controlpanel" element={<ControlPanel />} />
