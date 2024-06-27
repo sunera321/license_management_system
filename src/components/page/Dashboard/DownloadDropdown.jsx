@@ -46,7 +46,7 @@ const DownloadDropdown = ({ userData }) => {
                 </button>
             </div>
             {isOpen && (
-                <div className="absolute left-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="absolute right-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                         <button
                             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

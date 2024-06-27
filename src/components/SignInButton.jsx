@@ -6,6 +6,7 @@ import backgroundImage from '../components/asserts/Media/image1.jpg';
 import NavBar2 from '../components/page/loging/inc/NavBar2';
 import Footer2 from '../components/page/loging/inc/Footer2';
 
+
 const SignInButton = ({ setUserRole }) => {
   const { instance, accounts } = useMsal();
   const [userData, setUserData] = useState(null);

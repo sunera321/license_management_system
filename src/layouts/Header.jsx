@@ -3,10 +3,7 @@ import { useMsal } from '@azure/msal-react';
 import Logo from '../Images/nav_logo.png';
 import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
-import SignOut from '../Images/NavBarPic/l.png';
-import Notification from '../Images/NavBarPic/N.png';
-import { msalConfig } from '../Config';
-import Path from '../components/CommonModal/Path';
+
 
 const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
