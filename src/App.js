@@ -44,47 +44,17 @@ const msalInstance = new PublicClientApplication(msalConfig);
 
 
 function App() {
-  //accsess cookies and check if user is loged in
-
-  const userId = Cookies.get('userId');
-  const email = Cookies.get('userEmail');
-  const name='test';
-  console.log('User ID:', userId);
-  console.log('User Email:', email);
-  console.log('User Name:', name);
-
-  //save user id and email to database use asiox
-  if (userId && email) {
-    axios.post('https://localhost:7295/api/Partner/addPartner', {
-      userId,
-      email,
-      name
-    })
-      .then(response => {
-        console.log('User data saved to database:', response.data);
-      })
-      .catch(error => {
-        console.error('Failed to save user data to database:', error);
-      });
-  }
-  
-
-
 
   return (
     
     <BrowserRouter>
       <Routes>
-
         <Route path="/" element={<Home />} /> 
         <Route path="/login" element={<Login msalInstance={msalInstance} />} />
         <Route path="/" element={<MainLayout  />}>
-
           <Route path="mainhome" Component={Dashboard} />
           <Route path="controlpanel" Component={ControlPanel} />
           <Route path="about" Component={About} />
-
-      
           <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
           <Route path="addmodule" Component={AddModule} />
           <Route path="clientmore" Component={ClientMore} />
@@ -113,10 +83,7 @@ function App() {
            <Route path="keygenerateform2" Component={KeyGenerateForm2} />
           
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
-          
-       
-          
-           
+
         </Route>
       </Routes>
     
