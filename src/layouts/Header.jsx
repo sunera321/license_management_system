@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
+import { useMsal } from '@azure/msal-react';
 import Logo from '../Images/nav_logo.png';
 import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
+import SignOut from '../Images/NavBarPic/l.png';
+import Notification from '../Images/NavBarPic/N.png';
+import { msalConfig } from '../Config';
+import Path from '../components/CommonModal/Path';
 
+const deleteCookie = (name) => {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+};
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { instance } = useMsal();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
 
   const handleLogout = async () => {
     const logoutRequest = {
@@ -16,6 +26,26 @@ function Navbar() {
     };
 
     const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
+    // Clear session storage
+    sessionStorage.clear();
+
+    // Clear local storage if needed
+    localStorage.clear();
+
+    // Delete the access token cookie
+    deleteCookie('userId');
+    deleteCookie('userEmail');
+    deleteCookie('userProfile');
+    deleteCookie('displayName');
+    deleteCookie('roleIds');
+    
+    
+    
+
+
+
+    // Redirect the user to Azure AD logout endpoint
     window.location.href = logoutUrl;
   };
 

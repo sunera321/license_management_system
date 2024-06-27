@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,16 +22,16 @@ ChartJS.register(
 
 // Configuration options for the bar chart
 export const options = {
-  responsive: true, 
+  responsive: true,
   plugins: {
     title: {
       display: true,
-      text: 'Total Revenue', 
+      text: 'Total Revenue',
       position: 'bottom',
     },
     legend: {
       display: true,
-      position: 'bottom', 
+      position: 'bottom',
     },
   },
   scales: {
@@ -39,48 +39,71 @@ export const options = {
       ticks: {
         beginAtZero: true,
         callback: function(value) {
-          return value.toLocaleString(); 
+          return value.toLocaleString();
         },
       },
     },
     x: {
       grid: {
-        display: false, 
+        display: false,
       },
     },
   },
 };
 
-
-const labels = ['HRM', 'ESN', 'PeoplesHR', 'HRO', 'Tracking Systemsy', 'HRO', '07','08','09','10'];
-
-// Data for the bar chart
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Users',
-      data: [20, 30, 42, 35, 38, 60, 45, 50, 50, 30, 45],
-      backgroundColor: 'rgba(69, 96, 113, 0.5)',
-      barPercentage: 0.8, // Adjust overall width of bars (default: 0.9)
-      categoryPercentage: 0.9, // Adjust spacing between bars within the same category (default: 0.8)
-      barThickness: 'flex', // Use 'flex' to fit bars within the available space
-    },
-    {
-      label: 'Revenue',
-      data: [2000, 3000, 5000, 4000, 3000, 2000, 8000, 3500, 4500, 2500, 6000],
-      backgroundColor: 'rgba(12, 80, 126, 0.5)',
-      barPercentage: 0.8,
-      categoryPercentage: 0.9,
-      barThickness: 'flex',
-    },
-  ],
-};
-
 // Functional component to render the Bar Chart
 const Chart = () => {
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Revenue',
+        data: [],
+        backgroundColor: 'rgba(12, 80, 126, 0.5)',
+        barPercentage: 0.8,
+        categoryPercentage: 0.9,
+        barThickness: 'flex',
+      },
+    ],
+  });
+
+  useEffect(() => {
+    fetchData(); // Fetch data when component mounts
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      // Replace with your actual API endpoint
+      const response = await fetch('https://localhost:7295/api/Dashboard/module-revenue-2024');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+
+      // Process the fetched data and update chartData
+      const updatedData = {
+        labels: data.map(entry => entry.moduleName),
+        datasets: [
+          {
+            label: 'Revenue',
+            data: data.map(entry => entry.totalRevenue),
+            backgroundColor: 'rgba(12, 80, 126, 0.5)',
+            barPercentage: 0.8,
+            categoryPercentage: 0.9,
+            barThickness: 'flex',
+          },
+        ],
+      };
+
+      setChartData(updatedData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Optionally handle errors here, e.g., setChartData(initialData) to show initial static data
+    }
+  };
+
   return (
-    <Bar options={options} data={data} /> 
+    <Bar options={options} data={chartData} />
   );
 };
 

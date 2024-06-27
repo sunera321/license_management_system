@@ -32,6 +32,7 @@ import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
 import { useNavigate } from 'react-router-dom';
+import KeyGenerateForm2 from './page/KeyGenerateForm2';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="privacypolicy" element={<PrivacyPolicy />} />
           <Route path="profile" element={<Profile />} />
           <Route path="termsconditions" element={<TermsConditions />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
         </Route>
       </Routes>
     </BrowserRouter>
