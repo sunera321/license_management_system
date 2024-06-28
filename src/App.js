@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { MsalProvider } from '@azure/msal-react';
 import MainLayout from "./layouts/MainLayout";
 import MainLayout1 from "./layouts/MainLayout1";
-import Cookies from 'js-cookie';
 import Home from './page/Home';
 import IncomeDashboard from './page/IncomeDashboard';
 import About from './page/About';
@@ -39,8 +38,7 @@ import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
-import Availablelicense from './page/Availablelicense';
-import axios from 'axios';
+import RatingReview from  './components/page/ReviewRating/RatingReview';
 const msalInstance = new PublicClientApplication(msalConfig);
 
 const App = () => {
@@ -65,6 +63,52 @@ const App = () => {
     return Promise.reject(error);
   });
 
+function App() {
+  return (
+    
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<Home />} /> 
+        <Route path="/login" element={<Login msalInstance={msalInstance} />} />
+        <Route path="/" element={<MainLayout  />}>
+
+          <Route path="mainhome" Component={Dashboard} />
+          <Route path="controlpanel" Component={ControlPanel} />
+          <Route path="about" Component={About} />
+
+      
+          <Route path='licensekeyinfo' element={<LicenseKeyInfo/>} />
+          <Route path="addmodule" Component={AddModule} />
+          <Route path="clientmore" Component={ClientMore} />
+          <Route path="incomedashboard" Component={IncomeDashboard} />
+          <Route path="contact_us" Component={Contact_Us} />
+          <Route path="clientregistration" Component={ClientRegistration} />
+          <Route path="keygenerate" Component={KeyGenerate} />
+          <Route path="editprofilepartner" Component={EditProfilePartner} />
+          <Route path="editprofileuser" Component={EditProfileUser} />
+          <Route path="status" Component={Status} />
+          <Route path="/compeardata/:logkey" Component={CompearData} />
+          <Route path="statusofkey" Component={StatusOfKey} />
+          <Route path="validatekey" Component={ValidateKey}/>
+          <Route path="partnermanagerapproval" Component={PartnerManagerApproval} />
+          <Route path="finacialmanagerapproval" Component={FinacialManagerApproval} />
+          <Route path="notification" Component={Notification} />
+          <Route path="addclient" Component={AddClient} />
+          <Route path="clientdetials" Component={ClientDetials} />
+          <Route path="dashboard" Component={Dashboard} />
+          <Route path="/sendkey/:key" Component={SendKey} />
+          <Route path="keygenerateform" Component={KeyGenerateForm} />
+          <Route path="module" Component={Module} />
+          <Route path="privacypolicy" Component={PrivacyPolicy} />
+          <Route path="profile" Component={Profile} />
+          <Route path="termsconditions" Component={TermsConditions} />
+
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
+          <Route path="/module/:moduleId/reviews" component={RatingReview} />
+       
+          
+           
   const userId = Cookies.get('userId');
   const email = Cookies.get('userEmail');
   const name= Cookies.get('displayName');

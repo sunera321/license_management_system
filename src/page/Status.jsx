@@ -105,7 +105,7 @@ const Status = () => {
             .then(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'License Key Generated and Request Key Updated!',
+                    title: 'License Key Generated!',
                 });
                 navigate(`/sendkey/${key}`);
             })

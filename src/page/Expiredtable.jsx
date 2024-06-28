@@ -13,11 +13,10 @@ const ExpiredTable = () => {
     const fetchClients = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://localhost:7295/api/LicenseKey'); // Fetch all clients
-        // Filter clients for 'available' key status client-side
-        const availableClients = response.data.filter(client => client.key_status === 'Available');
-        console.log('API Response:', response.data); // Check what
-        setClients(availableClients);
+        const response = await axios.get('https://localhost:7295/api/LicenseKey/info'); 
+        const expiredClients = response.data.filter(client => client.keyStatus === 'Expired'); // Filter clients with 'Expired' status
+        console.log('API Response:', response.data); 
+        setClients(expiredClients);
         setError(null);
       } catch (err) {
         setError('Failed to fetch data');
@@ -46,12 +45,11 @@ const ExpiredTable = () => {
             <p>Error: {error}</p>
           ) : (
             <table className="w-full text-sm text-left border border-gray-200">
-              <thead className="text-xs uppercase bg-blue-200">
+              <thead className="text-xs uppercase bg-violet-200">
                 <tr>
                   <th scope="col" className="px-6 py-3">Client ID</th>
                   <th scope="col" className="px-6 py-3">Client Name</th>
                   <th scope="col" className="px-6 py-3">Email Address</th>
-                  <th scope="col" className="px-6 py-3">Issue Date</th>
                   <th scope="col" className="px-6 py-3">Expire Date</th>
                 </tr>
               </thead>
@@ -61,7 +59,6 @@ const ExpiredTable = () => {
                     <td className="px-2 py-2">{client.id}</td>
                     <td className="px-2 py-2">{client.name}</td>
                     <td className="px-2 py-2">{client.email}</td>
-                    <td className="px-2 py-2">{client.issueDate}</td>
                     <td className="px-2 py-2">{client.expireDate}</td>
                   </tr>
                 )) : <tr><td colSpan="5">No clients found</td></tr>}
