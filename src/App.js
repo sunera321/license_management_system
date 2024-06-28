@@ -102,7 +102,7 @@ const App = () => {
           <Route path="privacypolicy" element={<PrivacyPolicy />} />
           <Route path="profile" element={<Profile />} />
           <Route path="termsconditions" element={<TermsConditions />} />
-          <Route path="moduledetails" element={<ModuleDetails />} />
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="keygenerate" element={<KeyGenerate />} />
           <Route path="editprofilepartner" element={<EditProfilePartner />} />
           <Route path="editprofileuser" element={<EditProfileUser />} />
@@ -122,7 +122,7 @@ const App = () => {
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
           <Route path="contact_us" element={<Contact_Us />} />
-          <Route path="moduledetails" element={<ModuleDetails />} />
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="mainhome" element={<Dashboard />} />
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="incomedashboard" element={<IncomeDashboard />} />

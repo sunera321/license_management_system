@@ -109,7 +109,7 @@ const SignInButton = ({ setUserRole }) => {
               <p className="mt-32 mb-4 text-lg text-gray-600">Get started by signing in with Microsoft</p>
               <div className="flex items-center mt-10 logo-and-button">
                 <img src={microsoftLogo} alt="Microsoft Logo" className="w-10 h-10 mr-4" />
-                <button className="btn py-2 px-4 rounded-lg bg-gray-100 text-black hover:bg-gray-300 hover:text-gray-800" onClick={handleRedirect}>Sign in with Microsoft</button>
+                <button className="px-4 py-2 text-black bg-gray-100 rounded-lg btn hover:bg-gray-300 hover:text-gray-800" onClick={handleRedirect}>Sign in with Microsoft</button>
               </div>
             </div>
           </div>

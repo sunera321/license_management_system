@@ -49,12 +49,12 @@ const DownloadDropdown = ({ userData }) => {
                 <div className="absolute right-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                         <button
-                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
                             onClick={() => exportToCSV(userData)}>
                             Export to CSV
                         </button>
                         <button
-                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
                             onClick={() => exportToExcel(userData)}>
                             Export to Excel
                         </button>
