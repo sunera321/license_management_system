@@ -18,25 +18,20 @@ import del from '../Images/del.png'
 
 const Status = () => {
     const [modal, setModal] = useState(false);
-    // const [CID, setEditId] = useState('');
-    // const [CName, setEditName] = useState('');
-    // const [Email, setEditEmail] = useState('');
-    // const [Partner, setPartner] = useState('');
-    // const [Finance, setFinance] = useState('');
+   
     const [selectedClient, setSelectedClient] = useState(null);
-    // const [status1, setStatus1] = useState(true);
-    // const [status2, setStatus2] = useState(true);
+
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
-   // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+   
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
-    const [All,setAll] = useState([RejectRequests,PendingResults,AvailableRequest,KeyIssued]);
+    const [All,setAll] = useState([]);
    
     
     
@@ -66,7 +61,7 @@ const Status = () => {
         axios.get('https://localhost:7295/api/RequestKey')
         
             .then((result) => {
-                // Filter data where CommentFinaceMgt is NULL
+               setAll(response.data);
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
                 const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null)); ;
                 const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
