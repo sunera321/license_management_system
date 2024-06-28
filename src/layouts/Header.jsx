@@ -50,7 +50,7 @@ function Navbar() {
     <nav className="bg-white shadow-lg">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center">
-          <img src={Logo} alt="Logo" className="h-10" />
+          <img src={Logo} alt="Logo" className="h-7" />
         </div>
         <div className="flex items-center lg:hidden">
           <button onClick={toggleMenu} className="text-gray-500 focus:outline-none">
