@@ -26,7 +26,6 @@ import ClientRegistration from './page/ClientRegistration';
 import ValidateKey from './page/validatekey';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
-import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
 import axios from 'axios';
@@ -97,7 +96,6 @@ const App = () => {
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
           <Route path="contact_us" element={<Contact_Us />} />
-          <Route path="addnotification" component={<AddNotification/>} />
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="mainhome" element={<Dashboard />} />
           <Route path="controlpanel" element={<ControlPanel />} />
