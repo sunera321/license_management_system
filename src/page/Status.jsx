@@ -20,20 +20,17 @@ const Status = () => {
     const [modal, setModal] = useState(false);
    
     const [selectedClient, setSelectedClient] = useState(null);
-
+    
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
-   
+   // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
-    const [All,setAll] = useState([]);
-   
-    
     
     const addpopup = (client) => {
         setModal(!modal);
@@ -61,7 +58,7 @@ const Status = () => {
         HTTPService.get('api/RequestKey')
         
             .then((result) => {
-               setAll(response.data);
+                // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
                 const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null)); ;
                 const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
@@ -146,7 +143,7 @@ const Status = () => {
                 <div className='mt-10 '>
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
-                            <option value="All">Select Your Preference</option>
+                            <option value="">Select Your Preference</option>
                             <option value="PendingRequests">Pending Requests</option>
                             <option value="RejectRequests">Rejected Requests</option>
                             <option value="AvailableLicense">Available Requests</option>
@@ -155,8 +152,8 @@ const Status = () => {
                            
                         </select>
                     </div>
-                    <table className={`${selectedDataType ? ' ' : 'hidden'}content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top`}>
-                        <thead  className={`${selectedDataType ? ' ' : 'hidden'} text-white bg-indigo-900`}>
+                    <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
+                        <thead className='text-white bg-indigo-900'>
                             <tr>
 
                                 <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
@@ -165,13 +162,11 @@ const Status = () => {
 
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
-                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Status</th>
+                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
                             {
-                                
                             selectedDataType === 'RejectRequests' && (
                                 RejectRequests && RejectRequests.length > 0 ? (
                                     RejectRequests.map((item, index) => (
