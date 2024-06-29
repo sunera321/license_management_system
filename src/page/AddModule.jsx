@@ -13,7 +13,7 @@ const AddModule = () => {
     features: '',
     moduleDescription: '',
     imagePath: '',
-    cost: '' // Added cost field
+    cost: '' // cost field
   });
 
   const [image, setImage] = useState(null);
@@ -52,7 +52,7 @@ const AddModule = () => {
 
       uploadTask.on(
         'state_changed',
-        snapshot => {},
+        snapshot => { },
         error => {
           console.error(error);
           setUploading(false);
@@ -64,7 +64,7 @@ const AddModule = () => {
               const response = await HTTPService.post('api/Module', {
                 ...formData,
                 imagePath: url,
-                modulecost: formData.cost // Include the modulecost field here
+                modulecost: formData.cost //  modulecost field 
               }, {
                 headers: {
                   'Content-Type': 'application/json'
