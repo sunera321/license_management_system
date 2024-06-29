@@ -10,7 +10,7 @@ const ModuleDetails = () => {
   useEffect(() => {
     const fetchModuleDetails = async () => {
       try {
-        const response = await HTTPService.get(`api/Module/getModuleswithId/${moduleId}`);
+        const response = await HTTPService.get(`api/Module/${moduleId}`);
         setModule(response.data);
       } catch (error) {
         console.error('Error fetching module details:', error);
