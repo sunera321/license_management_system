@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import PageHeader from '../components/CommonModal/pageHeader';
+import HTTPService from '../Service/HTTPService';
 
 function PartnerManagerApproval() {
   const [clients, setClients] = useState([]);
@@ -14,7 +15,7 @@ function PartnerManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey')
+    HTTPService.get('api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
@@ -26,7 +27,7 @@ function PartnerManagerApproval() {
   }, []);
   const fetchModules = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setRequestedModules(prevModules => ({
         ...prevModules,
         [clientId]: response.data
@@ -38,9 +39,8 @@ function PartnerManagerApproval() {
   const navigate = useNavigate();
 
   const handleUpdate = (request_id) => {
-    const url = `https://localhost:7295/api/RequestKey/${request_id}/SetPartnerTrue`;
-
-    axios.patch(url)
+     
+    HTTPService.patch(`api/RequestKey/${request_id}/SetPartnerTrue`)
       .then((result) => {
         console.log('Data Updated Successfully');
         Swal.fire({
@@ -61,9 +61,9 @@ function PartnerManagerApproval() {
   }
 
   const handleSubmitRejection = () => {
-    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectPartnerPart`;
+    
 
-    axios.patch(url, JSON.stringify(rejectionReason), {
+    HTTPService.patch(`api/RequestKey/${selectedRequestId}/RejectPartnerPart`, JSON.stringify(rejectionReason), {
       headers: {
         'Content-Type': 'application/json'
       }

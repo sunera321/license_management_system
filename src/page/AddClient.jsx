@@ -3,7 +3,7 @@ import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import HTTPService from '../Service/HTTPService';
 const AddClient = () => {
   const [clients, setClients] = useState([]);
   const [toggleState, setToggleState] = useState({});
@@ -16,7 +16,7 @@ const AddClient = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClient');
+        const response = await HTTPService.get('api/EndClient/getEndClient');
         setClients(response.data); // Assuming response.data is an array of clients
       } catch (error) {
         console.error('Error fetching clients:', error);

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import HTTPService from '../Service/HTTPService';
 const ModuleDetails = () => {
   const { moduleId } = useParams();
   const [module, setModule] = useState(null);
@@ -10,7 +10,7 @@ const ModuleDetails = () => {
   useEffect(() => {
     const fetchModuleDetails = async () => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/Module/${moduleId}`);
+        const response = await HTTPService.get(`api/Module/${moduleId}`);
         setModule(response.data);
       } catch (error) {
         console.error('Error fetching module details:', error);
@@ -33,17 +33,17 @@ const ModuleDetails = () => {
 
   return (
     <div className="py-20" style={{ paddingTop: '50px' }}>
-      <div className="bg-gray-200 py-20 w-full mt-0">
-        <div className="absolute top-12 right-20 mt-7 bg-white-800 rounded-full w-70 h-60 flex justify-center items-center">
+      <div className="w-full py-20 mt-0 bg-gray-200">
+        <div className="absolute flex items-center justify-center rounded-full top-12 right-20 mt-7 bg-white-800 w-70 h-60">
           <img src={module.imagePath} alt="Module" className="w-60 h-50" />
         </div>
-        <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
+        <div className="absolute font-bold text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
           {module.modulename}
         </div>
-        <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
+        <div className="absolute font-bold text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
           Completed in {module.completedYear || formatDate(module.createdData)}
         </div>
-        <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
+        <div className="absolute text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
           Powered by {module.poweredBy || 'Hsenid'}
         </div>
       </div>

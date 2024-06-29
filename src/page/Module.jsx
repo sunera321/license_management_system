@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
-
+import HTTPService from '../Service/HTTPService';
 const Module = () => {
   const [modules, setModules] = useState([]);
 
   useEffect(() => {
     const fetchModules = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/Module/getModulesWithId');
+        const response = await HTTPService.get('api/Module/getModulesWithId');
         setModules(response.data);
       } catch (error) {
         console.error('Error fetching modules:', error);
@@ -22,16 +22,16 @@ const Module = () => {
   return (
     <div className="px-10 py-10">
        <PageHeader title={"Modules"} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {/* Existing Modules Cards */}
         {modules.map((module) => (
-          <div key={module.modulesId} className="flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden">
+          <div key={module.modulesId} className="flex flex-col items-center overflow-hidden bg-white rounded-lg shadow-lg">
             <Link to={`/module/moduledetails/${module.modulesId}`} className="w-full">
               <div className="w-full h-48 overflow-hidden">
                 <img
                   src={module.imagePath || 'default-image-path.jpg'}
                   alt={`Module ${module.modulesId}`}
-                  className="w-full h-full object-contain"
+                  className="object-contain w-full h-full"
                 />
               </div>
               <div className="p-5">
@@ -43,12 +43,12 @@ const Module = () => {
         ))}
 
         {/* Add Module Card */}
-        <div className="flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="flex flex-col items-center overflow-hidden bg-white rounded-lg shadow-lg">
           <Link to="/addmodule" className="w-full">
-            <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+            <div className="flex items-center justify-center w-full h-48 bg-gray-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-24 w-24 text-gray-600"
+                className="w-24 h-24 text-gray-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

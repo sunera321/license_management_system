@@ -70,9 +70,9 @@ const KeyGenerateForm = () => {
         }
 
         // Define the URLs for both endpoints
-        const clientUrl = `https://localhost:7295/api/RequestKey/${ClientID}`;
-        const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
+        const clientUrl = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${ClientID}`;
+        const requestKeyUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/addRequestKey';
+        const updateModuleUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/UpdateModule';
         //  Client API
         const clientData = {
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import HTTPService from '../Service/HTTPService';
 const ClientRegistration = () => {
 
     const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const ClientRegistration = () => {
         }
 
         try{
-            const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
+            const response = await HTTPService.post('api/EndClient/addEndClient', formData, {
               headers: {
                 'Content-Type': 'application/json'
               }

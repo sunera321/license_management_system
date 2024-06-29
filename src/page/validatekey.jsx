@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageLoader from '../components/CommonModal/PageLoader';
-
+import HTTPService from '../Service/HTTPService';
 const ValidateKey = () => {
   const [logDtl, setLogDtl] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -11,7 +11,7 @@ const ValidateKey = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo');
+        const response = await HTTPService.get('api/LogingValidateInfo/GetAllClientServerInfo');
         const sortedData = response.data.sort((a, b) => new Date(b.logTime) - new Date(a.logTime));
         setLogDtl(sortedData);
         setFilteredData(sortedData);

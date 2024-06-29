@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Search from '../components/page/ControlPanel/Search';
+import HTTPService from '../Service/HTTPService';
 
 const AvailableTable = () => {
   const [clients, setClients] = useState([]);
@@ -12,7 +13,7 @@ const AvailableTable = () => {
     const fetchClients = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://localhost:7295/api/LicenseKey/info');
+        const response = await HTTPService.get('api/LicenseKey/info');
         const activeClients = response.data.filter(client => client.keyStatus === 'Activated');
         setClients(activeClients);
         setError(null);
@@ -34,7 +35,7 @@ const AvailableTable = () => {
   return (
     <div>
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
-      <div className="container mx-auto px-2 sm:px-6 lg:px-8 w-3/4">
+      <div className="container w-3/4 px-2 mx-auto sm:px-6 lg:px-8">
         <div className="overflow-x-auto shadow-md sm:rounded-lg">
           {loading ? (
             <p>Loading...</p>

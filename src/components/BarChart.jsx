@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Chart } from 'react-google-charts';
-
+import HTTPService from '../Service/HTTPService';
 // Functional component to render the BarChart using Google Charts
 function BarChart() {
   const [chartData, setChartData] = useState(null);
@@ -9,7 +9,7 @@ function BarChart() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/Dashboard/top-modules')
+    HTTPService.get('api/Dashboard/top-modules')
       .then(response => {
         const data = response.data;
 

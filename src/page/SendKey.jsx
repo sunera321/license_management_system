@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import HTTPService from '../Service/HTTPService';
 
 const SendKey = () => {
 // Take the parameter of URL
@@ -20,7 +21,7 @@ const params = useParams();
 
     console.log(licenseKey.value);
     try {
-      const response = await axios.post('https://localhost:7295/api/KeyEmail', {
+      const response = await HTTPService.post('api/KeyEmail', {
         to: email.value,
         licenseKey: key,
       });
