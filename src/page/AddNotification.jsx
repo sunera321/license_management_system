@@ -17,7 +17,7 @@ const AddNotification = () => {
         date: new Date().toISOString(),
       };
 
-      // Example API call to save notification
+      //API call to save notification
       const response = await axios.post('https://localhost:7295/api/Notifications/addNotification', newNotification);
       console.log('Notification saved:', response.data);
 

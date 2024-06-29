@@ -11,7 +11,7 @@ const AddClient = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://localhost:7295/api/EndClient/getEndClient');
-        setClients(response.data); // Assuming response.data is an array of clients
+        setClients(response.data); //  response.data is an array of clients
       } catch (error) {
         console.error('Error fetching clients:', error);
       }

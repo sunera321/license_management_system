@@ -16,7 +16,7 @@ import { msalConfig } from '../Config';
 
 const handleLogout = async () => {
   const logoutRequest = {
-    // Specify the post_logout_redirect_uri where Azure AD should redirect after logout
+    // Specify the post logout redirect uri where Azure AD should redirect after logout
     post_logout_redirect_uri: `${window.location.origin}`,
   };
 
