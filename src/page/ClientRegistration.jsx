@@ -10,6 +10,9 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 const countryData = Object.values(countries);
 
+import HTTPService from '../Service/HTTPService';
+
+
 const ClientRegistration = () => {
     const initialFormData = {
         partnerId: '',
@@ -65,11 +68,13 @@ const ClientRegistration = () => {
             return;
         }
 
-        try {
-            const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+
+        try{
+            const response = await HTTPService.post('api/EndClient/addEndClient', formData, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+
             });
             console.log('Data submitted successfully:', response.data);
             Swal.fire({

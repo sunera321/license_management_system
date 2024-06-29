@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
+
 import PageLoader from '../components/CommonModal/PageLoader';
+
+
+import HTTPService from '../Service/HTTPService';
 
 const Module = () => {
   const [modules, setModules] = useState([]);
@@ -11,7 +15,7 @@ const Module = () => {
   useEffect(() => {
     const fetchModules = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/Module/getModulesWithId');
+        const response = await HTTPService.get('api/Module/getModulesWithId');
         setModules(response.data);
       } catch (error) {
         console.error('Error fetching modules:', error);
@@ -25,6 +29,7 @@ const Module = () => {
 
   return (
     <div className="px-10 py-10">
+
       <PageHeader title={"Modules"} />
       {isLoading ? (
         <PageLoader />
@@ -67,6 +72,7 @@ const Module = () => {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
+
               </div>
               <div className="p-5">
                 <p className="text-lg font-bold text-blue-500 hover:underline">Add Module</p>
@@ -74,6 +80,7 @@ const Module = () => {
               </div>
             </Link>
           </div>
+
         </div>
       )}
     </div>

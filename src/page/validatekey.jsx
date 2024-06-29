@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@material-tailwind/react';
 import axios from 'axios';
-
+import PageLoader from '../components/CommonModal/PageLoader';
+import HTTPService from '../Service/HTTPService';
 const ValidateKey = () => {
-  
   const [logDtl, setLogDtl] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterValue, setFilterValue] = useState('');
@@ -12,7 +11,7 @@ const ValidateKey = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/LogingValidateInfo/GetAllClientServerInfo');
+        const response = await HTTPService.get('api/LogingValidateInfo/GetAllClientServerInfo');
         const sortedData = response.data.sort((a, b) => new Date(b.logTime) - new Date(a.logTime));
         setLogDtl(sortedData);
         setFilteredData(sortedData);
@@ -21,98 +20,117 @@ const ValidateKey = () => {
         console.error('Error fetching data:', error);
       }
     };
-  
     fetchData();
   }, []);
-  
 
-  const handleFilterChange = (e) => {
-    setFilterValue(e.target.value);
+  const handleFilterChange = (event) => {
+    const value = event.target.value;
+    setFilterValue(value);
+    applyFilter(value);
   };
 
-  const applyFilter = () => {
-    if (filterValue === '') {
+  const applyFilter = (value) => {
+    if (value === '') {
       setFilteredData(logDtl);
     } else {
-      const filtered = logDtl.filter((item) => item.statusCode === filterValue);
+      const filtered = logDtl.filter((item) => item.statusCode === value);
       setFilteredData(filtered);
     }
   };
 
   return (
-    <div className="min-h-screen pb-5 mt-6">
-
-      
-
-      <div className="w-11/12 pl-2 pr-2 mx-auto mb-2 font-bold bg-gray-400 notification-box rounded-xl">
-        <div className="p-2 pl-5 pr-5">
-          <div className="flex">
-            <div className="flex w-2/12">Date
-              {/* <input
-            type="date"
-            className="w-3/5 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          /> */}
-            </div>
-            <div className="w-3/12">Client</div>
-            <div className="w-3/12">Partner</div>
-            <div className="w-2/12 ml-3">
-              <select className="block w-4/5 bg-gray-400 border border-gray-300 rounded-md focus:outline-none " onClick={applyFilter} onChange={handleFilterChange} value={filterValue}>
-                <option value="">Select Status</option>
-                <option value="Invalid Host URL">Invalid Host URL</option>
-                <option value="Invalid Mac Address">Invalid Mac Address</option>
-                <option value="Valid_Loging">Valid_Loging</option>
-              </select>
-            </div>
-            <div>Action</div>
+    <div className="min-h-screen pb-5 bg-gray-100">
+      <div className="container px-4 mx-auto">
+        <div className="flex items-center justify-between p-2 mb-3 bg-white rounded-lg shadow-lg">
+          <h1 className="text-2xl font-bold">User Logging Informations</h1>
+          <div className="w-64">
+            <label className="block text-sm font-medium text-gray-700">Select Status</label>
+            <select
+              value={filterValue}
+              onChange={handleFilterChange}
+              className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">All Status</option>
+              <option value="Invalid Host URL">Invalid Host URL</option>
+              <option value="Invalid Mac Address">Invalid Mac Address</option>
+              <option value="Valid_Loging">Valid_Loging</option>
+            </select>
           </div>
         </div>
+
+        {isLoad ? (
+        <>
+          <PageLoader />
+        </>
+      ) : (
+          <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3  font-medium tracking-wider text-left text-blue-500 text-[15px] uppercase">
+                    Date
+                  </th>
+                  <th scope="col" className="px-6 py-3  font-medium tracking-wider text-left text-blue-500 text-[15px] uppercase">
+                    Client
+                  </th>
+                  <th scope="col" className="px-6 py-3  font-medium tracking-wider text-left text-blue-500 text-[15px] uppercase">
+                    Partner
+                  </th>
+                  <th scope="col" className="px-6  font-medium tracking-wider text-left text-blue-500 text-[15px] uppercase">
+                    <span className='ml-4 '>Status</span>
+                  </th>
+                  <th scope="col" className="px-6 py-3  font-medium tracking-wider text-left text-blue-500 text-[15px] uppercase">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredData.map((data) => (
+                  <tr key={data.logKey}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{new Date(data.logTime).toLocaleDateString()}</div>
+                      <div className="text-sm text-gray-500">{new Date(data.logTime).toLocaleTimeString()}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{data.clintName}</div>
+                      <div className="text-sm text-gray-500">{data.clintEmail}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{data.partnerName}</div>
+                      <div className="text-sm text-gray-500">{data.partnerEmail}</div>
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap ">
+                      <span
+                        className={`px-3 py-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          data.statusCode === 'Valid_Loging'
+                            ? 'bg-green-100 text-green-800'
+                            : data.statusCode === 'Invalid Mac Address'
+                            ? 'bg-red-100 text-red-800'
+                            : data.statusCode === 'Invalid Host URL'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
+                        {data.statusCode === 'Invalid Mac Address'
+                          ? 'Invalid Mac'
+                          : data.statusCode === 'Invalid Host URL'
+                          ? 'Invalid Host'
+                          : data.statusCode}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
+                      <a href={`/compeardata/${data.logKey}`} className="text-indigo-600 hover:text-indigo-900">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
-
-      {filteredData.map((data) => (
-        <div  className="w-11/12 pl-2 pr-2 mx-auto mb-2 bg-gray-300 notification-box rounded-xl">
-          <div className="p-2 pl-5 pr-5"key={data.logKey}>
-            <div className="flex">
-              <div className="w-2/12">
-                <div className="font-medium">{new Date(data.logTime).toLocaleDateString()}</div>
-                <div>{new Date(data.logTime).toLocaleTimeString()}</div>
-              </div>
-              <div className="w-3/12">
-                <div className="font-medium">{data.clintName}</div>
-                <div>{data.clintEmail}</div>
-              </div>
-              <div className="w-3/12">
-                <div className="font-medium">{data.partnerName}</div>
-                <div>{data.partnerEmail}</div>
-              </div>
-              <div className="w-2/12 mt-3 ml-3 md:inline">
-                <span className={`relative inline-block px-5 py-2 font-semibold leading-tight ${data.statusCode === 'Available' ? 'text-[#ed944a]' :
-                    data.statusCode=== 'Valid_Loging' ? 'text-green-900' :
-                    data.statusCode === 'Invalid Mac Address' ? 'text-red-900' :
-                    data.statusCode === 'Invalid Host URL' ? ' text-yellow-900' :
-                    data.statusCode === 'Expired Key' ? ' text-rose-900' :
-                          ''
-                  }`}>
-                  <span aria-hidden className={`absolute inset-0 ${data.statusCode === 'Available' ? 'bg-[#f8d2c1]' :
-                      data.statusCode === 'Valid_Loging' ? 'bg-green-400' :
-                      data.statusCode === 'Invalid Mac Address' ? 'bg-red-500' :
-                        data.statusCode === 'Invalid Host URL' ?  ' bg-yellow-400' :
-                        data.statusCode === 'Expired Key' ?  ' bg-rose-400' :
-                            ''
-                    } rounded-full opacity-50`}></span>
-                  <span className="relative"> {data.statusCode === 'Invalid Mac Address' ? 'Invalid Mac' : data.statusCode === 'Invalid Host URL' ? 'Invalid Host' : data.statusCode}</span>
-                </span>
-              
-            </div>
-            <Button className="justify-end h-10 mt-1 font-bold border-2 border-sky-500 text-violet-950">
-              
-              <a href={`/compeardata/${data.logKey}`}>View</a>
-            </Button>
-          </div>
-        </div>
-        </div>
-  ))
-}
-    </div >
+    </div>
   );
 };
 

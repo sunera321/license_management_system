@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClientCard from './ClientCard';
@@ -6,7 +5,7 @@ import Popup from './Popup';
 import ContactForm from './ContactForm';
 import Search from './Search';
 import PageLoader from '../../CommonModal/PageLoader';
-
+import HTTPService from '../../../Service/HTTPService';
 const ControlPanel = () => {
   const [popup, setPopup] = useState(false);
   const [clients, setClients] = useState([]);
@@ -38,8 +37,8 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/GetkeyHasEndClients');
-        
+
+        const response = await HTTPService.get('api/EndClient/GetkeyHasEndClients')
         setClients(response.data);
         setIsLoad(false)
       } catch (error) {

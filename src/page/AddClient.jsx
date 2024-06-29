@@ -2,16 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import HTTPService from '../Service/HTTPService';
 const AddClient = () => {
   const [clients, setClients] = useState([]);
   const [toggleState, setToggleState] = useState({});
+  const navigate = useNavigate();
+
+  const goToGenerate = (cid,pid) => {
+    navigate(`/KeyGenerateForm?client=${cid}&partner=${pid}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/getEndClient');
-        setClients(response.data); //  response.data is an array of clients
+
+        const response = await HTTPService.get('api/EndClient/getEndClient');
+        setClients(response.data); // Assuming response.data is an array of clients
+
       } catch (error) {
         console.error('Error fetching clients:', error);
       }
@@ -58,15 +66,10 @@ const AddClient = () => {
                           >
                             View More
                           </button>
-                          <Link
-                            to={{
-                              pathname: "/KeyGenerateForm",
-                              state: { clientId: client.id, partnerId: client.partnerId }
-                            }}
-                            className="px-2 py-1 ml-2 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none"
-                          >
+                          <button onClick={() => goToGenerate(client.id,client.partnerId)} className="px-2 py-1 text-blue-500 transition-colors duration-200 bg-gray-100 border border-blue-500 rounded-md hover:text-indigo-500 focus:outline-none">
                             Generate License Key
-                          </Link>
+                        </button>
+
                         </td>
                       </tr>
                       {toggleState[`moreDetails${index + 1}`] && (
@@ -75,6 +78,10 @@ const AddClient = () => {
                             <div className="p-4 bg-white border-4 border-blue-100 rounded-md shadow-md">
                               <table className="w-full">
                                 <tbody>
+                                <tr>
+                                    <td className="font-bold">Partner ID:</td>
+                                    <td>{client.partnerId}</td>
+                                  </tr>
                                   <tr>
                                     <td className="font-bold">City:</td>
                                     <td>{client.city}</td>

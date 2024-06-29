@@ -3,29 +3,33 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import backgroundImage from '../components/asserts/Media/Screenshot 2024-04-23 112913.png';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import HTTPService from '../Service/HTTPService';
 
 const SendKey = () => {
 // Take the parameter of URL
 const params = useParams();
   const key = params.key;
-  
+  const [loading, setLoading] = useState(false);
  
   const handleSubmit = async (e) => {
+   
     e.preventDefault();
     const { email, licenseKey } = e.target.elements;
+
+    setLoading(true);
+
     console.log(licenseKey.value);
     try {
-      const response = await axios.post('https://localhost:7295/api/KeyEmail', {
+      const response = await HTTPService.post('api/KeyEmail', {
         to: email.value,
         licenseKey: key,
-        
-
       });
       
       console.log(licenseKey.value);
       // Handle successful response
       console.log('Email sent:', response.data);
-
+      setLoading(false);
       Swal.fire({
 
         position: "top-center",
@@ -44,9 +48,7 @@ const params = useParams();
 
 
   return (
-
-
-    <div className="top-0 left-0 flex items-center justify-center w-full h-full ">
+    <div className="top-0 left-0 flex items-center justify-center w-full h-full bg-slate-100 ">
       <section className="flex items-center justify-center h-screen overflow-hidden" >
         <div className="flex items-center justify-center w-2/6 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
           <img src={backgroundImage} className="w-100% h-[100%]" alt=" image" />
@@ -90,12 +92,13 @@ const params = useParams();
                 />
                 <div className='flex items-center justify-center mt-6'>
                   
-                  <button type="submit" class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                  <button type="submit" disabled={loading}  class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2">
                     <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                       <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
                       <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
                     </svg>
-                    Send license Key
+                    {loading ? 'Sending...' : ' Send license Key'}
+                   
                   </button>
                 </div>
               </form>

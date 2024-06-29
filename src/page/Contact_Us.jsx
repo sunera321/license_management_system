@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-
+import axiosInstance from '../components/axiosInstance';
+import HTTPService from '../Service/HTTPService';
 function Contact_Us() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -10,27 +12,26 @@ function Contact_Us() {
         message: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
     const validateEmail = (email) => {
-        // Regular expression to validate email format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
     };
 
     const validatePhoneNumber = (phoneNumber) => {
-        // Regular expression to validate phone number format
         const phonePattern = /^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$/;
         return phonePattern.test(phoneNumber);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Perform form validations
         const { firstName, lastName, email, phoneNumber, message } = formData;
 
         if (
@@ -54,16 +55,23 @@ function Contact_Us() {
             return;
         }
 
-    
+        setLoading(true);
 
-        // Reset form after successful submission
-        setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            phoneNumber: '',
-            message: ''
-        });
+        try {
+            await axiosInstance.post('https://localhost:7295/api/ContactUs', formData);
+            alert('Email sent successfully!');
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: '',
+                message: ''
+            });
+        } catch (error) {
+            alert('There was an error sending the email.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -154,8 +162,9 @@ function Contact_Us() {
                                 <button
                                     type="submit"
                                     className="px-8 py-2 text-lg text-white bg-black border-0 rounded focus:outline-none hover:bg-indigo-600"
+                                    disabled={loading}
                                 >
-                                    Send message
+                                    {loading ? 'Sending...' : 'Send message'}
                                 </button>
                             </div>
                         </form>

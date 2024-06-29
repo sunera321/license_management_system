@@ -1,7 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import HTTPService from '../Service/HTTPService';
 const ModuleDetails = () => {
   const { moduleId } = useParams();
   const [module, setModule] = useState(null);
@@ -9,7 +10,7 @@ const ModuleDetails = () => {
   useEffect(() => {
     const fetchModuleDetails = async () => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/Module/${moduleId}`);
+        const response = await HTTPService.get(`api/Module/${moduleId}`);
         setModule(response.data);
       } catch (error) {
         console.error('Error fetching module details:', error);
@@ -31,6 +32,7 @@ const ModuleDetails = () => {
   }
 
   return (
+
     <div className="py-20" style={{ paddingTop: '50px',  paddingRight: '20px'}}>
       <div className="border border-gray-300 rounded-lg shadow-lg p-6"> {/* Added frame styles */}
         <div className="bg-gray-200 py-20 w-full mt-0 relative">
@@ -47,6 +49,7 @@ const ModuleDetails = () => {
             Powered by {module.poweredBy || 'Hsenid'}
           </div>
         </div>
+
 
         <div>
           <h1 style={{ color: '#084c88', marginBottom: '20px', textAlign: 'left', marginTop: '40px' }}>Module Details</h1>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { storage } from '../firebase'; // Adjust the import path
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom'; // Update the import
-
+import HTTPService from '../Service/HTTPService';
 const AddModule = () => {
   const [formData, setFormData] = useState({
     moduleName: '',
@@ -61,7 +61,7 @@ const AddModule = () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
             console.log('Firebase Storage URL:', url); // Log the URL to the console
             try {
-              const response = await axios.post('https://localhost:7295/api/Module', {
+              const response = await HTTPService.post('api/Module', {
                 ...formData,
                 imagePath: url,
                 modulecost: formData.cost //  modulecost field 
@@ -104,9 +104,9 @@ const AddModule = () => {
       <PageHeader title={"Add Module Details"} />
       <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
         <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg' onSubmit={handleSubmit}>
-          <div className=" mb-1 ">
+          <div className="mb-1 ">
             <label className='mb-2 text-lg text-gray-700'>Add Module Profile</label><br />
-            <div className="flex items-center relative">
+            <div className="relative flex items-center">
               <input
                 type="file"
                 accept="image/*"
@@ -118,12 +118,12 @@ const AddModule = () => {
                 type="text"
                 name="imagePath"
                 placeholder="Please add 260*75 image"
-                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline pr-32'
+                className='w-full px-4 py-2 pr-32 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                 onChange={handleChange}
                 value={formData.imagePath}
                 readOnly
               />
-              <label htmlFor="module_image" className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1 bg-gray-300 text-gray-700 border rounded cursor-pointer  hover:bg-gray-400">Browse image</label>
+              <label htmlFor="module_image" className="absolute px-4 py-1 text-gray-700 transform -translate-y-1/2 bg-gray-300 border rounded cursor-pointer right-2 top-1/2 hover:bg-gray-400">Browse image</label>
             </div>
           </div>
 
