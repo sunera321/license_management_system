@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import axiosInstance from '../../axiosInstance';
 
 const RatingReview = ({ moduleId }) => {
   const [rating, setRating] = useState(0);
@@ -31,7 +32,7 @@ const RatingReview = ({ moduleId }) => {
       return;
     }
     try {
-      await axios.post(`https://localhost:7295/api/Module/${moduleId}/reviews`, { rating, review });
+      await axiosInstance.post(`https://localhost:7295/api/Module/${moduleId}/reviews`, { rating, review });
       Swal.fire({
         title: 'Thanks for your review online.',
         text: 'Review submitted successfully!',

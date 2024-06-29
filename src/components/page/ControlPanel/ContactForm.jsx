@@ -3,6 +3,7 @@ import axios from 'axios';
 import backgroundImage from '../../asserts/Media/background1.jpg';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
+import axiosInstance from '../../axiosInstance';
 
 const ContactForm = ({ client, onCloseClick }) => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ const ContactForm = ({ client, onCloseClick }) => {
     const { email, subject, description,contactInfo } = e.target.elements;
     setLoading(true);
     try {
-      const response = await axios.post('https://localhost:7295/api/ContactMail', {
+      const response = await axiosInstance.post('https://localhost:7295/api/ContactMail', {
         to: email.value,
         name: client.name,
         subject: subject.value,

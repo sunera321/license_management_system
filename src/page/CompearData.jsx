@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader'
 import { useParams } from 'react-router-dom';
+import axiosInstance from '../components/axiosInstance';
 import axios from 'axios';
+
+
 
 
 const CompearData = () => {
@@ -33,7 +36,7 @@ const CompearData = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
+                const response = await axiosInstance.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
                 setclient(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -47,7 +50,7 @@ const CompearData = () => {
     useEffect(() => {
         const fetchData = async (clientId) => {
             try {
-                const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+                const response = await axiosInstance.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
                 setmoduledata(response.data);
                 console.log(response.data);
                 if (response.data.length == 0) {

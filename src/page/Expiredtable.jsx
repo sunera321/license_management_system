@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 import Search from '../components/page/ControlPanel/Search'; // Import the Search component
+import axiosInstance from '../components/axiosInstance';
 
 
 const ExpiredTable = () => {
@@ -13,7 +14,7 @@ const ExpiredTable = () => {
     const fetchClients = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://localhost:7295/api/LicenseKey'); // Fetch all clients
+        const response = await axiosInstance.get('https://localhost:7295/api/LicenseKey'); // Fetch all clients
         // Filter clients for 'available' key status client-side
         const availableClients = response.data.filter(client => client.key_status === 'Available');
         console.log('API Response:', response.data); // Check what

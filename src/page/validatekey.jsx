@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-tailwind/react';
 import axios from 'axios';
+import axiosInstance from '../components/axiosInstance';
 
 const ValidateKey = () => {
   
@@ -12,7 +13,7 @@ const ValidateKey = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/LogingValidateInfo/GetAllClientServerInfo');
+        const response = await axiosInstance.get('https://localhost:7295/api/LogingValidateInfo/GetAllClientServerInfo');
         const sortedData = response.data.sort((a, b) => new Date(b.logTime) - new Date(a.logTime));
         setLogDtl(sortedData);
         setFilteredData(sortedData);

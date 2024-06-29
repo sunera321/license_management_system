@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../components/axiosInstance';
 
 
 const Module = () => {
@@ -9,7 +10,7 @@ const Module = () => {
   useEffect(() => {
     const fetchModules = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/Module/getModulesWithId');
+        const response = await axiosInstance.get('https://localhost:7295/api/Module/getModulesWithId');
         setModules(response.data);
       } catch (error) {
         console.error('Error fetching modules:', error);

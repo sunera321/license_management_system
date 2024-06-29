@@ -5,6 +5,7 @@ import axios from 'axios';
 import { storage } from '../firebase'; // Adjust the import path
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom'; // Update the import
+import axiosInstance from '../components/axiosInstance';
 
 const AddModule = () => {
   const [formData, setFormData] = useState({
@@ -61,7 +62,7 @@ const AddModule = () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
             console.log('Firebase Storage URL:', url); // Log the URL to the console
             try {
-              const response = await axios.post('https://localhost:7295/api/Module', {
+              const response = await axiosInstance.post('https://localhost:7295/api/Module', {
                 ...formData,
                 imagePath: url,
                 modulecost: formData.cost // Include the modulecost field here

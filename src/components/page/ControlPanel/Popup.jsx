@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaGlobe, FaBuilding } from 'react-icons/fa';
+import axiosInstance from '../../axiosInstance';
 
 
 
@@ -21,7 +22,7 @@ const [moduledata, setmoduledata] = useState([]);
 useEffect(() => {
   const fetchData = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await axiosInstance.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setmoduledata(response.data);
       console.log(response.data);
       if(response.data.length==0){

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import axiosInstance from '../components/axiosInstance';
+import axios from 'axios';
 
 function Contact_Us() {
     const [formData, setFormData] = useState({
@@ -13,15 +13,30 @@ function Contact_Us() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
+     const [showSuccess, setShowSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: '' });
+        }
     };
 
-    const validateEmail = (email) => {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validateEmailFormat = (email) => {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         return emailPattern.test(email);
+    };
+
+    const validateEmailWithAPI = async (email) => {
+        try {
+            const response = await axios.get(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=8fcc8f81d2ed65d9021a1220d5cf1d97db5cffb6`);
+            return response.data.data.result === 'deliverable';
+        } catch (error) {
+            console.error('Error validating email:', error);
+            return false;
+        }
     };
 
     const validatePhoneNumber = (phoneNumber) => {
@@ -33,25 +48,41 @@ function Contact_Us() {
         e.preventDefault();
 
         const { firstName, lastName, email, phoneNumber, message } = formData;
+        let formIsValid = true;
+        let errors = {};
 
-        if (
-            !firstName.trim() ||
-            !lastName.trim() ||
-            !email.trim() ||
-            !phoneNumber.trim() ||
-            !message.trim()
-        ) {
-            alert('Please fill out all required fields.');
-            return;
+        if (!firstName.trim()) {
+            formIsValid = false;
+            errors.firstName = 'First name is required';
+        }
+        if (!lastName.trim()) {
+            formIsValid = false;
+            errors.lastName = 'Last name is required';
+        }
+        if (!email.trim()) {
+            formIsValid = false;
+            errors.email = 'Email is required';
+        } else if (!validateEmailFormat(email)) {
+            formIsValid = false;
+            errors.email = 'Please enter a valid email address';
+        } else if (!await validateEmailWithAPI(email)) {
+            formIsValid = false;
+            errors.email = 'Email address is not deliverable';
+        }
+        if (!phoneNumber.trim()) {
+            formIsValid = false;
+            errors.phoneNumber = 'Phone number is required';
+        } else if (!validatePhoneNumber(phoneNumber)) {
+            formIsValid = false;
+            errors.phoneNumber = 'Please enter a valid phone number';
+        }
+        if (!message.trim()) {
+            formIsValid = false;
+            errors.message = 'Message is required';
         }
 
-        if (!validateEmail(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-
-        if (!validatePhoneNumber(phoneNumber)) {
-            alert('Please enter a valid phone number.');
+        if (!formIsValid) {
+            setErrors(errors);
             return;
         }
 
@@ -59,7 +90,7 @@ function Contact_Us() {
 
         try {
             await axiosInstance.post('https://localhost:7295/api/ContactUs', formData);
-            alert('Email sent successfully!');
+            setShowSuccess(true);
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -114,6 +145,7 @@ function Contact_Us() {
                                     className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     required
                                 />
+                                {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
                             </div>
                             <div className="w-1/2 p-2">
                                 <input
@@ -125,6 +157,7 @@ function Contact_Us() {
                                     className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     required
                                 />
+                                {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
                             </div>
                             <div className="w-1/2 p-2">
                                 <input
@@ -136,6 +169,7 @@ function Contact_Us() {
                                     className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     required
                                 />
+                                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
                             <div className="w-1/2 p-2">
                                 <input
@@ -147,6 +181,7 @@ function Contact_Us() {
                                     className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none focus:border-indigo-500"
                                     required
                                 />
+                                {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
                             </div>
                             <div className="w-full p-2">
                                 <textarea
@@ -157,6 +192,7 @@ function Contact_Us() {
                                     className="w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 border border-gray-300 rounded outline-none resize-none focus:border-indigo-500"
                                     required
                                 ></textarea>
+                                {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                             </div>
                             <div className="flex justify-end w-full p-2">
                                 <button
@@ -171,6 +207,24 @@ function Contact_Us() {
                     </div>
                 </div>
             </section>
+            {showSuccess && (
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div className="bg-white p-8 rounded-lg max-w-md text-center">
+            <svg className="text-green-500 w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <h2 className="text-4xl font-semibold mb-2">Thank you!</h2>
+            <p className="text-lg text-gray-800">We have received your message and will reach out to you shortly.</p>
+            <button
+                onClick={() => setShowSuccess(false)}
+                className="mt-4 px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+)}
+
         </div>
     );
 }

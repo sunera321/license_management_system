@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../axiosInstance';
 import { Chart } from 'react-google-charts';
 
-// Functional component to render the BarChart using Google Charts
 function BarChart() {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/Dashboard/top-modules')
+    axiosInstance.get('https://localhost:7295/api/InDashboard/top-modules')
       .then(response => {
         const data = response.data;
 
-        // Map fetched data to Google Charts format
         const mappedData = data.map(module => [
           module.moduleName,
           module.totalRevenue,
           module.numberOfClients
         ]);
 
-        // Prepare chart data with header
         const chartData = [
           ['Module', 'Revenue', 'Users'],
           ...mappedData
@@ -36,7 +33,6 @@ function BarChart() {
   }, []);
 
   const options = {
-    title: 'Top 5 Modules in 2024',
     chartArea: { width: '50%', height: '70%' },
     hAxis: {
       title: 'Modules',
@@ -55,6 +51,9 @@ function BarChart() {
     legend: { position: 'top' },
   };
 
+  const chartContainerStyle = 'bg-white shadow-2xl rounded-lg p-6 mb-6';
+  const titleStyle = 'text-center text-lg font-bold mb-4 border-b-2 border-gray-300 pb-2 text-red-600';
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -64,8 +63,8 @@ function BarChart() {
   }
 
   return (
-    <div style={{ background: '#B2B2B2', padding: '20px', borderRadius: '10px' }}>
-      {/* Render the Chart component with specified chartType, data, and options */}
+    <div className={chartContainerStyle}>
+      <h2 className={titleStyle}>Top 5 Modules in 2024</h2>
       <Chart
         chartType="ComboChart"
         width="100%"

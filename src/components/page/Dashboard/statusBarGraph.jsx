@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import axios from 'axios';
+import axiosInstance from '../../axiosInstance';
 
 const  StatusBarGraph = () => {
   const [chartData, setChartData] = useState([
@@ -8,7 +9,7 @@ const  StatusBarGraph = () => {
   ]);
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/LicenseKey')
+    axiosInstance.get('https://localhost:7295/api/LicenseKey')
       .then(response => {
         const keys = response.data;
         const statusCounts = {};

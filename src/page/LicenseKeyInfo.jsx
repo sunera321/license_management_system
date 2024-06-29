@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageLoader from '../components/CommonModal/PageLoader';
 import Popup from '../components/page/ControlPanel/Popup';
+import axiosInstance from '../components/axiosInstance';
+
 
 import ContactForm from '../components/page/ControlPanel/ContactForm';
 
@@ -19,10 +21,6 @@ function LicenseKeyInfo() {
   const [ClinetContact, setClinetContact] = useState(false);
   const [Clintmail, setClintmail] = useState(null);
 
-
-
-
-
   
   
   const conatctClinetclose = () => {
@@ -31,7 +29,7 @@ function LicenseKeyInfo() {
   };
   const fetchClientData = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
+      const response = await axiosInstance.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
       setClientData(response.data);
     
     } catch (error) {
@@ -52,7 +50,7 @@ function LicenseKeyInfo() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://localhost:7295/api/LicenseKey');
+      const response = await axiosInstance.get('https://localhost:7295/api/LicenseKey');
 
       const sortedData = response.data.sort((a, b) => a.clintId - b.clintId);
       setData(sortedData);

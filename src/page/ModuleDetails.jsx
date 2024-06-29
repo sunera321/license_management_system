@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../components/axiosInstance';
 
 
 const ModuleDetails = () => {
@@ -10,7 +11,7 @@ const ModuleDetails = () => {
   useEffect(() => {
     const fetchModuleDetails = async () => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/Module/${moduleId}`);
+        const response = await axiosInstance.get(`https://localhost:7295/api/Module/${moduleId}`);
         setModule(response.data);
       } catch (error) {
         console.error('Error fetching module details:', error);
