@@ -7,6 +7,7 @@ import BarChart from '../components/page/IncomeDashboard/BarChart';
 import axiosInstance from '../components/axiosInstance';
 import DownloadReport from '../components/page/IncomeDashboard/DownloadReport';
 import DoughnutChart from '../components/page/IncomeDashboard/DonutChart';
+import axios from 'axios';
 
 function IncomeDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
