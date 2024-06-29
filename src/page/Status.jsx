@@ -60,7 +60,7 @@ const Status = () => {
 
     const getData = () => {
         setIsLoading(true);
-        axios.get('https://localhost:7295/api/RequestKey')
+        axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey')
         
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL

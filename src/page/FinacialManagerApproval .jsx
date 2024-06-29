@@ -15,7 +15,7 @@ function FinancialManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://localhost:7295/api/RequestKey')
+    axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
@@ -30,7 +30,7 @@ function FinancialManagerApproval() {
  
   const fetchModules = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await axios.get(`https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setRequestedModules(prevModules => ({
         ...prevModules,
         [clientId]: response.data
@@ -42,7 +42,7 @@ function FinancialManagerApproval() {
 
  
   const handleUpdate = (request_id) => {
-    const url = `https://localhost:7295/api/RequestKey/${request_id}/SetFinanceTrue`;
+    const url = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${request_id}/SetFinanceTrue`;
 
     axios.patch(url)
       .then((result) => {
@@ -65,8 +65,8 @@ function FinancialManagerApproval() {
   }
 
   const handleSubmitRejection = () => {
-    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectFianceMgt`;
-
+    const url = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${selectedRequestId}/RejectFianceMgt`;
+    
     axios.patch(url, JSON.stringify(rejectionReason), {
       headers: {
         'Content-Type': 'application/json'

@@ -14,7 +14,7 @@ function PartnerManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://localhost:7295/api/RequestKey')
+    axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
