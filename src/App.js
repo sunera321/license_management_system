@@ -26,9 +26,12 @@ import ClientRegistration from './page/ClientRegistration';
 import ValidateKey from './page/validatekey';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
+
 import axios from 'axios';
+
 const msalInstance = new PublicClientApplication(msalConfig);
 
 const App = () => {
@@ -52,6 +55,7 @@ const App = () => {
   }, error => {
     return Promise.reject(error);
   });
+
 
   const userId = Cookies.get('userId');
   const email = Cookies.get('userEmail');
@@ -113,6 +117,7 @@ const App = () => {
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
+
         </Route>
       );
     }

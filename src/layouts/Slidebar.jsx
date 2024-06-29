@@ -11,6 +11,7 @@ import addClient from '../Images/sidebarpic/add-client.svg';
 import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
 import help from '../Images/sidebarpic/help.svg';
+import addnotification from '../Images/sidebarpic/notification.svg';
 import { msalConfig } from '../Config';
 
 const deleteCookie = (name) => {
@@ -18,6 +19,7 @@ const deleteCookie = (name) => {
 };
 const handleLogout = async () => {
   const logoutRequest = {
+
     post_logout_redirect_uri: `${window.location.origin}`,
   };
 
@@ -137,6 +139,14 @@ const Slidebar = () => {
             </div>
             <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/ClientRegistration" > Client Registration</a></span>
           </div>
+
+          <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
+            <div className="icon"> <img src={addnotification} alt="Notificatiom Icon" className="w-6 h-6 mr-4" />
+            </div>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/AddNotification" >Add Notifications</a></span>
+          </div>
+
+
 
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
