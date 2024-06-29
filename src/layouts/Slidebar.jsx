@@ -50,8 +50,8 @@ const Slidebar = () => {
   return (
        <div>
 
-      <div className="w-10 h-screen overflow-hidden transition-all duration-300 ease-in-out rounded bg-slate-900 bg-gray group hover:w-64">
-
+      <div className="w-10 h-full overflow-hidden transition-all duration-300 ease-in-out rounded bg-slate-900 bg-gray group hover:w-64">
+      <nav className="flex flex-col h-full overflow-y-auto text-slate-400">
         <div className="absolute inset-y-0 left-0 w-64 px-2 pt-2 pb-2 transition ease-in-out transform -translate-x-full bg-slate-900 bg-black-300 bg-gray md:relative md:translate-x-0">
 
           <a href="/components/page/" className="flex px-1 transition-colors ">
@@ -61,7 +61,7 @@ const Slidebar = () => {
 
         </div>
 
-        <nav className="flex flex-col text-slate-400">
+        
 
           
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
