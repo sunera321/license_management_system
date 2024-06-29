@@ -16,8 +16,10 @@ const AddClient = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
         const response = await HTTPService.get('api/EndClient/getEndClient');
         setClients(response.data); // Assuming response.data is an array of clients
+
       } catch (error) {
         console.error('Error fetching clients:', error);
       }
