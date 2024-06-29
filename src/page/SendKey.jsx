@@ -23,8 +23,6 @@ const params = useParams();
       const response = await axios.post('https://localhost:7295/api/KeyEmail', {
         to: email.value,
         licenseKey: key,
-        
-
       });
       
       console.log(licenseKey.value);
@@ -49,8 +47,6 @@ const params = useParams();
 
 
   return (
-
-
     <div className="top-0 left-0 flex items-center justify-center w-full h-full bg-slate-100 ">
       <section className="flex items-center justify-center h-screen overflow-hidden" >
         <div className="flex items-center justify-center w-2/6 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
