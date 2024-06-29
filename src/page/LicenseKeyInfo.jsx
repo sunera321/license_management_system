@@ -52,7 +52,7 @@ function LicenseKeyInfo() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://localhost:7295/api/LicenseKey');
+      const response = await axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LicenseKey');
 
       const sortedData = response.data.sort((a, b) => a.clintId - b.clintId);
       setData(sortedData);

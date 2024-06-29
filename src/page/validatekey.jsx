@@ -11,7 +11,7 @@ const ValidateKey = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/LogingValidateInfo/GetAllClientServerInfo');
+        const response = await axios.get('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo');
         const sortedData = response.data.sort((a, b) => new Date(b.logTime) - new Date(a.logTime));
         setLogDtl(sortedData);
         setFilteredData(sortedData);
