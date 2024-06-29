@@ -16,7 +16,7 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
   useEffect(() => {
     const fetchData = async (clientId) => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+        const response = await axios.get(`https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
         setModuleData(response.data.length > 0 ? response.data : ['No Modules']);
       } catch (error) {
         console.error('Error fetching data:', error);
