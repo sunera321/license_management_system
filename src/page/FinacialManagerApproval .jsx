@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import PageHeader from '../components/CommonModal/pageHeader';
-
+import HTTPService from '../Service/HTTPService';
 
 function FinancialManagerApproval() {
   const [clients, setClients] = useState([]);
@@ -15,7 +15,7 @@ function FinancialManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://localhost:7295/api/RequestKey')
+    HTTPService.get('api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
@@ -30,7 +30,7 @@ function FinancialManagerApproval() {
  
   const fetchModules = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setRequestedModules(prevModules => ({
         ...prevModules,
         [clientId]: response.data
@@ -42,9 +42,9 @@ function FinancialManagerApproval() {
 
  
   const handleUpdate = (request_id) => {
-    const url = `https://localhost:7295/api/RequestKey/${request_id}/SetFinanceTrue`;
+    
 
-    axios.patch(url)
+    HTTPService.patch(`api/RequestKey/${request_id}/SetFinanceTrue`)
       .then((result) => {
         console.log('Data Updated Successfully');
         Swal.fire({
@@ -65,9 +65,9 @@ function FinancialManagerApproval() {
   }
 
   const handleSubmitRejection = () => {
-    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectFianceMgt`;
-
-    axios.patch(url, JSON.stringify(rejectionReason), {
+    
+    
+    HTTPService.patch(`api/RequestKey/${selectedRequestId}/RejectFianceMgt`, JSON.stringify(rejectionReason), {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -116,7 +116,7 @@ function FinancialManagerApproval() {
             ) : (
       <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
         {clients.filter(client => client.isFinanceApproval=== false && client.commentFinaceMgt === null).map((client, index) => (
-          <div key={index} className="h-auto w-[450px]  bg-[#f9f6f6] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3"
+          <div key={index} className="h-auto w-[450px]  bg-[#fafafa] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3"
           onClick={() => handleClientClick(client.endClient.id)}>
             <div className="flex gap-6 pt-2 justify-evenly">
               <div className="text-[26px] font-normal">{client.endClient.name}</div>
@@ -144,7 +144,7 @@ function FinancialManagerApproval() {
               <td className='pl-5'>{client.numberOfDays}</td>
             </tr>
             <tr className='mx-auto text-center '>
-              <td className='py-1'>Partner Requested</td>
+              <td className='py-1'>Partner ID</td>
               <td>:</td>
               <td className='pl-5'>{client.partnerId}</td>
             </tr>
@@ -154,10 +154,10 @@ function FinancialManagerApproval() {
               <td className='pl-5'>  {requestedModules[client.endClient.id] ? requestedModules[client.endClient.id].join(', ') : 'Click here...'}</td>
             </tr>
             <div className='mt-5 ml-0'>Finance manager Approval</div>
-            <tr className='mx-auto text-center '>
-              <td className='py-1'> <button onClick={() => handleUpdate(client.requestID)} className="w-48 p-2 mt-10 font-bold text-white bg-green-600 rounded-md shadow-xl hover:bg-green-300 ">   Accept</button></td>
+            <tr className='flex flex-row justify-center gap-3 mt-10 '>
+              <td className='py-1'> <button onClick={() => handleUpdate(client.requestID)} className="p-2 font-bold text-white bg-green-600 rounded-md shadow-xl sm:w-10 md:w-24 lg:w-40 hover:bg-green-300">   Accept</button></td>
               <td></td>
-              <td className='pl-5'><button onClick={() => handleReject(client.requestID)} className="w-48 p-2 mt-10 font-bold text-white bg-red-700 rounded-md shadow-xl hover:bg-red-500 ">Reject</button></td>
+              <td className='pl-5'><button onClick={() => handleReject(client.requestID)} className="p-2 font-bold text-white bg-red-700 rounded-md shadow-xl sm:w-10 md:w-24 lg:w-40 hover:bg-red-500 ">Reject</button></td>
             </tr>
           </div>
         ))}

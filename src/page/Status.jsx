@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import IssuedKeys from '../components/CommonModal/IssuedKey';
 import del from '../Images/del.png'
-
+import HTTPService from '../Service/HTTPService';
 
 const Status = () => {
     const [modal, setModal] = useState(false);
@@ -47,7 +47,7 @@ const Status = () => {
         setRequestedModules([]); // Reset requested modules
     };
     const fetchModules = (clientId) => {
-        axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
+        HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
             .then((response) => {
                 setRequestedModules(response.data);
             })
@@ -58,7 +58,7 @@ const Status = () => {
 
     const getData = () => {
         setIsLoading(true);
-        axios.get('https://localhost:7295/api/RequestKey')
+        HTTPService.get('api/RequestKey')
         
             .then((result) => {
                setAll(response.data);
@@ -78,7 +78,7 @@ const Status = () => {
             });
     };
     const handledelete = (endClientId, requestKeyId) => {
-        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
+        HTTPService.delete(`api/RequestKey/${requestKeyId}`)
         .then (response => {
             Swal.fire({
                 icon: 'success',
@@ -89,7 +89,7 @@ const Status = () => {
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        HTTPService.post(`api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults
@@ -99,11 +99,11 @@ const Status = () => {
             const key = response.data;
     
             // Update the request key to set it as issued
-            axios.patch(`https://localhost:7295/api/RequestKey/${requestKeyId}/SetIssueTrue`)
+            HTTPService.patch(`api/RequestKey/${requestKeyId}/SetIssueTrue`)
             .then(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'License Key Generated and Request Key Updated!',
+                    title: 'License Key Generated!',
                 });
                 navigate(`/sendkey/${key}`);
             })

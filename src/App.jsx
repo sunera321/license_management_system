@@ -31,9 +31,11 @@ import Register from './page/Register';
 import ClientRegistration from './page/ClientRegistration';
 import ClientMore from './page/ClientMore'; 
 import ValidateKey from './page/validatekey';
+
+import AddNotification from './page/AddNotification';
+
 import { useNavigate } from 'react-router-dom';
 import KeyGenerateForm2 from './page/KeyGenerateForm2';
-
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
+
           <Route path="mainhome" element={<MainHome />} />
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="about" element={<About />} />
@@ -69,6 +72,8 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="termsconditions" element={<TermsConditions />} />
           <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+            <Route path="addnotification" component={AddNotification} />
+
         </Route>
       </Routes>
     </BrowserRouter>

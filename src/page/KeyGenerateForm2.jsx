@@ -3,7 +3,7 @@ import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
 import axios from 'axios';
-
+import HTTPService from '../Service/HTTPService';
 
 
 const KeyGenerateForm = () => {
@@ -20,7 +20,7 @@ const KeyGenerateForm = () => {
   
 
     useEffect(() => {
-        axios.get('https://localhost:7295/api/Module/getModuleswithId')
+        HTTPService.get('api/Module/getModuleswithId')
             .then(response => {
                 setModules(response.data);
             })
@@ -67,9 +67,9 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        const clientUrl = `https://localhost:7295/api/RequestKey/${ClientID}`;
-        const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
+        const clientUrl = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${ClientID}`;
+        const requestKeyUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/addRequestKey';
+        const updateModuleUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/UpdateModule';
 
         const clientData = {
             hostUrl: URL,
