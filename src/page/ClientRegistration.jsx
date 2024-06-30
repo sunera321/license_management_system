@@ -5,12 +5,13 @@ import Swal from 'sweetalert2';
 import { countries } from 'countries-list';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+// import 'react-phone-input-2/lib/style.css';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import HTTPService from '../Service/HTTPService';
 
 const countryData = Object.values(countries);
 
-import HTTPService from '../Service/HTTPService';
+
 
 
 const ClientRegistration = () => {
@@ -137,14 +138,14 @@ const ClientRegistration = () => {
                         </div>
                         <div className="relative w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Country</label><br />
-                            <div className="flex items-center relative">
+                            <div className="relative flex items-center">
                                 <CountryDropdown
                                     value={formData.country}
                                     onChange={handleCountryChange}
                                     className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                     required
                                 />
-                                <ChevronDownIcon className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+                                <ChevronDownIcon className="absolute w-5 h-5 text-gray-500 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                             </div>
                         </div>
                     </div>
@@ -163,7 +164,7 @@ const ClientRegistration = () => {
                         </div>
                         <div className="relative w-1/2">
                             <label className='mb-2 text-lg text-gray-700'>Region</label><br />
-                            <div className="flex items-center relative">
+                            <div className="relative flex items-center">
                                 <RegionDropdown
                                     country={formData.country}
                                     value={formData.region}
@@ -172,7 +173,7 @@ const ClientRegistration = () => {
                                     placeholder={regionPlaceholder}
                                     required
                                 />
-                                <ChevronDownIcon className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+                                <ChevronDownIcon className="absolute w-5 h-5 text-gray-500 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                             </div>
                         </div>
                     </div>
@@ -235,7 +236,7 @@ const ClientRegistration = () => {
                         ></textarea><br />
                     </div>
 
-                    <div className='text-right mb-4'>
+                    <div className='mb-4 text-right'>
                         <button
                             id='submit'
                             type='submit'

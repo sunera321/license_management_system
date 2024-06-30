@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import HTTPService from '../Service/HTTPService';
 import PageHeader from '../components/CommonModal/pageHeader';
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -10,7 +11,7 @@ const Notification = () => {
   }, []);
 
   const fetchNotifications = () => {
-    axios.get('https://localhost:7295/api/Notifications/getAllNotifications')
+    HTTPService.get('api/Notifications/getAllNotifications')
       .then(response => {
         const newNotifications = response.data.reverse();
         // Display alert if there are new notifications
@@ -38,16 +39,16 @@ const Notification = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mx-auto">
       <PageHeader title={"Notifications"} />
       <div className="mb-4">
         {notifications.length === 0 && <p className="text-gray-600">No notifications added yet.</p>}
         {notifications.map((notification, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-4 mb-4 relative">
+          <div key={index} className="relative p-4 mb-4 bg-white rounded-lg shadow-md">
             <button className="absolute top-0 right-0 mt-1 mr-2 text-gray-600" onClick={() => handleCloseNotification(index)}>×</button>
             <h3 className="text-xl font-semibold text-blue-700">{notification.title}</h3>
             <p className="text-gray-700">{notification.text}</p>
-            <p className="text-gray-500 text-sm">Added on: {new Date(notification.date).toLocaleString()}</p>
+            <p className="text-sm text-gray-500">Added on: {new Date(notification.date).toLocaleString()}</p>
           </div>
         ))}
       </div>

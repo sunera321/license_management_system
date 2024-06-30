@@ -30,6 +30,7 @@ import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
 
+
 import axios from 'axios';
 
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -99,6 +100,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
           <Route path="contact_us" element={<Contact_Us />} />
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="mainhome" element={<Dashboard />} />

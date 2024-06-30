@@ -67,9 +67,15 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        const clientUrl = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${cli}`;
-        const requestKeyUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/UpdateModule';
+        // const clientUrl = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${cli}`;
+        // const requestKeyUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/addRequestKey';
+        // const updateModuleUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/UpdateModule';
+
+        const clientUrl =HTTPService.get(`api/RequestKey/${cli}`);
+        const requestKeyUrl = HTTPService.get('api/RequestKey/addRequestKey');
+        const updateModuleUrl = HTTPService.get('api/ClintIdByModules/UpdateModule');
+        
+        
 
         const clientData = {
             hostUrl: URL,

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
+import HTTPService from '../Service/HTTPService';
 
 const AddNotification = () => {
   const [notificationTitle, setNotificationTitle] = useState('');
@@ -18,7 +19,7 @@ const AddNotification = () => {
       };
 
       //API call to save notification
-      const response = await axios.post('https://localhost:7295/api/Notifications/addNotification', newNotification);
+      const response = await HTTPService.post('api/Notifications/addNotification', newNotification);
       console.log('Notification saved:', response.data);
 
       // Reset form fields after successful submission
@@ -52,9 +53,9 @@ const AddNotification = () => {
   return (
     <div>
       <PageHeader title={"Add Notifications"} />
-      <div className="container mx-auto p-4">
+      <div className="container p-4 mx-auto">
         
-        <form onSubmit={handleSaveNotification} className="bg-white shadow-md rounded-lg p-6">
+        <form onSubmit={handleSaveNotification} className="p-6 bg-white rounded-lg shadow-md">
           <div className="mb-4">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">Notification Title</label>
             <input
@@ -82,14 +83,14 @@ const AddNotification = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mr-2 focus:outline-none"
+              className="px-4 py-2 mr-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none"
             >
               Save Notification
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none"
+              className="px-4 py-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
             >
               Cancel
             </button>
