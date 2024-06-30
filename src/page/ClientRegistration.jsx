@@ -6,8 +6,9 @@ import { countries } from 'countries-list';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import HTTPService from '../Service/HTTPService';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+
 const countryData = Object.values(countries);
 
 
