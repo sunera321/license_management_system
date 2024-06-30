@@ -7,7 +7,7 @@ const StatusPieChart = () => {
     const [activeIndex, setActiveIndex] = useState(-1);
 
     useEffect(() => {
-        fetch('https://localhost:7295/api/LogingValidateInfo/GetAllClientServerInfo')
+        fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo')
             .then(response => response.json())
             .then(data => {
                 const statusCounts = data.reduce((acc, item) => {
@@ -84,7 +84,7 @@ const StatusPieChart = () => {
                     <Tooltip />
                 </PieChart>
             </ResponsiveContainer>
-            <div className="w-full flex justify-end mt-4">
+            <div className="flex justify-end w-full mt-4">
                 <DownloadDropdown userData={data} />
             </div>
         </div>

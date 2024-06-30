@@ -19,13 +19,13 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
       <div className="mx-auto bg-white h-0.5 w-7/8 mt-"></div>
       <div className="pt-3 ">
         <div className='pb-2 pl-4 font-semibold'>Partner ID : {client.partnerId}</div>
-        <div className="text-[16px]  flex">
-          <div className="w-4 h-4 mt-1 bg-[#19F000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Activet Data : {formatDate(client.activeDate)}</div>
+        <div className="text-[14px]  flex">
+          <div className="w-3 h-3 mt-1 bg-[#19F000] border border-black rounded-full"></div>
+          <div className="text-[14px]"> Activet Data : {formatDate(client.activeDate)}</div>
         </div>
-        <div className="text-[16px] mt-3 flex">
-          <div className="w-4 h-4 mt-1 bg-[#F10000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Deactivat Data : {formatDate(client.expireDate)}</div>
+        <div className="text-[14px] mt-3 flex">
+          <div className="w-3 h-3 mt-1 bg-[#F10000] border border-black rounded-full"></div>
+          <div className="text-[14px]"> Deactivat Data : {formatDate(client.expireDate)}</div>
         </div>
       </div>
       

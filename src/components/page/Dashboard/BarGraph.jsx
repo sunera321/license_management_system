@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import axios from 'axios';
 import DownloadDropdown from './DownloadDropdown';
-
+import HTTPService from '../../../Service/HTTPService';
 const BarGraph = () => {
   const [chartData, setChartData] = useState([['Module', 'User Count', { role: 'style' }]]);
 
   useEffect(() => {
-    axios.get('https://localhost:7295/api/Module/statistics')
+    HTTPService.get('api/Module/statistics')
       .then(response => {
         const modules = response.data;
         const moduleData = {};
@@ -35,8 +35,8 @@ const BarGraph = () => {
   }, []);
 
   return (
-    <div className="w-full p-6 bg-white shadow-xl rounded-lg transform transition-transform hover:scale-105 duration-500">
-      <div className="mb-4 relative md:h-80 lg:h-96">
+    <div className="w-full p-6 transition-transform duration-500 transform bg-white rounded-lg shadow-xl hover:scale-105">
+      <div className="relative mb-4 md:h-80 lg:h-96">
         <Chart
           width={'100%'}
           height={'400px'}

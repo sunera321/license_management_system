@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom'; // Import useParams hook
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-
+import HTTPService from '../../../Service/HTTPService';
 const RatingReview = () => {
   const { moduleId } = useParams(); // Get moduleId from URL parameters
   const [rating, setRating] = useState(0);
@@ -21,7 +21,7 @@ const RatingReview = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/Module/${moduleId}/reviews`);
+      const response = await HTTPService.get(`api/Module/${moduleId}/reviews`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -60,14 +60,14 @@ const RatingReview = () => {
 
     try {
       if (editingReviewId) {
-        await axios.put(`https://localhost:7295/api/Module/reviews/${editingReviewId}`, { rating, review });
+        await HTTPService.put(`api/Module/reviews/${editingReviewId}`, { rating, review });
         Swal.fire({
           title: 'Review updated successfully!',
           icon: 'success',
           confirmButtonText: 'Close',
         });
       } else {
-        await axios.post(`https://localhost:7295/api/Module/${moduleId}/reviews`, { rating, review });
+        await HTTPService.post(`api/Module/${moduleId}/reviews`, { rating, review });
         Swal.fire({
           title: 'Thanks for your review online.',
           text: 'Review submitted successfully!',
@@ -90,7 +90,7 @@ const RatingReview = () => {
 
   const handleDelete = async (reviewId) => {
     try {
-      await axios.delete(`https://localhost:7295/api/Module/reviews/${reviewId}`);
+      await HTTPService.delete(`api/Module/reviews/${reviewId}`);
       Swal.fire({
         title: 'Review deleted successfully!',
         icon: 'success',
