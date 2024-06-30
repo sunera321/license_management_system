@@ -202,8 +202,8 @@ const KeyGenerateForm = () => {
 
 
                     </div>
-                    <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
-                        <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
+                    <div className="flex items-center justify-end pb-5">
+                        <input type="submit" value="Submit" className="p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl lg:w-48 mb2 hover:bg-indigo-500" />
                     </div>
                 </form>
             </div>

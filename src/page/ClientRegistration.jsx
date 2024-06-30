@@ -235,7 +235,7 @@ const ClientRegistration = () => {
                         ></textarea><br />
                     </div>
 
-                    <div className='mb-4 text-right'>
+                    <div className='mt-10 mb-4 text-right'>
                         <button
                             id='submit'
                             type='submit'

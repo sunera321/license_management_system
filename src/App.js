@@ -29,6 +29,7 @@ import ModuleDetails from './page/ModuleDetails';
 import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
+import KeyGenerateForm2 from './page/KeyGenerateForm2';
 
 import axios from 'axios';
 
@@ -90,6 +91,7 @@ const App = () => {
           <Route path="compeardata/:logkey" element={<CompearData />} />
           <Route path="statusofkey" element={<StatusOfKey />} />
           <Route path="validatekey" element={<ValidateKey />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
         </Route>
       );
     }
@@ -117,6 +119,7 @@ const App = () => {
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
 
         </Route>
       );

@@ -85,7 +85,7 @@ const KeyGenerateForm = () => {
             numberOfDays: ValidDate,
             endClientId: cli,
             partnerId: par,
-            issued:false
+            issued: false
         };
 
         const updateModuleData = {
@@ -149,11 +149,11 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" readOnly  setClinetID={ClientID}  placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
+                            <input required type="text" readOnly setClinetID={ClientID} placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required  placeholder={`${par}`} readOnly  value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required placeholder={`${par}`} readOnly value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                     </div>
 
@@ -198,9 +198,10 @@ const KeyGenerateForm = () => {
                         </ul>
 
                     </div>
-                    <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
-                        <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
+                    <div className="flex items-center justify-end pb-5">
+                        <input type="submit" value="Submit" className="p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl lg:w-48 mb2 hover:bg-indigo-500" />
                     </div>
+
                 </form>
             </div>
         </div>
