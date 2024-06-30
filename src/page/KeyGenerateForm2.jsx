@@ -25,7 +25,7 @@ const KeyGenerateForm = () => {
                 setModules(response.data);
             })
             .catch(error => {
-                console.error('Error fetching modules:', error);
+                console.error('Error Fetching modules:', error);
             });
     }, []);
 
