@@ -32,6 +32,7 @@ import { msalConfig } from './Config';
 import KeyGenerateForm2 from './page/KeyGenerateForm2';
 
 
+
 import axios from 'axios';
 
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -103,6 +104,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
           <Route path="contact_us" element={<Contact_Us />} />
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="mainhome" element={<Dashboard />} />
