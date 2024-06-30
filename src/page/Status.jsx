@@ -86,7 +86,7 @@ const Status = () => {
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        HTTPService.post(`api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        HTTPService.post(`api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults
@@ -231,7 +231,7 @@ const Status = () => {
                                             <td className='px-0 align-middle border-b-2 border-slate-500'>
                                             <div className='flex flex-row gap-5'>
                                                 <Reject value="Rejected" />
-                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -462,7 +462,7 @@ const Status = () => {
                                             <div className='flex flex-row gap-5'>
                                               <IssuedKeys value="Issued" />
                                               
-                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                               
                                             </div>
                                             
