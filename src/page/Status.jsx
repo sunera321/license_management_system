@@ -86,7 +86,7 @@ const Status = () => {
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        HTTPService.post(`api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        HTTPService.post(`api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults

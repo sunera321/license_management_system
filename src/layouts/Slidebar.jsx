@@ -127,7 +127,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={generate} alt="Generate Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 text-white truncate group-hover:block"><a href='/KeyGenerateForm' >Generate Key</a></span>
+            <span className="flex-1 ml-2 text-white truncate group-hover:block"><a href='/KeyGenerateForm2' >Generate Key</a></span>
           </div>
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addClient} alt="Add client Icon" className="w-6 h-6 mr-4" />
@@ -143,7 +143,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addnotification} alt="Notificatiom Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 text-white truncate group-hover:block"><a href="/AddNotification" >Add Notifications</a></span>
+            <span className="flex-1 ml-2 text-white truncate group-hover:block"><a href="/addnotification" >Add Notifications</a></span>
           </div>
 
 
