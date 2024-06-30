@@ -67,41 +67,27 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        const clientUrl = `https://localhost:7295/api/RequestKey/${cli}`;
-        const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
-
-        const clientData = {
+        HTTPService.patch(`api/RequestKey/${cli}`, {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
-        };
-
-        const requestKeyData = {
-            isFinanceApproval: false,
-            isPartnerApproval: false,
-            commentFinaceMgt: "",
-            commentPartnerMgt: "",
-            numberOfDays: ValidDate,
-            endClientId: cli,
-            partnerId: par,
-            issued: false
-        };
-
-        const updateModuleData = {
-            endClientId: cli,
-            moduleIds: selectedModules
-        };
-
-        console.log('Client Data:', clientData);
-        console.log('Request Key Data:', requestKeyData);
-        console.log('Update Module Data:', updateModuleData);
-
-        axios.patch(clientUrl, clientData)
+        })
             .then((clientResult) => {
-                axios.post(requestKeyUrl, requestKeyData)
+                HTTPService.post(`api/RequestKey/addRequestKey`, {
+                    isFinanceApproval: false,
+                    isPartnerApproval: false,
+                    commentFinaceMgt: "",
+                    commentPartnerMgt: "",
+                    numberOfDays: ValidDate,
+                    endClientId: cli,
+                    partnerId: par,
+                    issued: false,
+                })
                     .then((requestKeyResult) => {
-                        axios.post(updateModuleUrl, updateModuleData)
+                        HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
+                            endClientId: cli,
+                            moduleIds: selectedModules,
+                        })
                             .then((updateModuleResult) => {
                                 Swal.fire({
                                     position: "top-center",
@@ -138,6 +124,8 @@ const KeyGenerateForm = () => {
                 });
             });
     };
+
+
 
     return (
         <div>
