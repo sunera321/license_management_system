@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faUsers, faCoins } from '@fortawesome/free-solid-svg-icons';
-import AreaCard from '../components/AreaCard';
 import LineChart from '../components/LineChart';
 import Chart from '../components/Chart';
 import BarChart from '../components/BarChart';
-import HTTPService from '../Service/HTTPService';
+
 
 function IncomeDashboard() {
   const [dashboardData, setDashboardData] = useState(null);

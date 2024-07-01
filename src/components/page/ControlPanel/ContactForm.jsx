@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import backgroundImage from '../../asserts/Media/background1.jpg';
 import HTTPService from '../../../Service/HTTPService';
+
 const ContactForm = ({ client, onCloseClick }) => {
   const [loading, setLoading] = useState(false);
 
@@ -116,6 +117,14 @@ const ContactForm = ({ client, onCloseClick }) => {
       </div>
     </div>
   );
+};
+
+ContactForm.propTypes = {
+  client: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

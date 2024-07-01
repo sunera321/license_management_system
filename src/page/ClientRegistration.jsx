@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import { countries } from 'countries-list';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import HTTPService from '../Service/HTTPService';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
-const countryData = Object.values(countries);
+
 
 
 

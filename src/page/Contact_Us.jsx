@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import axiosInstance from '../components/axiosInstance';
-import HTTPService from '../Service/HTTPService';
+
 function Contact_Us() {
     const [formData, setFormData] = useState({
         firstName: '',
