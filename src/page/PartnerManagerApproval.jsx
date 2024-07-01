@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import PageHeader from '../components/CommonModal/pageHeader';
+import axiosInstance from '../components/axiosInstance';
 
 function PartnerManagerApproval() {
   const [clients, setClients] = useState([]);
@@ -14,7 +15,7 @@ function PartnerManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://localhost:7295/api/RequestKey')
+    axiosInstance.get('https://localhost:7295/api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
@@ -26,7 +27,7 @@ function PartnerManagerApproval() {
   }, []);
   const fetchModules = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await axiosInstance.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setRequestedModules(prevModules => ({
         ...prevModules,
         [clientId]: response.data

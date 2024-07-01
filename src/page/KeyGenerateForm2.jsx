@@ -3,6 +3,7 @@ import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
 import axios from 'axios';
+import axiosInstance from '../components/axiosInstance';
 
 
 
@@ -20,7 +21,7 @@ const KeyGenerateForm = () => {
   
 
     useEffect(() => {
-        axios.get('https://localhost:7295/api/Module/getModuleswithId')
+        axiosInstance.get('https://localhost:7295/api/Module/getModuleswithId')
             .then(response => {
                 setModules(response.data);
             })

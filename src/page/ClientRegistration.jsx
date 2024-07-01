@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import axiosInstance from '../components/axiosInstance';
 
 const ClientRegistration = () => {
 
@@ -41,7 +42,7 @@ const ClientRegistration = () => {
         }
 
         try{
-            const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
+            const response = await axiosInstance.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
               headers: {
                 'Content-Type': 'application/json'
               }

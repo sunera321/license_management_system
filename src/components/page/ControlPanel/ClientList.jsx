@@ -5,6 +5,7 @@ import Popup from './Popup';
 import ContactForm from './ContactForm';
 import Search from './Search';
 import PageLoader from '../../CommonModal/PageLoader';
+import axiosInstance from '../../axiosInstance';
 
 const ControlPanel = () => {
   const [popup, setPopup] = useState(false);
@@ -37,7 +38,7 @@ const ControlPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/EndClient/GetkeyHasEndClients');
+        const response = await axiosInstance.get('https://localhost:7295/api/EndClient/GetkeyHasEndClients');
         
         setClients(response.data);
         setIsLoad(false)

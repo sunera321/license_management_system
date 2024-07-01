@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import IssuedKeys from '../components/CommonModal/IssuedKey';
 import del from '../Images/del.png'
+import axiosInstance from '../components/axiosInstance';
 
 
 const Status = () => {
@@ -49,7 +50,7 @@ const Status = () => {
         setRequestedModules([]); // Reset requested modules
     };
     const fetchModules = (clientId) => {
-        axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
+        axiosInstance.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
             .then((response) => {
                 setRequestedModules(response.data);
             })
@@ -60,7 +61,7 @@ const Status = () => {
 
     const getData = () => {
         setIsLoading(true);
-        axios.get('https://localhost:7295/api/RequestKey')
+        axiosInstance.get('https://localhost:7295/api/RequestKey')
         
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
@@ -80,7 +81,7 @@ const Status = () => {
             });
     };
     const handledelete = (endClientId, requestKeyId) => {
-        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
+        axiosInstance.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
         .then (response => {
             Swal.fire({
                 icon: 'success',
@@ -91,7 +92,7 @@ const Status = () => {
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        axiosInstance.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaGlobe, FaBuilding } from 'react-icons/fa';
+import axiosInstance from '../../axiosInstance';
 
 const formatDate = (datetimeString) => {
   const date = new Date(datetimeString);
@@ -16,7 +17,7 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
   useEffect(() => {
     const fetchData = async (clientId) => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+        const response = await axiosInstance.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
         setModuleData(response.data.length > 0 ? response.data : ['No Modules']);
       } catch (error) {
         console.error('Error fetching data:', error);
