@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import PageLoader from '../components/CommonModal/PageLoader';
 import Popup from '../components/page/ControlPanel/Popup';
 import HTTPService from '../Service/HTTPService';
@@ -15,7 +15,7 @@ function LicenseKeyInfo() {
   const [isLoad, setIsLoad] = useState(true);
   const [clientData, setClientData] = useState({});
   const [popup, setPopup] = useState(false);
-  const [selectedClient, setSelectedClient] = useState(null);
+  // const [selectedClient, setSelectedClient] = useState(null);
   const [ClinetContact, setClinetContact] = useState(false);
   const [Clintmail, setClintmail] = useState(null);
 
@@ -37,7 +37,11 @@ function LicenseKeyInfo() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-
+  };
+  const closepopup = () => {
+    setPopup(false);
+    // setSelectedClient(null);
+  };
 
   const conatctClinet = (client) => {
     setClinetContact(true);
@@ -167,7 +171,7 @@ function LicenseKeyInfo() {
                     <select
                       value={statusFilter}
                       onChange={handleStatusFilterChange}
-                      inputProps={{ 'aria-label': 'Status Filter' }}
+                      // inputProps={{ 'aria-label': 'Status Filter' }}
                       className="block w-5 bg-white border border-gray-300 rounded-md focus:outline-none sm:text-sm"
                     >
                       <option value="">All</option>
