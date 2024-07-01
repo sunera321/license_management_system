@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 const msalInstance = new PublicClientApplication(msalConfig);
 
 const Login = () => {
-  const [userRole, setUserRole] = useState(null);
+  const [ setUserRole] = useState(null);
 
   return (
     <MsalProvider instance={msalInstance}>

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useMsal } from '@azure/msal-react';
 import Cookies from 'js-cookie';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
 import backgroundImage from '../components/asserts/Media/image1.jpg';
 import NavBar2 from '../components/page/loging/inc/NavBar2';
 import Footer2 from '../components/page/loging/inc/Footer2';
-
+import PropTypes from 'prop-types';
 const SignInButton = ({ setUserRole }) => {
   const { instance, accounts } = useMsal();
-  const [userData, setUserData] = useState(null);
+//  const [userData, setUserData] = useState(null);
 
   const handleRedirect = async () => {
     try {
@@ -33,7 +33,7 @@ const SignInButton = ({ setUserRole }) => {
         if (response.ok) {
           const data = await response.json();
           console.log('User Data from Graph API:', data);
-          setUserData(data);
+          // setUserData(data);
           // Save user ID, email, and displayName to cookies
           Cookies.set('userId', data.id, { expires: 7 }); // expires in 7 days
           Cookies.set('userEmail', data.mail || data.userPrincipalName, { expires: 7 }); // expires in 7 days
@@ -118,5 +118,7 @@ const SignInButton = ({ setUserRole }) => {
     </>
   );
 };
-
+SignInButton.propTypes = {
+  setUserRole: PropTypes.func.isRequired,
+};
 export default SignInButton;

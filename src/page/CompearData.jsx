@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import ContactForm from '../components/page/ControlPanel/ContactForm';
 import PageLoader from '../components/CommonModal/PageLoader';
 import HTTPService from '../Service/HTTPService';

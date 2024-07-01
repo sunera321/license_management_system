@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
-import axios from 'axios';
 import DownloadDropdown from './DownloadDropdown';
 import HTTPService from '../../../Service/HTTPService';
 

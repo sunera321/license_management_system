@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { PieChart, Pie, Cell, Label } from 'recharts';
 
 const AreaCard = ({ colors, percentFillValue, title }) => {
@@ -38,6 +39,12 @@ const AreaCard = ({ colors, percentFillValue, title }) => {
       </div>
     </div>
   );
+};
+
+AreaCard.propTypes = {
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  percentFillValue: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default AreaCard;

@@ -5,7 +5,6 @@ import Reject from '../components/CommonModal/Reject';
 // import Provide from '../components/CommonModal/Provide';
 // import Issue from '../components/CommonModal/Issue';
 // import Disable from '../components/CommonModal/Disable';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
@@ -26,7 +25,7 @@ const Status = () => {
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
-    const [generatedKey, setGeneratedKey] = useState('');
+    // const [generatedKey, setGeneratedKey] = useState('');
    // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
@@ -60,7 +59,7 @@ const Status = () => {
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
-                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null)); ;
+                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null));
                 const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
                 const IssuedKeys =result.data.filter(item=>item.issued === true && item.isFinanceApproval === true && item.isPartnerApproval === true );
                 setRejectRequests(dataWithComment);
@@ -76,19 +75,19 @@ const Status = () => {
     };
     const handledelete = (endClientId, requestKeyId) => {
         HTTPService.delete(`api/RequestKey/${requestKeyId}`)
-        .then (response => {
+        .then(() => {
             Swal.fire({
                 icon: 'success',
-                title: 'Deleted!',
+                title: 'Request Deleted!',
             });
-        }
-        )
+            getData();
+        })
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
         HTTPService.post(`api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
-            setGeneratedKey(response.data);
+            // setGeneratedKey(response.data);
             // Remove the item from PendingResults
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
     

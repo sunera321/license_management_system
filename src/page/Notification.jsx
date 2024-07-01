@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
 import PageHeader from '../components/CommonModal/pageHeader';
 const Notification = () => {

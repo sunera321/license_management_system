@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { Chart } from 'react-google-charts';
 import HTTPService from '../Service/HTTPService';
 // Functional component to render the BarChart using Google Charts
