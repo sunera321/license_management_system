@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useMsal } from '@azure/msal-react';
 import Cookies from 'js-cookie';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
@@ -8,7 +8,7 @@ import Footer2 from '../components/page/loging/inc/Footer2';
 import PropTypes from 'prop-types';
 const SignInButton = ({ setUserRole }) => {
   const { instance, accounts } = useMsal();
- // const [userData, setUserData] = useState(null);
+ const [ setUserData] = useState(null);
 
   const handleRedirect = async () => {
     try {

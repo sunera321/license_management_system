@@ -12,7 +12,7 @@ const PageHeader = ({ title }) => {
   );
 };
 
-Reject.propTypes = {
+PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
