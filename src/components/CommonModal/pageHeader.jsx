@@ -12,5 +12,11 @@ const PageHeader = ({ title }) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+PageHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+>>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 
 export default PageHeader;

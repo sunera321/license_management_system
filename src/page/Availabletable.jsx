@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 import Search from '../components/page/ControlPanel/Search';
 import HTTPService from '../Service/HTTPService';
 const AvailableTable = () => {

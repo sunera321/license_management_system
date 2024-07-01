@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';

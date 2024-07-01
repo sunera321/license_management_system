@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect} from 'react';
+=======
+import React, { useEffect,useState } from 'react';
+>>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 import { useMsal } from '@azure/msal-react';
 import Cookies from 'js-cookie';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
@@ -8,7 +12,11 @@ import Footer2 from '../components/page/loging/inc/Footer2';
 import PropTypes from 'prop-types';
 const SignInButton = ({ setUserRole }) => {
   const { instance, accounts } = useMsal();
+<<<<<<< HEAD
 //  const [userData, setUserData] = useState(null);
+=======
+ const [ setUserData] = useState(null);
+>>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 
   const handleRedirect = async () => {
     try {
