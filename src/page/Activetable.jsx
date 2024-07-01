@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Search from '../components/page/ControlPanel/Search';
 import HTTPService from '../Service/HTTPService';
 
-const AvailableTable = () => {
+const ActiveTable = () => {
   const [clients, setClients] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,33 +34,33 @@ const AvailableTable = () => {
   return (
     <div>
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
-      <div className="container w-3/4 px-2 mx-auto sm:px-6 lg:px-8">
-        <div className="overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="container w-full px-2 mx-auto sm:px-6 lg:px-8">
+        <div className="overflow-hidden shadow-md sm:rounded-lg">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
-            <p>Error: {error}</p>
+            <p className="text-red-500">{error}</p>
           ) : (
-            <table className="w-full text-sm text-left border border-gray-200">
-              <thead className="text-xs uppercase bg-emerald-200">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-emerald-200">
                 <tr>
-                  <th scope="col" className="px-6 py-3">Client ID</th>
-                  <th scope="col" className="px-6 py-3">Client Name</th>
-                  <th scope="col" className="px-6 py-3">Email Address</th>
-                  <th scope="col" className="px-6 py-3">Issue Date</th>
-                  <th scope="col" className="px-6 py-3">Expire Date</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Client ID</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Client Name</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Email Address</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Issue Date</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Expire Date</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {filteredClients.length > 0 ? filteredClients.map(client => (
-                  <tr key={client.id}>
-                    <td className="px-2 py-2">{client.id}</td>
-                    <td className="px-2 py-2">{client.name}</td>
-                    <td className="px-2 py-2">{client.email}</td>
-                    <td className="px-2 py-2">{client.activationDate}</td>
-                    <td className="px-2 py-2">{client.deactivatedDate}</td>
+                  <tr key={client.id} className="hover:bg-gray-100">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{client.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{client.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{client.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(client.activationDate).toLocaleDateString()}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(client.deactivatedDate).toLocaleDateString()}</td>
                   </tr>
-                )) : <tr><td colSpan="5">No clients found</td></tr>}
+                )) : <tr><td colSpan="5" className="px-6 py-4 text-center text-sm text-gray-500">No clients found</td></tr>}
               </tbody>
             </table>
           )}
@@ -71,4 +70,4 @@ const AvailableTable = () => {
   );
 };
 
-export default AvailableTable;
+export default ActiveTable;

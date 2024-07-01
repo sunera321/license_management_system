@@ -7,7 +7,6 @@ import AvailableTable from "./Availabletable";
 import ActiveTable from './Activetable';
 import ExpiredTable from './Expiredtable';
 import StatusBarGraph from '../components/page/Dashboard/statusBarGraph';
-import axios from 'axios';
 import StatusPieChart from '../components/page/Dashboard/piechart';
 import HTTPService from '../Service/HTTPService';
 
@@ -67,7 +66,7 @@ const Dashboard = () => {
   
   const countLicenses = (data) => {
     const counts = {
-      available: data.filter(license => license.keyStatus === 'Available').length,
+      available: data.length,
       active: data.filter(license => license.keyStatus === 'Activated').length,
       expired: data.filter(license => license.keyStatus === 'Expired').length
     };

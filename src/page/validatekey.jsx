@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import PageLoader from '../components/CommonModal/PageLoader';
 import HTTPService from '../Service/HTTPService';
 const ValidateKey = () => {
