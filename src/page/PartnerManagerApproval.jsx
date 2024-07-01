@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import PageHeader from '../components/CommonModal/pageHeader';
@@ -36,12 +34,11 @@ function PartnerManagerApproval() {
       console.error('Error fetching modules:', error);
     }
   };
-  const navigate = useNavigate();
 
   const handleUpdate = (request_id) => {
      
     HTTPService.patch(`api/RequestKey/${request_id}/SetPartnerTrue`)
-      .then((result) => {
+      .then(() => {
         console.log('Data Updated Successfully');
         Swal.fire({
           position: "top-center",
@@ -68,7 +65,7 @@ function PartnerManagerApproval() {
         'Content-Type': 'application/json'
       }
     })
-      .then((result) => {
+      .then(() => {
       
         const updatedClients = clients.map(client => {
           if (client.requestID === selectedRequestId) {

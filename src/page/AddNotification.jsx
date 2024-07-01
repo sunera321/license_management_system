@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import HTTPService from '../Service/HTTPService';

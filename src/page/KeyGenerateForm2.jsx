@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
 
 
@@ -72,7 +71,7 @@ const KeyGenerateForm = () => {
             mackAddress: MacAddress,
             website: Website,
         })
-            .then((clientResult) => {
+            .then(() => {
                 HTTPService.post(`api/RequestKey/addRequestKey`, {
                     isFinanceApproval: false,
                     isPartnerApproval: false,
@@ -83,12 +82,12 @@ const KeyGenerateForm = () => {
                     partnerId: PartnerID,
                     issued: false,
                 })
-                    .then((requestKeyResult) => {
+                    .then(() => {
                         HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
                             endClientId: ClientID,
                             moduleIds: selectedModules,
                         })
-                            .then((updateModuleResult) => {
+                            .then(() => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",

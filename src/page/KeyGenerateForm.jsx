@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
 import { useSearchParams } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
 
 const KeyGenerateForm = () => {
-    const [ClientID, setClinetID] = useState('');
+    // const [ClientID, setClinetID] = useState('');
     const [URL, setURL] = useState('');
     const [MacAddress, setSMA] = useState('');
     const [ValidDate, setVD] = useState('');
     const [Website, setWeb] = useState('');
-    const [PartnerID, setPartnerID] = useState('');
+    // const [PartnerID, setPartnerID] = useState('');
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
     const [searchParams] = useSearchParams();
@@ -72,7 +71,7 @@ const KeyGenerateForm = () => {
             mackAddress: MacAddress,
             website: Website,
         })
-            .then((clientResult) => {
+            .then(() => {
                 HTTPService.post(`api/RequestKey/addRequestKey`, {
                     isFinanceApproval: false,
                     isPartnerApproval: false,
@@ -83,12 +82,12 @@ const KeyGenerateForm = () => {
                     partnerId: par,
                     issued: false,
                 })
-                    .then((requestKeyResult) => {
+                    .then(() => {
                         HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
                             endClientId: cli,
                             moduleIds: selectedModules,
                         })
-                            .then((updateModuleResult) => {
+                            .then(() => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",
@@ -137,7 +136,7 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" readOnly setClinetID={ClientID} placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required type="text" readOnly  placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
