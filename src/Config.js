@@ -4,8 +4,8 @@ export const msalConfig = {
   auth: {
     clientId: 'ee426632-2cf8-46c5-879c-a04c67b32021',
     authority: 'https://login.microsoftonline.com/77f15a54-9e6b-4132-901c-9ceba83a9269',
-    redirectUri: 'http://localhost:3000/mainhome',
-    postLogoutRedirectUri: 'http://localhost:3000',
+    redirectUri:'https://lmshsenid.netlify.app/controlpanel',
+    postLogoutRedirectUri: 'https://lmshsenid.netlify.app',
     navigateToLoginRequestUrl: false,
   },
   cache: {
