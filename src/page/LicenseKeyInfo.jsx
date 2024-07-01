@@ -46,11 +46,7 @@ function LicenseKeyInfo() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
-  const closepopup = () => {
-    setPopup(false);
-    setSelectedClient(null);
-  };
+
 
   const conatctClinet = (client) => {
     setClinetContact(true);
