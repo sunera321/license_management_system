@@ -1,97 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement,  Tooltip, Filler} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
+import DownloadDropdown from './DownloadDropdown';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  Tooltip,
-  Filler
-);
-
-const LineGraph = ({ chartData }) => {
-  const options = {
-    responsive: true,
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      x: {
-        grid: {
-         display: false, 
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    maintainAspectRatio: false, 
-    elements: {
-      line: {
-        tension: 0.3,
-        borderWidth: 2,
-      },
-      point: {
-        radius: 0,
-      },
-    },
-  };
-  chartData.datasets.forEach(dataset => {
-    dataset.borderColor = 'black'; // Set the color of the line
-    dataset.backgroundColor = 'transparent'; // No fill beneath the line
-    dataset.pointRadius = 0; // Hide the points
-    dataset.pointHoverRadius = 5; // Show point on hover, adjust as needed
-  });
-
-  return (
-    <div className="w-full px-4 md:px-0"> 
-    <div className=" h-64 md:h-80 lg:h-96 "> 
-        <Line data={chartData} options={options} />
-      </div>
-    </div>
-  );
-};
-
-export default LineGraph;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Filler } from 'chart.js';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Filler
 );
 
 const LineGraph = () => {
@@ -100,40 +16,53 @@ const LineGraph = () => {
     datasets: []
   });
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7284/api/client');
+        const response = await fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LicenseKey/statistics');
         const data = await response.json();
-        // Group data by month
-        const groupedData = data.reduce((acc, curr) => {
-          const month = curr.date.split('-')[1];
+
+        // Filter data to include only 'Available' status
+        const activateData = data.filter(item => item.key_Status === 'Available');
+
+        // Group available data by month and count total users per month
+        const groupedData = activateData.reduce((acc, curr) => {
+          // Extract the month from the activationDate field
+          const month = new Date(curr.activationDate).getMonth() + 1; // JavaScript months are 0-indexed
           if (!acc[month]) {
-            acc[month] = {};
+            acc[month] = 0;
           }
-          if (!acc[month][curr.module]) {
-            acc[month][curr.module] = 0;
-          }
-          acc[month][curr.module]++;
+          acc[month]++;
           return acc;
         }, {});
 
-        // Extract unique modules
-        const modules = [...new Set(data.map(item => item.module))];
+        // Create labels for months
+        const months = Object.keys(groupedData).map(month =>
+          new Date(0, month - 1).toLocaleString('default', { month: 'long' })
+        );
 
-        // Generate datasets for each module
-        const datasets = modules.map(module => ({
-          label: module,
-          data: Object.values(groupedData).map(monthData => monthData[module] || 0),
-          borderColor: 'black',
-          backgroundColor: 'transparent',
-          pointRadius: 0,
-          pointHoverRadius: 5
-        }));
+        // Round counts to full values
+        const roundedData = Object.keys(groupedData).reduce((acc, key) => {
+          acc[key] = Math.round(groupedData[key]);
+          return acc;
+        }, {});
+
+
+        // Generate dataset for monthly users
+        const dataset = {
+          label: 'Monthly Available Users',
+          data: Object.values(roundedData),
+          borderColor: 'rgba(0, 123, 255, 0.8)',
+          backgroundColor: 'rgba(0, 123, 255, 0.5)',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: true
+        };
 
         setChartData({
-          labels: Object.keys(groupedData),
-          datasets: datasets
+          labels: months,
+          datasets: [dataset]
         });
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -151,11 +80,19 @@ const LineGraph = () => {
     },
     scales: {
       x: {
+        title: {
+          display: true,
+          text: 'Months',
+        },
         grid: {
           display: false,
         },
       },
       y: {
+        title: {
+          display: true,
+          text: 'User Count',
+        },
         grid: {
           display: false,
         },
@@ -170,17 +107,108 @@ const LineGraph = () => {
       point: {
         radius: 0,
       },
-    },
+    }
   };
 
   return (
     <div className="w-full px-4 md:px-0">
-      <div className="relative h-64 md:h-80 lg:h-96 ">
+      <div className="relative h-64 md:h-80 lg:h-96">
         <Line data={chartData} options={options} />
+      </div>
+      <div className="flex justify-end w-full mt-4">
+        <DownloadDropdown userData={chartData} />
       </div>
     </div>
   );
 };
 
 export default LineGraph;
-*/ 
+
+
+
+//////////////////////////////Hard coded data/////////////////////////////////////
+
+// import React from 'react';
+// import { Line } from 'react-chartjs-2';
+// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
+
+// ChartJS.register(
+//  CategoryScale,
+//    LinearScale,
+//     PointElement,
+//     LineElement,
+//   );
+
+//   const LineGraph = () => {
+//       //Set hardcoded chart data
+//     const chartData = {
+//       labels: ['January', 'February', 'March', 'April', 'May'],
+//       datasets: [
+//         {
+//           label: 'Monthly Available Users',
+//           data: [20, 25, 15, 30, 10],
+//           borderColor: 'rgba(0, 123, 255, 0.8)',
+//           backgroundColor: 'rgba(0, 123, 255, 0.5)',
+//           pointRadius: 3,
+//           pointHoverRadius: 5,
+//           fill: true
+//         }
+//       ]
+//     };
+
+//     const options = {
+//       responsive: true,
+//       interaction: {
+//         intersect: false,
+//         mode: 'index',
+//       },
+//       scales: {
+//         x: {
+//           title: {
+//             display: true,
+//             text: 'Months',
+//           },
+//           grid: {
+//             display: false,
+//           },
+//         },
+//         y: {
+//           title: {
+//             display: true,
+//             text: 'User Count',
+//           },
+//           grid: {
+//             display: false,
+//           },
+//         },
+//       },
+//       maintainAspectRatio: false,
+//       elements: {
+//         line: {
+//           tension: 0.3,
+//           borderWidth: 2,
+//         },
+//         point: {
+//           radius: 0,
+//         },
+        
+//       }
+//     };
+
+//     return (
+//       <div className="w-full px-4 md:px-0">
+//         <div className="relative h-64 md:h-80 lg:h-96">
+//           <Line data={chartData} options={options} />
+//  <div className="flex justify-end w-full mt-4">
+//                 <DownloadDropdown userData={chartData} />
+//             </div> 
+//         </div>
+//       </div>
+//     );
+//   };
+
+//   export default LineGraph;
+
+
+
+

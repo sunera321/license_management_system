@@ -1,70 +1,88 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PageHeader from '../components/CommonModal/pageHeader';
-import hsenidImage from '../Images/hsenid.png';
-import hsenidImage2 from '../Images/hb.jpeg';
-import hsenidImage3 from '../Images/HR.jpeg';
-import hsenidImage5 from '../Images/New hr.jpg';
 
+import PageHeader from '../components/CommonModal/pageHeader';
+
+import PageLoader from '../components/CommonModal/PageLoader';
+
+
+import HTTPService from '../Service/HTTPService';
 
 const Module = () => {
+  const [modules, setModules] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    const fetchModules = async () => {
+      try {
+        const response = await HTTPService.get('api/Module/getModulesWithId');
+        setModules(response.data);
+      } catch (error) {
+        console.error('Error fetching modules:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const images = [
-
-
-    { src: hsenidImage, topic: 'Cloud-based HR Solution', description: 'This module provides a cloud-based solution for managing HR tasks efficiently.', link: '/moduledetails/1' },
-    { src: hsenidImage2, topic: 'Employee Management System', description: 'Manage your employees effectively with this comprehensive management system.', link: '/moduledetails/2' },
-    { src: hsenidImage3, topic: 'Human Resource Management', description: 'Optimize your HR processes with this robust management system.', link: '/moduledetails/3' },
-    { src: hsenidImage5, topic: 'People Management Software', description: 'Enhance your people management capabilities with this software solution.', link: '/moduledetails/4' },
-    { src: hsenidImage, topic: 'Cloud-based HR Solution', description: 'This module provides a cloud-based solution for managing HR tasks efficiently.', link: '/moduledetails/5' },
-    { src: hsenidImage2, topic: 'Employee Management System', description: 'Manage your employees effectively with this comprehensive management system.', link: '/moduledetails/6' },
-    { src: hsenidImage, topic: 'Cloud-based HR Solution', description: 'This module provides a cloud-based solution for managing HR tasks efficiently.', link: '/moduledetails/7' },
-    { src: hsenidImage3, topic: 'Human Resource Management', description: 'Optimize your HR processes with this robust management system.', link: '/moduledetails/8' },
-    { src: hsenidImage5, topic: 'People Management Software', description: 'Enhance your people management capabilities with this software solution.', link: '/moduledetails/9' },
-  ];
-
-
-
- 
-
-
-const imageSize = 'max-w-md'; 
-
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
-
-
+    fetchModules();
+  }, []);
 
   return (
-    <div className={`px-10 py-10 border-gray-500 border-solid border-4 ${isVisible ? '' : 'hidden'}`}>
-      <div>
-        <PageHeader title="Modules" />
-      </div>
-      <div className="grid grid-cols-3 gap-5">
-        {images.map((imageItem, index) => (
-          <div key={index} className="flex flex-col items-center">
-            <Link to={`/ModuleDetails/`} className="flex flex-col items-center">
-              <img
-                src={imageItem.src}
-                alt={`Module ${index + 1}`}
-                className={`w-full h-[300px] rounded-lg border border-gray-300 border-1 ${imageSize} mb-4`}
-                style={{ maxHeight: '320px' }}
-              />
-              <p className="-mt-24 text-left text-blue-500 underline hover:text-blue-700 hover:no-underline">{imageItem.topic}</p>
-              <p className="mt-1 text-center text-gray-600 ">{imageItem.description}</p>
+    <div className="px-10 py-10">
+
+      <PageHeader title={"Modules"} />
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Existing Modules Cards */}
+          {modules.map((module) => (
+            <div key={module.modulesId} className="flex flex-col items-center overflow-hidden bg-white rounded-lg shadow-lg">
+              <Link to={`/module/moduledetails/${module.modulesId}`} className="w-full">
+                <div className="w-full h-48 overflow-hidden">
+                  <img
+                    src={module.imagePath || 'default-image-path.jpg'}
+                    alt={`Module ${module.modulesId}`}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-lg font-bold text-blue-500 hover:underline">{module.modulename}</p>
+                  <p className="mt-2 text-gray-600">{module.moduleDescription}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+
+          {/* Add Module Card */}
+          <div className="flex flex-col items-center overflow-hidden bg-white rounded-lg shadow-lg">
+            <Link to="/addmodule" className="w-full">
+              <div className="flex items-center justify-center w-full h-48 bg-gray-200">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-24 h-24 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+
+              </div>
+              <div className="p-5">
+                <p className="text-lg font-bold text-blue-500 hover:underline">Add Module</p>
+                <p className="mt-2 text-gray-600">Click here to add a new module</p>
+              </div>
             </Link>
           </div>
-        ))}
-      </div>
-      <div className="flex justify-between mt-6">
-        <a href="#" className="text-white hover:underline" onClick={toggleVisibility}>
-          Hide Page
-        </a>{' '}
-      </div>
-      <div className="py-20" style={{ paddingTop: '50px' }}></div>
+
+        </div>
+      )}
     </div>
   );
 };

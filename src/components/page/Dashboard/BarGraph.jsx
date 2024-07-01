@@ -1,100 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from 'chart.js';
-import axios from 'axios';
+import { Chart } from 'react-google-charts';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement);
-
+import DownloadDropdown from './DownloadDropdown';
+import HTTPService from '../../../Service/HTTPService';
 const BarGraph = () => {
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'User Count',
-        data: [],
-        backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(199, 199, 199, 0.2)'
-        ],
-        borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(199, 199, 199, 1)'
-        ],
-        borderWidth: 1
-      }
-    ]
-  });
-
-  const options = {
-    scales: {
-      x: {
-        grid: {
-          display: false, 
-        },
-      },
-      y: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          color: function(context) {
-            if (context.tick.value === 0) {
-              return 'transparent'; 
-            }
-            return 'rgba(0, 0, 0, 0.1)'; 
-          },
-        },
-        ticks: {
-          precision: 0, 
-          beginAtZero: true 
-        }
-      },
-    },
-    maintainAspectRatio: false, 
-    responsive: true,
-    layout: {
-      padding: {
-        top: 10,
-        right: 50,
-        bottom: 10,
-        left: 50
-      }
-    }
-  };
+  const [chartData, setChartData] = useState([['Module', 'User Count', { role: 'style' }]]);
 
   useEffect(() => {
-    axios.get('https://localhost:7284/api/client')
+    HTTPService.get('api/Module/statistics')
       .then(response => {
-        const data = response.data;
+        const modules = response.data;
         const moduleData = {};
 
-        data.forEach(item => {
-          if (!moduleData[item.module]) {
-            moduleData[item.module] = 0;
-          }
-          moduleData[item.module]++;
+        // Count occurrences of each module
+        modules.forEach(item => {
+          moduleData[item.name] = item.total;
         });
 
-        const labels = Object.keys(moduleData).map(module => `${module} (${moduleData[module]})`);
-        const userData = Object.values(moduleData);
+        const labels = Object.keys(moduleData);
+        const counts = Object.values(moduleData);
 
-        setChartData({
-          labels: labels,
-          datasets: [{
-            label: 'User Count',
-            data: userData,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          }]
+        // Prepare data for react-google-charts with a gradient color
+        const chartArray = [['Module', 'User Count', { role: 'style' }]];
+        const gradientColor = 'color: #4A90E2; fill-opacity: 0.8'; 
+        labels.forEach((label, index) => {
+          chartArray.push([label, counts[index], gradientColor]);
         });
+
+        setChartData(chartArray);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -102,9 +35,77 @@ const BarGraph = () => {
   }, []);
 
   return (
-    <div className="w-full px-4 md:px-0"> 
-      <div className="relative h-64 md:h-80 lg:h-96 "> 
-        <Bar data={chartData} options={options} />
+    <div className="w-full p-6 transition-transform duration-500 transform bg-white rounded-lg shadow-xl hover:scale-105">
+      <div className="relative mb-4 md:h-80 lg:h-96">
+        <Chart
+          width={'100%'}
+          height={'400px'}
+          chartType="BarChart"
+          data={chartData}
+          options={{
+            title: 'User Count by Product',
+            titleTextStyle: {
+              color: '#2C3E50',
+              fontSize: 20,
+              bold: true,
+              fontName: 'Arial',
+            },
+            chartArea: { width: '60%' },
+            hAxis: {
+              title: 'User Count',
+              minValue: 0,
+              titleTextStyle: {
+                color: '#2C3E50',
+                italic: false,
+                fontName: 'Arial',
+              },
+              textStyle: {
+                color: '#34495E',
+                fontName: 'Arial',
+              },
+              gridlines: {
+                color: '#BDC3C7',
+              },
+            },
+            vAxis: {
+              title: 'Product',
+              titleTextStyle: {
+                color: '#2C3E50',
+                italic: false,
+                fontName: 'Arial',
+              },
+              textStyle: {
+                color: '#34495E',
+                fontName: 'Arial',
+              },
+              gridlines: {
+                color: '#BDC3C7',
+              },
+            },
+            legend: {
+              position: 'none',
+            },
+            tooltip: {
+              isHtml: true,
+              textStyle: {
+                color: '#2C3E50',
+              },
+              showColorCode: true,
+            },
+            bar: {
+              groupWidth: '75%',
+            },
+            animation: {
+              startup: true,
+              duration: 1000,
+              easing: 'inAndOut',
+            },
+            enableInteractivity: true,
+          }}
+        />
+      </div>
+      <div className="flex justify-end">
+        <DownloadDropdown userData={chartData} />
       </div>
     </div>
   );

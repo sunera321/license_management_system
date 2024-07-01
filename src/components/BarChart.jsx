@@ -1,42 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { Chart } from 'react-google-charts';
-
-// Define data for the bar chart
-const data = [
-  ['Product', '2022', '2023'],
-  ['HR Solution', 50, 60],
-  ['HR', 60, 70],
-  ['Product X', 70, 80],
-  ['Product Y', 80, 100],
-  ['Product Z', 100, 90],
-];
-
-// Define options for customizing the bar chart appearance and behavior
-const options = {
-  title: 'Most Popular Products in 2022 and 2023',
-  chartArea: { width: '50%' },
-  hAxis: {
-    title: 'Total Users',
-    minValue: 0,
-  },
-  vAxis: {
-    title: 'Product',
-  },
-  colors: ['#6252bc', '#280cc9'], 
-  width: '700px', 
-  legend: { position: 'top' }, 
-};
-
+import HTTPService from '../Service/HTTPService';
 // Functional component to render the BarChart using Google Charts
 function BarChart() {
+  const [chartData, setChartData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    HTTPService.get('api/Dashboard/top-modules')
+      .then(response => {
+        const data = response.data;
+
+        // Map fetched data to Google Charts format
+        const mappedData = data.map(module => [
+          module.moduleName,
+          module.totalRevenue,
+          module.numberOfClients
+        ]);
+
+        // Prepare chart data with header
+        const chartData = [
+          ['Module', 'Revenue', 'Users'],
+          ...mappedData
+        ];
+
+        setChartData(chartData);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
+  const options = {
+    title: 'Top 5 Modules in 2024',
+    chartArea: { width: '50%', height: '70%' },
+    hAxis: {
+      title: 'Modules',
+    },
+    vAxes: {
+      0: { title: 'Revenue' },
+      1: { title: 'Users' }
+    },
+    seriesType: 'bars',
+    series: {
+      0: { targetAxisIndex: 0 },
+      1: { targetAxisIndex: 1 }
+    },
+    colors: ['#6252bc', '#280cc9'],
+    width: '100%',
+    legend: { position: 'top' },
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div style={{ background: '#B2B2B2', padding: '20px', borderRadius: '10px', width: '750px' }}>
+    <div style={{ background: '#B2B2B2', padding: '20px', borderRadius: '10px' }}>
       {/* Render the Chart component with specified chartType, data, and options */}
       <Chart
-        chartType="BarChart"
-        width={options.width}
+        chartType="ComboChart"
+        width="100%"
         height="400px"
-        data={data}
+        data={chartData}
         options={options}
       />
     </div>
@@ -44,4 +78,3 @@ function BarChart() {
 }
 
 export default BarChart;
-

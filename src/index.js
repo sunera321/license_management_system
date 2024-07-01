@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; // Import createRoot from react-dom/client
 import App from './App';
-import Login from './page/Login';
 import { PublicClientApplication, EventType } from '@azure/msal-browser'; // Import EventType
 import { msalConfig } from './Config';
 
@@ -18,10 +17,11 @@ msalInstance.addEventCallback((event) => {
   }
 });
 
+const container = document.getElementById('root');
+const root = createRoot(container); // Create a root using createRoot
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );

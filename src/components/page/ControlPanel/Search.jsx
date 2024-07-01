@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Search = ({ searchInput, setSearchInput }) => {
   return (
@@ -21,6 +22,11 @@ const Search = ({ searchInput, setSearchInput }) => {
       </div>
     </div>
   );
+};
+
+Search.propTypes = {
+  searchInput: PropTypes.string.isRequired,
+  setSearchInput: PropTypes.func.isRequired,
 };
 
 export default Search;

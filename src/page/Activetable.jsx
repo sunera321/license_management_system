@@ -1,107 +1,73 @@
-import React from "react";
-import Swal from 'sweetalert2';
+import React, { useState, useEffect } from 'react';
+import Search from '../components/page/ControlPanel/Search';
+import HTTPService from '../Service/HTTPService';
 
-const clients = [
-  { 
-    id: "01129A", 
-    name: "Manchee", 
-    email: "abh123@gmail.com", 
-    issueDate: "2018-12-03", 
-    expireDate: "2021-12-03"
-  },
-  { 
-    id: "01129A", 
-    name: "Manchee", 
-    email: "abh123@gmail.com", 
-    issueDate: "2018-12-03", 
-    expireDate: "2021-12-03"
-  },
-  { 
-    id: "01129A", 
-    name: "Manchee", 
-    email: "abh123@gmail.com", 
-    issueDate: "2018-12-03", 
-    expireDate: "2021-12-03"
-  },
-  { 
-    id: "01129A", 
-    name: "Manchee", 
-    email: "abh123@gmail.com", 
-    issueDate: "2018-12-03", 
-    expireDate: "2021-12-03"
-  },
-  { 
-    id: "01129A", 
-    name: "Manchee", 
-    email: "abh123@gmail.com", 
-    issueDate: "2018-12-03", 
-    expireDate: "2021-12-03"
-  }
+const AvailableTable = () => {
+  const [clients, setClients] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-];
-const handleViewMore = (id) => {
-  //console.log(id);
-  Swal.fire("This module is Active!");
-};
+  useEffect(() => {
+    const fetchClients = async () => {
+      setLoading(true);
+      try {
+        const response = await HTTPService.get('api/LicenseKey/info');
+        const activeClients = response.data.filter(client => client.keyStatus === 'Activated');
+        setClients(activeClients);
+        setError(null);
+      } catch (err) {
+        setError('Failed to fetch data');
+        setClients([]);
+      }
+      setLoading(false);
+    };
 
-const ActiveTable = () => {
+    fetchClients();
+  }, []);
+
+  // Filter clients based on search input
+  const filteredClients = clients.filter(client =>
+    client.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Client ID
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Client Name
-          </th>
-          <th scope="col" class="px-6 py-3">
-
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Email Address
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Issue Date
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Expire Date
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {clients.map((client, index) => (
-          <tr key={index} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {client.id}
-            </th>
-            <td class="px-6 py-4">
-              {client.name}
-            </td>
-            <td class="px-6 py-4">
-              <button class="bg-gray-600 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleViewMore(client.id)}>
-                View more
-              </button>
-            </td>
-            <td class="px-6 py-4">
-              {client.email}
-            </td>
-            <td class="px-6 py-4">
-              {client.issueDate}
-            </td>
-            <td class="px-6 py-4">
-              {client.expireDate}
-            </td>
-
-          </tr>
-        ))}
-             </tbody>
-        </table>
+    <div>
+      <Search searchInput={searchInput} setSearchInput={setSearchInput} />
+      <div className="container w-3/4 px-2 mx-auto sm:px-6 lg:px-8">
+        <div className="overflow-x-auto shadow-md sm:rounded-lg">
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : (
+            <table className="w-full text-sm text-left border border-gray-200">
+              <thead className="text-xs uppercase bg-emerald-200">
+                <tr>
+                  <th scope="col" className="px-6 py-3">Client ID</th>
+                  <th scope="col" className="px-6 py-3">Client Name</th>
+                  <th scope="col" className="px-6 py-3">Email Address</th>
+                  <th scope="col" className="px-6 py-3">Issue Date</th>
+                  <th scope="col" className="px-6 py-3">Expire Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredClients.length > 0 ? filteredClients.map(client => (
+                  <tr key={client.id}>
+                    <td className="px-2 py-2">{client.id}</td>
+                    <td className="px-2 py-2">{client.name}</td>
+                    <td className="px-2 py-2">{client.email}</td>
+                    <td className="px-2 py-2">{client.activationDate}</td>
+                    <td className="px-2 py-2">{client.deactivatedDate}</td>
+                  </tr>
+                )) : <tr><td colSpan="5">No clients found</td></tr>}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default  ActiveTable;
+export default AvailableTable;
