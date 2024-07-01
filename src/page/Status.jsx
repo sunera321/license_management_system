@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Accept from '../components/CommonModal/Accept'
 import Reject from '../components/CommonModal/Reject';
-import Provide from '../components/CommonModal/Provide';
-import Issue from '../components/CommonModal/Issue';
-import Disable from '../components/CommonModal/Disable';
+// import Provide from '../components/CommonModal/Provide';
+// import Issue from '../components/CommonModal/Issue';
+// import Disable from '../components/CommonModal/Disable';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../components/CommonModal/BlueButton';
@@ -14,25 +14,20 @@ import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import IssuedKeys from '../components/CommonModal/IssuedKey';
 import del from '../Images/del.png'
-
+import HTTPService from '../Service/HTTPService';
 
 const Status = () => {
     const [modal, setModal] = useState(false);
-    const [CID, setEditId] = useState('');
-    const [CName, setEditName] = useState('');
-    const [Email, setEditEmail] = useState('');
-    const [Partner, setPartner] = useState('');
-    const [Finance, setFinance] = useState('');
+   
     const [selectedClient, setSelectedClient] = useState(null);
-    const [status1, setStatus1] = useState(true);
-    const [status2, setStatus2] = useState(true);
+    
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
     const [generatedKey, setGeneratedKey] = useState('');
-    const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
+   // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
     const [KeyIssued,setKeyIssued] = useState([]);
@@ -49,7 +44,7 @@ const Status = () => {
         setRequestedModules([]); // Reset requested modules
     };
     const fetchModules = (clientId) => {
-        axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
+        HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
             .then((response) => {
                 setRequestedModules(response.data);
             })
@@ -60,7 +55,7 @@ const Status = () => {
 
     const getData = () => {
         setIsLoading(true);
-        axios.get('https://localhost:7295/api/RequestKey')
+        HTTPService.get('api/RequestKey')
         
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
@@ -80,7 +75,7 @@ const Status = () => {
             });
     };
     const handledelete = (endClientId, requestKeyId) => {
-        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
+        HTTPService.delete(`api/RequestKey/${requestKeyId}`)
         .then (response => {
             Swal.fire({
                 icon: 'success',
@@ -91,7 +86,7 @@ const Status = () => {
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        HTTPService.post(`api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
             setGeneratedKey(response.data);
             // Remove the item from PendingResults
@@ -101,11 +96,11 @@ const Status = () => {
             const key = response.data;
     
             // Update the request key to set it as issued
-            axios.patch(`https://localhost:7295/api/RequestKey/${requestKeyId}/SetIssueTrue`)
+            HTTPService.patch(`api/RequestKey/${requestKeyId}/SetIssueTrue`)
             .then(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'License Key Generated and Request Key Updated!',
+                    title: 'License Key Generated!',
                 });
                 navigate(`/sendkey/${key}`);
             })
@@ -137,7 +132,7 @@ const Status = () => {
     return (
         <div>
             <div className='fixed top-20 right-2'>
-                <a href='/KeyGenerateForm'>
+                <a href='/KeyGenerateForm2'>
                 <BlueButton value="Generate Key" />
                 </a>
             </div>
@@ -160,9 +155,11 @@ const Status = () => {
                     <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
                         <thead className='text-white bg-indigo-900'>
                             <tr>
-                                <th className='px-5 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
+
+                                <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
                                 <th className='px-20 mx-0 text-lg font-semibold rounded-lg py-'>Client name</th>
-                                <th className='px-10 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+                                <th className='px-10 py-0 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
                                 <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
                                 <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
@@ -234,7 +231,7 @@ const Status = () => {
                                             <td className='px-0 align-middle border-b-2 border-slate-500'>
                                             <div className='flex flex-row gap-5'>
                                                 <Reject value="Rejected" />
-                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -465,7 +462,7 @@ const Status = () => {
                                             <div className='flex flex-row gap-5'>
                                               <IssuedKeys value="Issued" />
                                               
-                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                               
                                             </div>
                                             

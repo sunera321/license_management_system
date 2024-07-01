@@ -4,10 +4,10 @@ import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
 import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
-import { useSearchParams } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
 
 const KeyGenerateForm = () => {
+
     const [ClientID, setClinetID] = useState('');
     const [URL, setURL] = useState('');
     const [MacAddress, setSMA] = useState('');
@@ -16,9 +16,8 @@ const KeyGenerateForm = () => {
     const [PartnerID, setPartnerID] = useState('');
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
-    const [searchParams] = useSearchParams();
-    const cli = searchParams.get('client');
-    const par = searchParams.get('partner');
+
+
 
     useEffect(() => {
         HTTPService.get('api/Module/getModuleswithId')
@@ -29,6 +28,7 @@ const KeyGenerateForm = () => {
                 console.error('Error Fetching modules:', error);
             });
     }, []);
+
 
     const validateMacAddress = (macAddress) => {
         const macAddressRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
@@ -67,7 +67,7 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        HTTPService.patch(`api/RequestKey/${cli}`, {
+        HTTPService.patch(`api/RequestKey/${ClientID}`, {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
@@ -79,13 +79,13 @@ const KeyGenerateForm = () => {
                     commentFinaceMgt: "",
                     commentPartnerMgt: "",
                     numberOfDays: ValidDate,
-                    endClientId: cli,
-                    partnerId: par,
+                    endClientId: ClientID,
+                    partnerId: PartnerID,
                     issued: false,
                 })
                     .then((requestKeyResult) => {
                         HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
-                            endClientId: cli,
+                            endClientId: ClientID,
                             moduleIds: selectedModules,
                         })
                             .then((updateModuleResult) => {
@@ -125,8 +125,6 @@ const KeyGenerateForm = () => {
             });
     };
 
-
-
     return (
         <div>
             <PageHeader title='Key Generate Form' />
@@ -137,11 +135,13 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" readOnly setClinetID={ClientID} placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required type="text" onChange={(e) => setClinetID(e.target.value)} value={ClientID} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required placeholder={`${par}`} readOnly value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+
+                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+
                         </div>
                     </div>
 
@@ -185,11 +185,11 @@ const KeyGenerateForm = () => {
                             ))}
                         </ul>
 
+
                     </div>
                     <div className="flex items-center justify-end pb-5">
                         <input type="submit" value="Submit" className="p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl lg:w-48 mb2 hover:bg-indigo-500" />
                     </div>
-
                 </form>
             </div>
         </div>

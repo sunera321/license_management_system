@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { countries } from 'countries-list';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import HTTPService from '../Service/HTTPService';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+
+const countryData = Object.values(countries);
+
+
+
 
 const ClientRegistration = () => {
-
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         partnerId: '',
         name: '',
         email: '',
@@ -17,7 +27,11 @@ const ClientRegistration = () => {
         website: '',
         industry: '',
         additionalInfo: ''
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [cityPlaceholder, setCityPlaceholder] = useState('City');
+    const [regionPlaceholder, setRegionPlaceholder] = useState('Region');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,50 +41,55 @@ const ClientRegistration = () => {
         });
     };
 
+    const handleCountryChange = (val) => {
+        setFormData({
+            ...formData,
+            country: val
+        });
+        setCityPlaceholder(`City in ${val}`);
+        setRegionPlaceholder(`Region in ${val}`);
+    };
+
+    const handleRegionChange = (val) => {
+        setFormData({
+            ...formData,
+            region: val
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Perform form submission/validation logic here
-        // For example, you can check if required fields are filled and validate email format
+
         if (
-            formData.ClientName === '' ||
-            formData.Email === '' ||
-            formData.Phone_number === ''
+            formData.name === '' ||
+            formData.email === '' ||
+            formData.phoneNumber === ''
         ) {
-            alert('Client Name, Email, and Phone Number are required!');
+            alert('Partner ID,Client Name, Email, and Phone Number are required!');
             return;
         }
 
+
         try{
-            const response = await axios.post('https://localhost:7295/api/EndClient/addEndClient', formData, {
+            const response = await HTTPService.post('api/EndClient/addEndClient', formData, {
               headers: {
                 'Content-Type': 'application/json'
               }
+
             });
             console.log('Data submitted successfully:', response.data);
             Swal.fire({
-    
                 position: "center",
                 icon: "success",
-                title: "New Client Add Successfully",
+                title: "New Client Added Successfully",
                 showConfirmButton: false,
                 timer: 1500
-        
-              })
-          } catch (error) {
+            });
+            setFormData(initialFormData); // Clear the form after submission
+            window.location.href = 'http://localhost:3000/addclient';
+        } catch (error) {
             console.error('Error submitting data:', error);
-          }
-   
-
-      
-
-     
-    };
-
-    // Email validation function
-    const validateEmail = (email) => {
-        // Basic email format validation
-        const re = /\S+@\S+\.\S+/;
-        return re.test(email);
+        }
     };
 
     return (
@@ -78,20 +97,21 @@ const ClientRegistration = () => {
             <PageHeader title={"Register Client"} />
 
             <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
-                <form className='px-5 pt-2 pb-20 bg-gray-100 rounded shadow-lg' onSubmit={handleSubmit}>
-                    <div className="flex mb-1">
+                <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg' onSubmit={handleSubmit}>
+                    <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Partner ID</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Partner ID <span className="text-red-600">*</span></label><br />
                             <input
                                 type="text"
                                 name="partnerId"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.partnerId}
+                                required
                             /><br />
                         </div>
                         <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Client Name</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Client Name <span className="text-red-600">*</span></label><br />
                             <input
                                 type="text"
                                 name="name"
@@ -103,56 +123,74 @@ const ClientRegistration = () => {
                         </div>
                     </div>
 
-                    <div className="flex mb-2">
+                    <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Email</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Email <span className="text-red-600">*</span></label><br />
                             <input
                                 type="email"
                                 name="email"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.email}
+                                placeholder=" example@example.com"
                                 required
                             /><br />
                         </div>
-                        <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Phone Number</label><br />
-                            <input
-                                type="text"
-                                name="phoneNumber"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.phoneNumber}
-                                required
-                            /><br />
+                        <div className="relative w-1/2">
+                            <label className='mb-2 text-lg text-gray-700'>Country</label><br />
+                            <div className="relative flex items-center">
+                                <CountryDropdown
+                                    value={formData.country}
+                                    onChange={handleCountryChange}
+                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                    required
+                                />
+                                <ChevronDownIcon className="absolute w-5 h-5 text-gray-500 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                            </div>
                         </div>
                     </div>
 
-                    <div className="flex mb-3">
+                    <div className="flex mb-4">
+                        <div className="w-1/2 mr-5">
+                            <label className='mb-2 text-lg text-gray-700'>Phone Number <span className="text-red-600">*</span></label><br />
+                            <PhoneInput
+                                country={formData.country.toLowerCase()}
+                                value={formData.phoneNumber}
+                                onChange={phone => setFormData({ ...formData, phoneNumber: phone })}
+                                inputClass='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                specialLabel=''
+                                required
+                            /><br />
+                        </div>
+                        <div className="relative w-1/2">
+                            <label className='mb-2 text-lg text-gray-700'>Region</label><br />
+                            <div className="relative flex items-center">
+                                <RegionDropdown
+                                    country={formData.country}
+                                    value={formData.region}
+                                    onChange={handleRegionChange}
+                                    className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                    placeholder={regionPlaceholder}
+                                    required
+                                />
+                                <ChevronDownIcon className="absolute w-5 h-5 text-gray-500 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>City</label><br />
                             <input
                                 type="text"
                                 name="city"
+                                placeholder={cityPlaceholder}
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.city}
                             /><br />
                         </div>
                         <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Region</label><br />
-                            <input
-                                type="text"
-                                name="region"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.region}
-                            /><br />
-                        </div>
-                    </div>
-
-                    <div className="flex mb-4">
-                        <div className="w-1/2 mr-5">
                             <label className='mb-2 text-lg text-gray-700'>Postal Code</label><br />
                             <input
                                 type="text"
@@ -162,27 +200,18 @@ const ClientRegistration = () => {
                                 value={formData.postalCode}
                             /><br />
                         </div>
-                        <div className="w-1/2">
-                            <label className='mb-2 text-lg text-gray-700'>Country</label><br />
-                            <input
-                                type="text"
-                                name="country"
-                                className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-                                onChange={handleInputChange}
-                                value={formData.country}
-                            /><br />
-                        </div>
                     </div>
 
                     <div className="flex mb-4">
                         <div className="w-1/2 mr-5">
-                            <label className='mb-2 text-lg text-gray-700'>Web site</label><br />
+                            <label className='mb-2 text-lg text-gray-700'>Website</label><br />
                             <input
                                 type="text"
                                 name="website"
                                 className='w-full px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                 onChange={handleInputChange}
                                 value={formData.website}
+                                placeholder="https://example.com"
                             /><br />
                         </div>
                         <div className="w-1/2">
@@ -204,21 +233,17 @@ const ClientRegistration = () => {
                             className='w-full h-32 px-4 py-2 leading-tight text-gray-700 border rounded shadow appearance-none resize-y focus:outline-none focus:shadow-outline'
                             onChange={handleInputChange}
                             value={formData.additionalInfo}
-                        ></textarea> <br />
+                        ></textarea><br />
                     </div>
 
-                    <br />
-                    <div className='mb-14'>
+                    <div className='mt-10 mb-4 text-right'>
                         <button
                             id='submit'
                             type='submit'
-                            className='max-w-xl px-8 py-2 text-white bg-blue-900 rounded-full float-end hover:bg-blue-1000'
+                            className='px-8 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-800 focus:outline-none focus:shadow-outline'
                         >SUBMIT</button>
                     </div>
                 </form>
-            </div>
-            <div className='mt-4'>
-
             </div>
         </div>
     );
