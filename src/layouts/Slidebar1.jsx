@@ -1,9 +1,5 @@
 import React from 'react';
 import menuIcon from '../Images/sidebarpic/menu-alt.svg';
-import dash from '../Images/sidebarpic/dashboard.svg';
-import control from '../Images/sidebarpic/control.svg';
-import addmodule from '../Images/sidebarpic/add-module.svg';
-import approval from '../Images/sidebarpic/approval.svg';
 import statusIcon from '../Images/sidebarpic/stat.svg'; 
 import license from '../Images/sidebarpic/license.svg';
 import generate from '../Images/sidebarpic/generate.svg';
@@ -92,7 +88,7 @@ const Slidebar = () => {
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={generate} alt="Generate Icon" className="w-6 h-6 mr-4" />
             </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href='/KeyGenerateForm' >Generate Key</a></span>
+            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href='/KeyGenerateForm2' >Generate Key</a></span>
           </div>
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"> <img src={addClient} alt="Add client Icon" className="w-6 h-6 mr-4" />

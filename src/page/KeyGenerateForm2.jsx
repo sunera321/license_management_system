@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import axios from 'axios';
-
+import HTTPService from '../Service/HTTPService';
 
 
 const KeyGenerateForm = () => {
@@ -16,16 +15,16 @@ const KeyGenerateForm = () => {
     const [PartnerID, setPartnerID] = useState('');
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
-    
-  
+
+
 
     useEffect(() => {
-        axios.get('https://localhost:7295/api/Module/getModuleswithId')
+        HTTPService.get('api/Module/getModuleswithId')
             .then(response => {
                 setModules(response.data);
             })
             .catch(error => {
-                console.error('Error fetching modules:', error);
+                console.error('Error Fetching modules:', error);
             });
     }, []);
 
@@ -67,43 +66,28 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        const clientUrl = `https://localhost:7295/api/RequestKey/${ClientID}`;
-        const requestKeyUrl = 'https://localhost:7295/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://localhost:7295/api/ClintIdByModules/UpdateModule';
-
-        const clientData = {
+        HTTPService.patch(`api/RequestKey/${ClientID}`, {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
-            
-        };
-
-        const requestKeyData = {
-            isFinanceApproval: false,
-            isPartnerApproval: false,
-            commentFinaceMgt: "",
-            commentPartnerMgt: "",
-            numberOfDays: ValidDate,
-            endClientId: ClientID,
-            partnerId: PartnerID,
-            issued:false
-        };
-
-        const updateModuleData = {
-            endClientId: ClientID,
-            moduleIds: selectedModules
-        };
-
-        console.log('Client Data:', clientData);
-        console.log('Request Key Data:', requestKeyData);
-        console.log('Update Module Data:', updateModuleData);
-
-        axios.patch(clientUrl, clientData)
-            .then((clientResult) => {
-                axios.post(requestKeyUrl, requestKeyData)
-                    .then((requestKeyResult) => {
-                        axios.post(updateModuleUrl, updateModuleData)
-                            .then((updateModuleResult) => {
+        })
+            .then(() => {
+                HTTPService.post(`api/RequestKey/addRequestKey`, {
+                    isFinanceApproval: false,
+                    isPartnerApproval: false,
+                    commentFinaceMgt: "",
+                    commentPartnerMgt: "",
+                    numberOfDays: ValidDate,
+                    endClientId: ClientID,
+                    partnerId: PartnerID,
+                    issued: false,
+                })
+                    .then(() => {
+                        HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
+                            endClientId: ClientID,
+                            moduleIds: selectedModules,
+                        })
+                            .then(() => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",
@@ -150,12 +134,12 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" onChange={(e) => setClinetID(e.target.value)}  value={ClientID} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
+                            <input required type="text" onChange={(e) => setClinetID(e.target.value)} value={ClientID} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
 
-                            <input required onChange={(e) => setPartnerID(e.target.value)}  value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required onChange={(e) => setPartnerID(e.target.value)} value={PartnerID} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
 
                         </div>
                     </div>
@@ -202,8 +186,8 @@ const KeyGenerateForm = () => {
 
 
                     </div>
-                    <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
-                        <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
+                    <div className="flex items-center justify-end pb-5">
+                        <input type="submit" value="Submit" className="p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl lg:w-48 mb2 hover:bg-indigo-500" />
                     </div>
                 </form>
             </div>

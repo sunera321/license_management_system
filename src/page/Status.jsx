@@ -5,7 +5,6 @@ import Reject from '../components/CommonModal/Reject';
 // import Provide from '../components/CommonModal/Provide';
 // import Issue from '../components/CommonModal/Issue';
 // import Disable from '../components/CommonModal/Disable';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../components/CommonModal/BlueButton';
 import InProgress from '../components/CommonModal/InProgress';
@@ -14,24 +13,19 @@ import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import IssuedKeys from '../components/CommonModal/IssuedKey';
 import del from '../Images/del.png'
-
+import HTTPService from '../Service/HTTPService';
 
 const Status = () => {
     const [modal, setModal] = useState(false);
-    // const [CID, setEditId] = useState('');
-    // const [CName, setEditName] = useState('');
-    // const [Email, setEditEmail] = useState('');
-    // const [Partner, setPartner] = useState('');
-    // const [Finance, setFinance] = useState('');
+   
     const [selectedClient, setSelectedClient] = useState(null);
-    // const [status1, setStatus1] = useState(true);
-    // const [status2, setStatus2] = useState(true);
+    
     const [RejectRequests, setRejectRequests] = useState([]);
     const [PendingResults, setPendingResults] = useState([]);
     const [AvailableRequest, setAvailableRequest] = useState([]);
     const [selectedDataType, setSelectedDataType] = useState('withCommentFinanceMgt'); // Default selected data type
     const [isLoading, setIsLoading] = useState(false);
-    const [generatedKey, setGeneratedKey] = useState('');
+    // const [generatedKey, setGeneratedKey] = useState('');
    // const [buttonClicked, setButtonClicked] = useState(false); // State to track if the button is clicked
     const navigate = useNavigate();
     const [requestedModules, setRequestedModules] = useState([]);
@@ -49,7 +43,7 @@ const Status = () => {
         setRequestedModules([]); // Reset requested modules
     };
     const fetchModules = (clientId) => {
-        axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
+        HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`)
             .then((response) => {
                 setRequestedModules(response.data);
             })
@@ -60,12 +54,12 @@ const Status = () => {
 
     const getData = () => {
         setIsLoading(true);
-        axios.get('https://localhost:7295/api/RequestKey')
+        HTTPService.get('api/RequestKey')
         
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
-                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null)); ;
+                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null));
                 const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
                 const IssuedKeys =result.data.filter(item=>item.issued === true && item.isFinanceApproval === true && item.isPartnerApproval === true );
                 setRejectRequests(dataWithComment);
@@ -80,20 +74,20 @@ const Status = () => {
             });
     };
     const handledelete = (endClientId, requestKeyId) => {
-        axios.delete(`https://localhost:7295/api/RequestKey/${requestKeyId}`)
-        .then (response => {
+        HTTPService.delete(`api/RequestKey/${requestKeyId}`)
+        .then(() => {
             Swal.fire({
                 icon: 'success',
-                title: 'Deleted!',
+                title: 'Request Deleted!',
             });
-        }
-        )
+            getData();
+        })
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
-        axios.post(`https://localhost:7295/api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
+        HTTPService.post(`api/LicenseKey/api/license/generate?endClientId=${endClientId}&requestKeyId=${requestKeyId}`)
         .then(response => {
-            setGeneratedKey(response.data);
+            // setGeneratedKey(response.data);
             // Remove the item from PendingResults
             setPendingResults(prevPendingResults => prevPendingResults.filter(item => item.endClient.id !== endClientId));
     
@@ -101,7 +95,7 @@ const Status = () => {
             const key = response.data;
     
             // Update the request key to set it as issued
-            axios.patch(`https://localhost:7295/api/RequestKey/${requestKeyId}/SetIssueTrue`)
+            HTTPService.patch(`api/RequestKey/${requestKeyId}/SetIssueTrue`)
             .then(() => {
                 Swal.fire({
                     icon: 'success',
@@ -236,7 +230,7 @@ const Status = () => {
                                             <td className='px-0 align-middle border-b-2 border-slate-500'>
                                             <div className='flex flex-row gap-5'>
                                                 <Reject value="Rejected" />
-                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                                <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -467,7 +461,7 @@ const Status = () => {
                                             <div className='flex flex-row gap-5'>
                                               <IssuedKeys value="Issued" />
                                               
-                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-10 h-10 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
+                                              <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                               
                                             </div>
                                             

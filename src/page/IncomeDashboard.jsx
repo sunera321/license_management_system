@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faUsers, faCoins } from '@fortawesome/free-solid-svg-icons';
-import AreaCard from '../components/AreaCard';
 import LineChart from '../components/LineChart';
 import Chart from '../components/Chart';
 import BarChart from '../components/BarChart';
+
 
 function IncomeDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
@@ -46,7 +46,7 @@ function IncomeDashboard() {
     <div className='relative flex flex-col items-start justify-between h-full col-span-2 gap-3 p-2 ml-11'>
       {/* Current Date and Time Container */}
       <div className="absolute top-0 right-0 p-4">
-        <div className="items-center p-2 shadow-md lg:w-54 mr-10">
+        <div className="items-center p-2 mr-10 shadow-md lg:w-54">
           <p className="text-ash">Date:  {currentDateTime.toLocaleDateString()}</p>
           <p className="text-ash">Time:   {currentDateTime.toLocaleTimeString()}</p>
         </div>
@@ -63,7 +63,7 @@ function IncomeDashboard() {
         {/* Total Module card */}
         <div className='flex flex-col items-center justify-center w-full gap-5 p-5 transition-transform bg-blue-200 rounded-xl'>
           <div className='flex items-center justify-between w-full'>
-            <h1 className='font-semibold text-black text-md -mt-2'>Total Module</h1>
+            <h1 className='-mt-2 font-semibold text-black text-md'>Total Module</h1>
             <FontAwesomeIcon icon={faCubes} className='text-slate-600 size-12' />
           </div>
           <div className='flex items-center justify-between w-full'>
@@ -112,7 +112,7 @@ function IncomeDashboard() {
       
       {/* LineChart and Chart */}
       <div className="w-full mb-12">
-        <div className="w-200 ml-32 mb-32 mt-5">
+        <div className="mt-5 mb-32 ml-32 w-200">
           <LineChart />
         </div>
         <div className="w-full mb-12">

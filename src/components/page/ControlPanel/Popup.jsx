@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaGlobe, FaBuilding } from 'react-icons/fa';
-
+import HTTPService from '../../../Service/HTTPService';
 const formatDate = (datetimeString) => {
   const date = new Date(datetimeString);
   if (isNaN(date.getTime())) {
@@ -16,7 +16,7 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
   useEffect(() => {
     const fetchData = async (clientId) => {
       try {
-        const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+        const response = await HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
         setModuleData(response.data.length > 0 ? response.data : ['No Modules']);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -30,7 +30,7 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
 
   return (
     <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50">
-    <div className="p-8 pb-4 pt-4 pb-10 bg-white  w-[70%] h-[85%] overflow-auto rounded-lg">
+    <div className="p-8 pb-4 pt-4  bg-white  w-[70%] h-[85%] overflow-auto rounded-lg">
         <button
           className="absolute text-xl font-semibold text-gray-800 top-4 right-4 hover:text-gray-600"
           onClick={onCloseClick}
@@ -133,12 +133,12 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
         <div className="flex justify-between">
           
           <button onClick={() => onContactClick(client)}
-           type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+           type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
              Contact Client
           </button>
          
           <button  onClick={onCloseClick}
-           type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+           type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
               Close
           </button>
         </div>
@@ -146,5 +146,9 @@ const Popup = ({ client, onCloseClick, onContactClick }) => {
     </div>
   );
 };
-
+Popup.propTypes = {
+  client: PropTypes.object.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
+  onContactClick: PropTypes.func.isRequired,
+};
 export default Popup;

@@ -20,7 +20,7 @@ const LineGraph = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7295/api/LicenseKey/statistics');
+        const response = await fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LicenseKey/statistics');
         const data = await response.json();
 
         // Filter data to include only 'Available' status
@@ -115,7 +115,7 @@ const LineGraph = () => {
       <div className="relative h-64 md:h-80 lg:h-96">
         <Line data={chartData} options={options} />
       </div>
-      <div className="w-full flex justify-end mt-4">
+      <div className="flex justify-end w-full mt-4">
         <DownloadDropdown userData={chartData} />
       </div>
     </div>
@@ -199,7 +199,7 @@ export default LineGraph;
 //       <div className="w-full px-4 md:px-0">
 //         <div className="relative h-64 md:h-80 lg:h-96">
 //           <Line data={chartData} options={options} />
-//  <div className="w-full flex justify-end mt-4">
+//  <div className="flex justify-end w-full mt-4">
 //                 <DownloadDropdown userData={chartData} />
 //             </div> 
 //         </div>

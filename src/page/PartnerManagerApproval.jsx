@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageLoader from '../components/CommonModal/PageLoader';
 import PageHeader from '../components/CommonModal/pageHeader';
+import HTTPService from '../Service/HTTPService';
 
 function PartnerManagerApproval() {
   const [clients, setClients] = useState([]);
@@ -14,7 +13,7 @@ function PartnerManagerApproval() {
 
   useEffect(() => {
     setIsLoading(true); 
-    axios.get('https://localhost:7295/api/RequestKey')
+    HTTPService.get('api/RequestKey')
       .then(response => {
         setClients(response.data);
         setIsLoading(false);
@@ -26,7 +25,7 @@ function PartnerManagerApproval() {
   }, []);
   const fetchModules = async (clientId) => {
     try {
-      const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
+      const response = await HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${clientId}`);
       setRequestedModules(prevModules => ({
         ...prevModules,
         [clientId]: response.data
@@ -35,13 +34,11 @@ function PartnerManagerApproval() {
       console.error('Error fetching modules:', error);
     }
   };
-  const navigate = useNavigate();
 
   const handleUpdate = (request_id) => {
-    const url = `https://localhost:7295/api/RequestKey/${request_id}/SetPartnerTrue`;
-
-    axios.patch(url)
-      .then((result) => {
+     
+    HTTPService.patch(`api/RequestKey/${request_id}/SetPartnerTrue`)
+      .then(() => {
         console.log('Data Updated Successfully');
         Swal.fire({
           position: "top-center",
@@ -61,14 +58,14 @@ function PartnerManagerApproval() {
   }
 
   const handleSubmitRejection = () => {
-    const url = `https://localhost:7295/api/RequestKey/${selectedRequestId}/RejectPartnerPart`;
+    
 
-    axios.patch(url, JSON.stringify(rejectionReason), {
+    HTTPService.patch(`api/RequestKey/${selectedRequestId}/RejectPartnerPart`, JSON.stringify(rejectionReason), {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-      .then((result) => {
+      .then(() => {
       
         const updatedClients = clients.map(client => {
           if (client.requestID === selectedRequestId) {

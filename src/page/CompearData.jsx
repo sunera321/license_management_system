@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import ContactForm from '../components/page/ControlPanel/ContactForm';
 import PageLoader from '../components/CommonModal/PageLoader';
-
+import HTTPService from '../Service/HTTPService';
 const CompareData = () => {
     const { logkey } = useParams();
     const [compareDetail, setCompareDetail] = useState({});
@@ -17,7 +16,7 @@ const CompareData = () => {
     useEffect(() => {
         const fetchCompareDetail = async () => {
             try {
-                const response = await axios.get(`https://localhost:7295/api/LogingValidateInfo/GetClientServerInfo/${logkey}`);
+                const response = await HTTPService.get(`api/LogingValidateInfo/GetClientServerInfo/${logkey}`);
                 setCompareDetail(response.data);
                 setIsLoad(false);
             } catch (error) {
@@ -34,7 +33,7 @@ const CompareData = () => {
         const fetchClient = async () => {
             if (clientId) {
                 try {
-                    const response = await axios.get(`https://localhost:7295/api/EndClient/getEndClientById/${clientId}`);
+                    const response = await HTTPService.get(`api/EndClient/getEndClientById/${clientId}`);
                     setClient(response.data);
                 } catch (error) {
                     console.error('Error fetching data:', error);
@@ -55,7 +54,7 @@ const CompareData = () => {
         const fetchModules = async () => {
             if (client.id) {
                 try {
-                    const response = await axios.get(`https://localhost:7295/api/ClintIdByModules/getModulesNamesByClientId/${client.id}`);
+                    const response = await HTTPService.get(`api/ClintIdByModules/getModulesNamesByClientId/${client.id}`);
                     setModules(response.data.length > 0 ? response.data : ['No Modules']);
                 } catch (error) {
                     console.error('Error fetching data:', error);

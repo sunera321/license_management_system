@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Search = ({ searchInput, setSearchInput }) => {
   return (
@@ -11,7 +12,7 @@ const Search = ({ searchInput, setSearchInput }) => {
           aria-label="Search"
           aria-describedby="button-addon2"
           value={searchInput}
-          onChange={(e) =>  setSearchInput(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
         <span className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-500" id="basic-addon2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -21,6 +22,11 @@ const Search = ({ searchInput, setSearchInput }) => {
       </div>
     </div>
   );
+};
+
+Search.propTypes = {
+  searchInput: PropTypes.string.isRequired,
+  setSearchInput: PropTypes.func.isRequired,
 };
 
 export default Search;

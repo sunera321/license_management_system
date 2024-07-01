@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { useMsal } from '@azure/msal-react';
 import Logo from '../Images/nav_logo.png';
 import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
-import SignOut from '../Images/NavBarPic/l.png';
-import Path from '../components/CommonModal/Path';
+
 
 const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { instance } = useMsal();
+
+  const [newNotificationCount, setNewNotificationCount] = useState(0); // State to track new notifications count
+ 
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,6 +25,7 @@ function Navbar() {
     };
 
     const logoutUrl = `https://login.microsoftonline.com/${msalConfig.auth.authority.split('/')[3]}/oauth2/v2.0/logout?${new URLSearchParams(logoutRequest)}`;
+
 
     // Clear session storage
     sessionStorage.clear();
@@ -44,10 +46,24 @@ function Navbar() {
 
 
     // Redirect the user to Azure AD logout endpoint
+
     window.location.href = logoutUrl;
   };
 
+  // Function to simulate adding a new notification
+  // const addNotification = () => {
+  //   // Increment the new notification count
+  //   setNewNotificationCount(prevCount => prevCount + 1);
+  // };
+
+  // Function to simulate viewing notifications
+  const viewNotifications = () => {
+    // Reset new notification count after viewing
+    setNewNotificationCount(0);
+  };
+
   return (
+
     <nav className="bg-white shadow-lg">
       <div className="container flex items-center justify-between px-6 py-3 mx-auto">
         <div className="flex items-center">
@@ -80,12 +96,16 @@ function Navbar() {
             </li>
           </ul>
           <div className="flex items-center ml-8"> 
-            <a href='/notification' className="pr-4 text-gray-700 hover:text-blue-500">
-              <img src={Notification} alt="Notification Icon" className="w-6 h-6" />
+             <a href='/notification' onClick={viewNotifications} className="relative">
+              <img src={Notification} alt="Notification Icon" className="w-5 h-6 mt-1.5 mr-4" />
+              {newNotificationCount > 0 && (
+                <span className="absolute top-0 right-0 flex items-center justify-center inline-block w-4 h-4 text-xs text-white bg-red-500 rounded-full">{newNotificationCount}</span>
+              )}
             </a>
             <button onClick={handleLogout} className="px-6 py-2 text-sm font-medium text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700">
               Logout
             </button>
+
           </div>
         </div>
       </div>

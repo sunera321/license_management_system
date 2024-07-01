@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MsalProvider } from '@azure/msal-react';
 import MainLayout from "./layouts/MainLayout";
 import MainLayout1 from "./layouts/MainLayout1";
@@ -26,9 +26,15 @@ import ClientRegistration from './page/ClientRegistration';
 import ValidateKey from './page/validatekey';
 import CompearData from './page/CompearData';
 import ModuleDetails from './page/ModuleDetails';
+import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
+import KeyGenerateForm2 from './page/KeyGenerateForm2';
+
+
+
 import axios from 'axios';
+
 const msalInstance = new PublicClientApplication(msalConfig);
 
 const App = () => {
@@ -52,6 +58,7 @@ const App = () => {
   }, error => {
     return Promise.reject(error);
   });
+
 
   const userId = Cookies.get('userId');
   const email = Cookies.get('userEmail');
@@ -86,6 +93,8 @@ const App = () => {
           <Route path="compeardata/:logkey" element={<CompearData />} />
           <Route path="statusofkey" element={<StatusOfKey />} />
           <Route path="validatekey" element={<ValidateKey />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
         </Route>
       );
     }
@@ -95,6 +104,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
           <Route path="contact_us" element={<Contact_Us />} />
           <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
           <Route path="mainhome" element={<Dashboard />} />
@@ -113,6 +123,9 @@ const App = () => {
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
+
         </Route>
       );
     }
