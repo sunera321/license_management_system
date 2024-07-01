@@ -59,7 +59,7 @@ const Status = () => {
             .then((result) => {
                 // Filter data where CommentFinaceMgt is NULL
                 const dataWithComment = result.data.filter(item => item.commentFinaceMgt !== null || item.commentPartnerMgt !== null);
-                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null)); ;
+                const dataWithoutComment = result.data.filter(item => (item.isFinanceApproval === false || item.isPartnerApproval === false)  && (item.commentFinaceMgt === null &&  item.commentPartnerMgt === null));
                 const AvailableRequest = result.data.filter(item => item.isFinanceApproval === true && item.isPartnerApproval === true && item.issued === false);
                 const IssuedKeys =result.data.filter(item=>item.issued === true && item.isFinanceApproval === true && item.isPartnerApproval === true );
                 setRejectRequests(dataWithComment);
@@ -75,13 +75,13 @@ const Status = () => {
     };
     const handledelete = (endClientId, requestKeyId) => {
         HTTPService.delete(`api/RequestKey/${requestKeyId}`)
-        .then (response => {
+        .then(() => {
             Swal.fire({
                 icon: 'success',
-                title: 'Deleted!',
+                title: 'Request Deleted!',
             });
-        }
-        )
+            getData();
+        })
     }
  
     const handleIssueButtonClick = (endClientId, requestKeyId) => {
