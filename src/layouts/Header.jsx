@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-=======
-
->>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 import Logo from '../Images/nav_logo.png';
 import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
