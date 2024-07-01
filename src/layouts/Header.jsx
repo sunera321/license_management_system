@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMsal } from '@azure/msal-react';
+
 import Logo from '../Images/nav_logo.png';
 import Notification from '../Images/NavBarPic/N.png';
 import { msalConfig } from '../Config';
