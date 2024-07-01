@@ -30,6 +30,7 @@
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "libphonenumber-js": "^1.11.4",
     "postcss": "^8.4.33",
     "prop-types": "^15.8.1",
