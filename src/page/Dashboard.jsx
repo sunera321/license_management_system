@@ -7,7 +7,6 @@ import AvailableTable from "./Availabletable";
 import ActiveTable from './Activetable';
 import ExpiredTable from './Expiredtable';
 import StatusBarGraph from '../components/page/Dashboard/statusBarGraph';
-import axios from 'axios';
 import StatusPieChart from '../components/page/Dashboard/piechart';
 import HTTPService from '../Service/HTTPService';
 
