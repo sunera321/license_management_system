@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const formatDate = (datetimeString) => {
   const date = new Date(datetimeString);
@@ -9,17 +10,17 @@ const formatDate = (datetimeString) => {
   return date.toISOString().split('T')[0];
 };
 
-const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
+const ClientCard = ({ client, onMoreInfoClick }) => {
   return (
-    <div className="h-auto w-[450px]  bg-[#CCC7C7] rounded-lg pb-3 shadow-lg pl-4 pr-4   lg:w-1/4 xl:w-1/5 ">
+    <div className="h-auto w-[450px] bg-[#CCC7C7] rounded-lg pb-3 shadow-lg pl-4 pr-4 lg:w-1/4 xl:w-1/5">
       <div className="flex justify-between p-2 pt-2 0 6">
         <div className="text-[20px] font-normal">{client.name}</div>
         <div className="pt-1.5 text-[16px]">ID-{client.id}</div>
       </div>
       <div className="mx-auto bg-white h-0.5 w-7/8 mt-"></div>
-      <div className="pt-3 ">
+      <div className="pt-3">
         <div className='pb-2 pl-4 font-semibold'>Partner ID : {client.partnerId}</div>
-        <div className="text-[14px]  flex">
+        <div className="text-[14px] flex">
           <div className="w-3 h-3 mt-1 bg-[#19F000] border border-black rounded-full"></div>
           <div className="text-[14px]"> Activet Data : {formatDate(client.activeDate)}</div>
         </div>
@@ -34,14 +35,25 @@ const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
           <button
             value="View More"
             onClick={() => onMoreInfoClick(client)}
-            className="mt-3 p-1 text-white bg-[#36ac4d] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
+            className="mt-3 p-1 text-white bg-[#36ac4d] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black"
+          >
             View More
           </button>
-          
         </div>
       </div>
     </div>
   );
+};
+
+ClientCard.propTypes = {
+  client: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    partnerId: PropTypes.string.isRequired,
+    activeDate: PropTypes.string.isRequired,
+    expireDate: PropTypes.string.isRequired,
+  }).isRequired,
+  onMoreInfoClick: PropTypes.func.isRequired,
 };
 
 export default ClientCard;

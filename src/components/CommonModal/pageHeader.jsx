@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 const PageHeader = ({ title }) => {
   return (
     <div>
@@ -10,6 +10,10 @@ const PageHeader = ({ title }) => {
       </pageHead>
     </div>
   );
+};
+
+Reject.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default PageHeader;
