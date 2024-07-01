@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect} from 'react';
-=======
 import React, { useEffect,useState } from 'react';
->>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 import { useMsal } from '@azure/msal-react';
 import Cookies from 'js-cookie';
 import microsoftLogo from '../components/asserts/Media/microsoft.jpg';
@@ -12,11 +8,7 @@ import Footer2 from '../components/page/loging/inc/Footer2';
 import PropTypes from 'prop-types';
 const SignInButton = ({ setUserRole }) => {
   const { instance, accounts } = useMsal();
-<<<<<<< HEAD
-//  const [userData, setUserData] = useState(null);
-=======
  const [ setUserData] = useState(null);
->>>>>>> 19395d82e9b6e7af835329b3d01a383324b4b8cf
 
   const handleRedirect = async () => {
     try {
@@ -35,13 +27,13 @@ const SignInButton = ({ setUserRole }) => {
       try {
         const response = await fetch('https://graph.microsoft.com/v1.0/me', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: Bearer ${accessToken},
           },
         });
         if (response.ok) {
           const data = await response.json();
           console.log('User Data from Graph API:', data);
-          // setUserData(data);
+          setUserData(data);
           // Save user ID, email, and displayName to cookies
           Cookies.set('userId', data.id, { expires: 7 }); // expires in 7 days
           Cookies.set('userEmail', data.mail || data.userPrincipalName, { expires: 7 }); // expires in 7 days
@@ -52,7 +44,7 @@ const SignInButton = ({ setUserRole }) => {
 
         const roleResponse = await fetch('https://graph.microsoft.com/v1.0/me/appRoleAssignments', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: Bearer ${accessToken},
           },
         });
         if (roleResponse.ok) {
@@ -105,7 +97,7 @@ const SignInButton = ({ setUserRole }) => {
   return (
     <>
       <NavBar2 />
-      <section className="flex items-center justify-center h-screen" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+      <section className="flex items-center justify-center h-screen" style={{ backgroundImage: url(${backgroundImage}), backgroundSize: 'cover' }}>
         <div className="flex items-center justify-center w-1/3 p-8 rounded-l-lg shadow-2xl bg-gradient-to-r from-emerald-950 to-green-100 h-2/3">
           <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="w-2/3" alt="Phone image" />
         </div>
