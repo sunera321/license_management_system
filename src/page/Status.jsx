@@ -130,16 +130,17 @@ const Status = () => {
 
     return (
         <div>
-            <div className='fixed top-20 right-2'>
+           
+            <PageHeader title='Approval Status' />
+            <div className='float-left  top-20 right-5'>
                 <a href='/KeyGenerateForm2'>
                 <BlueButton value="Generate Key" />
                 </a>
             </div>
-            <PageHeader title='Approval Status' />
             {isLoading ? (
                 <PageLoader />
             ) : (
-                <div className='mt-10 '>
+                <div className='mt-10 mb-10 overflow-x-auto mx-36'>
                     <div className="mb-10 text-center">
                         <select className="w-1/4 p-2 border border-gray-300 rounded-md" onChange={handleSelectChange} value={selectedDataType}>
                             <option value="">Select Your Preference</option>
@@ -151,17 +152,17 @@ const Status = () => {
                            
                         </select>
                     </div>
-                    <table className="content-center w-2/4 p-5 mx-auto bg-white border border-separate table-auto border-slate-500 mb-11 border-spacing-2 caption-top">
+                    <table className="min-w-full bg-white border-collapse lg:px-36">
                         <thead className='text-white bg-indigo-900'>
                             <tr>
 
-                                <th className='px-5 py-0 mx-0 text-lg font-semibold rounded-lg'>Request ID</th>
-                                <th className='px-20 mx-0 text-lg font-semibold rounded-lg py-'>Client name</th>
-                                <th className='px-10 py-0 mx-0 text-lg font-semibold rounded-lg'>Client Data</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Request ID</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Client name</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Client Data</th>
 
-                                <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Partner Manager</th>
-                                <th className='px-20 py-0 mx-0 text-lg font-semibold rounded-lg'>Finance manager</th>
-                                <th className='px-2 py-0 mx-0 text-lg font-semibold rounded-lg'>Issue</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Partner Manager</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Finance manager</th>
+                                <th className='py-2 text-base font-semibold text-center border-b-2 border-slate-500'>Issue</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -170,8 +171,8 @@ const Status = () => {
                                 RejectRequests && RejectRequests.length > 0 ? (
                                     RejectRequests.map((item, index) => (
                                         <tr key={index}>
-                                            <td className='px-0 py-2 text-base text-center border-b-2 border-slate-500'>{item.requestID}</td>
-                                            <td className='w-1/3 py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.requestID}</td>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
                                             <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                 <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
@@ -221,14 +222,14 @@ const Status = () => {
                                                     )}
                                                 </button>
                                             </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                            <td className='py-2 text-base text-center border-b-2 px-14 mx-45 border-slate-500'>
                                                 {item.commentPartnerMgt}
                                             </td>
-                                            <td className='px-1 py-2 text-base border-b-2 mx-45 border-slate-500'>
+                                            <td className='px-1 py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                 {item.commentFinaceMgt}
                                             </td>
-                                            <td className='px-0 align-middle border-b-2 border-slate-500'>
-                                            <div className='flex flex-row gap-5'>
+                                            <td className='text-base text-center border-b-2 py- border-slate-500'>
+                                            <div className='flex justify-center gap-5'>
                                                 <Reject value="Rejected" />
                                                 <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
                                                 </div>
@@ -247,7 +248,7 @@ const Status = () => {
                                     PendingResults.map((item, index) => (
                                         <tr key={index}>
                                             <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.requestID}</td>
-                                            <td className='w-1/3 py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
                                             <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                 <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
@@ -297,13 +298,13 @@ const Status = () => {
                                                     )}
                                                 </button>
                                             </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                            <td className='px-5 py-2 text-base text-center border-b-2 border-slate-500'>
                                                 <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' /> }</div>
                                             </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                            <td className='px-5 py-2 text-base text-center border-b-2 border-slate-500'>
                                                 <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                             </td>
-                                            <td className='align-middle border-b-2 border-slate-500'>
+                                            <td className='px-5 py-2 mx-10 text-base text-center border-b-2 border-slate-500'>
                                                 <div>
                                                 {item.isPartnerApproval && item.isFinanceApproval ?
                                                     <button  className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:bg-green-400' onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>Available</button> : <Pending value="Pending" />}
@@ -325,7 +326,7 @@ const Status = () => {
                                     AvailableRequest.map((item, index) => (
                                         <tr key={index}>
                                             <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.requestID}</td>
-                                            <td className='w-1/3 py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
                                             <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
                                                 <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
@@ -375,16 +376,16 @@ const Status = () => {
                                                     )}
                                                 </button>
                                             </td>
-                                            <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>
                                             <div className=''>{item.isPartnerApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' /> }</div>
                                         </td>
-                                        <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
+                                        <td className='py-2 text-base text-center border-b-2 border-slate-500'>
                                             <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                         </td>
-                                        <td className='align-middle border-b-2 border-slate-500'>
+                                        <td className='py-2 text-base text-center border-b-2 border-slate-500'>
                                             <div>
                                             {item.isPartnerApproval && item.isFinanceApproval ?
-                                                <button  className='py-2 mx-12 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:bg-green-400' onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>Available</button> : <Pending value="Pending" />}
+                                                <button  className='py-2 text-white transition duration-300 ease-in-out delay-150 bg-green-600 rounded-full px-7 hover:bg-green-400' onClick={() => handleIssueButtonClick(item.endClient.id,item.requestID)}>Available</button> : <Pending value="Pending" />}
                                             </div>
                                             
                                         </td>
@@ -401,14 +402,14 @@ const Status = () => {
                                     KeyIssued.map((item, index) => (
                                         <tr key={index}>
                                             <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.requestID}</td>
-                                            <td className='w-1/3 py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
-                                            <td className='py-2 text-base text-center border-b-2 mx-45 border-slate-500'>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>{item.endClient.name}</td>
+                                            <td className='py-2 text-base text-center border-b-2 border-slate-500'>
                                                 <button onClick={() => addpopup(item)} className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-900">View
                                                     {modal && selectedClient && (
-                                                        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-20">
-                                                            <div className="fixed inset-0 w-screen h-screen">
+                                                        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-10">
+                                                            <div className="bg-white dark:border-gray-700 py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
                                                                 <div className="text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-relaxed bg-white dark:border-gray-700 py-14 px-28 rounded-md max-w-screen-md min-w-[300px]">
-                                                                    <table>
+                                                                    <table className="min-w-full">
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td className='py-1'>Client Name</td>
@@ -457,8 +458,8 @@ const Status = () => {
                                         <td className='py-2 text-base border-b-2 px-14 mx-45 border-slate-500'>
                                             <div >{item.isFinanceApproval ? <Accept value='Accept' /> : <InProgress value='InProgress' />}</div>
                                         </td>
-                                        <td className='border-b-2 border-slate-500'>
-                                            <div className='flex flex-row gap-5'>
+                                        <td className='text-base text-center border-b-2 py- border-slate-500'>
+                                            <div className='flex justify-center gap-5'>
                                               <IssuedKeys value="Issued" />
                                               
                                               <img onClick={() => handledelete(item.endClient.id,item.requestID)} src={del} className='w-8 h-8 mt-1 mr-10 cursor-pointer rounded-3xl hover:bg-red-600'/>
