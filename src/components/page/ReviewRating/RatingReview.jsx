@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom'; // Import useParams hook
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'js-cookie';
 import HTTPService from '../../../Service/HTTPService';
+
 const RatingReview = () => {
-  const { moduleId } = useParams(); // Get moduleId from URL parameters
+  const { moduleId } = useParams();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [error, setError] = useState('');
   const [reviews, setReviews] = useState([]);
   const [editingReviewId, setEditingReviewId] = useState(null);
+
+  const userId = Cookies.get('userId'); // Retrieve userId from cookies
 
   useEffect(() => {
     if (moduleId) {
@@ -21,7 +25,7 @@ const RatingReview = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await HTTPService.get(`api/Module/${moduleId}/reviews`);
+      const response = await axios.get(`api/Module/${moduleId}/reviews`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -60,14 +64,14 @@ const RatingReview = () => {
 
     try {
       if (editingReviewId) {
-        await HTTPService.put(`api/Module/reviews/${editingReviewId}`, { rating, review });
+        await axios.put(`api/Module/reviews/${editingReviewId}`, { rating, review, userId });
         Swal.fire({
           title: 'Review updated successfully!',
           icon: 'success',
           confirmButtonText: 'Close',
         });
       } else {
-        await HTTPService.post(`api/Module/${moduleId}/reviews`, { rating, review });
+        await axios.post(`api/Module/${moduleId}/reviews`, { rating, review, userId });
         Swal.fire({
           title: 'Thanks for your review online.',
           text: 'Review submitted successfully!',
@@ -90,7 +94,7 @@ const RatingReview = () => {
 
   const handleDelete = async (reviewId) => {
     try {
-      await HTTPService.delete(`api/Module/reviews/${reviewId}`);
+      await axios.delete(`api/Module/reviews/${reviewId}`);
       Swal.fire({
         title: 'Review deleted successfully!',
         icon: 'success',
