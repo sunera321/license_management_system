@@ -105,7 +105,7 @@ function IncomeDashboard() {
       <div className="flex items-center justify-between w-full mb-4">
         <div>
           <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-gray-600">Hi, Welcome back to Hsenid Admin!</p>
+          <p className="text-gray-600">Hi, Welcome to Revenue Dashboard!</p>
         </div>
       </div>
 
