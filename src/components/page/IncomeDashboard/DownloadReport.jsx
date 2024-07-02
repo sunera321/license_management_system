@@ -1,6 +1,7 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import PropTypes from 'prop-types'; // Import PropTypes
 import logo from '../IncomeDashboard/hsenid.png';
 import { DownloadIcon } from '@heroicons/react/outline'; // Assuming you have imported Heroicons DownloadIcon
 
@@ -78,11 +79,31 @@ const DownloadReport = ({ dashboardData, lineChartData, chartData, barChartData,
 
   return (
     <div className="flex items-center justify-center">
-      <button onClick={downloadReport} className="flex items-center px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 hover:text-black rounded-lg font-bold ">
+      <button onClick={downloadReport} className="flex items-center px-4 py-2 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 hover:text-black ">
         <DownloadIcon className="w-5 h-5 mr-2" /> Download Report
       </button>
     </div>
   );
+};
+
+// Define PropTypes
+DownloadReport.propTypes = {
+  dashboardData: PropTypes.shape({
+    totalModules: PropTypes.number.isRequired,
+    totalUsers: PropTypes.number.isRequired,
+    totalRevenue: PropTypes.number.isRequired,
+  }).isRequired,
+  lineChartData: PropTypes.arrayOf(PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.string.isRequired,
+    totalModulePrice: PropTypes.number.isRequired,
+  })).isRequired,
+  chartData: PropTypes.arrayOf(PropTypes.shape({
+    moduleName: PropTypes.string.isRequired,
+    totalRevenue: PropTypes.number.isRequired,
+  })).isRequired,
+  barChartData: PropTypes.arrayOf(PropTypes.array).isRequired,
+  currentDateTime: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default DownloadReport;
