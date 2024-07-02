@@ -9,6 +9,7 @@ import ExpiredTable from './Expiredtable';
 import StatusBarGraph from '../components/page/Dashboard/statusBarGraph';
 import StatusPieChart from '../components/page/Dashboard/piechart';
 import HTTPService from '../Service/HTTPService';
+import axios from 'axios';
 
 const customStyles = {
   content: {
@@ -54,7 +55,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchLicenseData = async () => {
       try {
-        const response = await HTTPService.get('api/LicenseKey/info');
+        const response = await axios.get('https://localhost:7295/api/LicenseKey/info');
         countLicenses(response.data);
       } catch (error) {
         console.error('Error fetching license data:', error);

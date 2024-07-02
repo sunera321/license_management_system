@@ -10,7 +10,16 @@ const StatusPieChart = () => {
         fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo')
             .then(response => response.json())
             .then(data => {
-                const statusCounts = data.reduce((acc, item) => {
+                const normalizedData = data.map(item => {
+                    if (item.statusCode.toLowerCase().includes('valid_loging') ||
+                        item.statusCode.toLowerCase().includes('valid loging') ||
+                        item.statusCode.toLowerCase().includes('valid_logging')) {
+                        item.statusCode = 'Valid Logging';
+                    }
+                    return item;
+                });
+
+                const statusCounts = normalizedData.reduce((acc, item) => {
                     acc[item.statusCode] = (acc[item.statusCode] || 0) + 1;
                     return acc;
                 }, {});

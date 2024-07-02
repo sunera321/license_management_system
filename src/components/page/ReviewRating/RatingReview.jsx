@@ -111,7 +111,6 @@ const RatingReview = () => {
 
   return (
     <div style={{ padding: '20px', marginLeft: '100px' }}>
-      <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold' }}>Ratings & Reviews</h2>
       <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div style={{ marginRight: '20px' }}>
           <h3>Enter your rating</h3>
@@ -155,10 +154,10 @@ const RatingReview = () => {
             />
             {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>} 
             <div>
-              <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#0D5CB6', color: 'white', border: 'none', cursor: 'pointer', marginRight: '20px' }}>
+              <button type="submit" className='px-6 py-2 text-sm font-medium text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700'  style={{ cursor: 'pointer', marginRight: '20px' }}>
                 {editingReviewId ? 'Update' : 'Submit'}
               </button>
-              <button type="button" onClick={handleClear} style={{ padding: '10px 20px', backgroundColor: '#ccc', color: 'black', border: 'none', cursor: 'pointer' }}>
+              <button type="button" onClick={handleClear} className='px-6 py-2 text-sm font-medium  transition duration-300 bg-gray-300 rounded-md hover:bg-gray-700' style={{ cursor: 'pointer' }}>
                 Clear
               </button>
             </div>

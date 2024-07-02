@@ -1,8 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import RatingReview from './../components/page/ReviewRating/RatingReview';
 import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
+
+
 const ModuleDetails = () => {
   const { moduleId } = useParams();
   const [module, setModule] = useState(null);
@@ -33,7 +36,7 @@ const ModuleDetails = () => {
 
   return (
 
-    <div className="py-20" style={{ paddingTop: '50px',  paddingRight: '20px'}}>
+    <div className="py-20" style={{ paddingTop: '50px', paddingRight: '20px' }}>
       <div className="border border-gray-300 rounded-lg shadow-lg p-6"> {/* Added frame styles */}
         <div className="bg-gray-200 py-20 w-full mt-0 relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-20 bg-white-800 rounded-full w-70 h-60 flex justify-center items-center">
@@ -74,7 +77,13 @@ const ModuleDetails = () => {
             ))}
           </ul>
         </div>
-      </div>
+        </div>
+        {/* Separate Card for Ratings & Reviews */}
+        <div className="mt-6 bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-lg font-semibold text-gray-700 border-b pb-4">Ratings & Reviews</h2>
+          <RatingReview moduleId={module.moduleId} />
+        </div>
+      
     </div>
   );
 };
