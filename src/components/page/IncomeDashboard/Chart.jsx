@@ -20,15 +20,9 @@ ChartJS.register(
   Legend
 );
 
-// Configuration options for the bar chart
 export const options = {
   responsive: true,
   plugins: {
-    title: {
-      display: true,
-      text: 'Total Revenue',
-      position: 'bottom',
-    },
     legend: {
       display: true,
       position: 'bottom',
@@ -42,8 +36,25 @@ export const options = {
           return value.toLocaleString();
         },
       },
+      title: {
+        display: true,
+        text: 'Revenue',
+        font: {
+          size: 16,
+        },
+      },
+      grid: {
+        display: false,
+      },
     },
     x: {
+      title: {
+        display: true,
+        text: 'Module',
+        font: {
+          size: 16,
+        },
+      },
       grid: {
         display: false,
       },
@@ -74,7 +85,7 @@ const Chart = () => {
   const fetchData = async () => {
     try {
       // Replace with your actual API endpoint
-      const response = await fetch('https://localhost:7295/api/Dashboard/module-revenue-2024');
+      const response = await fetch('https://localhost:7295/api/InDashboard/module-revenue-2024');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -103,7 +114,11 @@ const Chart = () => {
   };
 
   return (
-    <Bar options={options} data={chartData} />
+    <div className="text-center shadow-2xl bg-white p-4 rounded-lg mt-6">
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Revenue By Module in 2024</h2>
+      <hr className="border-gray-300 my-4" />
+      <Bar options={options} data={chartData} />
+    </div>
   );
 };
 

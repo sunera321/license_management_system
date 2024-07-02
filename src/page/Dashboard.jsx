@@ -60,7 +60,7 @@ const Dashboard = () => {
         console.error('Error fetching license data:', error);
       }
     };
-  
+    
     fetchLicenseData();
   }, []);
   
@@ -164,7 +164,7 @@ const Dashboard = () => {
       </div>
     </div>
 
-      <div className="flex flex-col p-2 mt-5 mb-10 rounded-lg  sm:p-6">
+      <div className="flex flex-col p-2 mt-5 mb-10 rounded-lg sm:p-6">
       <div className="flex justify-around border-b-2 border-gray-300">
         <button 
           className={`py-2 px-4 ${activeTab === 'totalUsers' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'}`}
