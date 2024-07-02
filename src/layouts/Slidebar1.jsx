@@ -6,7 +6,6 @@ import generate from '../Images/sidebarpic/generate.svg';
 import addClient from '../Images/sidebarpic/add-client.svg';
 import setting from '../Images/sidebarpic/setting.svg';
 import logout from '../Images/sidebarpic/logout.svg';
-import help from '../Images/sidebarpic/help.svg';
 import { msalConfig } from '../Config';
 const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
@@ -102,11 +101,6 @@ const Slidebar = () => {
           </div>
 
 
-          <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
-            <div className="icon"> <img src={help} alt="help Icon" className="w-6 h-6 mr-4" />
-            </div>
-            <span className="flex-1 ml-2 truncate hover:text-purple-600 group-hover:block"><a href="/components" > Help</a></span>
-          </div>
 
           <div className="flex items-center justify-center px-6 py-2 transition-colors hover:bg-slate-700 ">
             <div className="icon"><img src={logout} alt="logout Icon" className="w-6 h-6 mr-4" />
