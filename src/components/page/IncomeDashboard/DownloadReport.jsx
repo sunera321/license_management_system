@@ -1,6 +1,7 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import PropTypes from 'prop-types'; // Import PropTypes
 import logo from '../IncomeDashboard/hsenid.png';
 import { DownloadIcon } from '@heroicons/react/outline'; // Assuming you have imported Heroicons DownloadIcon
 
@@ -83,6 +84,26 @@ const DownloadReport = ({ dashboardData, lineChartData, chartData, barChartData,
       </button>
     </div>
   );
+};
+
+// Define PropTypes
+DownloadReport.propTypes = {
+  dashboardData: PropTypes.shape({
+    totalModules: PropTypes.number.isRequired,
+    totalUsers: PropTypes.number.isRequired,
+    totalRevenue: PropTypes.number.isRequired,
+  }).isRequired,
+  lineChartData: PropTypes.arrayOf(PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.string.isRequired,
+    totalModulePrice: PropTypes.number.isRequired,
+  })).isRequired,
+  chartData: PropTypes.arrayOf(PropTypes.shape({
+    moduleName: PropTypes.string.isRequired,
+    totalRevenue: PropTypes.number.isRequired,
+  })).isRequired,
+  barChartData: PropTypes.arrayOf(PropTypes.array).isRequired,
+  currentDateTime: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default DownloadReport;
