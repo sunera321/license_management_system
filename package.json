@@ -23,6 +23,8 @@
     "autoprefixer": "^10.4.17",
     "axios": "^1.7.2",
     "chart.js": "^4.4.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-zoom": "^2.0.1",
     "countries-and-timezones": "^3.6.0",
     "countries-list": "^3.1.0",
     "country-region-data": "^3.0.0",
