@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import HTTPService from '../../../Service/HTTPService';
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer, Text } from 'recharts';
 import DownloadDropdown from './DownloadDropdown';
 
@@ -7,19 +8,9 @@ const StatusPieChart = () => {
     const [activeIndex, setActiveIndex] = useState(-1);
 
     useEffect(() => {
-        fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo')
-            .then(response => response.json())
-            .then(data => {
-                const normalizedData = data.map(item => {
-                    if (item.statusCode.toLowerCase().includes('valid_loging') ||
-                        item.statusCode.toLowerCase().includes('valid loging') ||
-                        item.statusCode.toLowerCase().includes('valid_logging')) {
-                        item.statusCode = 'Valid Logging';
-                    }
-                    return item;
-                });
-
-                const statusCounts = normalizedData.reduce((acc, item) => {
+        HTTPService.get('api/LogingValidateInfo/GetAllClientServerInfo')
+            .then(response => {
+                const statusCounts = response.data.reduce((acc, item) => {
                     acc[item.statusCode] = (acc[item.statusCode] || 0) + 1;
                     return acc;
                 }, {});

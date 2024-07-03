@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import Cookies from 'js-cookie';
 import HTTPService from '../../../Service/HTTPService';
 
 const RatingReview = () => {
@@ -23,7 +22,7 @@ const RatingReview = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`api/Module/${moduleId}/reviews`);
+      const response = await HTTPService.get(`/api/Review/${moduleId}`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -61,22 +60,29 @@ const RatingReview = () => {
     }
 
     try {
-      if (editingReviewId) {
-        await axios.put(`api/Module/reviews/${editingReviewId}`, { rating, review, userId });
-        Swal.fire({
-          title: 'Review updated successfully!',
-          icon: 'success',
-          confirmButtonText: 'Close',
+      // if (editingReviewId) {
+      //   await HTTPService.put(`/api/Review/review/${editingReviewId}`, {
+      //     rating,
+      //     reviewText: review
+      //   });
+      //   Swal.fire({
+      //     title: 'Review updated successfully!',
+      //     icon: 'success',
+      //     confirmButtonText: 'Close',
+      //   });
+      // } else {
+        await HTTPService.post(`/api/Review`, {
+          moduleId: parseInt(moduleId),
+          rating,
+          reviewText: review
         });
-      } else {
-        await axios.post(`api/Module/${moduleId}/reviews`, { rating, review, userId });
         Swal.fire({
-          title: 'Thanks for your review online.',
+          title: 'Thanks for your review!',
           text: 'Review submitted successfully!',
           icon: 'success',
           confirmButtonText: 'Close',
         });
-      }
+      //}
       handleClear();
       fetchReviews(); // Refresh reviews
     } catch (error) {
@@ -92,7 +98,7 @@ const RatingReview = () => {
 
   const handleDelete = async (reviewId) => {
     try {
-      await axios.delete(`api/Module/reviews/${reviewId}`);
+      await axios.delete(`/api/Review/${reviewId}`);
       Swal.fire({
         title: 'Review deleted successfully!',
         icon: 'success',
@@ -152,14 +158,14 @@ const RatingReview = () => {
               onBlur={(e) => {
                 e.target.style.borderColor = '#ccc';
                 e.target.style.boxShadow = 'none';
-              }} 
+              }}
             />
-            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>} 
+            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
             <div>
-              <button type="submit" className='px-6 py-2 text-sm font-medium text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700'  style={{ cursor: 'pointer', marginRight: '20px' }}>
+              <button type="submit" className='px-6 py-2 text-sm font-medium text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700' style={{ cursor: 'pointer', marginRight: '20px' }}>
                 {editingReviewId ? 'Update' : 'Submit'}
               </button>
-              <button type="button" onClick={handleClear} className='px-6 py-2 text-sm font-medium  transition duration-300 bg-gray-300 rounded-md hover:bg-gray-700' style={{ cursor: 'pointer' }}>
+              <button type="button" onClick={handleClear} className='px-6 py-2 text-sm font-medium transition duration-300 bg-gray-300 rounded-md hover:bg-gray-700' style={{ cursor: 'pointer' }}>
                 Clear
               </button>
             </div>
