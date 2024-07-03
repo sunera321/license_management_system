@@ -147,11 +147,11 @@ const KeyGenerateForm = () => {
                     <div className="flex flex-wrap mb-6">
                         <div className="w-1/2">
                             <label className="block mx-3 mb-0 text-base font-semibold text-gray-700">Host URL</label><br />
-                            <input required onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" className="w-full px-2 py-1 mx-0 leading-tight text-gray-700 border rounded shadow appearance-none" /><br />
+                            <input required onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" placeholder='http://example.com' className="w-full px-2 py-1 mx-0 leading-tight text-gray-700 border rounded shadow appearance-none" /><br />
                         </div>
                         <div className="w-1/2">
                             <label className="block mx-3 mb-0 text-base font-semibold text-gray-700">Server Mac Address</label><br />
-                            <input required onChange={(e) => setSMA(e.target.value)} value={MacAddress} type="text" className="w-full px-2 py-1 ml-3 leading-tight text-gray-700 border rounded shadow appearance-none" /> <br />
+                            <input required onChange={(e) => setSMA(e.target.value)} value={MacAddress} type="text" placeholder='00-B0-D0-63-C2-26' className="w-full px-2 py-1 ml-3 leading-tight text-gray-700 border rounded shadow appearance-none" /> <br />
                         </div>
                     </div>
 

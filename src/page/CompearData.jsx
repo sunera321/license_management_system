@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import ContactForm from '../components/page/ControlPanel/ContactForm';
 import PageLoader from '../components/CommonModal/PageLoader';
 import HTTPService from '../Service/HTTPService';
+
 const CompareData = () => {
     const { logkey } = useParams();
     const [compareDetail, setCompareDetail] = useState({});
@@ -44,8 +45,7 @@ const CompareData = () => {
         fetchClient();
     }, [clientId]);
 
-
-    const conatctClinet = (client) => {
+    const contactClient = (client) => {
         setClinetContact(true);
         setClintmail(client);
     };
@@ -64,95 +64,86 @@ const CompareData = () => {
 
         fetchModules();
     }, [client]);
-    const conatctClinetclose = () => {
+
+    const contactClientClose = () => {
         setClinetContact(false);
         setClintmail(null);
     };
 
     return (
-        <div className="min-h-screen mb-5 bg-white">
+        <div className="min-h-screen mb-5">
             <PageHeader title="Compare Data" />
             {isLoad ? (
-                <>
-                    <PageLoader />
-                </>
+                <PageLoader />
             ) : (
-                <>
-                    <div className="w-11/12 mx-auto bg-white rounded-lg shadow-md">
-                        <div className="flex justify-between p-2 mb-2 font-bold bg-gray-100 rounded-lg shadow-xl">
-                            <div className="text-xl font-semibold ">Logging Status</div>
-                            <div className="text-xl">{compareDetail.statusCode}</div>
+                <div className="w-11/12 mx-auto">
+                    <div className="p-6 mb-6 bg-white rounded-lg shadow-lg">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-[20px] font-semibold">Logging Status</h2>
+                            <span className="text-[20px]">{compareDetail.statusCode}</span>
                         </div>
-
-                        <div className="flex justify-between p-2 mb-2 font-bold bg-gray-100 rounded-lg shadow-xl ">
-                            <div className="text-xl font-semibold">Partner Email</div>
-                            <div className="text-xl">{compareDetail.partnerEmail}</div>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-[20px] font-semibold">Partner Email</h2>
+                            <span className="text-[20px]">{compareDetail.partnerEmail}</span>
                         </div>
-                        <div className="flex justify-between p-2 mb-2 font-bold bg-gray-100 rounded-lg shadow-xl ">
-                            <div className="text-xl font-semibold">Client Name</div>
-                            <div className="text-xl">{client.name}</div>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-[20px] font-semibold">Client Name</h2>
+                            <span className="text-[20px]">{client.name}</span>
                         </div>
-                        <div className="flex justify-between p-2 mb-2 bg-gray-100 rounded-lg shadow-xl ">
-                            <div className="text-xl font-semibold">Contact Client</div>
-                            <div className="text-md">
-                                <button
-                                    className="p-1 text-black transition duration-300 border border-black rounded w-36 hover:bg-blue-700 hover:text-white focus:outline-none"
-                                    onClick={() => conatctClinet(client)}
-                                >
-                                    Contact
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
-                            <h3 className="mb-4 text-xl font-semibold text-center uppercase">{client.name} Can Access This Software</h3>
-                            <div className="overflow-auto">
-                                <table className="w-full border">
-
-                                    <tbody>
-                                        {modules.map((module, index) => (
-                                            <tr key={index} className="font-bold border-b">
-                                                <td className="p-2">{index + 1}</td>
-                                                <td className="p-2">{module}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div className="p-6 rounded-lg shadow-sm bg-gray-50">
-                            <table className="w-full text-left border">
-                                <thead>
-                                    <tr className="bg-gray-200">
-                                        <th className="p-3">Check</th>
-                                        <th className="p-3">Current Data</th>
-                                        <th className="p-3">Actual Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="border-b">
-                                        <th className="p-3 bg-gray-100">Mac Address</th>
-                                        <td className="p-3">{compareDetail.logMacAddress}</td>
-                                        <td className="p-3">{client.macAddress}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <th className="p-3 bg-gray-100">Host URL</th>
-                                        <td className="p-3">{compareDetail.logHostUrl}</td>
-                                        <td className="p-3">{client.hostUrl}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-[20px] font-semibold">Contact Client</h2>
+                            <button
+                                className="px-2 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                                onClick={() => contactClient(client)}
+                            >
+                                Contact
+                            </button>
                         </div>
                     </div>
-                </>
-               )}
-            {ClinetContact && Clintmail && (
-                <ContactForm
-                    client={Clintmail}
-                    onCloseClick={conatctClinetclose}
 
-                />
+                    
+
+                    <div className="p-6 bg-white rounded-lg shadow-lg">
+                        <table className="w-full border rounded-md">
+                            <thead>
+                                <tr className="bg-gray-200">
+                                    <th className="p-3">Check</th>
+                                    <th className="p-3">Current Data</th>
+                                    <th className="p-3">Actual Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="border-b hover:bg-gray-100">
+                                    <th className="p-3 bg-gray-100">Mac Address</th>
+                                    <td className="p-3">{compareDetail.logMacAddress}</td>
+                                    <td className="p-3">{client.macAddress}</td>
+                                </tr>
+                                <tr className="border-b hover:bg-gray-100">
+                                    <th className="p-3 bg-gray-100">Host URL</th>
+                                    <td className="p-3">{compareDetail.logHostUrl}</td>
+                                    <td className="p-3">{client.hostUrl}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="p-6 mb-6 bg-white rounded-lg shadow-lg">
+                        <h3 className="mb-4 text-2xl font-semibold">Modules Accessible</h3>
+                        <table className="w-full border rounded-md">
+                            <tbody>
+                                {modules.map((module, index) => (
+                                    <tr key={index} className="border-b hover:bg-gray-100">
+                                        <td className="p-2">{index + 1}</td>
+                                        <td className="p-2">{module}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            )}
+            {ClinetContact && Clintmail && (
+                <ContactForm client={Clintmail} onCloseClick={contactClientClose} />
             )}
         </div>
     );
