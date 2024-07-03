@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
+import HTTPService from '../../../Service/HTTPService'
 
 // Functional component to render the Line Chart using Google Charts
 function LineChart() {
@@ -12,11 +13,8 @@ function LineChart() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://localhost:7295/api/InDashboard/module-prices-by-year-month");
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await response.json();
+      const response = await HTTPService.get("api/InDashboard/module-prices-by-year-month");
+      const data = response.data;
 
       // Process the data to aggregate totals for each month across both years
       const aggregatedData = {};
@@ -56,7 +54,6 @@ function LineChart() {
   }, []); // Fetch data only once on component mount
 
   const options = {
- 
     curveType: "function",
     legend: { position: "bottom" },
     hAxis: {
@@ -70,7 +67,6 @@ function LineChart() {
   return (
     <div className="bg-white shadow-2xl rounded-lg p-6 mb-6">
       <h2 className="text-center text-lg font-bold mb-4 pb-2 border-b-2 border-gray-300">Company Revenue</h2>
-    
       <Chart
         chartType="LineChart"
         width="100%" 

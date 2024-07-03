@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import HTTPService from '../../../Service/HTTPService'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -85,11 +86,8 @@ const Chart = () => {
   const fetchData = async () => {
     try {
       // Replace with your actual API endpoint
-      const response = await fetch('https://localhost:7295/api/InDashboard/module-revenue-2024');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
+      const response = await HTTPService.get('api/InDashboard/module-revenue-2024');
+      const data = response.data;
 
       // Process the fetched data and update chartData
       const updatedData = {
