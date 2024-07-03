@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, TimeScale, Title, Tooltip, Legend } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
-import axios from 'axios';
+import HTTPService from '../../../Service/HTTPService';
 import DownloadDropdown from './DownloadDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +30,7 @@ const LineGraph = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/LicenseKey/statistics');
+        const response = await HTTPService.get('api/LicenseKey/statistics');
         const data = response.data;
 
         // Map data to dates and counts
