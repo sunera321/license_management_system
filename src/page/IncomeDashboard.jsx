@@ -4,10 +4,9 @@ import { faCubes, faUsers, faCoins } from '@fortawesome/free-solid-svg-icons';
 import LineChart from '../components/page/IncomeDashboard/LineChart';
 import Chart from '../components/page/IncomeDashboard/Chart';
 import BarChart from '../components/page/IncomeDashboard/BarChart';
-import axiosInstance from '../components/axiosInstance';
 import DownloadReport from '../components/page/IncomeDashboard/DownloadReport';
 import DoughnutChart from '../components/page/IncomeDashboard/DonutChart';
-import axios from 'axios';
+import HTTPService from '../Service/HTTPService'; 
 
 function IncomeDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
@@ -18,25 +17,17 @@ function IncomeDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch('https://localhost:7295/api/InDashboard/getdashboarddata');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setDashboardData(data);
+      const response = await HTTPService.get('api/InDashboard/getdashboarddata');
+      setDashboardData(response.data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching dashboard data:', error);
     }
   };
 
   const fetchLineChartData = async () => {
     try {
-      const response = await fetch('https://localhost:7295/api/InDashboard/module-prices-by-year-month');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setLineChartData(data);
+      const response = await HTTPService.get('api/InDashboard/module-prices-by-year-month');
+      setLineChartData(response.data);
     } catch (error) {
       console.error('Error fetching line chart data:', error);
     }
@@ -44,7 +35,7 @@ function IncomeDashboard() {
 
   const fetchChartData = async () => {
     try {
-      const response = await axios.get('https://localhost:7295/api/InDashboard/module-revenue-2024');
+      const response = await HTTPService.get('api/InDashboard/module-revenue-2024');
       setChartData(response.data);
     } catch (error) {
       console.error('Error fetching chart data:', error);
@@ -66,7 +57,7 @@ function IncomeDashboard() {
 
   const fetchBarChartData = async () => {
     try {
-      const response = await axiosInstance.get('https://localhost:7295/api/InDashboard/top-modules');
+      const response = await HTTPService.get('api/InDashboard/top-modules');
       const data = response.data.map(module => [
         module.moduleName,
         module.totalRevenue,

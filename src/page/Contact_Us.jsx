@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import axiosInstance from '../components/axiosInstance';
 import axios from 'axios';
+import HTTPService from '../Service/HTTPService'; 
+
 
 function Contact_Us() {
     const [formData, setFormData] = useState({
@@ -89,7 +90,7 @@ function Contact_Us() {
         setLoading(true);
 
         try {
-            await axiosInstance.post('https://localhost:7295/api/ContactUs', formData);
+            await HTTPService.post('api/ContactUs', formData);
             setShowSuccess(true);
             setFormData({
                 firstName: '',
