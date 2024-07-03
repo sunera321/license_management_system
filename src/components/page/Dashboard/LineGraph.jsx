@@ -1,58 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, TimeScale, Title, Tooltip, Legend } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
+import 'chartjs-adapter-date-fns';
+import axios from 'axios';
 import DownloadDropdown from './DownloadDropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  TimeScale,
+  Title,
+  Tooltip,
+  Legend,
+  zoomPlugin
 );
 
 const LineGraph = () => {
+  const chartRef = useRef(null);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: []
   });
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LicenseKey/statistics');
-        const data = await response.json();
+        const response = await axios.get('https://localhost:7295/api/LicenseKey/statistics');
+        const data = response.data;
 
-        // Filter data to include only 'Available' status
-        const activateData = data.filter(item => item.key_Status === 'Available');
+        // Map data to dates and counts
+        const dates = data.map(item => new Date(item.date).toISOString().split('T')[0]);
+        const counts = data.map(item => item.count);
 
-        // Group available data by month and count total users per month
-        const groupedData = activateData.reduce((acc, curr) => {
-          // Extract the month from the activationDate field
-          const month = new Date(curr.activationDate).getMonth() + 1; // JavaScript months are 0-indexed
-          if (!acc[month]) {
-            acc[month] = 0;
-          }
-          acc[month]++;
-          return acc;
-        }, {});
-
-        // Create labels for months
-        const months = Object.keys(groupedData).map(month =>
-          new Date(0, month - 1).toLocaleString('default', { month: 'long' })
-        );
-
-        // Round counts to full values
-        const roundedData = Object.keys(groupedData).reduce((acc, key) => {
-          acc[key] = Math.round(groupedData[key]);
-          return acc;
-        }, {});
-
-
-        // Generate dataset for monthly users
+        // Generate dataset
         const dataset = {
-          label: 'Monthly Available Users',
-          data: Object.values(roundedData),
+          label: 'Daily Data',
+          data: counts,
           borderColor: 'rgba(0, 123, 255, 0.8)',
           backgroundColor: 'rgba(0, 123, 255, 0.5)',
           pointRadius: 3,
@@ -61,7 +49,7 @@ const LineGraph = () => {
         };
 
         setChartData({
-          labels: months,
+          labels: dates,
           datasets: [dataset]
         });
       } catch (error) {
@@ -71,6 +59,12 @@ const LineGraph = () => {
 
     fetchData();
   }, []);
+
+  const handleZoomIn = () => {
+    const chart = chartRef.current;
+    chart.zoom(1.2);
+  };
+  const buttonStyle = "flex items-center justify-center p-2 rounded shadow bg-gray-100 hover:bg-gray-200";
 
   const options = {
     responsive: true,
@@ -82,7 +76,12 @@ const LineGraph = () => {
       x: {
         title: {
           display: true,
-          text: 'Months',
+          text: 'Dates',
+        },
+        type: 'time',
+        time: {
+          unit: 'day',
+          tooltipFormat: 'MMM dd, yyyy',
         },
         grid: {
           display: false,
@@ -91,7 +90,16 @@ const LineGraph = () => {
       y: {
         title: {
           display: true,
-          text: 'User Count',
+          text: 'Count',
+        },
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            if (Number.isInteger(value)) {
+              return value;
+            }
+            return null;
+          }
         },
         grid: {
           display: false,
@@ -105,17 +113,37 @@ const LineGraph = () => {
         borderWidth: 2,
       },
       point: {
-        radius: 0,
+        radius: 3, // Show points on the line
       },
-    }
+    },
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'x',
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: 'x',
+        },
+      },
+    },
   };
 
   return (
     <div className="w-full px-4 md:px-0">
       <div className="relative h-64 md:h-80 lg:h-96">
-        <Line data={chartData} options={options} />
+        <Line ref={chartRef} data={chartData} options={options} />
       </div>
-      <div className="flex justify-end w-full mt-4">
+      <div className="flex justify-end w-full mt-4 space-x-2">
+        <button onClick={handleZoomIn} className={buttonStyle}>
+          <FontAwesomeIcon icon={faSearchPlus} />
+        </button>
         <DownloadDropdown userData={chartData} />
       </div>
     </div>
@@ -123,92 +151,3 @@ const LineGraph = () => {
 };
 
 export default LineGraph;
-
-
-
-//////////////////////////////Hard coded data/////////////////////////////////////
-
-// import React from 'react';
-// import { Line } from 'react-chartjs-2';
-// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
-
-// ChartJS.register(
-//  CategoryScale,
-//    LinearScale,
-//     PointElement,
-//     LineElement,
-//   );
-
-//   const LineGraph = () => {
-//       //Set hardcoded chart data
-//     const chartData = {
-//       labels: ['January', 'February', 'March', 'April', 'May'],
-//       datasets: [
-//         {
-//           label: 'Monthly Available Users',
-//           data: [20, 25, 15, 30, 10],
-//           borderColor: 'rgba(0, 123, 255, 0.8)',
-//           backgroundColor: 'rgba(0, 123, 255, 0.5)',
-//           pointRadius: 3,
-//           pointHoverRadius: 5,
-//           fill: true
-//         }
-//       ]
-//     };
-
-//     const options = {
-//       responsive: true,
-//       interaction: {
-//         intersect: false,
-//         mode: 'index',
-//       },
-//       scales: {
-//         x: {
-//           title: {
-//             display: true,
-//             text: 'Months',
-//           },
-//           grid: {
-//             display: false,
-//           },
-//         },
-//         y: {
-//           title: {
-//             display: true,
-//             text: 'User Count',
-//           },
-//           grid: {
-//             display: false,
-//           },
-//         },
-//       },
-//       maintainAspectRatio: false,
-//       elements: {
-//         line: {
-//           tension: 0.3,
-//           borderWidth: 2,
-//         },
-//         point: {
-//           radius: 0,
-//         },
-        
-//       }
-//     };
-
-//     return (
-//       <div className="w-full px-4 md:px-0">
-//         <div className="relative h-64 md:h-80 lg:h-96">
-//           <Line data={chartData} options={options} />
-//  <div className="flex justify-end w-full mt-4">
-//                 <DownloadDropdown userData={chartData} />
-//             </div> 
-//         </div>
-//       </div>
-//     );
-//   };
-
-//   export default LineGraph;
-
-
-
-
