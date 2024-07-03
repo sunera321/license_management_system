@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom'; // Import useParams hook
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
 import HTTPService from '../../../Service/HTTPService';
+
 const RatingReview = () => {
-  const { moduleId } = useParams(); // Get moduleId from URL parameters
+  const { moduleId } = useParams();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +19,7 @@ const RatingReview = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await HTTPService.get(`api/Module/${moduleId}/reviews`);
+      const response = await HTTPService.get(`/api/Review/${moduleId}`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -59,22 +57,29 @@ const RatingReview = () => {
     }
 
     try {
-      if (editingReviewId) {
-        await HTTPService.put(`api/Module/reviews/${editingReviewId}`, { rating, review });
-        Swal.fire({
-          title: 'Review updated successfully!',
-          icon: 'success',
-          confirmButtonText: 'Close',
+      // if (editingReviewId) {
+      //   await HTTPService.put(`/api/Review/review/${editingReviewId}`, {
+      //     rating,
+      //     reviewText: review
+      //   });
+      //   Swal.fire({
+      //     title: 'Review updated successfully!',
+      //     icon: 'success',
+      //     confirmButtonText: 'Close',
+      //   });
+      // } else {
+        await HTTPService.post(`/api/Review`, {
+          moduleId: parseInt(moduleId),
+          rating,
+          reviewText: review
         });
-      } else {
-        await HTTPService.post(`api/Module/${moduleId}/reviews`, { rating, review });
         Swal.fire({
-          title: 'Thanks for your review online.',
+          title: 'Thanks for your review!',
           text: 'Review submitted successfully!',
           icon: 'success',
           confirmButtonText: 'Close',
         });
-      }
+      //}
       handleClear();
       fetchReviews(); // Refresh reviews
     } catch (error) {
@@ -82,25 +87,6 @@ const RatingReview = () => {
     }
   };
 
-  const handleEdit = (review) => {
-    setRating(review.rating);
-    setReview(review.reviewText);
-    setEditingReviewId(review.id);
-  };
-
-  const handleDelete = async (reviewId) => {
-    try {
-      await HTTPService.delete(`api/Module/reviews/${reviewId}`);
-      Swal.fire({
-        title: 'Review deleted successfully!',
-        icon: 'success',
-        confirmButtonText: 'Close',
-      });
-      fetchReviews(); // Refresh reviews
-    } catch (error) {
-      console.error('Error deleting review:', error);
-    }
-  };
 
   const handleClear = () => {
     setRating(0);
@@ -111,7 +97,6 @@ const RatingReview = () => {
 
   return (
     <div style={{ padding: '20px', marginLeft: '100px' }}>
-      <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold' }}>Ratings & Reviews</h2>
       <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div style={{ marginRight: '20px' }}>
           <h3>Enter your rating</h3>
@@ -151,14 +136,14 @@ const RatingReview = () => {
               onBlur={(e) => {
                 e.target.style.borderColor = '#ccc';
                 e.target.style.boxShadow = 'none';
-              }} 
+              }}
             />
-            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>} 
+            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
             <div>
-              <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#0D5CB6', color: 'white', border: 'none', cursor: 'pointer', marginRight: '20px' }}>
+              <button type="submit" className='px-6 py-2 text-sm font-medium text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700' style={{ cursor: 'pointer', marginRight: '20px' }}>
                 {editingReviewId ? 'Update' : 'Submit'}
               </button>
-              <button type="button" onClick={handleClear} style={{ padding: '10px 20px', backgroundColor: '#ccc', color: 'black', border: 'none', cursor: 'pointer' }}>
+              <button type="button" onClick={handleClear} className='px-6 py-2 text-sm font-medium transition duration-300 bg-gray-300 rounded-md hover:bg-gray-700' style={{ cursor: 'pointer' }}>
                 Clear
               </button>
             </div>
@@ -175,38 +160,8 @@ const RatingReview = () => {
             <div>
               <strong>Review:</strong> {review.reviewText}
             </div>
-            <button
-              onClick={() => handleEdit(review)}
-              style={{
-                marginRight: '10px',
-                cursor: 'pointer',
-                color: 'blue',
-                border: 'none',
-                background: 'none',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center'
-              }}
-              onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
-              onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
-            >
-              <FontAwesomeIcon icon={faPencilAlt} style={{ marginRight: '5px' }} />
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(review.id)}
-              style={{
-                cursor: 'pointer',
-                color: 'red',
-                border: 'none',
-                background: 'none',
-                textDecoration: 'none'
-              }}
-              onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
-              onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
-            >
-              Delete
-            </button>
+          
+          
           </div>
         ))}
       </div>

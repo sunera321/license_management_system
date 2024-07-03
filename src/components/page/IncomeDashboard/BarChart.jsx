@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import HTTPService from '../../../Service/HTTPService';
 import { Chart } from 'react-google-charts';
 import HTTPService from '../../../Service/HTTPService'
 
