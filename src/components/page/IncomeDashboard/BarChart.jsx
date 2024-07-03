@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../axiosInstance';
+import HTTPService from '../../../Service/HTTPService';
 import { Chart } from 'react-google-charts';
 
 function BarChart() {
@@ -8,7 +8,7 @@ function BarChart() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get('https://localhost:7295/api/InDashboard/top-modules')
+    HTTPService.get('api/InDashboard/top-modules')
       .then(response => {
         const data = response.data;
 

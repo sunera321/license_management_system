@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // Create an axios instance with base configuration
 const instance = axios.create({
-  baseURL: 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/',
-  // baseURL: 'https://localhost:7295/',
+  //baseURL: 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/',
+  baseURL: 'https://localhost:7295/',
   timeout: 500000, // Adjusted to 50 seconds
   headers: {
     'Access-Control-Allow-Origin': '*',
