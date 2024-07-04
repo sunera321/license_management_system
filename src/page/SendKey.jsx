@@ -9,6 +9,7 @@ const SendKey = () => {
 // Take the parameter of URL
 const params = useParams();
   const key = params.key;
+  const email = params.email;
   const [loading, setLoading] = useState(false);
  
   const handleSubmit = async (e) => {
@@ -21,7 +22,7 @@ const params = useParams();
     console.log(licenseKey.value);
     try {
       const response = await HTTPService.post('api/KeyEmail', {
-        to: email.value,
+        to: email,
         licenseKey: key,
       });
       
@@ -62,6 +63,7 @@ const params = useParams();
                 <input
                   type='text'
                   name='email'
+                  placeholder={email}
                   className='border-2 rounded-lg border-zinc-300 bg-slate-100 w-[90%]'
                 />
                 <label className='font-semibold text-[18px] '>License key</label><br />
