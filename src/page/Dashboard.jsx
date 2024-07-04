@@ -66,7 +66,7 @@ const Dashboard = () => {
   
   const countLicenses = (data) => {
     const counts = {
-      available: data.filter(license => license.keyStatus === 'Available').length,
+      available: data.length,
       active: data.filter(license => license.keyStatus === 'Activated').length,
       expired: data.filter(license => license.keyStatus === 'Expired').length
     };

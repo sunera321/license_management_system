@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react';
-import Search from '../components/page/ControlPanel/Search'; // Import the Search component
+import Search from '../components/page/ControlPanel/Search'; 
 import HTTPService from '../Service/HTTPService';
 
 const ExpiredTable = () => {
@@ -13,8 +13,7 @@ const ExpiredTable = () => {
       setLoading(true);
       try {
         const response = await HTTPService.get('api/LicenseKey/info'); 
-        const expiredClients = response.data.filter(client => client.keyStatus === 'Expired'); // Filter clients with 'Expired' status
-        console.log('API Response:', response.data); 
+        const expiredClients = response.data.filter(client => client.keyStatus === 'Expired'); 
         setClients(expiredClients);
         setError(null);
       } catch (err) {
@@ -36,31 +35,32 @@ const ExpiredTable = () => {
   return (
     <div>
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
-      <div className="container w-3/4 px-2 mx-auto sm:px-6 lg:px-8">
-        <div className="overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="container w-full px-2 mx-auto sm:px-6 lg:px-8">
+        <div className="overflow-hidden shadow-md sm:rounded-lg">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
-            <p>Error: {error}</p>
+            <p className="text-red-500">{error}</p>
           ) : (
-            <table className="w-full text-sm text-left border border-gray-200">
-              <thead className="text-xs uppercase bg-violet-200">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-violet-200">
                 <tr>
-                  <th scope="col" className="px-6 py-3">Client ID</th>
-                  <th scope="col" className="px-6 py-3">Client Name</th>
-                  <th scope="col" className="px-6 py-3">Email Address</th>
-                  <th scope="col" className="px-6 py-3">Expire Date</th>
+                  <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">Client ID</th>
+                  <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">Client Name</th>
+                  <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">Email Address</th>
+                  <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">Expire Date</th>
+
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {filteredClients.length > 0 ? filteredClients.map(client => (
-                  <tr key={client.key_name}>
-                    <td className="px-2 py-2">{client.id}</td>
-                    <td className="px-2 py-2">{client.name}</td>
-                    <td className="px-2 py-2">{client.email}</td>
-                    <td className="px-2 py-2">{client.expireDate}</td>
+                  <tr key={client.id} className="hover:bg-gray-100">
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{client.id}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{client.name}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{client.email}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(client.deactivatedDate).toLocaleDateString()}</td>
                   </tr>
-                )) : <tr><td colSpan="5">No clients found</td></tr>}
+                )) : <tr><td colSpan="5" className="px-6 py-4 text-sm text-center text-gray-500">No clients found</td></tr>}
               </tbody>
             </table>
           )}
@@ -69,5 +69,4 @@ const ExpiredTable = () => {
     </div>
   );
 };
-
 export default ExpiredTable;

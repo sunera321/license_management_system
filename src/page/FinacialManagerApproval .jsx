@@ -111,7 +111,7 @@ function FinancialManagerApproval() {
       {isLoading ? (
                 <PageLoader />
             ) : (
-      <div className='flex flex-wrap justify-center h-screen gap-10 mt-10 mb-8 ml-18 mr-18'>
+      <div className='flex flex-wrap justify-center gap-10 mt-10 mb-8 ml-18 mr-18'>
         {clients.filter(client => client.isFinanceApproval=== false && client.commentFinaceMgt === null).map((client, index) => (
           <div key={index} className="h-auto w-[450px]  bg-[#fafafa] rounded-lg pb-3 shadow-lg pl-7 pr-7   lg:w-1/3 xl:w-1/3"
           onClick={() => handleClientClick(client.endClient.id)}>

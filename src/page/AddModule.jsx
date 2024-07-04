@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
-import HTTPService from '../Service/HTTPService';
+
 import { storage } from '../firebase'; // Adjust the import path
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import { useNavigate } from 'react-router-dom'; // Update the import
+import HTTPService from '../Service/HTTPService';
 const AddModule = () => {
   const [formData, setFormData] = useState({
     moduleName: '',
@@ -17,7 +18,7 @@ const AddModule = () => {
 
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-
+  const navigate = useNavigate(); // Update the usage
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +52,7 @@ const AddModule = () => {
 
       uploadTask.on(
         'state_changed',
-       
+        () => { },
         error => {
           console.error(error);
           setUploading(false);
@@ -63,7 +64,7 @@ const AddModule = () => {
               const response = await HTTPService.post('api/Module', {
                 ...formData,
                 imagePath: url,
-                modulecost: formData.cost //  modulecost field 
+                modulecost: formData.cost // modulecost field 
               }, {
                 headers: {
                   'Content-Type': 'application/json'
@@ -78,7 +79,7 @@ const AddModule = () => {
                 timer: 1500
               });
               setUploading(false);
-              window.location.href = 'http://localhost:3000/Module'; // Redirect to modules page
+              navigate('/Module'); // Redirect to modules page using navigate
             } catch (error) {
               console.error('Error submitting data:', error);
               Swal.fire({
@@ -103,7 +104,7 @@ const AddModule = () => {
       <PageHeader title={"Add Module Details"} />
       <div className='max-w-6xl px-10 mx-auto md:px-20 lg:px-40'>
         <form className='px-5 pt-2 pb-20 bg-gray-200 rounded shadow-lg' onSubmit={handleSubmit}>
-          <div className="mb-1 ">
+          <div className="mb-1">
             <label className='mb-2 text-lg text-gray-700'>Add Module Profile</label><br />
             <div className="relative flex items-center">
               <input
