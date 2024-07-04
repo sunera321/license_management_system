@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Chart } from 'react-google-charts';
+import HTTPService from '../../../Service/HTTPService'
 
 const DonutChart = () => {
   const [moduleData, setModuleData] = useState([]);
@@ -8,7 +8,7 @@ const DonutChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7295/api/InDashboard/module-revenue-2024');
+        const response = await HTTPService.get('api/InDashboard/module-revenue-2024');
         setModuleData(response.data);
       } catch (error) {
         console.error('Error fetching module revenue data:', error);

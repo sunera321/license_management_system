@@ -151,7 +151,7 @@ const App = () => {
           <Route path="addnotification" element={<AddNotification />} />
         </Route>
       );
-    } else if (['7b449069-9d8e-4101-9b60-997be537120b', '3c5f0eea-412e-4d0a-9fde-849b9d3e5838', '97111ac5-093b-41df-98ae-75ab8956e0d2'].includes(userRole)) {
+    } else if  (userRole === '7b449069-9d8e-4101-9b60-997be537120b')  {
       return (
         <Route path="/" element={<MainLayout />}>
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
