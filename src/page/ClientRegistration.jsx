@@ -84,7 +84,7 @@ const ClientRegistration = () => {
                 timer: 1500
             });
             setFormData(initialFormData); // Clear the form after submission
-            window.location.href = 'http://localhost:3000/addclient';
+            window.location.href = 'https://lmshsenid.netlify.app/addclient';
         } catch (error) {
             console.error('Error submitting data:', error);
         }
