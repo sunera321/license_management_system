@@ -22,7 +22,7 @@ const params = useParams();
     console.log(licenseKey.value);
     try {
       const response = await HTTPService.post('api/KeyEmail', {
-        to: email,
+        to: email.value,
         licenseKey: key,
       });
       
