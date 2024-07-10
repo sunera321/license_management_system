@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import HTTPService from '../Service/HTTPService';
 import { storage } from '../firebase'; // Adjust the import path
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useNavigate } from 'react-router-dom'; // Update the import
-import HTTPService from '../Service/HTTPService';
+
 const AddModule = () => {
   const [formData, setFormData] = useState({
     moduleName: '',
@@ -18,7 +17,7 @@ const AddModule = () => {
 
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const navigate = useNavigate(); // Update the usage
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +51,7 @@ const AddModule = () => {
 
       uploadTask.on(
         'state_changed',
-        snapshot => { },
+       
         error => {
           console.error(error);
           setUploading(false);

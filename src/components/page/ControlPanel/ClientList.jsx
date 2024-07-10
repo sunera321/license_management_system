@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import ClientCard from './ClientCard';
 import Popup from './Popup';
 import ContactForm from './ContactForm';
 import Search from './Search';
 import PageLoader from '../../CommonModal/PageLoader';
-import HTTPService from '../../../Service/HTTPService';
+import HTTPService from '../../../Service/HTTPService'
+
 const ControlPanel = () => {
   const [popup, setPopup] = useState(false);
   const [clients, setClients] = useState([]);

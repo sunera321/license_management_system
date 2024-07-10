@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import * as XLSX from 'xlsx';
@@ -63,6 +64,10 @@ const DownloadDropdown = ({ userData }) => {
             )}
         </div>
     );
+};
+
+DownloadDropdown.propTypes = {
+    userData: PropTypes.array.isRequired,
 };
 
 export default DownloadDropdown;

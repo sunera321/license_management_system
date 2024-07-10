@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
-import backgroundImage from '../../asserts/Media/background1.jpg';
 import HTTPService from '../../../Service/HTTPService';
+
 const ContactForm = ({ client, onCloseClick }) => {
   const [loading, setLoading] = useState(false);
 
@@ -38,7 +38,7 @@ const ContactForm = ({ client, onCloseClick }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-70">
-      <div className="relative w-full max-w-md p-8 bg-white rounded-lg shadow-lg md:max-w-lg" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+      <div className="relative w-full h-[90%] max-w-md p-8 bg-white rounded-lg shadow-lg md:max-w-lg" style={{ backgroundColor: '#f0f4f8' }}>
         <button
           className="absolute text-xl font-semibold text-gray-800 top-4 right-4 hover:text-gray-600"
           onClick={onCloseClick}
@@ -50,7 +50,7 @@ const ContactForm = ({ client, onCloseClick }) => {
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email:</label>
             <input
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               type="email"
               id="email"
               name="email"
@@ -61,27 +61,28 @@ const ContactForm = ({ client, onCloseClick }) => {
           <div>
             <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject:</label>
             <input
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-3 py-1 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               type="text"
               id="subject"
               name="subject"
+              placeholder='Enter Contact Reason'
               required
             />
           </div>
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
             <textarea
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-3 py-1 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               id="description"
               name="description"
-              rows="4"
+              rows="3"
               required
             ></textarea>
           </div>
           <div>
             <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">Contact Info:</label>
             <input
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-3 py-1 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               type="text"
               id="contactInfo"
               name="contactInfo"
@@ -116,6 +117,14 @@ const ContactForm = ({ client, onCloseClick }) => {
       </div>
     </div>
   );
+};
+
+ContactForm.propTypes = {
+  client: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

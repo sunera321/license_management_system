@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/CommonModal/pageHeader';
 import Swal from 'sweetalert2';
 import generate from '../Images/sidebarpic/generate.svg';
-import axios from 'axios';
 import HTTPService from '../Service/HTTPService';
 import { useSearchParams } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
 
 const KeyGenerateForm = () => {
-    const [ClientID, setClinetID] = useState('');
+    // const [ClientID, setClinetID] = useState('');
     const [URL, setURL] = useState('');
     const [MacAddress, setSMA] = useState('');
     const [ValidDate, setVD] = useState('');
     const [Website, setWeb] = useState('');
-    const [PartnerID, setPartnerID] = useState('');
+    // const [PartnerID, setPartnerID] = useState('');
     const [selectedModules, setSelectedModules] = useState([]);
     const [modules, setModules] = useState([]);
     const [searchParams] = useSearchParams();
@@ -26,7 +25,7 @@ const KeyGenerateForm = () => {
                 setModules(response.data);
             })
             .catch(error => {
-                console.error('Error fetching modules:', error);
+                console.error('Error Fetching modules:', error);
             });
     }, []);
 
@@ -67,42 +66,28 @@ const KeyGenerateForm = () => {
             return;
         }
 
-        const clientUrl = `https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/${cli}`;
-        const requestKeyUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/RequestKey/addRequestKey';
-        const updateModuleUrl = 'https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/ClintIdByModules/UpdateModule';
-
-        const clientData = {
+        HTTPService.patch(`api/RequestKey/${cli}`, {
             hostUrl: URL,
             mackAddress: MacAddress,
             website: Website,
-        };
-
-        const requestKeyData = {
-            isFinanceApproval: false,
-            isPartnerApproval: false,
-            commentFinaceMgt: "",
-            commentPartnerMgt: "",
-            numberOfDays: ValidDate,
-            endClientId: cli,
-            partnerId: par,
-            issued:false
-        };
-
-        const updateModuleData = {
-            endClientId: cli,
-            moduleIds: selectedModules
-        };
-
-        console.log('Client Data:', clientData);
-        console.log('Request Key Data:', requestKeyData);
-        console.log('Update Module Data:', updateModuleData);
-
-        axios.patch(clientUrl, clientData)
-            .then((clientResult) => {
-                axios.post(requestKeyUrl, requestKeyData)
-                    .then((requestKeyResult) => {
-                        axios.post(updateModuleUrl, updateModuleData)
-                            .then((updateModuleResult) => {
+        })
+            .then(() => {
+                HTTPService.post(`api/RequestKey/addRequestKey`, {
+                    isFinanceApproval: false,
+                    isPartnerApproval: false,
+                    commentFinaceMgt: "",
+                    commentPartnerMgt: "",
+                    numberOfDays: ValidDate,
+                    endClientId: cli,
+                    partnerId: par,
+                    issued: false,
+                })
+                    .then(() => {
+                        HTTPService.post(`api/ClintIdByModules/UpdateModule`, {
+                            endClientId: cli,
+                            moduleIds: selectedModules,
+                        })
+                            .then(() => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",
@@ -139,6 +124,8 @@ const KeyGenerateForm = () => {
             });
     };
 
+
+
     return (
         <div>
             <PageHeader title='Key Generate Form' />
@@ -149,22 +136,22 @@ const KeyGenerateForm = () => {
                     <div className="flex mb-6">
                         <div className="w-1/2 mr-3">
                             <label className="block mb-0 text-base font-semibold text-gray-700">Client ID</label><br />
-                            <input required type="text" readOnly  setClinetID={ClientID}  placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none"  />
+                            <input required type="text" readOnly  placeholder={`${cli}`} value={`${cli}`} className="w-full px-2 py-1 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                         <div className="w-1/2">
                             <label className="block mb-0 ml-2 text-base font-semibold text-gray-700">Partner ID</label><br />
-                            <input required  placeholder={`${par}`} readOnly  value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
+                            <input required placeholder={`${par}`} readOnly value={`${par}`} type="text" name="URL" className="w-full px-2 py-1 ml-2 leading-tight text-gray-700 border rounded shadow appearance-none" />
                         </div>
                     </div>
 
                     <div className="flex flex-wrap mb-6">
                         <div className="w-1/2">
                             <label className="block mx-3 mb-0 text-base font-semibold text-gray-700">Host URL</label><br />
-                            <input required onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" className="w-full px-2 py-1 mx-0 leading-tight text-gray-700 border rounded shadow appearance-none" /><br />
+                            <input required onChange={(e) => setURL(e.target.value)} value={URL} type="text" name="URL" placeholder='http://example.com' className="w-full px-2 py-1 mx-0 leading-tight text-gray-700 border rounded shadow appearance-none" /><br />
                         </div>
                         <div className="w-1/2">
                             <label className="block mx-3 mb-0 text-base font-semibold text-gray-700">Server Mac Address</label><br />
-                            <input required onChange={(e) => setSMA(e.target.value)} value={MacAddress} type="text" className="w-full px-2 py-1 ml-3 leading-tight text-gray-700 border rounded shadow appearance-none" /> <br />
+                            <input required onChange={(e) => setSMA(e.target.value)} value={MacAddress} type="text" placeholder='00-B0-D0-63-C2-26' className="w-full px-2 py-1 ml-3 leading-tight text-gray-700 border rounded shadow appearance-none" /> <br />
                         </div>
                     </div>
 
@@ -198,9 +185,10 @@ const KeyGenerateForm = () => {
                         </ul>
 
                     </div>
-                    <div className='items-end content-end self-end justify-end pb-5 mx-auto mb-5 place-content-end place-items-end'>
-                        <input type='submit' value='Submit' className="items-end w-48 p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl mb2 hover:bg-indigo-500" />
+                    <div className="flex items-center justify-end pb-5">
+                        <input type="submit" value="Submit" className="p-2 mt-10 font-bold text-white bg-blue-900 rounded-md shadow-xl lg:w-48 mb2 hover:bg-indigo-500" />
                     </div>
+
                 </form>
             </div>
         </div>

@@ -1,5 +1,4 @@
 import React, { useState , useEffect } from 'react';
-import axios from 'axios';
 import Search from '../components/page/ControlPanel/Search'; // Import the Search component
 import HTTPService from '../Service/HTTPService';
 

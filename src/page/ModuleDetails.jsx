@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import RatingReview from '../components/page/ReviewRating/RatingReview';
 import HTTPService from '../Service/HTTPService';
 const ModuleDetails = () => {
   const { moduleId } = useParams();
@@ -34,18 +34,18 @@ const ModuleDetails = () => {
   return (
 
     <div className="py-20" style={{ paddingTop: '50px',  paddingRight: '20px'}}>
-      <div className="border border-gray-300 rounded-lg shadow-lg p-6"> {/* Added frame styles */}
-        <div className="bg-gray-200 py-20 w-full mt-0 relative">
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-20 bg-white-800 rounded-full w-70 h-60 flex justify-center items-center">
+      <div className="p-6 border border-gray-300 rounded-lg shadow-lg"> {/* Added frame styles */}
+        <div className="relative w-full py-20 mt-0 bg-gray-200">
+          <div className="absolute flex items-center justify-center transform -translate-y-1/2 rounded-full top-1/2 right-20 bg-white-800 w-70 h-60">
             <img src={module.imagePath} alt="Module" className="w-60 h-50" />
           </div>
-          <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
+          <div className="absolute font-bold text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '30px', fontSize: '25px', right: '40%' }}>
             {module.modulename}
           </div>
-          <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black font-bold" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
+          <div className="absolute font-bold text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '60px', fontSize: '15px', right: '40%' }}>
             Completed in {module.completedYear || formatDate(module.createdData)}
           </div>
-          <div className="absolute top-1/4 transform -translate-y-1/2 right-1/2 translate-x-1/6 text-black" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
+          <div className="absolute text-black transform -translate-y-1/2 top-1/4 right-1/2 translate-x-1/6" style={{ textAlign: 'center', marginTop: '90px', fontSize: '10px', right: '40%' }}>
             Powered by {module.poweredBy || 'Hsenid'}
           </div>
         </div>
@@ -75,6 +75,11 @@ const ModuleDetails = () => {
           </ul>
         </div>
       </div>
+      {/* Separate Card for Ratings & Reviews */}
+      <div className="p-6 mt-6 bg-white rounded-lg shadow-lg">
+          <h2 className="pb-4 text-lg font-semibold text-gray-700 border-b">Ratings & Reviews</h2>
+          <RatingReview moduleId={module.moduleId} />
+        </div>
     </div>
   );
 };

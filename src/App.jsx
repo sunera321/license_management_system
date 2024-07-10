@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 import Home from './page/Home';
-import MainHome from './page/MainHome';
-import About from './page/About';
+//import MainHome from './page/MainHome';
+//import About from './page/About';
 import AddModule from './page/AddModule';
 import Contact_Us from './page/Contact_Us';
 import ControlPanel from './page/ControlPanel';
 import KeyGenerate from './page/KeyGenerateForm';
-import EditProfilePartner from './page/EditProfilePartner';
-import EditProfileUser from './page/EditProfileUser';
+//import EditProfilePartner from './page/EditProfilePartner';
+//import EditProfileUser from './page/EditProfileUser';
 import Status from './page/Status';
 import PartnerManagerApproval from './page/PartnerManagerApproval';
 import FinacialManagerApproval from './page/FinacialManagerApproval';
@@ -46,16 +46,16 @@ function App() {
         <Route path="/register" element={<Register />} /> 
         <Route path="/" element={<MainLayout />}>
 
-          <Route path="mainhome" element={<MainHome />} />
+         {/* <Route path="mainhome" element={<MainHome />} />*/}
           <Route path="controlpanel" element={<ControlPanel />} />
-          <Route path="about" element={<About />} />
+         {/* <Route path="about" element={<About />} />*/}
           <Route path="addmodule" element={<AddModule />} />
           <Route path="clientmore" element={<ClientMore />} />
           <Route path="contact_us" element={<Contact_Us />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
-          <Route path="keygenerate" element={<KeyGenerate />} />
-          <Route path="editprofilepartner" element={<EditProfilePartner />} />
-          <Route path="editprofileuser" element={<EditProfileUser />} />
+         {/* <Route path="keygenerate" element={<KeyGenerate />} />*/}
+          {/*<Route path="editprofilepartner" element={<EditProfilePartner />} />*/}
+          {/*<Route path="editprofileuser" element={<EditProfileUser />} />*/}
           <Route path="status" element={<Status />} />
           <Route path="statusofkey" element={<StatusOfKey />} />
           <Route path="validatekey" element={<ValidateKey />} />
@@ -65,14 +65,14 @@ function App() {
           <Route path="addclient" element={<AddClient />} />
           <Route path="clientdetials" element={<ClientDetials />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="help" element={<Help />} />
+          {/*<Route path="help" element={<Help />} />*/}
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
-          <Route path="privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="termsconditions" element={<TermsConditions />} />
+         {/*<Route path="privacypolicy" element={<PrivacyPolicy />} />*/}
+          {/*<Route path="profile" element={<Profile />} />*/}
+          {/*<Route path="termsconditions" element={<TermsConditions />} />*/}
           <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
-            <Route path="addnotification" component={AddNotification} />
+            <Route path="addnotification" component={<AddNotification/>} />
 
         </Route>
       </Routes>

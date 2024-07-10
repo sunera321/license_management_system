@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer, Text } from 'recharts';
+import HTTPService from '../../../Service/HTTPService';
 import DownloadDropdown from './DownloadDropdown';
 
 const StatusPieChart = () => {
@@ -7,10 +8,9 @@ const StatusPieChart = () => {
     const [activeIndex, setActiveIndex] = useState(-1);
 
     useEffect(() => {
-        fetch('https://licensemanagementsystemseverside20240316184109.azurewebsites.net/api/LogingValidateInfo/GetAllClientServerInfo')
-            .then(response => response.json())
-            .then(data => {
-                const statusCounts = data.reduce((acc, item) => {
+        HTTPService.get('api/LogingValidateInfo/GetAllClientServerInfo')
+            .then(response => {
+                const statusCounts = response.data.reduce((acc, item) => {
                     acc[item.statusCode] = (acc[item.statusCode] || 0) + 1;
                     return acc;
                 }, {});
@@ -36,7 +36,7 @@ const StatusPieChart = () => {
         setActiveIndex(-1);
     };
 
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
         const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);

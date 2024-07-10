@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const formatDate = (datetimeString) => {
   const date = new Date(datetimeString);
@@ -9,39 +10,47 @@ const formatDate = (datetimeString) => {
   return date.toISOString().split('T')[0];
 };
 
-const ClientCard = ({ client, onMoreInfoClick, onContactClick }) => {
+const ClientCard = ({ client, onMoreInfoClick }) => {
   return (
-    <div className="h-auto w-[450px]  bg-[#CCC7C7] rounded-lg pb-3 shadow-lg pl-4 pr-4   lg:w-1/4 xl:w-1/5 ">
-      <div className="flex justify-between p-2 pt-2 0 6">
-        <div className="text-[20px] font-normal">{client.name}</div>
-        <div className="pt-1.5 text-[16px]">ID-{client.id}</div>
+    <div className="w-[25%] h-auto max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow-lg">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">{client.name}</h2>
+        <span className="text-gray-500">ID-{client.id}</span>
       </div>
-      <div className="mx-auto bg-white h-0.5 w-7/8 mt-"></div>
-      <div className="pt-3 ">
-        <div className='pb-2 pl-4 font-semibold'>Partner ID : {client.partnerId}</div>
-        <div className="text-[16px]  flex">
-          <div className="w-4 h-4 mt-1 bg-[#19F000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Activet Data : {formatDate(client.activeDate)}</div>
+      <div className="mb-4 border-b border-gray-200"></div>
+      <div className="mb-4">
+        <div className="text-sm font-medium text-gray-700">Partner ID: {client.partnerId}</div>
+        <div className="flex items-center mt-2 text-sm text-gray-700">
+          <div className="w-3 h-3 mr-2 bg-green-500 rounded-full"></div>
+          <span>Active Date: {formatDate(client.activeDate)}</span>
         </div>
-        <div className="text-[16px] mt-3 flex">
-          <div className="w-4 h-4 mt-1 bg-[#F10000] border border-black rounded-full"></div>
-          <div className="text-[16px]"> Deactivat Data : {formatDate(client.expireDate)}</div>
+        <div className="flex items-center mt-2 text-sm text-gray-700">
+          <div className="w-3 h-3 mr-2 bg-red-500 rounded-full"></div>
+          <span>Deactivation Date: {formatDate(client.expireDate)}</span>
         </div>
       </div>
-      
-      <div className="flex flex-col items-center justify-center -mt-0.5">
-        <div>
-          <button
-            value="View More"
-            onClick={() => onMoreInfoClick(client)}
-            className="mt-3 p-1 text-white bg-[#36ac4d] rounded-md font-medium text-[12px] w-[80px] hover:bg-slate-100 hover:text-black">
-            View More
-          </button>
-          
-        </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={() => onMoreInfoClick(client)}
+          className="w-[30%] py-2 text-[13px] font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          View More
+        </button>
       </div>
     </div>
   );
+};
+
+ClientCard.propTypes = {
+  client: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    partnerId: PropTypes.string.isRequired,
+    activeDate: PropTypes.string.isRequired,
+    expireDate: PropTypes.string.isRequired,
+  }).isRequired,
+  onMoreInfoClick: PropTypes.func.isRequired,
 };
 
 export default ClientCard;

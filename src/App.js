@@ -1,9 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MsalProvider } from '@azure/msal-react';
 import MainLayout from "./layouts/MainLayout";
 import MainLayout1 from "./layouts/MainLayout1";
+import MainLayout2 from "./layouts/MainLayout2";
+import MainLayout3 from "./layouts/MainLayout3";
 import Cookies from 'js-cookie';
 import Home from './page/Home';
 import IncomeDashboard from './page/IncomeDashboard';
@@ -29,7 +31,7 @@ import ModuleDetails from './page/ModuleDetails';
 import AddNotification from './page/AddNotification';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './Config';
-
+import KeyGenerateForm2 from './page/KeyGenerateForm2';
 import axios from 'axios';
 
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -41,10 +43,9 @@ const App = () => {
     // Get user role from session storage
     const role = sessionStorage.getItem('roleIds');
     setUserRole(role);
-  
   }, []);
-  const axiosInstance = axios.create();
 
+  const axiosInstance = axios.create();
 
   axiosInstance.interceptors.request.use(config => {
     const roleIds = sessionStorage.getItem('roleIds');
@@ -56,17 +57,17 @@ const App = () => {
     return Promise.reject(error);
   });
 
-
   const userId = Cookies.get('userId');
   const email = Cookies.get('userEmail');
-  const name= Cookies.get('displayName');
+  const name = Cookies.get('displayName');
+
   const renderRoutes = () => {
     if (userRole === 'b6fb7992-75fe-4d51-81e9-a62e2b8bd6ff') {
       axios.post('https://localhost:7295/api/Partner/addPartner', {
-      userId,
-      email,
-      name,
-    })
+        userId,
+        email,
+        name,
+      })
       .then(response => {
         console.log('User data saved to database:', response.data);
       })
@@ -85,22 +86,23 @@ const App = () => {
           <Route path="sendkey/:key" element={<SendKey />} />
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
-          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
           <Route path="status" element={<Status />} />
           <Route path="compeardata/:logkey" element={<CompearData />} />
           <Route path="statusofkey" element={<StatusOfKey />} />
           <Route path="validatekey" element={<ValidateKey />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
         </Route>
       );
-    }
-
-    if (['7b449069-9d8e-4101-9b60-997be537120b', '3c5f0eea-412e-4d0a-9fde-849b9d3e5838', '97111ac5-093b-41df-98ae-75ab8956e0d2'].includes(userRole)) {
+    } else if (userRole === '3c5f0eea-412e-4d0a-9fde-849b9d3e5838') {
       return (
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<MainLayout2 />}>
           <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
           <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
           <Route path="contact_us" element={<Contact_Us />} />
-          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails/>}/>
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
           <Route path="mainhome" element={<Dashboard />} />
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="incomedashboard" element={<IncomeDashboard />} />
@@ -117,11 +119,67 @@ const App = () => {
           <Route path="keygenerateform" element={<KeyGenerateForm />} />
           <Route path="module" element={<Module />} />
           <Route path="clientregistration" element={<ClientRegistration />} />
-
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
+        </Route>
+      );
+    } else if (userRole === '97111ac5-093b-41df-98ae-75ab8956e0d2') {
+      return (
+        <Route path="/" element={<MainLayout3 />}>
+          <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
+          <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
+          <Route path="contact_us" element={<Contact_Us />} />
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
+          <Route path="mainhome" element={<Dashboard />} />
+          <Route path="controlpanel" element={<ControlPanel />} />
+          <Route path="incomedashboard" element={<IncomeDashboard />} />
+          <Route path="status" element={<Status />} />
+          <Route path="compeardata/:logkey" element={<CompearData />} />
+          <Route path="statusofkey" element={<StatusOfKey />} />
+          <Route path="validatekey" element={<ValidateKey />} />
+          <Route path="partnermanagerapproval" element={<PartnerManagerApproval />} />
+          <Route path="finacialmanagerapproval" element={<FinacialManagerApproval />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="addclient" element={<AddClient />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="sendkey/:key" element={<SendKey />} />
+          <Route path="keygenerateform" element={<KeyGenerateForm />} />
+          <Route path="module" element={<Module />} />
+          <Route path="clientregistration" element={<ClientRegistration />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
+        </Route>
+      );
+    } else if  (userRole === '7b449069-9d8e-4101-9b60-997be537120b')  {
+      return (
+        <Route path="/" element={<MainLayout />}>
+          <Route path="licensekeyinfo" element={<LicenseKeyInfo />} />
+          <Route path="addmodule" element={<AddModule />} />
+          <Route path="addnotification" element={<AddNotification />} />
+          <Route path="contact_us" element={<Contact_Us />} />
+          <Route path="/module/moduledetails/:moduleId" element={<ModuleDetails />} />
+          <Route path="mainhome" element={<Dashboard />} />
+          <Route path="controlpanel" element={<ControlPanel />} />
+          <Route path="incomedashboard" element={<IncomeDashboard />} />
+          <Route path="status" element={<Status />} />
+          <Route path="compeardata/:logkey" element={<CompearData />} />
+          <Route path="statusofkey" element={<StatusOfKey />} />
+          <Route path="validatekey" element={<ValidateKey />} />
+          <Route path="partnermanagerapproval" element={<PartnerManagerApproval />} />
+          <Route path="finacialmanagerapproval" element={<FinacialManagerApproval />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="addclient" element={<AddClient />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="sendkey/:key" element={<SendKey />} />
+          <Route path="keygenerateform" element={<KeyGenerateForm />} />
+          <Route path="module" element={<Module />} />
+          <Route path="clientregistration" element={<ClientRegistration />} />
+          <Route path="keyGenerateform2" element={<KeyGenerateForm2 />} />
+          <Route path="addnotification" element={<AddNotification />} />
         </Route>
       );
     }
-
   };
 
   return (
